@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.map.TileMapCollisionDetector;
+
+import java.util.Objects;
 
 public class RealtimeMovementStyle extends MovementStyle{
     private final Actor player;
@@ -19,40 +22,45 @@ public class RealtimeMovementStyle extends MovementStyle{
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             finalPosition.x += 2;
-            if(lastDirection != "wW" && lastDirection != "wS"){
+            if(!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")){
                 direction = "wD";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             finalPosition.x -= 2;
-            if(lastDirection != "wW" && lastDirection != "wS"){
+            if(!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")){
                 direction = "wA";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) { 
             finalPosition.y += 2;
-            if(lastDirection != "wD" && lastDirection != "wA"){
+            if(!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")){
                 direction = "wW";
             }
             
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
-            if(lastDirection != "wD" && lastDirection != "wA"){
+            if(!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")){
                 direction = "wS";
             }
             
         }
-        if(direction == "-"){
+        if(direction.equals("-")){
             direction = "i" + lastDirection.substring(1);
         }
 
-        player.setX(player.getX() + finalPosition.x);
+        if(TileMapCollisionDetector.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)){
+            player.setX(player.getX() + finalPosition.x);
 
-        player.setY(player.getY() + finalPosition.y);
-        
-        player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
+            player.setY(player.getY() + finalPosition.y);
+
+            player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
+
+        }
+
         lastDirection = direction;
+
         return direction;
     }
 }

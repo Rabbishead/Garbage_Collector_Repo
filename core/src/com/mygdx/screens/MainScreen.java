@@ -3,15 +3,14 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.entities.Player;
 import com.mygdx.game.GarbageCollection;
-import com.mygdx.genericClasses.TileSetManager;
-import com.mygdx.genericClasses.Utils;
-import com.mygdx.genericClasses.resources.ResourceEnum;
+import com.mygdx.map.TileMapCollisionDetector;
+import com.mygdx.map.TileSetManager;
 
 public class MainScreen extends ScreenAdapter {
 
@@ -32,9 +31,10 @@ public class MainScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
 
         tileSetManager = new TileSetManager();
+        TileMapCollisionDetector.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
 
         Player player = new Player(160, 160);
-        player.setMovementStyle(Player.Styles.TILED);
+        player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
     }

@@ -1,4 +1,4 @@
-package com.mygdx.genericClasses;
+package com.mygdx.map;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,13 +9,19 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class TileSetManager {
     private final TiledMapRenderer tiledMapRenderer;
+    private final TiledMap map;
 
     public TileSetManager(){
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(new TmxMapLoader().load("tiles.tmx"));
+        map = new TmxMapLoader().load("prova.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
     }
 
     public void render(OrthographicCamera camera){
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
+    }
+
+    public TiledMap getMap() {
+        return map;
     }
 }
