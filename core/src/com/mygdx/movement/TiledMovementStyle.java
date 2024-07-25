@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.mygdx.map.TileMapCollisionDetector;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -60,10 +61,14 @@ public class TiledMovementStyle extends MovementStyle {
             inputs.clear();
             inputted = false;
             lastMove = Gdx.graphics.getFrameId();
-            MoveByAction mba = new MoveByAction();
-            mba.setAmount(x, y);
-            mba.setDuration(0.1f);
-            player.addAction(mba);
+
+            if(TileMapCollisionDetector.canMove(player.getX() + x, player.getY() + y)) {
+
+                MoveByAction mba = new MoveByAction();
+                mba.setAmount(x, y);
+                mba.setDuration(0.1f);
+                player.addAction(mba);
+            }
             String dir = "-";
             if (y == 32) dir = "wW";
             else if (y == -32) dir = "wS";

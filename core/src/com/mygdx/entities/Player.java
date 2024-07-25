@@ -16,8 +16,8 @@ public class Player extends Actor {
 
     public Player(int x, int y){
 
-        setX(x);
-        setY(y);
+        setX(x+16);
+        setY(y+16);
 
         playerAnimationManager = new PlayerAnimationManager();
         setWidth(32);
@@ -39,7 +39,7 @@ public class Player extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(playerAnimationManager.getCurrentFrame(), getX()+8, getY()+8);
+        batch.draw(playerAnimationManager.getCurrentFrame(), getX(), getY());
     }
 
     @Override
