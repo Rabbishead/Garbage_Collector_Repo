@@ -14,7 +14,7 @@ public class Hitbox extends Rectangle {
     }
 
     public void onHit(Rectangle r){
-        if (!active || !this.contains(r)) return;
+        if (!active || !this.overlaps(r)) return;
         action.accept(this);
     }
 
