@@ -68,6 +68,8 @@ public class TiledMovementStyle extends MovementStyle {
                 mba.setAmount(x, y);
                 mba.setDuration(0.1f);
                 player.addAction(mba);
+                //player.getStage().getCamera().translate(x, y, 0);
+
             }
             String dir = "-";
             if (y == 32) dir = "wW";
@@ -75,6 +77,8 @@ public class TiledMovementStyle extends MovementStyle {
             if (x == 32) dir = "wD";
             else if (x == -32) dir = "wA";
             lastDirection = "i" + dir.substring(1);
+            
+
             return dir;
         }
         return "";
