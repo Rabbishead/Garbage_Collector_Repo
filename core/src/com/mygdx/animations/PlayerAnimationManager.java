@@ -3,9 +3,8 @@ package com.mygdx.animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.entities.Player;
-import com.mygdx.genericClasses.Utils;
-import com.mygdx.genericClasses.resources.ResourceEnum;
+import com.mygdx.Utils;
+import com.mygdx.resources.ResourceEnum;
 
 public class PlayerAnimationManager {
     private final Animation<TextureRegion> idleDown;

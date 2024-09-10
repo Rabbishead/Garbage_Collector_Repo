@@ -31,6 +31,7 @@ public class MenuScreen extends ScreenAdapter {
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
                     game.setScreen(new MainScreen(game));
+                    dispose();
                 }
                 return true;
             }

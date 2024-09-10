@@ -1,4 +1,4 @@
-package com.mygdx.genericClasses.resources;
+package com.mygdx.resources;
 
 public enum ResourceEnum {
     PLAYER,

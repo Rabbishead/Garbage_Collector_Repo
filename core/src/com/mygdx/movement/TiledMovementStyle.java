@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.mygdx.map.TileMapCollisionDetector;
+import com.mygdx.map.TileMapCollisionsManager;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -62,7 +62,7 @@ public class TiledMovementStyle extends MovementStyle {
             inputted = false;
             lastMove = Gdx.graphics.getFrameId();
 
-            if(TileMapCollisionDetector.canMove(player.getX() + x, player.getY() + y)) {
+            if(TileMapCollisionsManager.canMove(player.getX() + x, player.getY() + y)) {
 
                 MoveByAction mba = new MoveByAction();
                 mba.setAmount(x, y);

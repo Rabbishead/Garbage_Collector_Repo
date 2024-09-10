@@ -3,6 +3,7 @@ package com.mygdx.entities;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.animations.PlayerAnimationManager;
 import com.mygdx.movement.RealtimeMovementStyle;

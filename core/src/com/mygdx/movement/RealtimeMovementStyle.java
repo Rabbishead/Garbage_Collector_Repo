@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.map.TileMapCollisionDetector;
+import com.mygdx.map.TileMapCollisionsManager;
 
 import java.util.Objects;
 
@@ -50,7 +50,7 @@ public class RealtimeMovementStyle extends MovementStyle{
             direction = "i" + lastDirection.substring(1);
         }
 
-        if(TileMapCollisionDetector.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)){
+        if(TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)){
             player.setX(player.getX() + finalPosition.x);
 
             player.setY(player.getY() + finalPosition.y);

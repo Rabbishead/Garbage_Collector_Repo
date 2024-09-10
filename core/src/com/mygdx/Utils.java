@@ -1,8 +1,8 @@
-package com.mygdx.genericClasses;
+package com.mygdx;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.genericClasses.resources.ResourceEnum;
-import com.mygdx.genericClasses.resources.ResourceManager;
+import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.ResourceManager;
 
 public class Utils {
 
