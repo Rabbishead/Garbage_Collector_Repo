@@ -1,5 +1,6 @@
 package com.mygdx.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -9,6 +10,7 @@ import com.mygdx.resources.ResourceEnum;
 
 public class Stone extends Actor {
     public Stone(Vector2 v2, int x, int y) {
+        // Gdx.input.getX() Gdx.input.getY()
         Vector2 newv2 = new Vector2(x, y);
         newv2.setAngleDeg(v2.angleDeg(newv2));
         newv2.scl(8);
