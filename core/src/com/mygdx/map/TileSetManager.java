@@ -11,7 +11,7 @@ public class TileSetManager {
     private final TiledMap map;
 
     public TileSetManager(){
-        map = new TmxMapLoader().load("prova.tmx");
+        map = new TmxMapLoader().load("map/prova.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
     }
 
