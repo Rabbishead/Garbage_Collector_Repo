@@ -8,6 +8,9 @@ public class Utils {
 
     private static final ResourceManager manager = new ResourceManager();
 
+    /**
+     * use this class in order to load a texture
+     */
     public static Texture getTexture(ResourceEnum e){
         return manager.getTexture(e);
     }
