@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
+import com.mygdx.entities.TestActor;
 import com.mygdx.game.GarbageCollection;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
@@ -20,6 +21,7 @@ public class MainScreen extends ScreenAdapter {
     private TileSetManager tileSetManager;
     Player player = new Player(160, 160);
     private NPCDialogue npcDialogue;
+    TestActor testActor;
 
     public MainScreen(GarbageCollection game){
         this.game = game;
@@ -39,6 +41,8 @@ public class MainScreen extends ScreenAdapter {
         player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
+        testActor = new TestActor(160, 160);
+        stage.addActor(testActor);
     }
 
     @Override
@@ -46,7 +50,6 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1,1,1,0);
         ScreenUtils.clear(1,1,1,0);
         tileSetManager.render((OrthographicCamera) stage.getCamera());
-
 
         stage.act(Gdx.graphics.getDeltaTime());
 

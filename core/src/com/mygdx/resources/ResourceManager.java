@@ -25,8 +25,8 @@ public class ResourceManager {
 
     private void loadPathMap() {
         pathMap.put(ResourceEnum.PLAYER, "map/animation_sheet.png");
-        pathMap.put(ResourceEnum.BACKGROUND, "sc_map.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
+        pathMap.put(ResourceEnum.TESTACTOR, "testActor.png");
     }
 
     public Texture getTexture(ResourceEnum e) {
