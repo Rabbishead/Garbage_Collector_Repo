@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * NPC dialogues manager
+ * it's an actor so we can subscrbe it to MainScreen's stage
+ * @see MainScreen
+ */
 public class NPCDialogue extends Actor {
     private Texture texture;
     private String textToDisplay;

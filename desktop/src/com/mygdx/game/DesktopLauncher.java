@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.game.GarbageCollection;
 
 // Please note that on macOS your application needs to wbe started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {

@@ -2,6 +2,9 @@ package com.mygdx.delay;
 
 import java.util.HashMap;
 
+/**
+ * Class ussed to subsribe objects to a delay and update delays
+ */
 public class DelayManager {
     private static HashMap<Object, Integer> originalDelays;
     private static HashMap<Object, Integer> currentDelays;
