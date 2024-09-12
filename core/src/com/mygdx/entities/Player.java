@@ -12,15 +12,17 @@ import com.mygdx.movement.TiledMovementStyle;
  * player class with collision managing
  */
 public class Player extends Actor {
-
+    
     private final PlayerAnimationManager playerAnimationManager;
     private MovementStyle movementStyle;
-    public enum Styles {REALTIME, TILED}
 
-    public Player(int x, int y){
+    public enum Styles {
+        REALTIME, TILED
+    }
 
-        setX(x+16);
-        setY(y+16);
+    public Player(int x, int y) {
+        setX(x + 16);
+        setY(y + 16);
 
         playerAnimationManager = new PlayerAnimationManager();
         setWidth(32);
@@ -30,14 +32,15 @@ public class Player extends Actor {
 
     /**
      * sets player's movement style between REALTIME and TILED
+     * 
      * @param s
      */
     public void setMovementStyle(Styles s) {
-        switch (s){
-            case REALTIME :
+        switch (s) {
+            case REALTIME:
                 movementStyle = new RealtimeMovementStyle(this);
                 break;
-            case TILED :
+            case TILED:
                 movementStyle = new TiledMovementStyle(this);
                 break;
         }
@@ -52,7 +55,6 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-    
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
         playerAnimationManager.updateAnimation(delta);
     }

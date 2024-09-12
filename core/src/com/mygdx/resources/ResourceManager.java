@@ -8,34 +8,33 @@ import java.util.EnumMap;
 public class ResourceManager {
 
     private final AssetManager manager;
-
     private final EnumMap<ResourceEnum, String> pathMap;
 
-    public ResourceManager(){
+    public ResourceManager() {
         manager = new AssetManager();
         pathMap = new EnumMap<ResourceEnum, String>(ResourceEnum.class);
         loadPathMap();
         loadTextures();
     }
 
-    private void loadTextures(){
-        for(ResourceEnum key : pathMap.keySet()){
+    private void loadTextures() {
+        for (ResourceEnum key : pathMap.keySet()) {
             manager.load(pathMap.get(key), Texture.class);
         }
     }
 
-    private void loadPathMap(){
+    private void loadPathMap() {
         pathMap.put(ResourceEnum.PLAYER, "map/animation_sheet.png");
         pathMap.put(ResourceEnum.BACKGROUND, "sc_map.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
     }
 
-    public Texture getTexture(ResourceEnum e){
+    public Texture getTexture(ResourceEnum e) {
         manager.finishLoadingAsset(pathMap.get(e));
         return manager.get(pathMap.get(e));
     }
 
-    public void dispose(){
+    public void dispose() {
         manager.dispose();
     }
 }

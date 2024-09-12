@@ -11,11 +11,12 @@ import java.util.Objects;
 /**
  * RealtimeMovement for the overworld
  */
-public class RealtimeMovementStyle extends MovementStyle{
+public class RealtimeMovementStyle extends MovementStyle {
+    
     private final Actor player;
     private String lastDirection;
 
-    public RealtimeMovementStyle(Actor player){
+    public RealtimeMovementStyle(Actor player) {
         this.player = player;
         lastDirection = "-";
     }
@@ -28,45 +29,38 @@ public class RealtimeMovementStyle extends MovementStyle{
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             finalPosition.x += 2;
-            if(!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")){
+            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
                 direction = "wD";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             finalPosition.x -= 2;
-            if(!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")){
+            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
                 direction = "wA";
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) { 
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             finalPosition.y += 2;
-            if(!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")){
+            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
                 direction = "wW";
             }
-            
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 2;
-            if(!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")){
+            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
                 direction = "wS";
             }
-            
         }
-        if(direction.equals("-")){
+        if (direction.equals("-")) {
             direction = "i" + lastDirection.substring(1);
         }
-
-        if(TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)){
+        if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);
-
             player.setY(player.getY() + finalPosition.y);
-
             player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
-
         }
 
         lastDirection = direction;
-
         return direction;
     }
 }
