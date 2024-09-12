@@ -8,6 +8,9 @@ import com.mygdx.map.TileMapCollisionsManager;
 
 import java.util.Objects;
 
+/**
+ * RealtimeMovement for the overworld
+ */
 public class RealtimeMovementStyle extends MovementStyle{
     private final Actor player;
     private String lastDirection;
@@ -17,6 +20,9 @@ public class RealtimeMovementStyle extends MovementStyle{
         lastDirection = "-";
     }
 
+    /**
+     * moves the player and returns the correct direction of the body
+     */
     public String move() {
         String direction = "-";
         Vector2 finalPosition = new Vector2(0, 0);

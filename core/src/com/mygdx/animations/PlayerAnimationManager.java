@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 
+/**
+ * Class useful to manage player's animations
+ */
 public class PlayerAnimationManager {
     private final Animation<TextureRegion> idleDown;
     private final Animation<TextureRegion> idleRight;
@@ -68,9 +71,17 @@ public class PlayerAnimationManager {
 		stateTime = 0f;
     }
 
+    /**
+     * @return currant frame in the animation
+     */
     public TextureRegion getCurrentFrame() {
         return currentFrame;
     }
+
+    /**
+     * updates currentFrame state
+     * @param delta
+     */
     public void updateAnimation(float delta){
         stateTime += delta;
         currentFrame = currentAnimation.getKeyFrame(stateTime, true);

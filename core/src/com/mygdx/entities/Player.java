@@ -3,12 +3,14 @@ package com.mygdx.entities;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.animations.PlayerAnimationManager;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
 
+/**
+ * player class with collision managing
+ */
 public class Player extends Actor {
 
     private final PlayerAnimationManager playerAnimationManager;
@@ -26,6 +28,10 @@ public class Player extends Actor {
         setTouchable(Touchable.enabled);
     }
 
+    /**
+     * sets player's movement style between REALTIME and TILED
+     * @param s
+     */
     public void setMovementStyle(Styles s) {
         switch (s){
             case REALTIME :
