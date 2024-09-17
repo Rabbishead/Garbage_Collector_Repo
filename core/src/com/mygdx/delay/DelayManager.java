@@ -6,8 +6,8 @@ import java.util.HashMap;
  * Class ussed to subsribe objects to a delay and update delays
  */
 public class DelayManager {
-    private static HashMap<Object, Integer> originalDelays;
-    private static HashMap<Object, Integer> currentDelays;
+    private static HashMap<Object, Integer> originalDelays = new HashMap<>();
+    private static HashMap<Object, Integer> currentDelays = new HashMap<>();
 
     public static void registerObject(Object o, Integer time){
         originalDelays.put(o, time);

@@ -1,5 +1,7 @@
 package com.mygdx.screens;
 
+import java.io.File;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
+import com.mygdx.delay.DelayManager;
+import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
@@ -35,6 +39,8 @@ public class MainScreen extends ScreenAdapter {
         stage.setViewport(new ScreenViewport(new OrthographicCamera(320,320)));
         stage.getCamera().translate(160,160,0);
 
+        DialogueLoader.loadFile(new File("assets/dialogues/dialoguesIta.txt"));
+        
         Utils.setHitboxHandler(hitboxHandler);
 
         Gdx.input.setInputProcessor(stage);
@@ -50,6 +56,7 @@ public class MainScreen extends ScreenAdapter {
         stage.setKeyboardFocus(player);
         testActor = new TestActor(160, 160);
         stage.addActor(testActor);
+
     }
 
     @Override
@@ -72,6 +79,7 @@ public class MainScreen extends ScreenAdapter {
         }
 
         hitboxHandler.checkHitboxes();
+
     }
 
     @Override

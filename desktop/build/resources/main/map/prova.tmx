@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="terrain.tsx"/>
+ <layer id="1" name="Livello tile 1" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFllEKxCAMRD2CV/FY+9Vb7AX86p62CBXckMkksdCPoVCtLzFj7FFKOV5SVdQMafPRd1V80wgXsauyFpvfxPjKZXkgnlyT5Zrlepko15XrrZ2MO+KDJ7hR/8n3iItizXC194P5XWR5NLoPVlySayl6dhnXK6sOaG/Q/md6GqpFpPbZXsr8jzw1x3e5nn6ije/eHVlvR32VPWNyTsbPU+etsc6HsFB9d/pCNP8OckHx7sQx1R1cT50yTI0bWdPL7IoyZyTSpy1mtCd44mHcX/n3M+tBkT6lMfvNlFxPDta9MJ+MObme/CymnMeYGle7tzQu2gfG2+Gie86Tp6wv+k9A8bBzingr92kx5tAF4vfMBA==
+  </data>
+ </layer>
+</map>

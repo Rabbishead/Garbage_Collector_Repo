@@ -1,17 +1,19 @@
 package com.mygdx.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
-import com.mygdx.animations.PlayerAnimationManager;
+import com.mygdx.delay.DelayManager;
+import com.mygdx.dialogues.DialogueLoader;
+import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 
 public class TestActor extends Actor {
     private Hitbox hitbox;
+    boolean dialogueActive = false;
 
     public TestActor(float x, float y) {
         setX(x + 100);
@@ -21,9 +23,21 @@ public class TestActor extends Actor {
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, e -> {
-            this.remove();
-            Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+            //this.remove();
+            //Utils.getHitboxHandler().unRegisterHitbox(hitbox);
             System.out.println("touched");
+            if(dialogueActive){
+                DelayManager.updateDelay(this);
+                if(DelayManager.getCurrentDelay(this) <= 0){
+                    dialogueActive = false;
+                } 
+                return;
+            }
+            NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50, DialogueLoader.getLine("testNPCDialogue1"));
+            getStage().addActor(npcDialogue);
+            dialogueActive = true;
+            DelayManager.registerObject(this, 60);
+        
         });
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
@@ -38,8 +52,8 @@ public class TestActor extends Actor {
     public void act(float delta) {
         super.act(delta);
         if (TileMapCollisionsManager.canMove(getX() + 5, getY() + 5)) {
-            setX(getX() + 1);
-            setY(getY() + 1);
+            setX(getX() + 0.5f);
+            setY(getY() + 0.5f);
         }
         hitbox.setPosition(getX(), getY());
     }
