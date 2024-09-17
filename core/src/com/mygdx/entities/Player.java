@@ -1,10 +1,13 @@
 package com.mygdx.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
+import com.mygdx.Utils;
 import com.mygdx.animations.PlayerAnimationManager;
+import com.mygdx.hitboxes.Collider;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
 
@@ -12,9 +15,10 @@ import com.mygdx.movement.TiledMovementStyle;
  * player class with collision managing
  */
 public class Player extends Actor {
-    
+
     private final PlayerAnimationManager playerAnimationManager;
     private MovementStyle movementStyle;
+    private Collider collider;
 
     public enum Styles {
         REALTIME, TILED
@@ -23,11 +27,13 @@ public class Player extends Actor {
     public Player(int x, int y) {
         setX(x + 16);
         setY(y + 16);
-
         playerAnimationManager = new PlayerAnimationManager();
         setWidth(32);
+        setHeight(32);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), "player");
+        Utils.getHitboxHandler().registerCollider(collider);
     }
 
     /**
@@ -57,6 +63,7 @@ public class Player extends Actor {
         super.act(delta);
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
         playerAnimationManager.updateAnimation(delta);
+        collider.setPosition(getX(), getY());
     }
 
     @Override

@@ -7,10 +7,12 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.Utils;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.game.GarbageCollection;
+import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 
@@ -19,9 +21,9 @@ public class MainScreen extends ScreenAdapter {
     private GarbageCollection game;
     private Stage stage;
     private TileSetManager tileSetManager;
-    Player player = new Player(160, 160);
+    HitboxHandler hitboxHandler = new HitboxHandler();
     private NPCDialogue npcDialogue;
-    TestActor testActor;
+    Player player;
 
     public MainScreen(GarbageCollection game){
         this.game = game;
@@ -33,10 +35,15 @@ public class MainScreen extends ScreenAdapter {
         stage.setViewport(new ScreenViewport(new OrthographicCamera(320,320)));
         stage.getCamera().translate(160,160,0);
 
+        Utils.setHitboxHandler(hitboxHandler);
+
         Gdx.input.setInputProcessor(stage);
 
         tileSetManager = new TileSetManager();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
+        
+        player = new Player(160, 160);
+        TestActor testActor;
 
         player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
@@ -63,6 +70,8 @@ public class MainScreen extends ScreenAdapter {
             stage.getActors().removeIndex(stage.getActors().size-1);
             npcDialogue = null;
         }
+
+        hitboxHandler.checkHitboxes();
     }
 
     @Override

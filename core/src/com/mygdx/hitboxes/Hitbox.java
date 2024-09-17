@@ -8,13 +8,22 @@ public class Hitbox extends Rectangle {
     private boolean active;
     private Consumer<Hitbox> action;
 
-    public Hitbox(boolean active, Consumer<Hitbox> action){
+    public Hitbox(boolean active, Consumer<Hitbox> action) {
+        super();
         this.active = active;
         this.action = action;
     }
 
-    public void onHit(Rectangle r){
-        if (!active || !this.overlaps(r)) return;
+    public Hitbox(float x, float y, float width, float height, boolean active, Consumer<Hitbox> action) {
+        super(x, y, width, height);
+        this.active = active;
+        this.action = action;
+    }
+
+    public void onHit(Collider r) {
+        if (!active || !this.overlaps(r))
+            return;
+        System.out.println("accepting action");
         action.accept(this);
     }
 

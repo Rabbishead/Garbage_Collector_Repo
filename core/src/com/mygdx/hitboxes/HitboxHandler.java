@@ -2,12 +2,12 @@ package com.mygdx.hitboxes;
 
 import com.badlogic.gdx.math.Rectangle;
 
-import java.util.ArrayList;
+import java.util.concurrent.*;
 
 public class HitboxHandler {
     
-    private final ArrayList<Hitbox> hitboxes = new ArrayList<>();
-    private final ArrayList<Rectangle> colliders = new ArrayList<>();
+    private final CopyOnWriteArrayList<Hitbox> hitboxes = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
     private Rectangle player;
 
     public HitboxHandler() {
@@ -21,13 +21,21 @@ public class HitboxHandler {
         hitboxes.add(h);
     }
 
-    public void registerCollider(Rectangle r) {
+    public void registerCollider(Collider r){
         colliders.add(r);
     }
 
-    public void checkHitboxes() {
-        for (Hitbox h : hitboxes) {
-            for (Rectangle s : colliders) {
+    public void unRegisterHitbox(Hitbox h) {
+        hitboxes.remove(h);
+    }
+
+    public void unRegisterCollider(Collider r){
+        colliders.remove(r);
+    }
+
+    public void checkHitboxes(){
+        for (Hitbox h: hitboxes) {
+            for (Collider s: colliders) {
                 h.onHit(s);
             }
         }
