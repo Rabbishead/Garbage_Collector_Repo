@@ -1,11 +1,14 @@
 package com.mygdx;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
 
 public class Utils {
+
+    private static Stage stage;
 
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
@@ -27,5 +30,12 @@ public class Utils {
 
     public static void dispose() {
         manager.dispose();
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+    public static void setStage(Stage stage) {
+        Utils.stage = stage;
     }
 }

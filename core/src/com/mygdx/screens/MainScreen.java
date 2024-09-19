@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
@@ -36,6 +35,7 @@ public class MainScreen extends ScreenAdapter {
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
+        Utils.setStage(stage);
         stage.setViewport(new ScreenViewport(new OrthographicCamera(320,320)));
         stage.getCamera().translate(160,160,0);
 

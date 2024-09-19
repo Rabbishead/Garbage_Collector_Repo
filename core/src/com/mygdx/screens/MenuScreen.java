@@ -1,57 +1,107 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.Utils;
 import com.mygdx.game.GarbageCollection;
+import com.mygdx.resources.ResourceEnum;
 
 public class MenuScreen extends ScreenAdapter {
     private final GarbageCollection game;
-    private final ShapeRenderer shapeRenderer;
-    private final BitmapFont font;
-    private final SpriteBatch batch;
+    
+    private final Stage stage;
+    private ImageButton engButton;
+
+    private ImageButton itaButton;
+
+    private ImageButton playButton;
 
 
     public MenuScreen(GarbageCollection game){
         this.game = game;
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        font = new BitmapFont();
+        stage = new Stage();
+        Utils.setStage(stage);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputAdapter() {
+        engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
+
+        itaButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ITAFLAG))));
+
+        playButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAYBUTTON))));
+
+
+        int row_height = Gdx.graphics.getWidth() / 24;
+        int col_width = Gdx.graphics.getWidth() / 24;
+ 
+        
+        engButton.setSize(col_width*4,row_height);
+        engButton.setPosition(col_width,Gdx.graphics.getHeight()-row_height*17);
+        engButton.addListener(new InputListener(){
             @Override
-            public boolean keyDown(int keyCode) {
-                if (keyCode == Input.Keys.SPACE) {
-                    game.setScreen(new MainScreen(game));
-                    dispose();
-                }
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("ciao");
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("not ciao");
                 return true;
             }
         });
+        stage.addActor(engButton);
+
+        itaButton.setSize(col_width*4,row_height);
+        itaButton.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*17);
+        itaButton.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("ciao");
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("not ciao");
+                return true;
+            }
+        });
+        stage.addActor(itaButton);
+
+        playButton.setSize(col_width*6,row_height);
+        playButton.setPosition(Gdx.graphics.getHeight()/2 - playButton.getHeight()/2,Gdx.graphics.getWidth()/2 - playButton.getWidth()/2);
+        playButton.addListener(new InputListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("ciao");
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new MainScreen(game));
+                return true;
+            }
+        });
+        stage.addActor(playButton);
+        Gdx.input.setInputProcessor(stage); 
+
     }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         ScreenUtils.clear(1,1,1,0);
-        batch.begin();
-        font.draw(batch, "Title Screen!", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        font.draw(batch, "Press space to play.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
-        batch.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+
+        stage.draw();
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        batch.dispose();
-        font.dispose();
-        shapeRenderer.dispose();
     }
 }
