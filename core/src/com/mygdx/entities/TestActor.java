@@ -12,9 +12,9 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 
 public class TestActor extends Actor {
-    private Hitbox hitbox;
     boolean dialogueActive = false;
-
+    private Hitbox hitbox = new Hitbox(false, null);
+    
     public TestActor(float x, float y) {
         setX(x + 100);
         setY(y + 100);
@@ -23,21 +23,20 @@ public class TestActor extends Actor {
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, (hitbox, collider) -> {
-            //this.remove();
-            //Utils.getHitboxHandler().unRegisterHitbox(hitbox);
-            System.out.println("touched");
-            if(dialogueActive){
+            // this.remove();
+            // Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+            if (dialogueActive) {
                 DelayManager.updateDelay(this);
-                if(DelayManager.getCurrentDelay(this) <= 0){
+                if (DelayManager.getCurrentDelay(this) <= 0) {
                     dialogueActive = false;
-                } 
+                }
                 return;
             }
-            NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50, DialogueLoader.getLine("testNPCDialogue1"));
+            NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+                    DialogueLoader.getLine("testNPCDialogue1"));
             getStage().addActor(npcDialogue);
             dialogueActive = true;
             DelayManager.registerObject(this, 60);
-        
         });
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
@@ -55,11 +54,11 @@ public class TestActor extends Actor {
             setX(getX() + 0.5f);
             setY(getY() + 0.5f);
         }
-        hitbox.setPosition(getX(), getY());
     }
 
     @Override
     protected void positionChanged() {
         super.positionChanged();
+        hitbox.setPosition(getX(), getY());
     }
 }

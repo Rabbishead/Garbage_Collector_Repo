@@ -23,7 +23,6 @@ public class Hitbox extends Rectangle {
     public void onHit(Collider r) {
         if (!active || !this.overlaps(r))
             return;
-        System.out.println("accepting action");
         action.accept(this, r);
     }
 

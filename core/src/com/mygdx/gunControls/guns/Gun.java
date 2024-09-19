@@ -1,0 +1,19 @@
+package com.mygdx.gunControls.guns;
+
+public class Gun {
+
+    public Gun() {
+    }
+
+    public int rightTrigger() {
+        return 0;
+    }
+
+    public int leftTrigger() {
+        return 0;
+    }
+
+    public int middleTrigger() {
+        return 0;
+    }
+}

@@ -16,6 +16,7 @@ import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.game.GarbageCollection;
+import com.mygdx.gunControls.GunController;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
@@ -30,19 +31,19 @@ public class MainScreen extends ScreenAdapter {
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
 
-    public MainScreen(GarbageCollection game){
+    public MainScreen(GarbageCollection game) {
         this.game = game;
     }
 
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
-        stage.setViewport(new ScreenViewport(new OrthographicCamera(320,320)));
-        stage.getCamera().translate(160,160,0);
+        stage.setViewport(new ScreenViewport(new OrthographicCamera(320, 320)));
+        stage.getCamera().translate(160, 160, 0);
 
         DialogueLoader.loadFile(new File("assets/dialogues/dialoguesIta.txt"));
-        
-        Utils.setHitboxHandler(hitboxHandler);
+
+        GunController.get();
 
         Gdx.input.setInputProcessor(stage);
 
@@ -57,23 +58,25 @@ public class MainScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,1,1,0);
-        ScreenUtils.clear(1,1,1,0);
+        Gdx.gl.glClearColor(1, 1, 1, 0);
+        ScreenUtils.clear(1, 1, 1, 0);
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
 
         stage.draw();
 
-        if(TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") != null && npcDialogue == null){
-            npcDialogue = new NPCDialogue(player.getX() +10, player.getY()+30, TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("content").toString());
+        if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") != null
+                && npcDialogue == null) {
+            npcDialogue = new NPCDialogue(player.getX() + 10, player.getY() + 30, TileMapCollisionsManager
+                    .getCurrentTileProprieties(player.getX(), player.getY()).get("content").toString());
             stage.addActor(npcDialogue);
-        }
-        else if(TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") == null && npcDialogue != null){
-            stage.getActors().removeIndex(stage.getActors().size-1);
+        } else if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY())
+                .get("dialogue") == null && npcDialogue != null) {
+            stage.getActors().removeIndex(stage.getActors().size - 1);
             npcDialogue = null;
         }
-        
+
         hitboxHandler.checkHitboxes();
     }
 
