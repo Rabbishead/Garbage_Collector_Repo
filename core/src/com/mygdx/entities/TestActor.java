@@ -22,7 +22,7 @@ public class TestActor extends Actor {
         setHeight(32);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, e -> {
+        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, (hitbox, collider) -> {
             //this.remove();
             //Utils.getHitboxHandler().unRegisterHitbox(hitbox);
             System.out.println("touched");

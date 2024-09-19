@@ -27,7 +27,8 @@ public class MainScreen extends ScreenAdapter {
     private TileSetManager tileSetManager;
     HitboxHandler hitboxHandler = new HitboxHandler();
     private NPCDialogue npcDialogue;
-    Player player;
+    Player player = new Player(160, 160);
+    TestActor testActor = new TestActor(160, 160);
 
     public MainScreen(GarbageCollection game){
         this.game = game;
@@ -47,16 +48,11 @@ public class MainScreen extends ScreenAdapter {
 
         tileSetManager = new TileSetManager();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
-        
-        player = new Player(160, 160);
-        TestActor testActor;
 
         player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
-        testActor = new TestActor(160, 160);
         stage.addActor(testActor);
-
     }
 
     @Override
@@ -77,9 +73,8 @@ public class MainScreen extends ScreenAdapter {
             stage.getActors().removeIndex(stage.getActors().size-1);
             npcDialogue = null;
         }
-
+        
         hitboxHandler.checkHitboxes();
-
     }
 
     @Override

@@ -2,19 +2,19 @@ package com.mygdx.hitboxes;
 
 import com.badlogic.gdx.math.Rectangle;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class Hitbox extends Rectangle {
     private boolean active;
-    private Consumer<Hitbox> action;
+    private BiConsumer<Hitbox, Collider> action;
 
-    public Hitbox(boolean active, Consumer<Hitbox> action) {
+    public Hitbox(boolean active, BiConsumer<Hitbox, Collider> action) {
         super();
         this.active = active;
         this.action = action;
     }
 
-    public Hitbox(float x, float y, float width, float height, boolean active, Consumer<Hitbox> action) {
+    public Hitbox(float x, float y, float width, float height, boolean active, BiConsumer<Hitbox, Collider> action) {
         super(x, y, width, height);
         this.active = active;
         this.action = action;
@@ -24,14 +24,14 @@ public class Hitbox extends Rectangle {
         if (!active || !this.overlaps(r))
             return;
         System.out.println("accepting action");
-        action.accept(this);
+        action.accept(this, r);
     }
 
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    public void setAction(Consumer<Hitbox> action) {
+    public void setAction(BiConsumer<Hitbox, Collider> action) {
         this.action = action;
     }
 
@@ -39,7 +39,7 @@ public class Hitbox extends Rectangle {
         return active;
     }
 
-    public Consumer<Hitbox> getAction() {
+    public BiConsumer<Hitbox, Collider> getAction() {
         return action;
     }
 }
