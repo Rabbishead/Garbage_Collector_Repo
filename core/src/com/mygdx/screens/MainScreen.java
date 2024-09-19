@@ -64,6 +64,8 @@ public class MainScreen extends ScreenAdapter {
 
         stage.act(Gdx.graphics.getDeltaTime());
 
+        hitboxHandler.checkHitboxes();
+
         stage.draw();
 
         if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") != null
@@ -76,8 +78,6 @@ public class MainScreen extends ScreenAdapter {
             stage.getActors().removeIndex(stage.getActors().size - 1);
             npcDialogue = null;
         }
-
-        hitboxHandler.checkHitboxes();
     }
 
     @Override

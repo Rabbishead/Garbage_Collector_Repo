@@ -1,10 +1,11 @@
 package com.mygdx.entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
@@ -13,8 +14,11 @@ import com.mygdx.resources.ResourceEnum;
 
 public class TestActor extends Actor {
     boolean dialogueActive = false;
-    private Hitbox hitbox = new Hitbox(false, null);
-    
+    private Hitbox hitbox = new Hitbox(false, null, null);
+    private NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+    DialogueLoader.getLine("testNPCDialogue1"));
+    private Texture texture = Utils.getTexture(ResourceEnum.TESTACTOR);
+
     public TestActor(float x, float y) {
         setX(x + 100);
         setY(y + 100);
@@ -23,20 +27,13 @@ public class TestActor extends Actor {
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, (hitbox, collider) -> {
-            // this.remove();
-            // Utils.getHitboxHandler().unRegisterHitbox(hitbox);
-            if (dialogueActive) {
-                DelayManager.updateDelay(this);
-                if (DelayManager.getCurrentDelay(this) <= 0) {
-                    dialogueActive = false;
-                }
-                return;
+            if (collider.getTag().equals("player")) {
+                if (!dialogueActive) Utils.getStage().addActor(npcDialogue);
             }
-            NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
-                    DialogueLoader.getLine("testNPCDialogue1"));
-            getStage().addActor(npcDialogue);
-            dialogueActive = true;
-            DelayManager.registerObject(this, 60);
+        }, (hitbox, collider) -> {
+            if (collider.getTag().equals("player")) {
+                if (dialogueActive) npcDialogue.remove();
+            }
         });
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
@@ -44,7 +41,7 @@ public class TestActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(Utils.getTexture(ResourceEnum.TESTACTOR), getX(), getY(), 32, 32);
+        batch.draw(texture, getX(), getY(), 32, 32);
     }
 
     @Override
@@ -54,11 +51,13 @@ public class TestActor extends Actor {
             setX(getX() + 0.5f);
             setY(getY() + 0.5f);
         }
+        dialogueActive = npcDialogue.getStage() != null;
     }
 
     @Override
     protected void positionChanged() {
         super.positionChanged();
         hitbox.setPosition(getX(), getY());
+        npcDialogue.setPosition(getX() + 40, getY() + 50);
     }
 }
