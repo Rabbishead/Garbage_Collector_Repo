@@ -9,7 +9,10 @@ public class DialogueLoader {
     private static HashMap<String, String> loadedLines;
     public enum Languages{
         ITALIAN,
-        ENGLISH
+        ENGLISH,
+        SPANISH,
+        FRENCH,
+        RUSSIAN
     }
     private static Languages activeLanguage;
 
