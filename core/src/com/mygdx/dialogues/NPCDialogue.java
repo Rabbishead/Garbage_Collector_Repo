@@ -20,7 +20,7 @@ public class NPCDialogue extends Actor {
         setY(y);
         setWidth(2);
         setHeight(3);
-        texture = new Texture("dialogues/dialogueBox.jpg");
+        texture = new Texture("dialogues/images/dialogueBox.jpg");
         this.textToDisplay = textToDisplay;
     }
     @Override

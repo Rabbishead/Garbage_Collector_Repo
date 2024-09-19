@@ -27,9 +27,9 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.PLAYER, "map/animation_sheet.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
         pathMap.put(ResourceEnum.TESTACTOR, "testActor.png");
-        pathMap.put(ResourceEnum.PLAYBUTTON, "play.png");
-        pathMap.put(ResourceEnum.ENGFLAG, "leng/engFlag.jpg");
-        pathMap.put(ResourceEnum.ITAFLAG, "leng/itaFlag.png");
+        pathMap.put(ResourceEnum.PLAYBUTTON, "menu/play.png");
+        pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
+        pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
         
 
     }

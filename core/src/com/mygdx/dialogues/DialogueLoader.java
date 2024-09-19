@@ -7,8 +7,19 @@ import java.util.HashMap;
 
 public class DialogueLoader {
     private static HashMap<String, String> loadedLines;
+    public enum Languages{
+        ITALIAN,
+        ENGLISH
+    }
+    private static Languages activeLanguage;
 
-    public static void loadFile(File file) {
+    public static void loadFile() {
+        File file = null;
+        switch (activeLanguage) {
+            case ITALIAN -> { file = new File("assets/dialogues/lang/dialoguesIta.txt"); }
+            case ENGLISH -> { file = new File("assets/dialogues/lang/dialoguesEng.txt"); }
+        }
+
         loadedLines = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -28,4 +39,12 @@ public class DialogueLoader {
     public static String getLine(String key) {
         return loadedLines.get(key);
     }
+
+    public static void setLang(Languages language){
+        activeLanguage = language;
+    }
+    public static Languages getActiveLanguage() {
+        return activeLanguage;
+    }
+
 }

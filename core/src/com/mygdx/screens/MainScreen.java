@@ -1,7 +1,5 @@
 package com.mygdx.screens;
 
-import java.io.File;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
-import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
@@ -40,8 +37,6 @@ public class MainScreen extends ScreenAdapter {
         Utils.setStage(stage);
         stage.setViewport(new ScreenViewport(new OrthographicCamera(320, 320)));
         stage.getCamera().translate(160, 160, 0);
-
-        DialogueLoader.loadFile(new File("assets/dialogues/dialoguesIta.txt"));
 
         GunController.get();
 

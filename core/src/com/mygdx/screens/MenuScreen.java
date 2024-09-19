@@ -1,5 +1,7 @@
 package com.mygdx.screens;
 
+import java.io.File;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.Utils;
+import com.mygdx.dialogues.DialogueLoader;
+import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.game.GarbageCollection;
 import com.mygdx.resources.ResourceEnum;
 
@@ -28,6 +32,7 @@ public class MenuScreen extends ScreenAdapter {
         this.game = game;
         stage = new Stage();
         Utils.setStage(stage);
+        DialogueLoader.setLang(Languages.ITALIAN);
     }
 
     @Override
@@ -47,12 +52,8 @@ public class MenuScreen extends ScreenAdapter {
         engButton.setPosition(col_width,Gdx.graphics.getHeight()-row_height*17);
         engButton.addListener(new InputListener(){
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("ciao");
-            }
-            @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("not ciao");
+                DialogueLoader.setLang(Languages.ENGLISH);
                 return true;
             }
         });
@@ -62,12 +63,8 @@ public class MenuScreen extends ScreenAdapter {
         itaButton.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*17);
         itaButton.addListener(new InputListener(){
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("ciao");
-            }
-            @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("not ciao");
+                DialogueLoader.setLang(Languages.ITALIAN);
                 return true;
             }
         });
@@ -77,11 +74,8 @@ public class MenuScreen extends ScreenAdapter {
         playButton.setPosition(Gdx.graphics.getHeight()/2 - playButton.getHeight()/2,Gdx.graphics.getWidth()/2 - playButton.getWidth()/2);
         playButton.addListener(new InputListener(){
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("ciao");
-            }
-            @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                DialogueLoader.loadFile();
                 game.setScreen(new MainScreen(game));
                 return true;
             }
