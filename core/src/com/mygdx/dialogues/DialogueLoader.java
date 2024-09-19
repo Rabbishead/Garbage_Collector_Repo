@@ -6,9 +6,10 @@ import java.io.FileReader;
 import java.util.HashMap;
 
 public class DialogueLoader {
-    private static HashMap<String, String> loadedLines = new HashMap<>();
+    private static HashMap<String, String> loadedLines;
 
     public static void loadFile(File file) {
+        loadedLines = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             while (br.ready()) {

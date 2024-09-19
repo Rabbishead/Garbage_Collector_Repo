@@ -1,6 +1,5 @@
-package com.mygdx.entities;
+package com.mygdx.gunControls.guns;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,12 +12,13 @@ public class Stone extends Actor {
         // Gdx.input.getX() Gdx.input.getY()
         Vector2 newv2 = new Vector2(x, y);
         newv2.setAngleDeg(v2.angleDeg(newv2));
-        newv2.scl(8);
+        newv2.scl(2);
         this.moveBy(x, y);
         setX(x + 16);
         setY(y + 16);
 
         setWidth(8);
+        setHeight(8);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
     }
