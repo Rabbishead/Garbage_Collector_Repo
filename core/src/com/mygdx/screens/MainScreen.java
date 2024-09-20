@@ -23,7 +23,6 @@ public class MainScreen extends ScreenAdapter {
     private Stage stage;
     private TileSetManager tileSetManager;
     HitboxHandler hitboxHandler = new HitboxHandler();
-    private NPCDialogue npcDialogue;
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
 
@@ -65,17 +64,6 @@ public class MainScreen extends ScreenAdapter {
 
         // sout fps
         //System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
-
-        if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") != null
-                && npcDialogue == null) {
-            npcDialogue = new NPCDialogue(player.getX() + 10, player.getY() + 30, TileMapCollisionsManager
-                    .getCurrentTileProprieties(player.getX(), player.getY()).get("content").toString());
-            stage.addActor(npcDialogue);
-        } else if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY())
-                .get("dialogue") == null && npcDialogue != null) {
-            stage.getActors().removeIndex(stage.getActors().size - 1);
-            npcDialogue = null;
-        }
     }
 
     @Override
