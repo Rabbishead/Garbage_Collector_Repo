@@ -39,7 +39,7 @@ public class DelayManager {
         if (i == null) return;
 
         if (i > 0) {
-            currentDelays.replace(o, i - 1);
+            currentDelays.replace(o, i - 2);
             return;
         }
 
