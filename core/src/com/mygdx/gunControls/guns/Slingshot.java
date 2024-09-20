@@ -1,17 +1,22 @@
 package com.mygdx.gunControls.guns;
 
-public class Slingshot extends Gun{
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.Utils;
+
+public class Slingshot extends Gun {
 
     public Slingshot() {
         super();
     }
 
-    public int rightTrigger() {
-        
+    public int leftTrigger() {
+        Utils.getStage().addActor(new Stone(
+                new Vector2(Utils.player.getX(), Utils.player.getY()), Gdx.input.getX(), Gdx.input.getY()));
         return 1;
     }
-
-    public int leftTrigger() {
+    
+    public int rightTrigger() {
         return 2;
     }
 

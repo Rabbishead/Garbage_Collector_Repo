@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.PlayerAnimationManager;
+import com.mygdx.gunControls.GunController;
+import com.mygdx.gunControls.guns.Slingshot;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
@@ -33,6 +35,8 @@ public class Player extends Actor {
         playerAnimationManager = new PlayerAnimationManager();
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), "player");
         Utils.getHitboxHandler().registerCollider(collider);
+        Utils.player = this;
+        GunController.get().loadGun(new Slingshot());
     }
 
     /**
@@ -62,6 +66,7 @@ public class Player extends Actor {
         super.act(delta);
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
         playerAnimationManager.updateAnimation(delta);
+        GunController.get().act();
     }
 
     @Override

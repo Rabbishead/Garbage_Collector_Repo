@@ -2,6 +2,7 @@ package com.mygdx;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
@@ -12,6 +13,7 @@ public class Utils {
 
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
+    public static Player player;
 
     /**
      * use this class in order to load a texture

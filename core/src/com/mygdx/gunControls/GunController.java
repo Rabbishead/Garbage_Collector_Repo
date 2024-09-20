@@ -18,6 +18,8 @@ public class GunController {
     }
 
     private GunController() {
+        guns = new ArrayList<>();
+        gunIndex = 0;
     }
 
     public void loadGun(Gun gun) {

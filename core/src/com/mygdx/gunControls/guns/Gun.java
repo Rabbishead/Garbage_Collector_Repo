@@ -5,11 +5,11 @@ public class Gun {
     public Gun() {
     }
 
-    public int rightTrigger() {
+    public int leftTrigger() {
         return 0;
     }
 
-    public int leftTrigger() {
+    public int rightTrigger() {
         return 0;
     }
 
