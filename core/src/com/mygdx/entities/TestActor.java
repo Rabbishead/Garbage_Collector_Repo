@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
+import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
@@ -24,15 +25,21 @@ public class TestActor extends Actor {
         setHeight(32);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
+
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, (hitbox, collider) -> {
             if (collider.getTag().equals("player")) {
                 Utils.getStage().addActor(npcDialogue);
                 hitbox.setActive(false);
+                DelayManager.registerObject(this, 100, object -> {
+                    npcDialogue.remove();
+                    hitbox.setActive(true);
+                });
             } else if (collider.getTag().equals("stone")) {
                 this.remove();
                 Utils.getHitboxHandler().unRegisterHitbox(hitbox);
             }
         });
+
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
 
@@ -49,6 +56,7 @@ public class TestActor extends Actor {
             setX(getX() + 0.5f);
             setY(getY() + 0.5f);
         }
+        DelayManager.updateDelay(this);
     }
 
     @Override

@@ -63,6 +63,9 @@ public class MainScreen extends ScreenAdapter {
 
         stage.draw();
 
+        // sout fps
+        System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
+
         if (TileMapCollisionsManager.getCurrentTileProprieties(player.getX(), player.getY()).get("dialogue") != null
                 && npcDialogue == null) {
             npcDialogue = new NPCDialogue(player.getX() + 10, player.getY() + 30, TileMapCollisionsManager
