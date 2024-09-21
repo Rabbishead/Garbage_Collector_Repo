@@ -24,14 +24,12 @@ public class ResourceManager {
     }
 
     private void loadPathMap() {
-        pathMap.put(ResourceEnum.PLAYER, "map/animation_sheet.png");
+        pathMap.put(ResourceEnum.PLAYER, "animation_sheet.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
         pathMap.put(ResourceEnum.TESTACTOR, "testActor.png");
         pathMap.put(ResourceEnum.PLAYBUTTON, "menu/play.png");
         pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
-        
-
     }
 
     public Texture getTexture(ResourceEnum e) {
