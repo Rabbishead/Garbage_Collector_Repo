@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
-import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.game.GarbageCollection;

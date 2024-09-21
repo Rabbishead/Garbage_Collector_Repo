@@ -9,13 +9,28 @@ import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 
 public class Stone extends Actor {
+    // Declared as fields, so they will be reused
+    private Vector2 position = new Vector2();
+    private Vector2 velocity = new Vector2();
+    private Vector2 movement = new Vector2();
+
+    private Vector2 touch = new Vector2();
+    private Vector2 dir = new Vector2();
+
+    // On touch events, set the touch vector, then do this to get the direction
+    // vector
     private Vector2 trajectory;
     private Vector2 playerVector;
     private Texture t = Utils.getTexture(ResourceEnum.STONE);
 
     public Stone(Vector2 playerVector, int mouseX, int mouseY) {
-        trajectory = new Vector2(mouseX, mouseY);
+        touch.set(mouseX, mouseY);
         this.playerVector = playerVector;
+
+        dir.set(touch).sub(position).nor();
+        velocity = new Vector2(dir).scl(2);
+        movement.set(velocity).scl(1);
+        position.add(movement);
 
         trajectory.setAngleDeg(playerVector.angleDeg(trajectory));
         setX(playerVector.x);
@@ -42,7 +57,8 @@ public class Stone extends Actor {
         setY(trajectory.y);
         System.out.println(trajectory.x + " " + trajectory.y);
 
-        if (trajectory.dst(playerVector) > 5000) this.remove();
+        if (trajectory.dst(playerVector) > 5000)
+            this.remove();
     }
 
     @Override
