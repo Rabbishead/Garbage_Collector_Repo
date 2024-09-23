@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * NPC dialogues manager
- * it's an actor so we can subscrbe it to MainScreen's stage
+ * it's an actor so we can subscribe it to MainScreen's stage
  * @see MainScreen
  */
 public class NPCDialogue extends Actor {
