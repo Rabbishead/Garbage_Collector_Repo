@@ -1,6 +1,7 @@
 package com.mygdx.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
@@ -28,15 +29,16 @@ public class Player extends Actor {
     public Player(int x, int y) {
         setX(x + 16);
         setY(y + 16);
-        setWidth(32);
+        setWidth(18);
         setHeight(32);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
         playerAnimationManager = new PlayerAnimationManager();
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), "player");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
         Utils.player = this;
         GunController.get().loadGun(new Slingshot());
+        this.debug();
     }
 
     /**
@@ -59,6 +61,10 @@ public class Player extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(playerAnimationManager.getCurrentFrame(), getX(), getY());
+    }
+
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.polygon(collider.getTransformedVertices());
     }
 
     @Override

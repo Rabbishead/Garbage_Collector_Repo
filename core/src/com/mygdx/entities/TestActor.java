@@ -2,6 +2,7 @@ package com.mygdx.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
@@ -26,7 +27,7 @@ public class TestActor extends Actor {
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
 
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), true, (hitbox, collider) -> {
+        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, (hitbox, collider) -> {
             if (collider.getTag().equals("player")) {
                 Utils.getStage().addActor(npcDialogue);
                 hitbox.setActive(false);
@@ -41,12 +42,17 @@ public class TestActor extends Actor {
         });
 
         Utils.getHitboxHandler().registerHitbox(hitbox);
+        this.debug();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(texture, getX(), getY(), 32, 32);
+    }
+
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.polygon(hitbox.getTransformedVertices());
     }
 
     @Override
