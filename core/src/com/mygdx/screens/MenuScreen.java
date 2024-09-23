@@ -28,11 +28,10 @@ public class MenuScreen extends ScreenAdapter {
 
     private ImageButton playButton;
 
+    private boolean fullScreen = false;
+
 
     public MenuScreen(GarbageCollection game){
-        /*Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-        Gdx.graphics.setUndecorated(true);
-        Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);*/
         this.game = game;
         stage = new Stage();
         Utils.setStage(stage);
@@ -59,7 +58,8 @@ public class MenuScreen extends ScreenAdapter {
         engButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                DialogueLoader.setLang(Languages.ENGLISH);
+                toggleFullScreen();
+                //DialogueLoader.setLang(Languages.ENGLISH);
                 return true;
             }
         });
@@ -103,5 +103,22 @@ public class MenuScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         super.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        stage.getViewport().update(width, height); 
+    }
+
+    private void toggleFullScreen(){
+        fullScreen = !fullScreen;
+        if(fullScreen){
+            Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+            Gdx.graphics.setUndecorated(fullScreen);
+            Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);
+        }
+        else Gdx.graphics.setWindowedMode(640, 480);
+        Gdx.graphics.setUndecorated(fullScreen);
     }
 }

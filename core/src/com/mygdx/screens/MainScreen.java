@@ -33,7 +33,7 @@ public class MainScreen extends ScreenAdapter {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Utils.setStage(stage);
-        stage.setViewport(new ScreenViewport(new OrthographicCamera(160, 160)));
+        stage.setViewport(new ScreenViewport(new OrthographicCamera(1000, 1000)));
         stage.getCamera().translate(160, 160, 0);
 
         GunController.get();
@@ -53,6 +53,7 @@ public class MainScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
+
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
