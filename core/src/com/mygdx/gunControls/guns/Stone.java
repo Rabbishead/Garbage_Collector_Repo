@@ -31,7 +31,7 @@ public class Stone extends Actor {
         velocity = new Vector2(dir).scl(2);
         movement.set(velocity).scl(1);
         position.add(movement);
-
+        trajectory = new Vector2();
         trajectory.setAngleDeg(playerVector.angleDeg(trajectory));
         setX(playerVector.x);
         setY(playerVector.y);

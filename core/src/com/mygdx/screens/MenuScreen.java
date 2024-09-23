@@ -1,7 +1,9 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
@@ -27,10 +30,15 @@ public class MenuScreen extends ScreenAdapter {
 
 
     public MenuScreen(GarbageCollection game){
+        /*Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+        Gdx.graphics.setUndecorated(true);
+        Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);*/
         this.game = game;
         stage = new Stage();
         Utils.setStage(stage);
         DialogueLoader.setLang(Languages.ITALIAN);
+
+        
     }
 
     @Override

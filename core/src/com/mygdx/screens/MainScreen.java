@@ -33,7 +33,7 @@ public class MainScreen extends ScreenAdapter {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Utils.setStage(stage);
-        stage.setViewport(new ScreenViewport(new OrthographicCamera(320, 320)));
+        stage.setViewport(new ScreenViewport(new OrthographicCamera(160, 160)));
         stage.getCamera().translate(160, 160, 0);
 
         GunController.get();
@@ -68,5 +68,11 @@ public class MainScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        stage.getViewport().update(width, height); 
     }
 }
