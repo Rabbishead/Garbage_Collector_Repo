@@ -2,7 +2,9 @@ package com.mygdx.gunControls.guns;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
+import com.mygdx.gunControls.GunController;
 
 public class Slingshot extends Gun {
 
@@ -11,12 +13,18 @@ public class Slingshot extends Gun {
     }
 
     public int leftTrigger() {
+        Actor player = Utils.player;
         Utils.getStage().addActor(new Stone(
-                new Vector2(Utils.player.getX(), Utils.player.getY()), Gdx.input.getX(), Gdx.input.getY()));
+                new Vector2(player.getOriginX() + player.getX(), player.getOriginY() + player.getY()), Gdx.input.getX(), Gdx.input.getY()));
+        GunController.get().setCooldown(10);
+        GunController.get().resetCooldown();
         return 1;
     }
     
     public int rightTrigger() {
+        Utils.getStage().addActor(new Stone(
+                new Vector2(Utils.player.getX(), Utils.player.getY()), Gdx.input.getX(), Gdx.input.getY()));
+        GunController.get().setCooldown(20);
         return 2;
     }
 

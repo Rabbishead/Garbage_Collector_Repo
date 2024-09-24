@@ -10,7 +10,6 @@ import java.util.function.Consumer;
 public class DelayManager {
     private static HashMap<Object, Integer> originalDelays = new HashMap<>();
     private static HashMap<Object, Integer> currentDelays = new HashMap<>();
-    // consumer to manage accepting object
     private static HashMap<Object, Consumer<?>> actions = new HashMap<>();
 
     public static void registerObject(Object o, Integer time) {
@@ -52,5 +51,9 @@ public class DelayManager {
 
     public static Integer getCurrentDelay(Object o) {
         return currentDelays.get(o);
+    }
+
+    public static boolean isDelayOver(Object o) {
+        return currentDelays.get(o) <= 0;
     }
 }

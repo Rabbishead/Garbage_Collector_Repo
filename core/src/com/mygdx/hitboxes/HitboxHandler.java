@@ -8,14 +8,8 @@ public class HitboxHandler {
 
     private final CopyOnWriteArrayList<Hitbox> hitboxes = new CopyOnWriteArrayList<>();
     private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
-    private Collider player;
 
     public HitboxHandler() {
-        Utils.setHitboxHandler(this);
-    }
-
-    public HitboxHandler(Collider player) {
-        this.player = player;
         Utils.setHitboxHandler(this);
     }
 

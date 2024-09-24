@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mygdx.delay.DelayManager;
 import com.mygdx.gunControls.guns.Gun;
 
 public class GunController {
@@ -20,6 +21,7 @@ public class GunController {
     private GunController() {
         guns = new ArrayList<>();
         gunIndex = 0;
+        DelayManager.registerObject(this, 10);
     }
 
     public void loadGun(Gun gun) {
@@ -34,13 +36,23 @@ public class GunController {
         guns.remove(gun);
     }
 
+    public void setCooldown(int cooldown) {
+        DelayManager.registerObject(this, cooldown);
+    }
+
+    public void resetCooldown() {
+        DelayManager.resetDelay(this);
+    }
+
     public void act() {
-        if (guns.isEmpty()) return;
+        DelayManager.updateDelay(this);
+        if (guns.isEmpty() || !DelayManager.isDelayOver(this))
+            return;
         Gun currentGun = guns.get(gunIndex);
         int j = 0;
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             j = currentGun.leftTrigger();
-        } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+        } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             j = currentGun.rightTrigger();
         }
         gunIndex = (gunIndex + j) % guns.size();
