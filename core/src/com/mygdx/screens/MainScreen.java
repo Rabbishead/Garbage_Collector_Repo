@@ -28,7 +28,6 @@ public class MainScreen extends ScreenAdapter {
 
     private OrthographicCamera hudCamera;
 
-
     private BitmapFont font;
 
 
