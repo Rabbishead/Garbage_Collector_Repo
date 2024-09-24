@@ -3,6 +3,7 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -25,6 +26,12 @@ public class MainScreen extends ScreenAdapter {
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
 
+    private OrthographicCamera hudCamera;
+
+
+    private BitmapFont font;
+
+
     public MainScreen(GarbageCollection game) {
         this.game = game;
     }
@@ -35,6 +42,9 @@ public class MainScreen extends ScreenAdapter {
         Utils.setStage(stage);
         stage.setViewport(new ScreenViewport(new OrthographicCamera(1000, 1000)));
         stage.getCamera().translate(160, 160, 0);
+
+        hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        hudCamera.position.set(hudCamera.viewportWidth / 2.0f, hudCamera.viewportHeight / 2.0f, 1.0f);
 
         GunController.get();
 
@@ -47,6 +57,9 @@ public class MainScreen extends ScreenAdapter {
         stage.addActor(player);
         stage.setKeyboardFocus(player);
         stage.addActor(testActor);
+
+        font = new BitmapFont();
+
     }
 
     @Override
@@ -61,6 +74,15 @@ public class MainScreen extends ScreenAdapter {
         hitboxHandler.checkHitboxes();
 
         stage.draw();
+
+        
+        hudCamera.update();
+        stage.getBatch().setProjectionMatrix(hudCamera.combined);
+        stage.getBatch().begin();
+        font.draw(stage.getBatch(), "Upper left, FPS=" + Gdx.graphics.getFramesPerSecond(), 0, hudCamera.viewportHeight);
+        font.draw(stage.getBatch(), "Lower left", 0, font.getLineHeight());
+
+        stage.getBatch().end();
 
         // sout fps
         //System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
