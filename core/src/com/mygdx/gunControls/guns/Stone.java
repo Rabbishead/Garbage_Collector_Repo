@@ -22,7 +22,6 @@ public class Stone extends Actor {
 
     private float speed = 500;
 
-    private Vector2 playerVector;
     private Texture t = Utils.getTexture(ResourceEnum.STONE);
     private Sprite sprite = new Sprite(t);
 
@@ -31,11 +30,12 @@ public class Stone extends Actor {
         touch.set(tmp.x, tmp.y);
         position.set(playerVector.x, playerVector.y);
         dir.set(touch).sub(position).nor();
+        velocity = new Vector2(dir).scl(1000);
+        movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
+        position.add(movement);
 
-        this.playerVector = playerVector;
-
-        setX(playerVector.x);
-        setY(playerVector.y);
+        setX(position.x);
+        setY(position.y);
 
         setWidth(8);
         setHeight(8);

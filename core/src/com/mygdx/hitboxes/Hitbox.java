@@ -29,6 +29,7 @@ public class Hitbox extends Polygon {
         if (!active)
             return;
         boolean collision = Intersector.overlapConvexPolygons(this, r);
+        r.setCollided(collision);
         if (!collision)
             return;
         onHit.accept(this, r);

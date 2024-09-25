@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Polygon;
 
 public class Collider extends Polygon {
     private String tag = "";
+    private boolean collided = false;
 
     public Collider() {
         super();
@@ -32,5 +33,13 @@ public class Collider extends Polygon {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public boolean isCollided() {
+        return collided;
+    }
+
+    public void setCollided(boolean collided) {
+        this.collided = collided;
     }
 }
