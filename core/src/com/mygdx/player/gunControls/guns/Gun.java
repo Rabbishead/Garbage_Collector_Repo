@@ -1,4 +1,4 @@
-package com.mygdx.gunControls.guns;
+package com.mygdx.player.gunControls.guns;
 
 public class Gun {
 

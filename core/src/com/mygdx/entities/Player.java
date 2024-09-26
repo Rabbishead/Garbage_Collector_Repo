@@ -7,11 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.PlayerAnimationManager;
-import com.mygdx.gunControls.GunController;
-import com.mygdx.gunControls.guns.Slingshot;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
+import com.mygdx.player.gunControls.GunController;
+import com.mygdx.player.gunControls.guns.Slingshot;
 
 /**
  * player class with collision managing

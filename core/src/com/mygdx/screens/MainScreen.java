@@ -12,10 +12,10 @@ import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.game.GarbageCollection;
-import com.mygdx.gunControls.GunController;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
+import com.mygdx.player.gunControls.GunController;
 
 public class MainScreen extends ScreenAdapter {
 
