@@ -37,7 +37,7 @@ public class MainScreen extends ScreenAdapter {
         stage = new Stage(new ScreenViewport());
         Utils.setStage(stage);
         stage.setViewport(new ScreenViewport(new OrthographicCamera(1000, 1000)));
-        stage.getCamera().translate(160, 160, 0);
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
 
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         hudCamera.position.set(hudCamera.viewportWidth / 2.0f, hudCamera.viewportHeight / 2.0f, 1.0f);

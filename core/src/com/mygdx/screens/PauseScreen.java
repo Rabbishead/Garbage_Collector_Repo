@@ -23,8 +23,6 @@ public class PauseScreen extends ScreenAdapter{
 
     private ImageButton resumeButton;
 
-    private boolean fullScreen = false;
-
 
     public PauseScreen(){
         stage = new Stage();
@@ -90,13 +88,13 @@ public class PauseScreen extends ScreenAdapter{
     }
 
     private void toggleFullScreen(){
-        fullScreen = !fullScreen;
-        if(fullScreen){
-            Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-            Gdx.graphics.setUndecorated(fullScreen);
-            Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);
+        Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+        if(Gdx.graphics.getHeight() == displayMode.height){
+            Gdx.graphics.setWindowedMode(640, 480);
+            Gdx.graphics.setUndecorated(false);
+            return;
         }
-        else Gdx.graphics.setWindowedMode(640, 480);
-        Gdx.graphics.setUndecorated(fullScreen);
+        Gdx.graphics.setUndecorated(true);
+        Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);
     }
 }
