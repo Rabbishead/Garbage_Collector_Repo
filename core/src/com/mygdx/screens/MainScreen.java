@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
@@ -34,9 +35,10 @@ public class MainScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage();
         Utils.setStage(stage);
-        stage.setViewport(new ScreenViewport(new OrthographicCamera(1000, 1000)));
+
+        stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getWidth()));
         stage.getCamera().translate(player.getX(), player.getY(), 0);
 
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
