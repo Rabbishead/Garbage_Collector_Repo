@@ -24,8 +24,14 @@ public class GunController {
         DelayManager.registerObject(this, 10);
     }
 
-    public void loadGun(Gun gun) {
+    /**
+     * Adds the gun to the list
+     * @param gun The gun to add
+     * @return This instance for chaining
+     */
+    public GunController loadGun(Gun gun) {
         guns.add(gun);
+        return instance;
     }
 
     public void loadGuns(ArrayList<Gun> guns) {

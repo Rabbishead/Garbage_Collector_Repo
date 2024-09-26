@@ -6,12 +6,12 @@ import com.mygdx.Utils;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.resources.ResourceEnum;
 
-public class Stone extends Bullet {
+public class Stone extends Projectile {
 
     private Collider collider = new Collider();
 
     public Stone(float nozzleX, float nozzleY) {
-        super(Utils.getTexture(ResourceEnum.STONE), 8, 8, nozzleX, nozzleY, 500);
+        super(Utils.getTexture(ResourceEnum.STONE), 6, 6, nozzleX, nozzleY, 500f);
     }
 
     @Override
