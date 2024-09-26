@@ -1,15 +1,17 @@
-package com.mygdx.gunControls.guns;
+package com.mygdx.player.gunControls.projectiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
+import com.mygdx.hitboxes.Collider;
 import com.mygdx.resources.ResourceEnum;
 
 public class Stone extends Actor {
@@ -24,6 +26,8 @@ public class Stone extends Actor {
 
     private Texture t = Utils.getTexture(ResourceEnum.STONE);
     private Sprite sprite = new Sprite(t);
+
+    private Collider collider = new Collider();
 
     public Stone(Vector2 playerVector, int mouseX, int mouseY) {
         Vector3 tmp = Utils.getStage().getCamera().unproject(new Vector3(mouseX, mouseY, 0));
@@ -44,9 +48,13 @@ public class Stone extends Actor {
 
         sprite.setOrigin(getWidth()/2, getHeight()/2);
 
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "projectile");
+        Utils.getHitboxHandler().registerCollider(collider);
+
         DelayManager.registerObject(this, 150, e -> {
-            this.remove();
+            delete();
         });
+        this.debug();
     }
 
     @Override
@@ -56,9 +64,14 @@ public class Stone extends Actor {
         sprite.rotate(10);
     }
 
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.polygon(collider.getTransformedVertices());
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
+        DelayManager.updateDelay(this);
 
         velocity = new Vector2(dir).scl(speed);
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
@@ -66,7 +79,7 @@ public class Stone extends Actor {
         setX(position.x);
         setY(position.y);
 
-        DelayManager.updateDelay(this);
+        if (collider.isCollided()) delete();
     }
 
     @Override
@@ -74,5 +87,11 @@ public class Stone extends Actor {
         super.positionChanged();
         sprite.setX(getX());
         sprite.setY(getY());
+        collider.setPosition(getX(), getY());
+    }
+
+    private void delete(){
+        this.remove();
+        Utils.getHitboxHandler().unRegisterCollider(collider);
     }
 }

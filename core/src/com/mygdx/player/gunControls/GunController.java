@@ -1,11 +1,11 @@
-package com.mygdx.gunControls;
+package com.mygdx.player.gunControls;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.delay.DelayManager;
-import com.mygdx.gunControls.guns.Gun;
+import com.mygdx.player.gunControls.guns.Gun;
 
 public class GunController {
     private static GunController instance;

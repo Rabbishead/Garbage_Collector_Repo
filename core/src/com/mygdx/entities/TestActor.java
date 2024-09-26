@@ -35,7 +35,7 @@ public class TestActor extends Actor {
                     npcDialogue.remove();
                     hitbox.setActive(true);
                 });
-            } else if (collider.getTag().equals("stone")) {
+            } else if (collider.getTag().equals("projectile")) {
                 this.remove();
                 Utils.getHitboxHandler().unRegisterHitbox(hitbox);
             }

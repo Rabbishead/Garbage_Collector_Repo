@@ -69,7 +69,6 @@ public class TiledMovementStyle extends MovementStyle {
                 mba.setDuration(0.1f);
                 player.addAction(mba);
                 //player.getStage().getCamera().translate(x, y, 0);
-
             }
             String dir = "-";
             if (y == 32) dir = "wW";
