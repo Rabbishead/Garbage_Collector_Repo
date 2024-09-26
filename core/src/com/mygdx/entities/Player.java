@@ -12,6 +12,7 @@ import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.guns.Slingshot;
+import com.mygdx.player.gunControls.guns.Sniper;
 
 /**
  * player class with collision managing
@@ -38,7 +39,7 @@ public class Player extends Actor {
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
         Utils.player = this;
-        GunController.get().loadGun(new Slingshot());
+        GunController.get().loadGun(new Sniper());
         this.debug();
     }
 
