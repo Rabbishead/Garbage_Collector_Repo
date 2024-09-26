@@ -1,5 +1,6 @@
 package com.mygdx;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
@@ -8,6 +9,8 @@ import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
 
 public class Utils {
+
+    public static Game game;
 
     private static Stage stage;
 
@@ -39,5 +42,12 @@ public class Utils {
     }
     public static void setStage(Stage stage) {
         Utils.stage = stage;
+    }
+
+    public static Game getGame() {
+        return game;
+    }
+    public static void setGame(Game game) {
+        Utils.game = game;
     }
 }

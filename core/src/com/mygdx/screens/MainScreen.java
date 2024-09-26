@@ -2,10 +2,12 @@ package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.Utils;
@@ -16,10 +18,10 @@ import com.mygdx.gunControls.GunController;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
+import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class MainScreen extends ScreenAdapter {
 
-    private GarbageCollection game;
     private Stage stage;
     private TileSetManager tileSetManager;
     HitboxHandler hitboxHandler = new HitboxHandler();
@@ -29,11 +31,6 @@ public class MainScreen extends ScreenAdapter {
     private OrthographicCamera hudCamera;
 
     private BitmapFont font;
-
-
-    public MainScreen(GarbageCollection game) {
-        this.game = game;
-    }
 
     @Override
     public void show() {
@@ -66,6 +63,7 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
 
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)) Utils.getGame().setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -96,5 +94,10 @@ public class MainScreen extends ScreenAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
         stage.getViewport().update(width, height); 
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
     }
 }
