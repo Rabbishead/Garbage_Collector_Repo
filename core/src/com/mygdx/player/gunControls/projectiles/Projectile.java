@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -29,24 +30,32 @@ public class Projectile extends Actor {
 
     public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, float speed, int time) {
         sprite = new Sprite(t);
+        
         float mX = Gdx.input.getX(), mY = Gdx.input.getY();
         Vector3 tmp = Utils.getStage().getCamera().unproject(new Vector3(mX, mY, 0));
+
         touch.set(tmp.x, tmp.y);
         position.set(nozzleX, nozzleY);
-        dir.set(touch).sub(position).nor();
+        dir.set(touch).sub(position);
+        float angle = MathUtils.radiansToDegrees * MathUtils.atan2(dir.x, dir.y);
+        if (angle < 0) angle+= 360;
+        dir.nor();
         velocity = new Vector2(dir).scl(speed);
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
+
+        sprite.setOrigin(getWidth() / 2, getHeight() / 2);
+        
+        sprite.setRotation(angle);
+        System.out.println(sprite.getRotation() + "\n" + dir.x + " - " + dir.y);
         position.add(movement);
+
         setX(position.x);
         setY(position.y);
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
-        sprite.setOrigin(getWidth() / 2, getHeight() / 2);
-        sprite.setRotation(position.angleDeg(new Vector2(tmp.x, tmp.y)));
-        System.out.println(sprite.getRotation() + "\n" + tmp.x + " - " + tmp.y);
-        System.out.println(position.x + " - " + position.y);
+        
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
         DelayManager.registerObject(this, time, e -> {
