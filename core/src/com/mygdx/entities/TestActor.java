@@ -24,7 +24,6 @@ public class TestActor extends Actor {
         setY(y + 100);
         setWidth(32);
         setHeight(32);
-        setBounds(getX(), getY(), getWidth(), getHeight());
         setTouchable(Touchable.enabled);
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, (hitbox, collider) -> {

@@ -28,7 +28,8 @@ public class Projectile extends Actor {
 
     protected Collider collider = new Collider();
 
-    public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, float speed, int time, float rotation) {
+    public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, float speed, int time,
+            float rotation) {
         sprite = new Sprite(t);
         this.speed = speed;
 
@@ -52,7 +53,6 @@ public class Projectile extends Actor {
 
         setX(position.x);
         setY(position.y);
-        setBounds(getX(), getY(), getWidth(), getHeight());
 
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), angle, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
