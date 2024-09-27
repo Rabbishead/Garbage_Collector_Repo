@@ -15,14 +15,14 @@ public class Collider extends Polygon {
         this.tag = tag;
     }
 
-    public Collider(float x, float y, float width, float height, int degrees) {
+    public Collider(float x, float y, float width, float height, float degrees) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
         this.setPosition(x, y);
         this.setOrigin(width / 2, height / 2);
         this.setRotation(degrees);
     }
 
-    public Collider(float x, float y, float width, float height, int degrees, String tag) {
+    public Collider(float x, float y, float width, float height, float degrees, String tag) {
         this(x, y, width, height, degrees);
         this.tag = tag;
     }
