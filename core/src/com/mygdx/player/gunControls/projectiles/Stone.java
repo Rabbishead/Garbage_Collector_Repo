@@ -15,14 +15,4 @@ public class Stone extends Projectile {
         super.draw(batch, parentAlpha);
         sprite.rotate(10);
     }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-    }
-
-    @Override
-    protected void positionChanged() {
-        super.positionChanged();
-    }
 }

@@ -1,27 +1,24 @@
 package com.mygdx.player.gunControls.guns;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.projectiles.Bullet;
 
 public class Sniper extends Gun {
-    Actor player;
-
+    
     public Sniper() {
         super();
-        player = Utils.player;
     }
 
     public int leftTrigger() {
-        Utils.getStage().addActor(new Bullet(player.getOriginX() + player.getX(), player.getOriginY() + player.getY()));
+        Utils.getStage().addActor(new Bullet(Utils.player.getOriginX() + Utils.player.getX(), Utils.player.getOriginY() + Utils.player.getY()));
         GunController.get().setCooldown(30);
         GunController.get().resetCooldown();
         return 1;
     }
     
     public int rightTrigger() {
-        Utils.getStage().addActor(new Bullet(player.getOriginX() + player.getX(), player.getOriginY() + player.getY()));
+        Utils.getStage().addActor(new Bullet(Utils.player.getOriginX() + Utils.player.getX(), Utils.player.getOriginY() + Utils.player.getY()));
         GunController.get().setCooldown(50);
         return 2;
     }
