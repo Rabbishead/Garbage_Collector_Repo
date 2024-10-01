@@ -3,14 +3,17 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
@@ -24,22 +27,30 @@ import com.mygdx.screens.ScreensManager.ScreenEnum;
 public class MainScreen extends ScreenAdapter {
 
     private Stage stage;
+    private Viewport viewport;
+    private OrthographicCamera camera;
+
     private TileSetManager tileSetManager;
+
     HitboxHandler hitboxHandler = new HitboxHandler();
+    
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
 
     private OrthographicCamera hudCamera;
 
-    private BitmapFont font;
+    MainScreen(){
+        stage = new Stage();
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(Utils.VIEWPORT_X, Utils.VIEWPORT_Y, camera);
+        
+        stage.setViewport(viewport);
+        stage.getCamera().translate(player.getX(),player.getY(), 0);
+    }
 
     @Override
     public void show() {
-        stage = new Stage();
         Utils.setStage(stage);
-
-        stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getWidth()));
-        stage.getCamera().translate(player.getX(), player.getY(), 0);
 
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         hudCamera.position.set(hudCamera.viewportWidth / 2.0f, hudCamera.viewportHeight / 2.0f, 1.0f);
@@ -56,8 +67,6 @@ public class MainScreen extends ScreenAdapter {
         stage.setKeyboardFocus(player);
         stage.addActor(testActor);
 
-        font = new BitmapFont();
-
     }
 
     @Override
@@ -65,7 +74,10 @@ public class MainScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
 
-        if(Gdx.input.isKeyPressed(Keys.ESCAPE)) Utils.getGame().setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+            Utils.getGame().setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+            return;
+        } 
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -73,18 +85,6 @@ public class MainScreen extends ScreenAdapter {
         hitboxHandler.checkHitboxes();
 
         stage.draw();
-
-        
-        hudCamera.update();
-        stage.getBatch().setProjectionMatrix(hudCamera.combined);
-        stage.getBatch().begin();
-        font.draw(stage.getBatch(), "Upper left, FPS=" + Gdx.graphics.getFramesPerSecond(), 0, hudCamera.viewportHeight);
-        font.draw(stage.getBatch(), "Lower left", 0, font.getLineHeight());
-
-        stage.getBatch().end();
-
-        // sout fps
-        //System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
     }
 
     @Override

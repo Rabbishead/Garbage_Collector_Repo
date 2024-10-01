@@ -11,18 +11,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.game.GarbageCollection;
+import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class MenuScreen extends ScreenAdapter {
     
     private final Stage stage;
+    private final Viewport viewport;
+    private final OrthographicCamera camera;
     private ImageButton engButton;
 
     private ImageButton itaButton;
@@ -34,17 +39,19 @@ public class MenuScreen extends ScreenAdapter {
 
     public MenuScreen(){
         stage = new Stage();
-        Utils.setStage(stage);
+        camera = new OrthographicCamera();
+        viewport = new ExtendViewport(Utils.VIEWPORT_X, Utils.VIEWPORT_Y, camera);
+        stage.setViewport(viewport);
+        
+        camera.translate(Utils.VIEWPORT_X/2, Utils.VIEWPORT_Y/2, 0);
         DialogueLoader.setLang(Languages.ITALIAN);
     }
 
     @Override
     public void show() {
-
-
-        stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getWidth()));
-        stage.getCamera().translate(Gdx.graphics.getWidth()/2, Gdx.graphics.getWidth()/3, 0);
-
+        Utils.setStage(stage);
+        CameraController.setGameCamera(camera);
+        
         engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
         itaButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ITAFLAG))));
@@ -54,11 +61,11 @@ public class MenuScreen extends ScreenAdapter {
         fullScreenButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
 
-        int row_height = Gdx.graphics.getWidth() / 24;
-        int col_width = Gdx.graphics.getWidth() / 24;
+        int row_height = Utils.VIEWPORT_X / 24;
+        int col_width = Utils.VIEWPORT_Y / 24;
  
         engButton.setSize(col_width*4,row_height);
-        engButton.setPosition(col_width,Gdx.graphics.getHeight()-row_height*17);
+        engButton.setPosition(col_width*2, row_height);
         engButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -69,7 +76,7 @@ public class MenuScreen extends ScreenAdapter {
         stage.addActor(engButton);
 
         itaButton.setSize(col_width*4,row_height);
-        itaButton.setPosition(col_width*4,Gdx.graphics.getHeight()-row_height*17);
+        itaButton.setPosition(col_width*6,row_height);
         itaButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -80,7 +87,7 @@ public class MenuScreen extends ScreenAdapter {
         stage.addActor(itaButton);
 
         playButton.setSize(col_width*6,row_height);
-        playButton.setPosition(Gdx.graphics.getHeight()/2 - playButton.getHeight()/2,Gdx.graphics.getWidth()/2 - playButton.getWidth()/2);
+        playButton.setPosition(col_width*24 - playButton.getWidth(), row_height * 12 - playButton.getHeight());
         playButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -93,7 +100,7 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage); 
 
         fullScreenButton.setSize(col_width*4,row_height);
-        fullScreenButton.setPosition(col_width * 20,Gdx.graphics.getHeight()-row_height*17);
+        fullScreenButton.setPosition(col_width * 32,row_height);
         fullScreenButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -129,7 +136,7 @@ public class MenuScreen extends ScreenAdapter {
     private void toggleFullScreen(){
         Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
         if(Gdx.graphics.getHeight() == displayMode.height){
-            Gdx.graphics.setWindowedMode(640, 480);
+            Gdx.graphics.setWindowedMode(Utils.VIEWPORT_X, Utils.VIEWPORT_Y);
             Gdx.graphics.setUndecorated(false);
             return;
         }
