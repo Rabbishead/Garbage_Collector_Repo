@@ -18,4 +18,8 @@ public class CameraController {
     public static void setHudCamera(OrthographicCamera hudCamera) {
         CameraController.hudCamera = hudCamera;
     }
+
+    public static void applyShakeEffect(){
+        
+    }
 }

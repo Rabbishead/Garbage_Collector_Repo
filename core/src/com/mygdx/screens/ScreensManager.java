@@ -3,7 +3,6 @@ package com.mygdx.screens;
 import java.util.EnumMap;
 
 import com.badlogic.gdx.Screen;
-import com.mygdx.resources.ResourceEnum;
 public class ScreensManager {
 
     public static enum ScreenEnum{
