@@ -38,7 +38,7 @@ public class Projectile extends Actor {
         setTouchable(Touchable.enabled);
 
         float mX = Gdx.input.getX(), mY = Gdx.input.getY();
-        Vector3 tmp = Utils.getStage().getViewport().unproject(new Vector3(mX, mY, 0));
+        Vector2 tmp = Utils.getStage().getViewport().unproject(new Vector2(mX, mY));
 
         touch.set(tmp.x, tmp.y);
         position.set(nozzleX, nozzleY);
@@ -46,15 +46,13 @@ public class Projectile extends Actor {
         velocity = new Vector2(dir).scl(speed);
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
         position.add(movement);
-
-        float angle = MathUtils.radiansToDegrees * MathUtils.atan2(dir.y, dir.x) + rotation;
         sprite.setOrigin(getWidth() / 2, getHeight() / 2);
-        sprite.setRotation(angle);
+        sprite.setRotation(dir.angleDeg() + rotation);
 
         setX(position.x);
         setY(position.y);
 
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), angle, "projectile");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), dir.angleDeg() + rotation, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
         DelayManager.registerObject(this, time, e -> {
             delete();

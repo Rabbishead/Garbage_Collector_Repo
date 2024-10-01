@@ -2,6 +2,7 @@ package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.mygdx.map.TileMapCollisionsManager;
@@ -15,7 +16,10 @@ public class TiledMovementStyle extends MovementStyle {
     private boolean inputted = false;
     private long lastMove, firstInput;
     private final Actor player;
-    private String lastDirection; 
+    private String lastDirection;
+
+    private Vector2 playerV = new Vector2();
+    private Vector2 mouseV = new Vector2();
 
     public TiledMovementStyle(Actor player) {
         inputs = new HashSet<>();
@@ -24,19 +28,44 @@ public class TiledMovementStyle extends MovementStyle {
         this.player = player;
         lastDirection = "-";
     }
+
     public String move() {
         long sinceLastMove = (Gdx.graphics.getFrameId() - lastMove);
 
-        if (sinceLastMove < 5) return "";
+        if (sinceLastMove < 5)
+            return "";
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) inputs.add('W');
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) inputs.add('S');
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) inputs.add('A');
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) inputs.add('D');
+        if (Gdx.input.isKeyPressed(Input.Keys.W))
+            inputs.add('W');
+        if (Gdx.input.isKeyPressed(Input.Keys.S))
+            inputs.add('S');
+        if (Gdx.input.isKeyPressed(Input.Keys.A))
+            inputs.add('A');
+        if (Gdx.input.isKeyPressed(Input.Keys.D))
+            inputs.add('D');
 
-        if (sinceLastMove < 9) return "";
+        if (sinceLastMove < 9)
+            return "";
 
-        if (inputs.isEmpty()) return lastDirection;
+        playerV = new Vector2(player.getX(), player.getY());
+        mouseV = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+        mouseV = player.getStage().getViewport().unproject(mouseV);
+        Vector2 dirV = mouseV.sub(playerV).nor();
+        float angle = dirV.angleDeg();
+        String dir = "-";
+
+        if (angle > 55 && angle <= 125)
+            dir = "wW";
+        else if (angle > 125 && angle <= 235)
+            dir = "wA";
+        else if (angle > 235 && angle <= 305)
+            dir = "wS";
+        else if (angle > 305 || angle <= 55)
+            dir = "wD";
+        lastDirection = "i" + dir.substring(1);
+
+        if (inputs.isEmpty())
+            return lastDirection;
 
         if (!inputted) {
             inputted = true;
@@ -62,24 +91,15 @@ public class TiledMovementStyle extends MovementStyle {
             inputted = false;
             lastMove = Gdx.graphics.getFrameId();
 
-            if(TileMapCollisionsManager.canMove(player.getX() + x, player.getY() + y)) {
+            if (TileMapCollisionsManager.canMove(player.getX() + x, player.getY() + y)) {
 
                 MoveByAction mba = new MoveByAction();
                 mba.setAmount(x, y);
                 mba.setDuration(0.1f);
                 player.addAction(mba);
-                //player.getStage().getCamera().translate(x, y, 0);
             }
-            String dir = "-";
-            if (y == 32) dir = "wW";
-            else if (y == -32) dir = "wS";
-            if (x == 32) dir = "wD";
-            else if (x == -32) dir = "wA";
-            lastDirection = "i" + dir.substring(1);
-            
-
-            return dir;
         }
-        return "";
+
+        return dir;
     }
 }
