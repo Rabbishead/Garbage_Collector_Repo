@@ -74,10 +74,14 @@ public class MainScreen extends ScreenAdapter {
             Utils.getGame().setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
             return;
         } 
+        if(Gdx.input.isKeyPressed(Keys.R)){
+            CameraController.applyShakeEffect();
+            return;
+        } 
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
-
+        CameraController.updateCamera();
         hitboxHandler.checkHitboxes();
 
         stage.draw();
