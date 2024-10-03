@@ -15,6 +15,8 @@ import com.mygdx.entities.TestActor;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
+import com.mygdx.player.camera.CameraController;
+import com.mygdx.player.camera.CameraShaker;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
@@ -40,6 +42,7 @@ public class MainScreen extends ScreenAdapter {
         
         stage.setViewport(viewport);
         stage.getCamera().translate(player.getX(),player.getY(), 0);
+        CameraController.setGameCamera(camera);
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.player.camera.CameraController;
+import com.mygdx.player.camera.CameraShaker;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
@@ -42,6 +43,8 @@ public class MenuScreen extends ScreenAdapter {
         
         camera.translate(Utils.VIEWPORT_X/2, Utils.VIEWPORT_Y/2, 0);
         DialogueLoader.setLang(Languages.ITALIAN);
+        CameraController.setGameCamera(camera);
+        CameraController.initCamera();
     }
 
     @Override
@@ -66,7 +69,8 @@ public class MenuScreen extends ScreenAdapter {
         engButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                DialogueLoader.setLang(Languages.ENGLISH);
+                //DialogueLoader.setLang(Languages.ENGLISH);
+                CameraController.applyShakeEffect();
                 return true;
             }
         });
@@ -114,6 +118,7 @@ public class MenuScreen extends ScreenAdapter {
         ScreenUtils.clear(1,1,1,0);
 
         stage.act(Gdx.graphics.getDeltaTime());
+        CameraController.updateCamera();
 
         stage.draw();
     }
