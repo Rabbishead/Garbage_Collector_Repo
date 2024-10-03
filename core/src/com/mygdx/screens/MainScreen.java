@@ -3,6 +3,7 @@ package com.mygdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -42,12 +43,13 @@ public class MainScreen extends ScreenAdapter {
         
         stage.setViewport(viewport);
         stage.getCamera().translate(player.getX(),player.getY(), 0);
-        CameraController.setGameCamera(camera);
+        
     }
 
     @Override
     public void show() {
         Utils.setStage(stage);
+        CameraController.initCamera();
 
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         hudCamera.position.set(hudCamera.viewportWidth / 2.0f, hudCamera.viewportHeight / 2.0f, 1.0f);

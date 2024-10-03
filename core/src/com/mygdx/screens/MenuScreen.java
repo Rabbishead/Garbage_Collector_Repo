@@ -43,14 +43,13 @@ public class MenuScreen extends ScreenAdapter {
         
         camera.translate(Utils.VIEWPORT_X/2, Utils.VIEWPORT_Y/2, 0);
         DialogueLoader.setLang(Languages.ITALIAN);
-        CameraController.setGameCamera(camera);
-        CameraController.initCamera();
+        
     }
 
     @Override
     public void show() {
         Utils.setStage(stage);
-        CameraController.setGameCamera(camera);
+        CameraController.initCamera();
         
         engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 

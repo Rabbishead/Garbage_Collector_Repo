@@ -2,31 +2,23 @@ package com.mygdx.player.camera;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.Utils;
 
 public class CameraController {
     private static OrthographicCamera gameCamera;
     private static OrthographicCamera hudCamera;
+    private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
-
-    public static OrthographicCamera getGameCamera() {
-        return gameCamera;
-    }
-    public static OrthographicCamera getHudCamera() {
-        return hudCamera;
-    }
-    public static void setGameCamera(OrthographicCamera gameCamera) {
-        CameraController.gameCamera = gameCamera;
-    }
-    public static void setHudCamera(OrthographicCamera hudCamera) {
-        CameraController.hudCamera = hudCamera;
-    }
 
     public static void initCamera(){
         float shakeRadius = 30f;
         float minimumShakeRadius = 3f;
         float radiusFallOffFactor = 0.90f;
         cameraShaker = new CameraShaker(gameCamera, shakeRadius, minimumShakeRadius, radiusFallOffFactor);
-
+        gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
+        currentViewport = Utils.getStage().getViewport();
+        hudCamera = new OrthographicCamera();
     }
 
     public static void updateCamera(){

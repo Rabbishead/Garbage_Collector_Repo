@@ -45,7 +45,7 @@ public class PauseScreen extends ScreenAdapter{
     @Override
     public void show() {
         Utils.setStage(stage);
-        CameraController.setGameCamera(camera);
+        CameraController.initCamera();
         
         engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
