@@ -5,14 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.hitboxes.Collider;
+import com.mygdx.player.camera.CameraController;
 
 public class Projectile extends Actor {
     protected Vector2 position = new Vector2();
@@ -20,7 +19,7 @@ public class Projectile extends Actor {
     protected Vector2 movement = new Vector2();
 
     protected Vector2 touch = new Vector2();
-    protected Vector2 dir = new Vector2();
+    protected Vector2 dir;
 
     protected float speed;
 
@@ -36,13 +35,9 @@ public class Projectile extends Actor {
         setWidth(width);
         setHeight(height);
         setTouchable(Touchable.enabled);
-
-        float mX = Gdx.input.getX(), mY = Gdx.input.getY();
-        Vector2 tmp = Utils.getStage().getViewport().unproject(new Vector2(mX, mY));
-
-        touch.set(tmp.x, tmp.y);
+        
         position.set(nozzleX, nozzleY);
-        dir.set(touch).sub(position).nor();
+        dir = CameraController.getMouseAngle();;
         velocity = new Vector2(dir).scl(speed);
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
         position.add(movement);

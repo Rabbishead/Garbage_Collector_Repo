@@ -33,6 +33,7 @@ public class TestActor extends Actor {
                 DelayManager.registerObject(this, 100, object -> {
                     npcDialogue.remove();
                     hitbox.setActive(true);
+                    collider.setCollided(false);
                 });
             } else if (collider.getTag().equals("projectile")) {
                 this.remove();

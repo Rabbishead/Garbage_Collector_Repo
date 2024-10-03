@@ -43,7 +43,6 @@ public class MenuScreen extends ScreenAdapter {
         
         camera.translate(Utils.VIEWPORT_X/2, Utils.VIEWPORT_Y/2, 0);
         DialogueLoader.setLang(Languages.ITALIAN);
-        
     }
 
     @Override

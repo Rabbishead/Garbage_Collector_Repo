@@ -4,6 +4,7 @@ public enum ResourceEnum {
     PLAYER,
     STONE,
     BULLET,
+    DEFAULT,
     TESTACTOR,
     ITAFLAG,
     ENGFLAG,

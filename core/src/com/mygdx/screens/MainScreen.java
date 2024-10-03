@@ -43,7 +43,6 @@ public class MainScreen extends ScreenAdapter {
         
         stage.setViewport(viewport);
         stage.getCamera().translate(player.getX(),player.getY(), 0);
-        
     }
 
     @Override
@@ -61,7 +60,7 @@ public class MainScreen extends ScreenAdapter {
         tileSetManager = new TileSetManager();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
 
-        player.setMovementStyle(Player.Styles.REALTIME);
+        player.setMovementStyle(Player.Styles.TILED);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
         stage.addActor(testActor);

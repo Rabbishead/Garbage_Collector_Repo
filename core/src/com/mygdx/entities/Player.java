@@ -2,6 +2,7 @@ package com.mygdx.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
@@ -22,6 +23,7 @@ public class Player extends Actor {
     private final PlayerAnimationManager playerAnimationManager;
     private MovementStyle movementStyle;
     private Collider collider = new Collider();
+    public Vector2 center = new Vector2();
 
     public enum Styles {
         REALTIME, TILED
@@ -34,6 +36,8 @@ public class Player extends Actor {
         setHeight(32);
         setOrigin(getWidth() / 2, getHeight() / 2);
         setTouchable(Touchable.enabled);
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
         playerAnimationManager = new PlayerAnimationManager();
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
@@ -71,6 +75,7 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (collider.isCollided()) return;
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
         playerAnimationManager.updateAnimation(delta);
         GunController.get().act();
@@ -80,5 +85,7 @@ public class Player extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         collider.setPosition(getX(), getY());
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
     }
 }

@@ -1,6 +1,8 @@
 package com.mygdx.player.gunControls.guns;
 
-public class Gun {
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
+public class Gun extends Actor {
 
     public Gun() {
     }
