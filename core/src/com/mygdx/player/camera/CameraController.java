@@ -12,13 +12,13 @@ public class CameraController {
     private static CameraShaker cameraShaker;
 
     public static void initCamera(){
+        gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
+        currentViewport = Utils.getStage().getViewport();
+        hudCamera = new OrthographicCamera();
         float shakeRadius = 30f;
         float minimumShakeRadius = 3f;
         float radiusFallOffFactor = 0.90f;
         cameraShaker = new CameraShaker(gameCamera, shakeRadius, minimumShakeRadius, radiusFallOffFactor);
-        gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
-        currentViewport = Utils.getStage().getViewport();
-        hudCamera = new OrthographicCamera();
     }
 
     public static void updateCamera(){
