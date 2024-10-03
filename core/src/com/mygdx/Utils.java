@@ -10,18 +10,13 @@ import com.mygdx.resources.ResourceManager;
 
 public class Utils {
 
-    public static Game game;
+    private static Game game;
 
     private static Stage stage;
 
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
-    public static Player player;
-
-    public static final int RATIO_X = 16;
-    public static final int RATIO_Y = 9;
-    public static final int VIEWPORT_X = 64 * RATIO_X;
-    public static final int VIEWPORT_Y = 64 * RATIO_Y;
+    private static Player player;
 
     /**
      * use this class in order to load a texture
@@ -54,5 +49,11 @@ public class Utils {
     }
     public static void setGame(Game game) {
         Utils.game = game;
+    }
+    public static Player getPlayer() {
+        return player;
+    }
+    public static void setPlayer(Player player) {
+        Utils.player = player;
     }
 }

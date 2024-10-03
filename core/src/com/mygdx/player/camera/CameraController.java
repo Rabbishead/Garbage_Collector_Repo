@@ -34,7 +34,7 @@ public class CameraController {
         float mX = Gdx.input.getX(), mY = Gdx.input.getY();
         Vector2 tmp = currentViewport.unproject(new Vector2(mX, mY));
         Vector2 dir = new Vector2();
-        dir.set(tmp).sub(Utils.player.center.x, Utils.player.center.y).nor();
+        dir.set(tmp).sub(Utils.getPlayer().center.x, Utils.getPlayer().center.y).nor();
         return dir;
     }
 }

@@ -41,7 +41,7 @@ public class Player extends Actor {
         playerAnimationManager = new PlayerAnimationManager();
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
-        Utils.player = this;
+        Utils.setPlayer(this);
         GunController.get().loadGun(new Sniper());
         this.debug();
     }

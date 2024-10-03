@@ -13,11 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.player.camera.CameraController;
-import com.mygdx.player.camera.CameraShaker;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
@@ -38,10 +38,10 @@ public class MenuScreen extends ScreenAdapter {
     public MenuScreen(){
         stage = new Stage();
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(Utils.VIEWPORT_X, Utils.VIEWPORT_Y, camera);
+        viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
         
-        camera.translate(Utils.VIEWPORT_X/2, Utils.VIEWPORT_Y/2, 0);
+        camera.translate(Data.VIEWPORT_X/2, Data.VIEWPORT_Y/2, 0);
         DialogueLoader.setLang(Languages.ITALIAN);
     }
 
@@ -59,8 +59,8 @@ public class MenuScreen extends ScreenAdapter {
         fullScreenButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
 
-        int row_height = Utils.VIEWPORT_X / 24;
-        int col_width = Utils.VIEWPORT_Y / 24;
+        int row_height = Data.VIEWPORT_X / 24;
+        int col_width = Data.VIEWPORT_Y / 24;
  
         engButton.setSize(col_width*4,row_height);
         engButton.setPosition(col_width*2, row_height);
@@ -136,7 +136,7 @@ public class MenuScreen extends ScreenAdapter {
     private void toggleFullScreen(){
         Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
         if(Gdx.graphics.getHeight() == displayMode.height){
-            Gdx.graphics.setWindowedMode(Utils.VIEWPORT_X, Utils.VIEWPORT_Y);
+            Gdx.graphics.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);
             Gdx.graphics.setUndecorated(false);
             return;
         }
