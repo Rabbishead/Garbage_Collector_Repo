@@ -8,20 +8,38 @@ import java.util.function.Consumer;
  * Class ussed to subsribe objects to a delay and update delays
  */
 public class DelayManager {
+    //nsert here an object and an integer, this will be the amount of delay associated with the object
     private static HashMap<Object, Integer> originalDelays = new HashMap<>();
+    //here you can see the current state of the delay for the given object
     private static HashMap<Object, Integer> currentDelays = new HashMap<>();
+    //actions called when delay ends
     private static HashMap<Object, Consumer<?>> actions = new HashMap<>();
 
+    /**
+     * registers an object to the delayManager
+     * @param o the object you wish to register
+     * @param time the amount of delay you need for the object
+     */
     public static void registerObject(Object o, Integer time) {
         originalDelays.put(o, time);
         currentDelays.put(o, time);
     }
 
+    /**
+     * registers an object to the delayManager
+     * @param o the object you wish to register
+     * @param time the amount of delay you need for the object
+     * @param action action invoked when delay ends
+     */
     public static void registerObject(Object o, Integer time, Consumer<?> action) {
         registerObject(o, time);
         actions.put(o, action);
     }
 
+    /**
+     * unregisters an object from the delay manager 
+     * @param o
+     */
     public static void unregisterObject(Object o) {
         originalDelays.remove(o);
         currentDelays.remove(o);
@@ -29,10 +47,18 @@ public class DelayManager {
             actions.remove(o);
     }
 
+    /**
+     * resets the delay associated with o
+     * @param o
+     */
     public static void resetDelay(Object o) {
         currentDelays.replace(o, originalDelays.get(o));
     }
 
+    /**
+     * updates the delay associated with o
+     * @param o
+    */
     public static void updateDelay(Object o) {
         Integer i = currentDelays.get(o);
         if (i == null) return;
@@ -49,10 +75,18 @@ public class DelayManager {
         }
     }
 
+    /**
+     * @param o
+     * @return current delay associated with o
+     */
     public static Integer getCurrentDelay(Object o) {
         return currentDelays.get(o);
     }
 
+    /**
+     * @param o
+     * @return true if delay is over
+     */
     public static boolean isDelayOver(Object o) {
         return currentDelays.get(o) <= 0;
     }
