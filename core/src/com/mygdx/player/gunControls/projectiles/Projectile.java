@@ -37,17 +37,17 @@ public class Projectile extends Actor {
         setTouchable(Touchable.enabled);
         
         position.set(nozzleX, nozzleY);
-        dir = CameraController.getMouseAngle();;
+        dir = CameraController.getMouseDirection();
         velocity = new Vector2(dir).scl(speed);
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
         position.add(movement);
         sprite.setOrigin(getWidth() / 2, getHeight() / 2);
-        sprite.setRotation(dir.angleDeg() + rotation);
+        sprite.setRotation(CameraController.getMouseAngle() + rotation);
 
         setX(position.x);
         setY(position.y);
 
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), dir.angleDeg() + rotation, "projectile");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), CameraController.getMouseAngle() + rotation, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
         DelayManager.registerObject(this, time, e -> {
             delete();

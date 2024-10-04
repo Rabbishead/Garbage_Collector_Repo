@@ -2,7 +2,6 @@ package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.mygdx.delay.DelayManager;
@@ -37,8 +36,7 @@ public class TiledMovementStyle extends MovementStyle {
         if (Gdx.input.isKeyPressed(Input.Keys.D))
             inputs.add('D');
 
-        Vector2 dirV = CameraController.getMouseAngle();
-        float angle = dirV.angleDeg();
+        float angle = CameraController.getMouseAngle();
         String dir = "-";
 
         if (angle > 55 && angle <= 125)
