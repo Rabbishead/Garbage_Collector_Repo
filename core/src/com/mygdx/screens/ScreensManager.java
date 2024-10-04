@@ -3,6 +3,9 @@ package com.mygdx.screens;
 import java.util.EnumMap;
 
 import com.badlogic.gdx.Screen;
+import com.mygdx.screens.game.MainScreen;
+import com.mygdx.screens.menus.MenuScreen;
+import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
 
     public static enum ScreenEnum{

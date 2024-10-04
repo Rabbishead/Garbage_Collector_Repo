@@ -1,4 +1,4 @@
-package com.mygdx.screens;
+package com.mygdx.screens.menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -19,30 +19,24 @@ import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
-public class MenuScreen extends ScreenAdapter {
-    
-    private final Stage stage;
-    private final Viewport viewport;
-    private final OrthographicCamera camera;
+public class PauseScreen extends GenericScreen{
+    private ImageButton fullScreenButton;
+
     private ImageButton engButton;
 
     private ImageButton itaButton;
 
     private ImageButton playButton;
 
-    private ImageButton fullScreenButton;
 
-
-    public MenuScreen(){
-        stage = new Stage();
-        camera = new OrthographicCamera();
+    public PauseScreen(){
         viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
-        
         camera.translate(Data.VIEWPORT_X/2, Data.VIEWPORT_Y/2, 0);
-        DialogueLoader.setLang(Languages.ITALIAN);
     }
 
     @Override
@@ -67,8 +61,7 @@ public class MenuScreen extends ScreenAdapter {
         engButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                //DialogueLoader.setLang(Languages.ENGLISH);
-                CameraController.applyShakeEffect();
+                DialogueLoader.setLang(Languages.ENGLISH);
                 return true;
             }
         });
@@ -83,7 +76,7 @@ public class MenuScreen extends ScreenAdapter {
                 return true;
             }
         });
-        stage.addActor(itaButton);
+        //stage.addActor(itaButton);
 
         playButton.setSize(col_width*6,row_height);
         playButton.setPosition(col_width*24 - playButton.getWidth(), row_height * 12 - playButton.getHeight());
@@ -108,15 +101,14 @@ public class MenuScreen extends ScreenAdapter {
             }
         });
         stage.addActor(fullScreenButton);
-
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         ScreenUtils.clear(1,1,1,0);
 
         stage.act(Gdx.graphics.getDeltaTime());
-        CameraController.updateCamera();
 
         stage.draw();
     }
@@ -130,7 +122,6 @@ public class MenuScreen extends ScreenAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
         stage.getViewport().update(width, height); 
-
     }
 
     private void toggleFullScreen(){

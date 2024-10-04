@@ -1,4 +1,4 @@
-package com.mygdx.screens;
+package com.mygdx.screens.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -18,13 +18,12 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
+import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
-public class MainScreen extends ScreenAdapter {
+public class MainScreen extends GenericScreen {
 
-    private Stage stage;
-    private Viewport viewport;
-    private OrthographicCamera camera;
     private OrthographicCamera hudCamera;
 
     private TileSetManager tileSetManager;
@@ -34,9 +33,7 @@ public class MainScreen extends ScreenAdapter {
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
 
-    MainScreen(){
-        stage = new Stage();
-        camera = new OrthographicCamera();
+    public MainScreen(){
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         
         stage.setViewport(viewport);
@@ -76,7 +73,6 @@ public class MainScreen extends ScreenAdapter {
         } 
         if(Gdx.input.isKeyPressed(Keys.R)){
             CameraController.applyShakeEffect();
-            return;
         } 
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
