@@ -11,6 +11,8 @@ public class CameraController {
     private static OrthographicCamera hudCamera;
     private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
+    private static Vector2 direction;
+    private static float angle;
 
     public static void initCamera(){
         gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
@@ -30,11 +32,20 @@ public class CameraController {
         cameraShaker.startShaking();
     }
 
-    public static Vector2 getMouseAngle() {
+    public static void calculateMouseAngle(Vector2 position) {
         float mX = Gdx.input.getX(), mY = Gdx.input.getY();
         Vector2 tmp = currentViewport.unproject(new Vector2(mX, mY));
         Vector2 dir = new Vector2();
-        dir.set(tmp).sub(Utils.getPlayer().center.x, Utils.getPlayer().center.y).nor();
-        return dir;
+        dir.set(tmp).sub(position.x, position.y).nor();
+        direction = dir;
+        angle = dir.angleDeg();
+    }
+
+    public static float getMouseAngle() {
+        return angle;
+    }
+
+    public static Vector2 getMouseDirection() {
+        return direction;
     }
 }

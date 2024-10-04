@@ -11,6 +11,7 @@ import com.mygdx.animations.PlayerAnimationManager;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
+import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.guns.Slingshot;
 import com.mygdx.player.gunControls.guns.Sniper;
@@ -43,6 +44,7 @@ public class Player extends Actor {
         Utils.getHitboxHandler().registerCollider(collider);
         Utils.setPlayer(this);
         GunController.get().loadGun(new Sniper());
+        CameraController.calculateMouseAngle(center);
         this.debug();
     }
 
@@ -76,6 +78,7 @@ public class Player extends Actor {
     public void act(float delta) {
         super.act(delta);
         if (collider.isCollided()) return;
+        CameraController.calculateMouseAngle(center);
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
         playerAnimationManager.updateAnimation(delta);
         GunController.get().act();
