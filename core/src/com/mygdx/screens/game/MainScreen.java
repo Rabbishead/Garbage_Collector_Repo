@@ -55,7 +55,7 @@ public class MainScreen extends GenericScreen {
         tileSetManager = new TileSetManager();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
 
-        player.setMovementStyle(Player.Styles.TILED);
+        player.setMovementStyle(Player.Styles.REALTIME);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
         stage.addActor(testActor);

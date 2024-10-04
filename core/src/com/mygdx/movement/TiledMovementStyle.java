@@ -15,12 +15,12 @@ public class TiledMovementStyle extends MovementStyle {
 
     private final Set<Character> inputs;
     private final Actor player;
-    private String lastDirection;
+    private String movingDir;
 
     public TiledMovementStyle(Actor player) {
         inputs = new HashSet<>();
         this.player = player;
-        lastDirection = "-";
+        movingDir = "-";
         DelayManager.registerObject(this, 14);
     }
 
@@ -37,20 +37,20 @@ public class TiledMovementStyle extends MovementStyle {
             inputs.add('D');
 
         float angle = CameraController.getMouseAngle();
-        String dir = "-";
+        String idleDir = "-";
 
         if (angle > 55 && angle <= 125)
-            dir = "wW";
+            idleDir = "iW";
         else if (angle > 125 && angle <= 235)
-            dir = "wA";
+            idleDir = "iA";
         else if (angle > 235 && angle <= 305)
-            dir = "wS";
+            idleDir = "iS";
         else if (angle > 305 || angle <= 55)
-            dir = "wD";
-        lastDirection = "i" + dir.substring(1);
+            idleDir = "iD";
+        movingDir = "w" + idleDir.substring(1);
 
         if (inputs.isEmpty())
-            return lastDirection;
+            return idleDir;
 
         if (DelayManager.isDelayOver(this)) {
             float x = 0, y = 0;
@@ -67,8 +67,9 @@ public class TiledMovementStyle extends MovementStyle {
             inputs.clear();
             DelayManager.resetDelay(this);
 
+            System.out.println(x + " " + y);
             if (x == 0 && y == 0)
-                return lastDirection;
+                return "";
 
             if (TileMapCollisionsManager.canMove(player.getX() + x, player.getY() + y)) {
                 MoveByAction mba = new MoveByAction();
@@ -76,8 +77,10 @@ public class TiledMovementStyle extends MovementStyle {
                 mba.setDuration(0.1f);
                 player.addAction(mba);
             }
+            return movingDir;
         }
 
-        return dir;
+        System.out.println("moving " + movingDir);
+        return "";
     }
 }
