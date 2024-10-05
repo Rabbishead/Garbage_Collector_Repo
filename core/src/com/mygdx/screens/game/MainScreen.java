@@ -34,32 +34,29 @@ public class MainScreen extends GenericScreen {
     TestActor testActor = new TestActor(160, 160);
 
     public MainScreen(){
+        tileSetManager = new TileSetManager();
+        TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
+
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        
         stage.setViewport(viewport);
+        GunController.get();
+
+        stage.addActor(player);
+        stage.setKeyboardFocus(player);
+        player.setMovementStyle(Player.Styles.REALTIME);
+
+        stage.addActor(testActor);
+
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }
 
     @Override
     public void show() {
         Utils.setStage(stage);
+        
         CameraController.initCamera();
 
-        hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        hudCamera.position.set(hudCamera.viewportWidth / 2.0f, hudCamera.viewportHeight / 2.0f, 1.0f);
-
-        GunController.get();
-
         Gdx.input.setInputProcessor(stage);
-
-        tileSetManager = new TileSetManager();
-        TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
-
-        player.setMovementStyle(Player.Styles.REALTIME);
-        stage.addActor(player);
-        stage.setKeyboardFocus(player);
-        stage.addActor(testActor);
-
     }
 
     @Override
