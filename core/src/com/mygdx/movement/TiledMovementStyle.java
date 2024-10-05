@@ -67,9 +67,8 @@ public class TiledMovementStyle extends MovementStyle {
             inputs.clear();
             DelayManager.resetDelay(this);
 
-            System.out.println(x + " " + y);
             if (x == 0 && y == 0)
-                return "";
+                return idleDir;
 
             if (TileMapCollisionsManager.canMove(player.getX() + x, player.getY() + y)) {
                 MoveByAction mba = new MoveByAction();
@@ -80,7 +79,6 @@ public class TiledMovementStyle extends MovementStyle {
             return movingDir;
         }
 
-        System.out.println("moving " + movingDir);
         return "";
     }
 }
