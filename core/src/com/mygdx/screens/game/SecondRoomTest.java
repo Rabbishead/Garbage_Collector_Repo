@@ -22,7 +22,7 @@ import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
-public class MainScreen extends GenericScreen {
+public class SecondRoomTest extends GenericScreen {
 
     private OrthographicCamera hudCamera;
 
@@ -30,10 +30,9 @@ public class MainScreen extends GenericScreen {
 
     HitboxHandler hitboxHandler = new HitboxHandler();
     
-    Player player = new Player(160, 160);
-    TestActor testActor = new TestActor(160, 160);
+    Player player = new Player(40, 550);
 
-    public MainScreen(){
+    public SecondRoomTest(){
 
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
@@ -43,15 +42,13 @@ public class MainScreen extends GenericScreen {
         stage.setKeyboardFocus(player);
         player.setMovementStyle(Player.Styles.REALTIME);
 
-        stage.addActor(testActor);
-
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }
 
     @Override
     public void show() {
         Utils.setStage(stage);
-        tileSetManager = new TileSetManager("map/map.tmx");
+        tileSetManager = new TileSetManager("map/map_beta.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         
         CameraController.initCamera();

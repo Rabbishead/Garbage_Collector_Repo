@@ -1,6 +1,8 @@
 package com.mygdx;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
@@ -43,17 +45,16 @@ public class Utils {
     public static void setStage(Stage stage) {
         Utils.stage = stage;
     }
-
-    public static Game getGame() {
-        return game;
-    }
-    public static void setGame(Game game) {
-        Utils.game = game;
-    }
     public static Player getPlayer() {
         return player;
     }
     public static void setPlayer(Player player) {
         Utils.player = player;
+    }
+    public static void setScreen(Screen screen){
+       game.setScreen(screen); 
+    }
+    public static void setGame(Game game) {
+        Utils.game = game;
     }
 }

@@ -84,7 +84,7 @@ public class PauseScreen extends GenericScreen{
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 DialogueLoader.loadFile();
-                Utils.getGame().setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
+                Utils.setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
                 return true;
             }
         });

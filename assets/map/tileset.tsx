@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tileset" tilewidth="32" tileheight="32" tilecount="4" columns="4">
- <image source="Tilesheet (WIP).png" width="144" height="36"/>
+<tileset version="1.10" tiledversion="1.10.2" name="tileset" tilewidth="32" tileheight="32" tilecount="160" columns="10">
+ <image source="terrain_tiles_v2.png" width="320" height="512"/>
+ <tile id="104">
+  <properties>
+   <property name="changeScreen" value="MAP2"/>
+  </properties>
+ </tile>
+ <tile id="105">
+  <properties>
+   <property name="changeScreen" value="MAP1"/>
+  </properties>
+ </tile>
+ <tile id="110">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>

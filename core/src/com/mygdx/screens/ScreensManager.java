@@ -4,6 +4,7 @@ import java.util.EnumMap;
 
 import com.badlogic.gdx.Screen;
 import com.mygdx.screens.game.MainScreen;
+import com.mygdx.screens.game.SecondRoomTest;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
@@ -11,7 +12,8 @@ public class ScreensManager {
     public static enum ScreenEnum{
         MAIN_SCREEN,
         MENU_SCREEN,
-        PAUSE_SCREEN
+        PAUSE_SCREEN,
+        SECOND_SCREEN
     }
 
     private static EnumMap<ScreenEnum, Screen> map = new EnumMap<>(ScreenEnum.class);
@@ -28,6 +30,9 @@ public class ScreensManager {
                 }
                 case PAUSE_SCREEN -> {
                     map.put(ScreenEnum.PAUSE_SCREEN, new PauseScreen());
+                }
+                case SECOND_SCREEN -> {
+                    map.put(ScreenEnum.SECOND_SCREEN, new SecondRoomTest());
                 }
             }
         }

@@ -10,8 +10,8 @@ public class TileSetManager {
     private final TiledMapRenderer tiledMapRenderer;
     private final TiledMap map;
 
-    public TileSetManager(){
-        map = new TmxMapLoader().load("map/prova.tmx");
+    public TileSetManager(String path){
+        map = new TmxMapLoader().load(path);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
     }
 
