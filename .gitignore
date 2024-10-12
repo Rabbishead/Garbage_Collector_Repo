@@ -2,7 +2,9 @@
 /.idea
 /.gradle
 /core/bin
+/core/build
 /desktop/bin
+/desktop/build
 *.class
 *.jar
 *.bin
