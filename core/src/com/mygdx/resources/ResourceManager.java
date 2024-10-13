@@ -24,7 +24,7 @@ public class ResourceManager {
     }
 
     private void loadPathMap() {
-        pathMap.put(ResourceEnum.PLAYER, "animation_sheet.png");
+        pathMap.put(ResourceEnum.PLAYER, "playerSpritesheet.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
         pathMap.put(ResourceEnum.BULLET, "bullets/bullet.png");
         pathMap.put(ResourceEnum.DEFAULT, "weapons/default.png");
