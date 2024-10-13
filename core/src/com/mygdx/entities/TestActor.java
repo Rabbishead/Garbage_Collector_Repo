@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
@@ -13,7 +14,7 @@ import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 
-public class TestActor extends Actor {
+public class TestActor extends Actor{
     private Hitbox hitbox = new Hitbox(false, null);
     private NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
             DialogueLoader.getLine("testNPCDialogue1"));
@@ -73,4 +74,5 @@ public class TestActor extends Actor {
         hitbox.setPosition(getX(), getY());
         npcDialogue.setPosition(getX() + 40, getY() + 50);
     }
+    
 }

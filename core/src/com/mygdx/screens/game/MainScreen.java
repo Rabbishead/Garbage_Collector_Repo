@@ -14,6 +14,7 @@ import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.hitboxes.HitboxHandler;
+import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
@@ -24,7 +25,7 @@ import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class MainScreen extends GenericScreen {
 
-    private OrthographicCamera hudCamera;
+    private Hud hud;
 
     private TileSetManager tileSetManager;
 
@@ -46,6 +47,7 @@ public class MainScreen extends GenericScreen {
         stage.addActor(testActor);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
+        hud = new Hud();
     }
 
     @Override
@@ -79,6 +81,8 @@ public class MainScreen extends GenericScreen {
         hitboxHandler.checkHitboxes();
 
         stage.draw();
+        hud.update();
+        hud.draw();
     }
 
     @Override

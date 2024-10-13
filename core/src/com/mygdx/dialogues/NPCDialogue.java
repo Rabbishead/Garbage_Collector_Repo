@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * it's an actor so we can subscribe it to MainScreen's stage
  * @see MainScreen
  */
-public class NPCDialogue extends Actor {
+public class NPCDialogue extends Actor{
     private Texture texture;
     private String textToDisplay;
     private final BitmapFont font;

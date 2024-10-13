@@ -9,15 +9,11 @@ import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.PlayerAnimationManager;
 import com.mygdx.hitboxes.Collider;
-import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.RealtimeMovementStyle;
 import com.mygdx.movement.TiledMovementStyle;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
-import com.mygdx.player.gunControls.guns.Slingshot;
 import com.mygdx.player.gunControls.guns.Sniper;
-import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 /**
  * player class with collision managing
