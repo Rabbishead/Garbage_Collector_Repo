@@ -53,6 +53,7 @@ public class MainScreen extends GenericScreen {
     @Override
     public void show() {
         Utils.setStage(stage);
+        Utils.setPlayer(player);
         tileSetManager = new TileSetManager("map/map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         

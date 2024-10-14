@@ -36,7 +36,6 @@ public class SecondRoomTest extends GenericScreen {
 
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
-        GunController.get();
 
         stage.addActor(player);
         stage.setKeyboardFocus(player);
@@ -48,6 +47,7 @@ public class SecondRoomTest extends GenericScreen {
     @Override
     public void show() {
         Utils.setStage(stage);
+        Utils.setPlayer(player);
         tileSetManager = new TileSetManager("map/map_beta.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         
