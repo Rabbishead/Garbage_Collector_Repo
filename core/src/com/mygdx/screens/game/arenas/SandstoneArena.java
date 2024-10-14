@@ -10,6 +10,7 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
+import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
@@ -25,6 +26,8 @@ public class SandstoneArena extends GenericScreen{
     
     Player player = new Player(506, 500);
 
+    Hud hud;
+
     public SandstoneArena(){
 
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
@@ -35,6 +38,8 @@ public class SandstoneArena extends GenericScreen{
         player.setMovementStyle(Player.Styles.TILED);
 
         stage.getCamera().translate(512, 288, 0);
+
+        hud = new Hud();
     }
 
     @Override
@@ -69,6 +74,8 @@ public class SandstoneArena extends GenericScreen{
         hitboxHandler.checkHitboxes();
 
         stage.draw();
+        hud.update();
+        hud.draw();
     }
 
     @Override

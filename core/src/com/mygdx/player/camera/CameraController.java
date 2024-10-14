@@ -8,7 +8,6 @@ import com.mygdx.Utils;
 
 public class CameraController {
     private static OrthographicCamera gameCamera;
-    private static OrthographicCamera hudCamera;
     private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
     private static Vector2 direction;
@@ -17,7 +16,6 @@ public class CameraController {
     public static void initCamera(){
         gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
         currentViewport = Utils.getStage().getViewport();
-        hudCamera = new OrthographicCamera();
         float shakeRadius = 30f;
         float minimumShakeRadius = 3f;
         float radiusFallOffFactor = 0.90f;

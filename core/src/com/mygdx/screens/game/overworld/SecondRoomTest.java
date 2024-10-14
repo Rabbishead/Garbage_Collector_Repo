@@ -10,6 +10,7 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
+import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
@@ -25,6 +26,8 @@ public class SecondRoomTest extends GenericScreen {
     
     Player player = new Player(40, 600);
 
+    Hud hud;
+
     public SecondRoomTest(){
 
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
@@ -33,6 +36,7 @@ public class SecondRoomTest extends GenericScreen {
         stage.addActor(player);
         stage.setKeyboardFocus(player);
         player.setMovementStyle(Player.Styles.REALTIME);
+        hud = new Hud();
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }
@@ -70,6 +74,8 @@ public class SecondRoomTest extends GenericScreen {
         hitboxHandler.checkHitboxes();
 
         stage.draw();
+        hud.update();
+        hud.draw();
     }
 
     @Override
