@@ -68,7 +68,7 @@ public class SecondRoomTest extends GenericScreen {
         if(Gdx.input.isKeyPressed(Keys.R)){
             CameraController.applyShakeEffect();
         } 
-        TileMapCollisionsManager.changeScreenIfNecessary(player.getX(), player.getY());
+        TileMapCollisionsManager.changeScreenIfNecessary();
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());

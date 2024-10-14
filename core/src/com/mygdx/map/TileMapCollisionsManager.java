@@ -19,19 +19,19 @@ public class TileMapCollisionsManager {
      * @return true if player can move in the incoming position
      */
     public static boolean canMove(float incomingX, float incomingY){
-        return layer.getCell((int) (incomingX+8) / 32, (int) (incomingY+8) / 32).getTile().getProperties().get("blocked") == null;
+        return layer.getCell((int) (incomingX + Utils.getPlayer().getWidth()/2) / 32, (int) (incomingY) / 32).getTile().getProperties().get("blocked") == null;
     }
     /**
      * @param x
      * @param y
      * @return CurrentTileProprieties set
      */
-    public static MapProperties getCurrentTileProprieties(float x, float y){
-        return layer.getCell((int) (x) / 32, (int) (y) / 32).getTile().getProperties();
+    public static MapProperties getCurrentTileProprieties(){
+        return layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile().getProperties();
     }
 
-    public static void changeScreenIfNecessary(float x, float y){
-        MapProperties properties = getCurrentTileProprieties(x, y);
+    public static void changeScreenIfNecessary(){
+        MapProperties properties = getCurrentTileProprieties();
         if(properties.get("changeScreen") == null){
             transitioning = false;
             return;
