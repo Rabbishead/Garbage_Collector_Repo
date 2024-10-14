@@ -54,6 +54,7 @@ public class MainScreen extends GenericScreen {
     public void show() {
         Utils.setStage(stage);
         Utils.setPlayer(player);
+        Utils.setHitboxHandler(hitboxHandler);
         tileSetManager = new TileSetManager("map/map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         
