@@ -41,6 +41,7 @@ public class SecondRoomTest extends GenericScreen {
     public void show() {
         Utils.setStage(stage);
         Utils.setPlayer(player);
+        Utils.setHitboxHandler(hitboxHandler);
         tileSetManager = new TileSetManager("map/map_beta.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         
