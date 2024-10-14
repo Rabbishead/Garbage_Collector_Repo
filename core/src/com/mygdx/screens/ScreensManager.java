@@ -3,8 +3,9 @@ package com.mygdx.screens;
 import java.util.EnumMap;
 
 import com.badlogic.gdx.Screen;
-import com.mygdx.screens.game.MainScreen;
-import com.mygdx.screens.game.SecondRoomTest;
+import com.mygdx.screens.game.arenas.SandstoneArena;
+import com.mygdx.screens.game.overworld.MainScreen;
+import com.mygdx.screens.game.overworld.SecondRoomTest;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
@@ -13,7 +14,8 @@ public class ScreensManager {
         MAIN_SCREEN,
         MENU_SCREEN,
         PAUSE_SCREEN,
-        SECOND_SCREEN
+        SECOND_SCREEN,
+        SANDSTONE_ARENA
     }
 
     private static EnumMap<ScreenEnum, Screen> map = new EnumMap<>(ScreenEnum.class);
@@ -33,6 +35,9 @@ public class ScreensManager {
                 }
                 case SECOND_SCREEN -> {
                     map.put(ScreenEnum.SECOND_SCREEN, new SecondRoomTest());
+                }
+                case SANDSTONE_ARENA -> {
+                    map.put(ScreenEnum.SANDSTONE_ARENA, new SandstoneArena());
                 }
             }
         }

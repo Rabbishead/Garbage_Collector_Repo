@@ -8,5 +8,6 @@ public enum ResourceEnum {
     TESTACTOR,
     ITAFLAG,
     ENGFLAG,
-    PLAYBUTTON
+    PLAYBUTTON,
+    HEATH_BAR
 }

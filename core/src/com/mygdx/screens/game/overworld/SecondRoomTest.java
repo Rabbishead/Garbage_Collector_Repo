@@ -1,36 +1,29 @@
-package com.mygdx.screens.game;
+package com.mygdx.screens.game.overworld;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
-import com.mygdx.entities.TestActor;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
-import com.mygdx.player.gunControls.GunController;
 import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class SecondRoomTest extends GenericScreen {
 
-    private OrthographicCamera hudCamera;
-
     private TileSetManager tileSetManager;
 
     HitboxHandler hitboxHandler = new HitboxHandler();
     
-    Player player = new Player(40, 550);
+    Player player = new Player(40, 600);
 
     public SecondRoomTest(){
 

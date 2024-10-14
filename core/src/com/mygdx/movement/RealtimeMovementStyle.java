@@ -54,6 +54,7 @@ public class RealtimeMovementStyle extends MovementStyle {
         if (direction.equals("-")) {
             direction = "i" + lastDirection.substring(1);
         }
+        if(TileMapCollisionsManager.getCurrentTileProprieties() == null) return "";
         if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);
             player.setY(player.getY() + finalPosition.y);

@@ -24,7 +24,7 @@ public class ResourceManager {
     }
 
     private void loadPathMap() {
-        pathMap.put(ResourceEnum.PLAYER, "playerSpritesheet.png");
+        pathMap.put(ResourceEnum.PLAYER, "player/playerSpritesheet.png");
         pathMap.put(ResourceEnum.STONE, "bullets/stone.png");
         pathMap.put(ResourceEnum.BULLET, "bullets/bullet.png");
         pathMap.put(ResourceEnum.DEFAULT, "weapons/default.png");
@@ -32,6 +32,7 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.PLAYBUTTON, "menu/play.png");
         pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
+        pathMap.put(ResourceEnum.HEATH_BAR, "hud/health.png");
     }
 
     public Texture getTexture(ResourceEnum e) {

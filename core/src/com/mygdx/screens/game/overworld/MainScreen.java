@@ -1,4 +1,4 @@
-package com.mygdx.screens.game;
+package com.mygdx.screens.game.overworld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;

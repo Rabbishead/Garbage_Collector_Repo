@@ -17,21 +17,21 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.entities.TestActor;
 import com.mygdx.hud.actors.Fps;
-import com.mygdx.hud.actors.TestHudComponent;
+import com.mygdx.hud.actors.HealthBar;
 
 public class Hud implements Disposable{
     private Stage stage;
     private FitViewport viewport;
     private Fps fps;
-    private TestHudComponent testHudComponent;
+    private HealthBar healthBar;
 
     public Hud(){
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
         stage = new Stage(viewport);
         fps = new Fps();
         stage.addActor(fps);
-        testHudComponent = new TestHudComponent();
-        stage.addActor(testHudComponent);
+        healthBar = new HealthBar();
+        stage.addActor(healthBar);
     }
     public void draw(){
         stage.draw();

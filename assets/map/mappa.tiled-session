@@ -13,16 +13,16 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 736,
-                "y": 319.5
+                "x": 733.5,
+                "y": 318.5
             }
         },
         "map_beta.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 386.5,
-                "y": 367.5
+                "x": 385.5,
+                "y": 243.5
             }
         },
         "mappa.tmx": {
@@ -38,11 +38,11 @@
             "scaleInEditor": 4
         },
         "sandstone/sandstone_map.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 653.5,
-                "y": 452.5
+                "x": 529.9999999999999,
+                "y": 375.33333333333326
             }
         },
         "sandstone/sandstone_tileset.tsx": {
@@ -75,7 +75,7 @@
         "sandstone/sandstone_tileset.tsx"
     ],
     "project": "mappa.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "map.tmx",
         "tileset.tsx",

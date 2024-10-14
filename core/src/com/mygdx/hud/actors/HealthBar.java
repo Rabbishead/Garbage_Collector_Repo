@@ -3,17 +3,18 @@ package com.mygdx.hud.actors;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.mygdx.Utils;
+import com.mygdx.resources.ResourceEnum;
 
-public class TestHudComponent extends Actor{
+public class HealthBar extends Actor{
     Texture t;
 
-    public TestHudComponent(){
-        t = new Texture("assets/testActor.png");
+    public HealthBar(){
+        t = Utils.getTexture(ResourceEnum.HEATH_BAR);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(t, 0,0, 50, 50);
+        batch.draw(t, 0,0, 260, 64);
     }
 }

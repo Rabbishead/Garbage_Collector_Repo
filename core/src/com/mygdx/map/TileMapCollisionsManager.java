@@ -40,6 +40,7 @@ public class TileMapCollisionsManager {
         switch (properties.get("changeScreen").toString()) {
             case "MAP2" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.SECOND_SCREEN));
             case "MAP1" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
+            case "MAP3" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.SANDSTONE_ARENA));
         }
         transitioning = true;
     }
