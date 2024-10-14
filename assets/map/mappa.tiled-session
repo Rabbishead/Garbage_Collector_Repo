@@ -21,8 +21,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 385.5,
-                "y": 243.5
+                "x": 785.5,
+                "y": 612.5
             }
         },
         "mappa.tmx": {
@@ -42,7 +42,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 529.9999999999999,
-                "y": 375.33333333333326
+                "y": 211.33333333333326
             }
         },
         "sandstone/sandstone_tileset.tsx": {

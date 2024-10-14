@@ -23,7 +23,7 @@ public class SandstoneArena extends GenericScreen{
 
     HitboxHandler hitboxHandler = new HitboxHandler();
     
-    Player player = new Player(480, 600);
+    Player player = new Player(506, 500);
 
     public SandstoneArena(){
 
@@ -32,9 +32,9 @@ public class SandstoneArena extends GenericScreen{
 
         stage.addActor(player);
         stage.setKeyboardFocus(player);
-        player.setMovementStyle(Player.Styles.REALTIME);
+        player.setMovementStyle(Player.Styles.TILED);
 
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
+        stage.getCamera().translate(512, 288, 0);
     }
 
     @Override

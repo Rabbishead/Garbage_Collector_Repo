@@ -27,6 +27,7 @@ public class TileMapCollisionsManager {
      * @return CurrentTileProprieties set
      */
     public static MapProperties getCurrentTileProprieties(){
+        System.out.println(Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2 + " " +  Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2);
         return layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile().getProperties();
     }
 
