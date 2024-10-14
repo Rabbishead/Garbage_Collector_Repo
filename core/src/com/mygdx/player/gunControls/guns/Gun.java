@@ -1,10 +1,17 @@
 package com.mygdx.player.gunControls.guns;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Gun extends Actor {
+    protected Sprite s;
 
     public Gun() {
+    }
+
+    public Gun(Texture t) {
+        s = new Sprite(t);
     }
 
     public int leftTrigger() {

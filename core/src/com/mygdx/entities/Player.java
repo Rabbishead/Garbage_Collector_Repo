@@ -32,7 +32,7 @@ public class Player extends Actor {
     public Player(int x, int y) {
         setX(x + 16);
         setY(y + 16);
-        setWidth(18);
+        setWidth(17);
         setHeight(32);
         setOrigin(getWidth() / 2, getHeight() / 2);
         setTouchable(Touchable.enabled);
