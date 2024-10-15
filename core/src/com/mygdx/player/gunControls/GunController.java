@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.player.gunControls.guns.Gun;
 
@@ -31,15 +32,20 @@ public class GunController {
      */
     public GunController loadGun(Gun gun) {
         guns.add(gun);
+        Utils.getStage().addActor(gun);
         return instance;
     }
 
     public void loadGuns(ArrayList<Gun> guns) {
         this.guns.addAll(guns);
+        for (Gun gun : guns) {
+            Utils.getStage().addActor(gun);
+        }
     }
 
     public void removeGun(Gun gun) {
         guns.remove(gun);
+        gun.remove();
     }
 
     public void setCooldown(int cooldown) {
