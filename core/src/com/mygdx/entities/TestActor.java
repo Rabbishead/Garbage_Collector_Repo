@@ -29,7 +29,7 @@ public class TestActor extends Actor{
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, (hitbox, collider) -> {
             if (collider.getTag().equals("player")) {
                 npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
-            DialogueLoader.getLine("testNPCDialogue1"));
+                DialogueLoader.getLine("testNPCDialogue1"));
                 Utils.getStage().addActor(npcDialogue);
                 hitbox.setActive(false);
                 DelayManager.registerObject(this, 100, object -> {

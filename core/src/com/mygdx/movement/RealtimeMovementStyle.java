@@ -51,6 +51,7 @@ public class RealtimeMovementStyle extends MovementStyle {
                 direction = "wS";
             }
         }
+        if(finalPosition.x == 0 && finalPosition.y == 0) direction = "-";
         if (direction.equals("-")) {
             direction = "i" + lastDirection.substring(1);
         }

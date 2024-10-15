@@ -75,7 +75,7 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (collider.isCollided()) return;
+        //if (collider.isCollided()) return;
 
         CameraController.calculateMouseAngle(center);
         playerAnimationManager.setCurrentAnimation(movementStyle.move());
