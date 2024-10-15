@@ -10,8 +10,10 @@ public class CameraController {
     private static OrthographicCamera gameCamera;
     private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
-    private static Vector2 direction;
-    private static float angle;
+    private static Vector2 mouseDirection;
+    private static float mouseAngle;
+    private static Vector2 xDirection;
+    private static float xAngle;
 
     public static void initCamera(){
         gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
@@ -35,15 +37,30 @@ public class CameraController {
         Vector2 tmp = currentViewport.unproject(new Vector2(mX, mY));
         Vector2 dir = new Vector2();
         dir.set(tmp).sub(position.x, position.y).nor();
-        direction = dir;
-        angle = dir.angleDeg();
+        mouseDirection = dir;
+        mouseAngle = dir.angleDeg();
+    }
+
+    public static void calculateThowardsPlayer(Vector2 position1, Vector2 position2) {
+        Vector2 dir = new Vector2();
+        dir.set(position2).sub(position1.x, position1.y).nor();
+        xDirection = dir;
+        xAngle = dir.angleDeg();
+    }
+    
+    public static Vector2 getMouseDirection() {
+        return mouseDirection;
     }
 
     public static float getMouseAngle() {
-        return angle;
+        return mouseAngle;
+    }
+    
+    public static Vector2 getXDirection() {
+        return xDirection;
     }
 
-    public static Vector2 getMouseDirection() {
-        return direction;
+    public static float getXAngle() {
+        return xAngle;
     }
 }

@@ -46,6 +46,7 @@ public class SandstoneArena extends GenericScreen{
     public void show() {
         Utils.setStage(stage);
         Utils.setPlayer(player);
+        Utils.setHitboxHandler(hitboxHandler);
         tileSetManager = new TileSetManager("map/sandstone/sandstone_map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
         
