@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
+import com.mygdx.dialogues.BossDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.hitboxes.HitboxHandler;
@@ -30,6 +31,7 @@ public class MainScreen extends GenericScreen {
     
     Player player = new Player(160, 160);
     TestActor testActor = new TestActor(160, 160);
+    BossDialogue bossDialogue;
 
     public MainScreen(){
 
@@ -65,6 +67,27 @@ public class MainScreen extends GenericScreen {
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
 
+        if(Gdx.input.isKeyPressed(Keys.Y)){
+            stopGame();
+        }
+        if(Gdx.input.isKeyPressed(Keys.U)){
+            resumeGame();
+            if(bossDialogue != null){
+                bossDialogue.remove();
+                bossDialogue = null;
+            } 
+        }
+        if(stopGame){
+            
+            if(bossDialogue == null){
+                bossDialogue = new BossDialogue("Ciao");
+                stage.addActor(bossDialogue);
+            } 
+            tileSetManager.render((OrthographicCamera) stage.getCamera());
+            stage.draw();
+            hud.draw();
+            return;
+        }
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
             Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
             return;
@@ -72,6 +95,7 @@ public class MainScreen extends GenericScreen {
         if(Gdx.input.isKeyPressed(Keys.R)){
             CameraController.applyShakeEffect();
         } 
+
         TileMapCollisionsManager.changeScreenIfNecessary();
         tileSetManager.render((OrthographicCamera) stage.getCamera());
 
