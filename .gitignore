@@ -8,4 +8,4 @@
 *.class
 *.jar
 *.bin
-/savings/*
+/savings
