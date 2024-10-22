@@ -17,6 +17,7 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
+import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
@@ -95,6 +96,9 @@ public class MainScreen extends GenericScreen {
         if(Gdx.input.isKeyPressed(Keys.R)){
             CameraController.applyShakeEffect();
         } 
+        if(Gdx.input.isKeyPressed(Keys.M)){
+            SavingsManager.save();
+        }
 
         TileMapCollisionsManager.changeScreenIfNecessary();
         tileSetManager.render((OrthographicCamera) stage.getCamera());
