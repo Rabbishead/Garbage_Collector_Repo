@@ -18,11 +18,6 @@ public class DataSavingsManager {
     private static Json json;
 
     public static void saveData(){
-        /*if(json == null) json = new Json();
-        FileHandle handle = Gdx.files.local("savings/savings.json");
-        json.setOutputType(JsonWriter.OutputType.json);
-        json.setUsePrototypes(true);
-        json.toJson(Utils.getPlayer(), handle);*/
         if(json == null) json = new Json();
         String s = json.prettyPrint(Utils.getPlayer());
         s = json.toJson(Utils.getPlayer(), Player.class);

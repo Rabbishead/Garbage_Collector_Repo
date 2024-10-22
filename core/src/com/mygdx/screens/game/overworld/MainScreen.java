@@ -18,10 +18,12 @@ import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.savings.Settings;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
+
 
 public class MainScreen extends GenericScreen {
 
@@ -31,16 +33,18 @@ public class MainScreen extends GenericScreen {
 
     HitboxHandler hitboxHandler = new HitboxHandler();
     
-    Player player = new Player(160, 160);
+    Player player;
     TestActor testActor = new TestActor(160, 160);
     BossDialogue bossDialogue;
 
     public MainScreen(){
-
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
         GunController.get();
 
+        player = new Player(Settings.playerX, Settings.playerY);
+        Utils.setPlayer(player);
+        SavingsManager.load();
         stage.addActor(player);
         stage.setKeyboardFocus(player);
         player.setMovementStyle(Player.Styles.REALTIME);

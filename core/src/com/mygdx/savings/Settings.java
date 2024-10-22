@@ -5,9 +5,12 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.Utils;
 import com.mygdx.player.camera.CameraController;
+import com.mygdx.screens.ScreensManager;
+import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
-    public float playerX, playerY;
+    public static float playerX;
+    public static float playerY;
 
     public void updateData(){
         playerX = Utils.getPlayer().getX();

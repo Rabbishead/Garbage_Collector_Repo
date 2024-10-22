@@ -29,9 +29,9 @@ public class Player extends Actor {
         REALTIME, TILED
     }
 
-    public Player(int x, int y) {
-        setX(x + 16);
-        setY(y + 16);
+    public Player(float playerX, float playerY) {
+        setX(playerX + 16);
+        setY(playerY + 16);
         setWidth(17);
         setHeight(32);
         setOrigin(getWidth() / 2, getHeight() / 2);
