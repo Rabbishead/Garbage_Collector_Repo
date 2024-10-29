@@ -21,51 +21,27 @@ import com.mygdx.savings.SavingsManager;
 import com.mygdx.savings.Settings;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 
-public class MainScreen extends GenericScreen {
-
-    private Hud hud;
-
-    private TileSetManager tileSetManager;
-
-    HitboxHandler hitboxHandler = new HitboxHandler();
-    
-    Player player;
+public class MainScreen extends PlayableScreen {
     TestActor testActor = new TestActor(160, 160);
     BossDialogue bossDialogue;
 
     public MainScreen(){
-        viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        stage.setViewport(viewport);
-        GunController.get();
-
-        player = new Player(Settings.playerX, Settings.playerY);
-        Utils.setPlayer(player);
-        SavingsManager.load();
-        stage.addActor(player);
-        stage.setKeyboardFocus(player);
-        player.setMovementStyle(Player.Styles.REALTIME);
-
+        super();
         stage.addActor(testActor);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
-        hud = new Hud();
     }
 
     @Override
     public void show() {
-        Utils.setStage(stage);
-        Utils.setPlayer(player);
-        Utils.setHitboxHandler(hitboxHandler);
+        super.show();
         tileSetManager = new TileSetManager("map/map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
-        
-        CameraController.initCamera();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mygdx.screens;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 import com.badlogic.gdx.Screen;
@@ -18,7 +19,7 @@ public class ScreensManager {
         SANDSTONE_ARENA
     }
 
-    private static EnumMap<ScreenEnum, Screen> map = new EnumMap<>(ScreenEnum.class);
+    private static EnumMap<ScreenEnum, GenericScreen> map = new EnumMap<>(ScreenEnum.class);
         
 
     public static Screen getScreen(ScreenEnum e){

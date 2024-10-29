@@ -11,7 +11,6 @@ public class GenericScreen extends ScreenAdapter{
     protected Stage stage;
     protected Viewport viewport;
     protected OrthographicCamera camera;
-    protected boolean stopGame = false;
 
     protected GenericScreen(){
         stage = new Stage();
@@ -28,11 +27,4 @@ public class GenericScreen extends ScreenAdapter{
     public void dispose() {}
     @Override
     public void resize(int width, int height) {}
-    protected void stopGame(){
-        stopGame = true;
-    }
-    protected void resumeGame(){
-        stopGame = false;
-    }{
-    }
 }
