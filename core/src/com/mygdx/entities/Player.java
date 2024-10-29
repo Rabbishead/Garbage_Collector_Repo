@@ -45,6 +45,22 @@ public class Player extends Actor {
         CameraController.calculateMouseAngle(center);
         this.debug();
     }
+    public Player(Vector2 coordinates) {
+        setX(coordinates.x + 16);
+        setY(coordinates.y + 16);
+        setWidth(17);
+        setHeight(32);
+        setOrigin(getWidth() / 2, getHeight() / 2);
+        setTouchable(Touchable.enabled);
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+        playerAnimationManager = new PlayerAnimationManager();
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
+        Utils.getHitboxHandler().registerCollider(collider);
+        GunController.get().loadGun(new Sniper());
+        CameraController.calculateMouseAngle(center);
+        this.debug();
+    }
 
     /**
      * sets player's movement style between REALTIME and TILED
