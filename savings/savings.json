@@ -1,1 +1,15 @@
-{"x":486,"y":512}
+{
+"LAST_ROOM": "MAIN_SCREEN",
+"MAIN_SCREEN": {
+	"x": 646,
+	"y": 468
+},
+"SECOND_ROOM": {
+	"x": 48,
+	"y": 624
+},
+"SANDSTONE_ARENA": {
+	"x": 516.6492,
+	"y": 506.6492
+}
+}

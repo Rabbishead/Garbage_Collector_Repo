@@ -5,8 +5,12 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.mygdx.screens.PlayableScreen;
+import com.mygdx.screens.ScreensManager;
+import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class SavingsManager {
     private static Json json;
@@ -16,16 +20,14 @@ public class SavingsManager {
         if(json == null) {
             json = new Json();
             json.setOutputType(OutputType.json);
-            s = new Settings();
         }
         s.updateData();
-        writeFile(json.toJson(s));
+        writeFile(json.prettyPrint(s));
     }
     public static void load(){
         if(json == null){
             json = new Json();
             json.setOutputType(OutputType.json);
-            s = new Settings();
         } 
         FileHandle file = Gdx.files.local("savings/savings.json");
         String jsonFile = file.readString();
@@ -38,5 +40,25 @@ public class SavingsManager {
             myWriter.write(s);
             myWriter.close();
         } catch (IOException e) {e.printStackTrace();}
+    }
+
+    public static Vector2 getPlayerCoordinates(String screenName){
+        return s.getPlayerCoordinates(screenName);
+    }
+
+    public static PlayableScreen getLastRoom(){
+        String name = s.getLastRoom();
+        switch (name) {
+            case "MAIN_SCREEN" -> {
+                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN);
+            }
+            case "SECOND_ROOM" -> {
+                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.SECOND_SCREEN);
+            }
+            case "SANDSTONE_ARENA" -> {
+                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.SANDSTONE_ARENA);
+            }
+        }
+        return null;
     }
 }

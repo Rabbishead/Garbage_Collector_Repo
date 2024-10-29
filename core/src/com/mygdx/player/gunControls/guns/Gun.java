@@ -18,8 +18,8 @@ public class Gun extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        s.draw(batch);
-        s.setRotation(CameraController.getMouseAngle());
+        //s.draw(batch);
+        //s.setRotation(CameraController.getMouseAngle());
     }
 
     public int leftTrigger() {

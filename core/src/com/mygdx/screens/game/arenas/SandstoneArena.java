@@ -15,50 +15,30 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
 
-public class SandstoneArena extends GenericScreen{
-
-    private TileSetManager tileSetManager;
-
-    HitboxHandler hitboxHandler = new HitboxHandler();
-    
-    Player player = new Player(506, 500);
-
-    Hud hud;
+public class SandstoneArena extends PlayableScreen{
 
     public SandstoneArena(){
-
-        viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        stage.setViewport(viewport);
-
-        stage.addActor(player);
-        stage.setKeyboardFocus(player);
-        player.setMovementStyle(Player.Styles.TILED);
-
+        super("SANDSTONE_ARENA");
         stage.getCamera().translate(512, 288, 0);
-
-        hud = new Hud();
+        player.setMovementStyle(Player.Styles.TILED);
+        player.setX(player.getX()-16);
+        player.setY(player.getY()-16);
     }
 
     @Override
     public void show() {
-        Utils.setStage(stage);
-        Utils.setPlayer(player);
-        Utils.setHitboxHandler(hitboxHandler);
+        super.show();
         tileSetManager = new TileSetManager("map/sandstone/sandstone_map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
-        
-        CameraController.initCamera();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 0);
-        ScreenUtils.clear(1, 1, 1, 0);
+        super.render(delta);
 
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
             Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));

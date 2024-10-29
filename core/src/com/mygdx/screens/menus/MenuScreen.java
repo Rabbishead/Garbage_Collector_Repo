@@ -15,6 +15,7 @@ import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.ScreensManager.ScreenEnum;
@@ -85,7 +86,7 @@ public class MenuScreen extends GenericScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 DialogueLoader.loadFile();
-                Utils.setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
+                Utils.setScreen(SavingsManager.getLastRoom());
                 return true;
             }
         });

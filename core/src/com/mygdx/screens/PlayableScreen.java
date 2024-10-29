@@ -1,7 +1,10 @@
 package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
@@ -14,6 +17,7 @@ import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.savings.Settings;
+import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class PlayableScreen extends GenericScreen{
     protected boolean stopGame = false;
@@ -25,19 +29,19 @@ public class PlayableScreen extends GenericScreen{
     protected HitboxHandler hitboxHandler;
     
     protected Player player;
+    protected PlayableScreen(){}
 
-    protected PlayableScreen(){
+    protected PlayableScreen(String name){
+        this.name = name;
         hitboxHandler = new HitboxHandler();
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
-        GunController.get();
-
-        player = new Player(Settings.playerX, Settings.playerY);
+        player = new Player(SavingsManager.getPlayerCoordinates(name));
         Utils.setPlayer(player);
-        SavingsManager.load();
         stage.addActor(player);
         stage.setKeyboardFocus(player);
-        player.setMovementStyle(Player.Styles.REALTIME);
+
+        GunController.get();
 
         hud = new Hud();
     }
@@ -53,10 +57,26 @@ public class PlayableScreen extends GenericScreen{
         Gdx.input.setInputProcessor(stage);
     }
 
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(1, 1, 1, 0);
+        ScreenUtils.clear(1, 1, 1, 0);
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+            Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+            return;
+        } 
+        if(Gdx.input.isKeyPressed(Keys.M)){
+            SavingsManager.save();
+        }
+    }
+
     protected void stopGame(){
         stopGame = true;
     }
     protected void resumeGame(){
         stopGame = false;
+    }
+    public Vector2 getPlayerCoordinates(){
+        return new Vector2(player.getX(), player.getY());
     }
 }

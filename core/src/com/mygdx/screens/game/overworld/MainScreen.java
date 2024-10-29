@@ -31,10 +31,11 @@ public class MainScreen extends PlayableScreen {
     BossDialogue bossDialogue;
 
     public MainScreen(){
-        super();
+        super("MAIN_SCREEN");
         stage.addActor(testActor);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
+        player.setMovementStyle(Player.Styles.REALTIME);
     }
 
     @Override
@@ -46,8 +47,7 @@ public class MainScreen extends PlayableScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 0);
-        ScreenUtils.clear(1, 1, 1, 0);
+        super.render(delta);
 
         if(Gdx.input.isKeyPressed(Keys.Y)){
             stopGame();
@@ -69,19 +69,6 @@ public class MainScreen extends PlayableScreen {
             stage.draw();
             hud.draw();
             return;
-        }
-        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-            Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
-            return;
-        } 
-        if(Gdx.input.isKeyPressed(Keys.R)){
-            CameraController.applyShakeEffect();
-        } 
-        if(Gdx.input.isKeyPressed(Keys.M)){
-            SavingsManager.save();
-        }
-        if(Gdx.input.isKeyPressed(Keys.N)){
-            SavingsManager.load();
         }
 
         TileMapCollisionsManager.changeScreenIfNecessary();

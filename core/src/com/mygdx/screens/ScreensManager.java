@@ -1,8 +1,6 @@
 package com.mygdx.screens;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-
 import com.badlogic.gdx.Screen;
 import com.mygdx.screens.game.arenas.SandstoneArena;
 import com.mygdx.screens.game.overworld.MainScreen;
@@ -43,5 +41,10 @@ public class ScreensManager {
             }
         }
         return map.get(e);
+    }
+
+    public static boolean isNull(ScreenEnum e){
+        return map.get(e) == null ? true : false;
+
     }
 }
