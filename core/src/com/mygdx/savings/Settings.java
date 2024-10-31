@@ -4,12 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.Utils;
-import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
-import com.mygdx.screens.game.arenas.SandstoneArena;
-import com.mygdx.screens.game.overworld.MainScreen;
-import com.mygdx.screens.game.overworld.SecondRoomTest;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
 
@@ -19,18 +15,19 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
     private Vector2 sandstoneArenaCoordinates = new Vector2();
 
     public void updateData(){
-        lastRoom = ((GenericScreen) Utils.getScreen()).getName();
-        if(!ScreensManager.isNull(ScreenEnum.MAIN_SCREEN)){
-            MainScreen m = (MainScreen) ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN);
-            mainScreenCoordinates = m.getPlayerCoordinates();
+        lastRoom = Utils.getActiveScreen().getName();
+        if(!ScreensManager.isNull("MAIN_SCREEN")){
+            PlayableScreen s = ScreensManager.getPlayableScreen("MAIN_SCREEN");
+            mainScreenCoordinates = s.getPlayerCoordinates();
         }
         
-        if(!ScreensManager.isNull(ScreenEnum.SECOND_SCREEN)){
-            SecondRoomTest s = (SecondRoomTest) ScreensManager.getScreen(ScreenEnum.SECOND_SCREEN);
+        if(!ScreensManager.isNull("SECOND_SCREEN")){
+            PlayableScreen s = ScreensManager.getPlayableScreen("SECOND_SCREEN");
             secondScreenCoordinates = s.getPlayerCoordinates();
+
         }
-        if(!ScreensManager.isNull(ScreenEnum.SANDSTONE_ARENA)){
-            SandstoneArena s = (SandstoneArena) ScreensManager.getScreen(ScreenEnum.SANDSTONE_ARENA);
+        if(!ScreensManager.isNull("SANDSTONE_ARENA")){
+            PlayableScreen s = ScreensManager.getPlayableScreen("SANDSTONE_ARENA");
             sandstoneArenaCoordinates = s.getPlayerCoordinates();
         }
     }
@@ -39,7 +36,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
     public void write(Json json) {
         json.writeValue("LAST_ROOM", lastRoom);
         json.writeValue("MAIN_SCREEN", mainScreenCoordinates);
-        json.writeValue("SECOND_ROOM", secondScreenCoordinates);
+        json.writeValue("SECOND_SCREEN", secondScreenCoordinates);
         json.writeValue("SANDSTONE_ARENA", sandstoneArenaCoordinates);
 
     }
@@ -51,8 +48,8 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
         mainScreenCoordinates.x = jsonData.get("MAIN_SCREEN").getFloat("x");
         mainScreenCoordinates.y = jsonData.get("MAIN_SCREEN").getFloat("y");
 
-        secondScreenCoordinates.x = jsonData.get("SECOND_ROOM").getFloat("x");
-        secondScreenCoordinates.y = jsonData.get("SECOND_ROOM").getFloat("y");
+        secondScreenCoordinates.x = jsonData.get("SECOND_SCREEN").getFloat("x");
+        secondScreenCoordinates.y = jsonData.get("SECOND_SCREEN").getFloat("y");
 
         sandstoneArenaCoordinates.x = jsonData.get("SANDSTONE_ARENA").getFloat("x");
         sandstoneArenaCoordinates.y = jsonData.get("SANDSTONE_ARENA").getFloat("y");
@@ -63,7 +60,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
             case "MAIN_SCREEN" -> {
                 return mainScreenCoordinates;
             }
-            case "SECOND_ROOM" -> {
+            case "SECOND_SCREEN" -> {
                 return secondScreenCoordinates;
             }
             case "SANDSTONE_ARENA" -> {

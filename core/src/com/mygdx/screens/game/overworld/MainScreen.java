@@ -4,26 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.Data;
-import com.mygdx.Utils;
 import com.mygdx.dialogues.BossDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
-import com.mygdx.hitboxes.HitboxHandler;
-import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
-import com.mygdx.player.gunControls.GunController;
-import com.mygdx.savings.SavingsManager;
-import com.mygdx.savings.Settings;
-import com.mygdx.savings.SavingsManager;
-import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.PlayableScreen;
-import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 
 public class MainScreen extends PlayableScreen {

@@ -1,7 +1,6 @@
 package com.mygdx;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
@@ -19,47 +18,87 @@ public class Utils {
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
     private static Player player;
-    private static Screen screen;
+    private static GenericScreen activeSscreen;
 
     /**
-     * use this class in order to load a texture
+     * @Texture already loaded
      */
     public static Texture getTexture(ResourceEnum e) {
         return manager.getTexture(e);
     }
 
+    /**
+     * @return static hitboxHandler
+     */
     public static HitboxHandler getHitboxHandler() {
         return hitboxHandler;
     }
 
+    /**
+     * @param newHitboxHandler
+     */
     public static void setHitboxHandler(HitboxHandler newHitboxHandler) {
         hitboxHandler = newHitboxHandler;
     }
 
-    public static void dispose() {
-        manager.dispose();
-    }
-
+    /**
+     * @return the current stage
+     */
     public static Stage getStage() {
         return stage;
     }
+
+    /**
+     * TOBE called every time you change screen
+     * @param stage new stage
+     */
     public static void setStage(Stage stage) {
         Utils.stage = stage;
     }
+
+    /**
+     * @return current player object
+     */
     public static Player getPlayer() {
         return player;
     }
+
+    /**
+     * sets current player object
+     * @param player
+     */
     public static void setPlayer(Player player) {
         Utils.player = player;
     }
-    public static void setScreen(Screen screen2){
-        screen = screen2;
-       game.setScreen(screen2); 
+
+    /**
+     * sets active screen
+     * @param newScreen
+     */
+    public static void setScreen(GenericScreen newScreen){
+        activeSscreen = newScreen;
+        game.setScreen(newScreen); 
     }
+
+    /**
+     * sets game object
+     * @param game
+     */
     public static void setGame(Game game) {
         Utils.game = game;
     }
-    public static Screen getScreen() {
-        return screen;
+
+    /**
+     * @return active screen
+     */
+    public static GenericScreen getActiveScreen() {
+        return activeSscreen;
+    }
+
+    /**
+     * correctly disposes resources
+     */
+    public static void dispose() {
+        manager.dispose();
     }
 }

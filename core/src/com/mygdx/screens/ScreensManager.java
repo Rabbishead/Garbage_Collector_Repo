@@ -1,7 +1,6 @@
 package com.mygdx.screens;
 
-import java.util.EnumMap;
-import com.badlogic.gdx.Screen;
+import java.util.HashMap;
 import com.mygdx.screens.game.arenas.SandstoneArena;
 import com.mygdx.screens.game.overworld.MainScreen;
 import com.mygdx.screens.game.overworld.SecondRoomTest;
@@ -9,42 +8,37 @@ import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
 
-    public static enum ScreenEnum{
-        MAIN_SCREEN,
-        MENU_SCREEN,
-        PAUSE_SCREEN,
-        SECOND_SCREEN,
-        SANDSTONE_ARENA
-    }
-
-    private static EnumMap<ScreenEnum, GenericScreen> map = new EnumMap<>(ScreenEnum.class);
+    private static HashMap<String, GenericScreen> map = new HashMap<>();
         
 
-    public static Screen getScreen(ScreenEnum e){
-        if(map.get(e) == null){
-            switch (e) {
-                case MAIN_SCREEN -> {
-                    map.put(ScreenEnum.MAIN_SCREEN, new MainScreen());
+    public static GenericScreen getScreen(String screenName){
+        if(map.get(screenName) == null){
+            switch (screenName) {
+                case "MAIN_SCREEN" -> {
+                    map.put("MAIN_SCREEN", new MainScreen());
                 }
-                case MENU_SCREEN -> {
-                    map.put(ScreenEnum.MENU_SCREEN, new MenuScreen());
+                case "MENU_SCREEN" -> {
+                    map.put("MENU_SCREEN", new MenuScreen());
                 }
-                case PAUSE_SCREEN -> {
-                    map.put(ScreenEnum.PAUSE_SCREEN, new PauseScreen());
+                case "PAUSE_SCREEN" -> {
+                    map.put("PAUSE_SCREEN", new PauseScreen());
                 }
-                case SECOND_SCREEN -> {
-                    map.put(ScreenEnum.SECOND_SCREEN, new SecondRoomTest());
+                case "SECOND_SCREEN" -> {
+                    map.put("SECOND_SCREEN", new SecondRoomTest());
                 }
-                case SANDSTONE_ARENA -> {
-                    map.put(ScreenEnum.SANDSTONE_ARENA, new SandstoneArena());
+                case "SANDSTONE_ARENA" -> {
+                    map.put("SANDSTONE_ARENA", new SandstoneArena());
                 }
             }
         }
-        return map.get(e);
+        return map.get(screenName);
+    }
+    public static PlayableScreen getPlayableScreen(String screenName){
+        return (PlayableScreen) getScreen(screenName);
     }
 
-    public static boolean isNull(ScreenEnum e){
-        return map.get(e) == null ? true : false;
+    public static boolean isNull(String screenName){
+        return map.get(screenName) == null ? true : false;
 
     }
 }

@@ -17,8 +17,6 @@ import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.GenericScreen;
-import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class MenuScreen extends GenericScreen {
     

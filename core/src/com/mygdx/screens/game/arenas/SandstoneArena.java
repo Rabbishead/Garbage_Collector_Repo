@@ -4,20 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
-import com.mygdx.hitboxes.HitboxHandler;
-import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
-import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class SandstoneArena extends PlayableScreen{
 
@@ -41,7 +34,7 @@ public class SandstoneArena extends PlayableScreen{
         super.render(delta);
 
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-            Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+            Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
             return;
         } 
         if(Gdx.input.isKeyPressed(Keys.R)){

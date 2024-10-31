@@ -11,12 +11,11 @@ import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class SecondRoomTest extends PlayableScreen {
 
     public SecondRoomTest(){
-        super("SECOND_ROOM");
+        super("SECOND_SCREEN");
         stage.getCamera().translate(player.getX(),player.getY(), 0);
         player.setMovementStyle(Player.Styles.REALTIME);
     }
@@ -33,7 +32,7 @@ public class SecondRoomTest extends PlayableScreen {
         super.render(delta);
 
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-            Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+            Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
             return;
         } 
         if(Gdx.input.isKeyPressed(Keys.R)){

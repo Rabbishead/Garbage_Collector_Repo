@@ -2,7 +2,6 @@ package com.mygdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -11,13 +10,10 @@ import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
-import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.savings.SavingsManager;
-import com.mygdx.savings.Settings;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class PlayableScreen extends GenericScreen{
     protected boolean stopGame = false;
@@ -62,7 +58,7 @@ public class PlayableScreen extends GenericScreen{
         Gdx.gl.glClearColor(1, 1, 1, 0);
         ScreenUtils.clear(1, 1, 1, 0);
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-            Utils.setScreen(ScreensManager.getScreen(ScreenEnum.PAUSE_SCREEN));
+            Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
             return;
         } 
         if(Gdx.input.isKeyPressed(Keys.M)){

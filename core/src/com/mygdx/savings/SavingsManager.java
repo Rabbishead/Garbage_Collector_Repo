@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class SavingsManager {
     private static Json json;
@@ -46,19 +45,7 @@ public class SavingsManager {
         return s.getPlayerCoordinates(screenName);
     }
 
-    public static PlayableScreen getLastRoom(){
-        String name = s.getLastRoom();
-        switch (name) {
-            case "MAIN_SCREEN" -> {
-                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN);
-            }
-            case "SECOND_ROOM" -> {
-                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.SECOND_SCREEN);
-            }
-            case "SANDSTONE_ARENA" -> {
-                return (PlayableScreen) ScreensManager.getScreen(ScreenEnum.SANDSTONE_ARENA);
-            }
-        }
-        return null;
+    public static PlayableScreen getLastRoom(){System.out.println(ScreensManager.getPlayableScreen(s.getLastRoom()));
+        return ScreensManager.getPlayableScreen(s.getLastRoom());
     }
 }

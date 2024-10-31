@@ -17,7 +17,6 @@ import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 public class PauseScreen extends GenericScreen{
     private ImageButton fullScreenButton;
@@ -80,7 +79,7 @@ public class PauseScreen extends GenericScreen{
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 DialogueLoader.loadFile();
-                Utils.setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
+                Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
                 return true;
             }
         });

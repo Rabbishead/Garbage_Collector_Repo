@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.Utils;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.ScreensManager.ScreenEnum;
 
 /**
  * manages collisions inside a tilemap
@@ -38,9 +37,9 @@ public class TileMapCollisionsManager {
         }
         if(transitioning == true) return;
         switch (properties.get("changeScreen").toString()) {
-            case "MAP2" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.SECOND_SCREEN));
-            case "MAP1" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.MAIN_SCREEN));
-            case "MAP3" -> Utils.setScreen(ScreensManager.getScreen(ScreenEnum.SANDSTONE_ARENA));
+            case "MAP2" -> Utils.setScreen(ScreensManager.getScreen("SECOND_SCREEN"));
+            case "MAP1" -> Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
+            case "MAP3" -> Utils.setScreen(ScreensManager.getScreen("SANDSTONE_ARENA"));
         }
         transitioning = true;
     }
