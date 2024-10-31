@@ -1,8 +1,11 @@
 package com.mygdx.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
@@ -20,8 +23,8 @@ public class TestActor extends Actor{
     private Texture texture = Utils.getTexture(ResourceEnum.TESTACTOR);
 
     public TestActor(float x, float y) {
-        setX(x + 100);
-        setY(y + 100);
+        setX(x);
+        setY(y);
         setWidth(32);
         setHeight(32);
         setTouchable(Touchable.enabled);
@@ -60,11 +63,18 @@ public class TestActor extends Actor{
     @Override
     public void act(float delta) {
         super.act(delta);
+
         if (TileMapCollisionsManager.canMove(getX() + 5, getY() + 5)) {
             setX(getX() + 0.5f);
             setY(getY() + 0.5f);
         }
         DelayManager.updateDelay(this);
+
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            Vector2 coord = new Vector2(getX(), getY());
+            Vector2 mousePos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            //TODO implement dial
+        }
     }
 
     @Override
