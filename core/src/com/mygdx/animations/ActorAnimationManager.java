@@ -9,7 +9,7 @@ import com.mygdx.resources.ResourceEnum;
 /**
  * Class useful to manage player's animations
  */
-public class PlayerAnimationManager {
+public class ActorAnimationManager {
     private final Animation<TextureRegion> idleDown;
     private final Animation<TextureRegion> idleRight;
     private final Animation<TextureRegion> idleLeft;
@@ -25,8 +25,8 @@ public class PlayerAnimationManager {
 
     private float stateTime;
 
-    public PlayerAnimationManager(){
-        Texture walkSheet = Utils.getTexture(ResourceEnum.PLAYER);
+    public ActorAnimationManager(ResourceEnum e){
+        Texture walkSheet = Utils.getTexture(e);
 
         int FRAME_COLS = 7;
         int FRAME_ROWS = 3;

@@ -7,20 +7,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
-import com.mygdx.animations.PlayerAnimationManager;
+import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.hitboxes.Collider;
-import com.mygdx.movement.RealtimeMovementStyle;
-import com.mygdx.movement.TiledMovementStyle;
+import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
+import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.guns.Sniper;
+import com.mygdx.resources.ResourceEnum;
 
 /**
  * player class with collision managing
  */
 public class Player extends Actor {
 
-    private final PlayerAnimationManager playerAnimationManager;
+    private final ActorAnimationManager animationManager;
     private MovementStyle movementStyle;
     private Collider collider = new Collider();
     public Vector2 center = new Vector2();
@@ -38,7 +39,7 @@ public class Player extends Actor {
         setTouchable(Touchable.enabled);
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        playerAnimationManager = new PlayerAnimationManager();
+        animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
         GunController.get().loadGun(new Sniper());
@@ -54,7 +55,7 @@ public class Player extends Actor {
         setTouchable(Touchable.enabled);
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        playerAnimationManager = new PlayerAnimationManager();
+        animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
         Utils.getHitboxHandler().registerCollider(collider);
         //GunController.get().loadGun(new Sniper());
@@ -70,10 +71,10 @@ public class Player extends Actor {
     public void setMovementStyle(Styles s) {
         switch (s) {
             case REALTIME:
-                movementStyle = new RealtimeMovementStyle(this);
+                movementStyle = new PlayerRealtimeMovementStyle();
                 break;
             case TILED:
-                movementStyle = new TiledMovementStyle(this);
+                movementStyle = new PlayerTiledMovementStyle();
                 break;
         }
     }
@@ -81,7 +82,7 @@ public class Player extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(playerAnimationManager.getCurrentFrame(), getX(), getY());
+        batch.draw(animationManager.getCurrentFrame(), getX(), getY());
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -94,8 +95,8 @@ public class Player extends Actor {
         //if (collider.isCollided()) return;
 
         CameraController.calculateMouseAngle(center);
-        playerAnimationManager.setCurrentAnimation(movementStyle.move());
-        playerAnimationManager.updateAnimation(delta);
+        animationManager.setCurrentAnimation(movementStyle.move());
+        animationManager.updateAnimation(delta);
         GunController.get().act();
     }
 

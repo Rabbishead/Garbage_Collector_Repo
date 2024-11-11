@@ -1,25 +1,27 @@
-package com.mygdx.movement;
+package com.mygdx.movement.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.movement.MovementStyle;
 import com.mygdx.player.camera.CameraController;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class TiledMovementStyle extends MovementStyle {
+public class PlayerTiledMovementStyle extends MovementStyle {
 
     private final Set<Character> inputs;
     private final Actor player;
     private String movingDir;
 
-    public TiledMovementStyle(Actor player) {
+    public PlayerTiledMovementStyle() {
         inputs = new HashSet<>();
-        this.player = player;
+        this.player = Utils.getPlayer();
         movingDir = "-";
         DelayManager.registerObject(this, 14);
     }
