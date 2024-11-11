@@ -1,14 +1,10 @@
 package com.mygdx.movement.npc;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
-
-import java.util.Objects;
 
 /**
  * RealtimeMovement for the overworld
@@ -17,7 +13,8 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     
     private final Actor npc;
     private String lastDirection;
-    private String[] path = {"wD", "wW" , "wW" , "wA", "wS" , "wS"};
+    private String[] path = {"wD", "wW" , "wW" , "wA", "wS" , "wS"}
+    ;
     private int index;
 
     public NPCRealtimeMovementStyle(Actor npc) {

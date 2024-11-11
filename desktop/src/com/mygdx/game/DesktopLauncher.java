@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Garbage Collection");
 		config.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);
+		config.setWindowIcon("assets/testactor.png");
 		new Lwjgl3Application(new GarbageCollection(), config);
 	}
 }
