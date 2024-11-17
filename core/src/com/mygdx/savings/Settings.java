@@ -13,6 +13,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
     private Vector2 mainScreenCoordinates = new Vector2();
     private Vector2 secondScreenCoordinates = new Vector2();
     private Vector2 sandstoneArenaCoordinates = new Vector2();
+    private Vector2 cityCoordinates = new Vector2();
 
     public void updateData(){
         lastRoom = Utils.getActiveScreen().getName();
@@ -30,6 +31,10 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
             PlayableScreen s = ScreensManager.getPlayableScreen("SANDSTONE_ARENA");
             sandstoneArenaCoordinates = s.getPlayerCoordinates();
         }
+        if(!ScreensManager.isNull("CITY_SCREEN")){
+            PlayableScreen s = ScreensManager.getPlayableScreen("CITY_SCREEN");
+            cityCoordinates = s.getPlayerCoordinates();
+        }
     }
 
     @Override
@@ -38,6 +43,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
         json.writeValue("MAIN_SCREEN", mainScreenCoordinates);
         json.writeValue("SECOND_SCREEN", secondScreenCoordinates);
         json.writeValue("SANDSTONE_ARENA", sandstoneArenaCoordinates);
+        json.writeValue("CITY_SCREEN", cityCoordinates);
 
     }
 
@@ -53,6 +59,9 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
 
         sandstoneArenaCoordinates.x = jsonData.get("SANDSTONE_ARENA").getFloat("x");
         sandstoneArenaCoordinates.y = jsonData.get("SANDSTONE_ARENA").getFloat("y");
+
+        cityCoordinates.x = jsonData.get("CITY_SCREEN").getFloat("x");
+        cityCoordinates.y = jsonData.get("CITY_SCREEN").getFloat("y");
     }
 
     public Vector2 getPlayerCoordinates(String screenName){
@@ -65,6 +74,9 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
             }
             case "SANDSTONE_ARENA" -> {
                 return sandstoneArenaCoordinates;
+            }
+            case "CITY_SCREEN" -> {
+                return cityCoordinates;
             }
         }
         return new Vector2();

@@ -2,6 +2,7 @@ package com.mygdx.screens;
 
 import java.util.HashMap;
 import com.mygdx.screens.game.arenas.SandstoneArena;
+import com.mygdx.screens.game.overworld.CityScreen;
 import com.mygdx.screens.game.overworld.MainScreen;
 import com.mygdx.screens.game.overworld.SecondRoomTest;
 import com.mygdx.screens.menus.MenuScreen;
@@ -28,6 +29,9 @@ public class ScreensManager {
                 }
                 case "SANDSTONE_ARENA" -> {
                     map.put("SANDSTONE_ARENA", new SandstoneArena());
+                }
+                case "CITY_SCREEN" -> {
+                    map.put("CITY_SCREEN", new CityScreen());
                 }
             }
         }

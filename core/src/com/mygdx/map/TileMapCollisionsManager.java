@@ -37,9 +37,10 @@ public class TileMapCollisionsManager {
         }
         if(transitioning == true) return;
         switch (properties.get("changeScreen").toString()) {
-            case "MAP2" -> Utils.setScreen(ScreensManager.getScreen("SECOND_SCREEN"));
-            case "MAP1" -> Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
-            case "MAP3" -> Utils.setScreen(ScreensManager.getScreen("SANDSTONE_ARENA"));
+            case "SECONDSCREEN" -> Utils.setScreen(ScreensManager.getScreen("SECOND_SCREEN"));
+            case "MAINSCREEN" -> Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
+            case "SANDSTONEARENA" -> Utils.setScreen(ScreensManager.getScreen("SANDSTONE_ARENA"));
+            case "CITYSCREEN" -> Utils.setScreen(ScreensManager.getScreen("CITY_SCREEN"));
         }
         transitioning = true;
     }
