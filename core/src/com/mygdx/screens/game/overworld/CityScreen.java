@@ -46,7 +46,7 @@ public class CityScreen extends PlayableScreen {
 
         stage.act(Gdx.graphics.getDeltaTime());
         CameraController.updateCamera();
-        //hitboxHandler.checkHitboxes();
+        hitboxHandler.checkHitboxes();
 
         stage.draw();
         hud.update();
