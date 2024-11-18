@@ -60,6 +60,7 @@ public class HitboxHandler {
     }
 
     public void checkHitboxes() {
+        /*
         for (CopyOnWriteArrayList<Collider> listC : collidersA.values()) {
             for (Collider c : listC) {
                 for (String tag : c.getSearchTags()) {
@@ -68,7 +69,7 @@ public class HitboxHandler {
                     }
                 }
             }
-        }
+        }*/
     }
 
     public void checkForAll(Collider c) {

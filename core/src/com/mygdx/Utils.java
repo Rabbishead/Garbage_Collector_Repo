@@ -7,7 +7,7 @@ import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
-import com.mygdx.screens.GenericScreen;
+import com.mygdx.screens.generic.GenericScreen;
 
 public class Utils {
 

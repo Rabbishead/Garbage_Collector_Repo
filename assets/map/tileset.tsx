@@ -3,22 +3,22 @@
  <image source="terrain_tiles_v2.png" width="320" height="512"/>
  <tile id="39">
   <properties>
-   <property name="changeScreen" value="SANDSTONEARENA"/>
+   <property name="changeScreen" value="SANDSTONE_ARENA"/>
   </properties>
  </tile>
  <tile id="104">
   <properties>
-   <property name="changeScreen" value="SECONDSCREEN"/>
+   <property name="changeScreen" value="SECOND_SCREEN"/>
   </properties>
  </tile>
  <tile id="105">
   <properties>
-   <property name="changeScreen" value="MAINSCREEN"/>
+   <property name="changeScreen" value="MAIN_SCREEN"/>
   </properties>
  </tile>
  <tile id="106">
   <properties>
-   <property name="changeScreen" value="CITYSCREEN"/>
+   <property name="changeScreen" value="CITY_SCREEN"/>
   </properties>
  </tile>
  <tile id="110">

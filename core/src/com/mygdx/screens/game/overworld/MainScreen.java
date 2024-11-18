@@ -1,16 +1,12 @@
 package com.mygdx.screens.game.overworld;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.dialogues.BossDialogue;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.TestActor;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
-import com.mygdx.player.camera.CameraController;
-import com.mygdx.screens.PlayableScreen;
+import com.mygdx.screens.generic.playable.PlayableScreen;
 
 
 public class MainScreen extends PlayableScreen {
@@ -36,7 +32,7 @@ public class MainScreen extends PlayableScreen {
     public void render(float delta) {
         super.render(delta);
 
-        if(Gdx.input.isKeyPressed(Keys.Y)){
+        /*if(Gdx.input.isKeyPressed(Keys.Y)){
             stopGame();
         }
         if(Gdx.input.isKeyPressed(Keys.U)){
@@ -56,28 +52,6 @@ public class MainScreen extends PlayableScreen {
             stage.draw();
             hud.draw();
             return;
-        }
-
-        TileMapCollisionsManager.changeScreenIfNecessary();
-        tileSetManager.render((OrthographicCamera) stage.getCamera());
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        CameraController.updateCamera();
-        hitboxHandler.checkHitboxes();
-
-        stage.draw();
-        hud.update();
-        hud.draw();
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        stage.getViewport().update(width, height); 
+        }*/
     }
 }

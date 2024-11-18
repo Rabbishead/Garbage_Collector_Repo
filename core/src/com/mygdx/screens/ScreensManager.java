@@ -5,12 +5,14 @@ import com.mygdx.screens.game.arenas.SandstoneArena;
 import com.mygdx.screens.game.overworld.CityScreen;
 import com.mygdx.screens.game.overworld.MainScreen;
 import com.mygdx.screens.game.overworld.SecondRoomTest;
+import com.mygdx.screens.generic.GenericScreen;
+import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
 
     private static HashMap<String, GenericScreen> map = new HashMap<>();
-        
+    private static String lastPlayableActiveScreen;
 
     public static GenericScreen getScreen(String screenName){
         if(map.get(screenName) == null){
@@ -35,6 +37,7 @@ public class ScreensManager {
                 }
             }
         }
+        if(map.get(screenName) instanceof PlayableScreen) lastPlayableActiveScreen = screenName;
         return map.get(screenName);
     }
     public static PlayableScreen getPlayableScreen(String screenName){
@@ -44,5 +47,8 @@ public class ScreensManager {
     public static boolean isNull(String screenName){
         return map.get(screenName) == null ? true : false;
 
+    }
+    public static String getLastPlayableActiveScreen() {
+        return lastPlayableActiveScreen;
     }
 }

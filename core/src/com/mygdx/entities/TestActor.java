@@ -1,6 +1,5 @@
 package com.mygdx.entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,7 +21,6 @@ public class TestActor extends Actor{
     private Hitbox hitbox = new Hitbox(false, null);
     private NPCDialogue npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
             DialogueLoader.getLine("testNPCDialogue1"));
-    private Texture texture = Utils.getTexture(ResourceEnum.TESTACTOR);
 
     public TestActor(float x, float y) {
         setX(x);

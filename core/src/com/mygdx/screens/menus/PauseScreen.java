@@ -7,18 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
-import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
-import com.mygdx.screens.GenericScreen;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.screens.generic.gui.GuiScreen;
 
-public class PauseScreen extends GenericScreen{
+public class PauseScreen extends GuiScreen{
     private ImageButton fullScreenButton;
 
     private ImageButton engButton;
@@ -29,15 +26,12 @@ public class PauseScreen extends GenericScreen{
 
 
     public PauseScreen(){
-        viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        stage.setViewport(viewport);
-        camera.translate(Data.VIEWPORT_X/2, Data.VIEWPORT_Y/2, 0);
+        super();
     }
 
     @Override
     public void show() {
-        Utils.setStage(stage);
-        CameraController.initCamera();
+        super.show();
         
         engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
@@ -79,7 +73,7 @@ public class PauseScreen extends GenericScreen{
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 DialogueLoader.loadFile();
-                Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
+                Utils.setScreen(ScreensManager.getScreen(ScreensManager.getLastPlayableActiveScreen()));
                 return true;
             }
         });
@@ -100,23 +94,7 @@ public class PauseScreen extends GenericScreen{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, .25f, 0, 1);
-        ScreenUtils.clear(1,1,1,0);
-
-        stage.act(Gdx.graphics.getDeltaTime());
-
-        stage.draw();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-        stage.getViewport().update(width, height); 
+        super.render(delta);
     }
 
     private void toggleFullScreen(){

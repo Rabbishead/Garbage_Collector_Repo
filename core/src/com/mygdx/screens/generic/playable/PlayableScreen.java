@@ -1,21 +1,27 @@
-package com.mygdx.screens;
+package com.mygdx.screens.generic.playable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
+import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.ScreensManager;
+import com.mygdx.screens.generic.GenericScreen;
 
-public class PlayableScreen extends GenericScreen{
+/**
+ * generic abstract class for every playable screen
+ */
+public abstract class PlayableScreen extends GenericScreen{
     protected boolean stopGame = false;
 
     protected Hud hud;
@@ -44,19 +50,13 @@ public class PlayableScreen extends GenericScreen{
 
     @Override
     public void show() {
-        Utils.setStage(stage);
         Utils.setPlayer(player);
         Utils.setHitboxHandler(hitboxHandler);
-        
-        CameraController.initCamera();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 0);
-        ScreenUtils.clear(1, 1, 1, 0);
+        super.render(delta);
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
             Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
             return;
@@ -64,6 +64,20 @@ public class PlayableScreen extends GenericScreen{
         if(Gdx.input.isKeyPressed(Keys.M)){
             SavingsManager.save();
         }
+        if(Gdx.input.isKeyPressed(Keys.R)){
+            CameraController.applyShakeEffect();
+        } 
+        TileMapCollisionsManager.changeScreenIfNecessary();
+        if(Utils.getActiveScreen() != this) return;
+        tileSetManager.render((OrthographicCamera) stage.getCamera());
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        CameraController.updateCamera();
+        hitboxHandler.checkHitboxes();
+
+        stage.draw();
+        hud.update();
+        hud.draw();
     }
 
     protected void stopGame(){

@@ -1,7 +1,9 @@
 package com.mygdx.map;
 
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.mygdx.Utils;
 import com.mygdx.screens.ScreensManager;
 
@@ -18,7 +20,8 @@ public class TileMapCollisionsManager {
      * @return true if player can move in the incoming position
      */
     public static boolean canMove(float incomingX, float incomingY){
-        return layer.getCell((int) (incomingX + Utils.getPlayer().getWidth()/2) / 32, (int) (incomingY) / 32).getTile().getProperties().get("blocked") == null;
+        TiledMapTile tile = layer.getCell((int) (incomingX + Utils.getPlayer().getWidth()/2) / 32, (int) (incomingY) / 32).getTile();
+        return tile instanceof AnimatedTiledMapTile ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties().get("blocked") == null : tile.getProperties().get("blocked") == null;
     }
     /**
      * @param x
@@ -26,9 +29,13 @@ public class TileMapCollisionsManager {
      * @return CurrentTileProprieties set
      */
     public static MapProperties getCurrentTileProprieties(){
-        return layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile().getProperties();
+        TiledMapTile tile = layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile();
+        return tile instanceof AnimatedTiledMapTile ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties() : tile.getProperties();
     }
 
+    /** 
+     * if player is on the tile of a door, changes current screen based on the properties of the tile
+    */
     public static void changeScreenIfNecessary(){
         MapProperties properties = getCurrentTileProprieties();
         if(properties.get("changeScreen") == null){
@@ -36,12 +43,8 @@ public class TileMapCollisionsManager {
             return;
         }
         if(transitioning == true) return;
-        switch (properties.get("changeScreen").toString()) {
-            case "SECONDSCREEN" -> Utils.setScreen(ScreensManager.getScreen("SECOND_SCREEN"));
-            case "MAINSCREEN" -> Utils.setScreen(ScreensManager.getScreen("MAIN_SCREEN"));
-            case "SANDSTONEARENA" -> Utils.setScreen(ScreensManager.getScreen("SANDSTONE_ARENA"));
-            case "CITYSCREEN" -> Utils.setScreen(ScreensManager.getScreen("CITY_SCREEN"));
-        }
+        
+        Utils.setScreen(ScreensManager.getScreen(properties.get("changeScreen").toString()));
         transitioning = true;
     }
 }

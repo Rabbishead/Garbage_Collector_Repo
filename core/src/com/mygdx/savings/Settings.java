@@ -4,8 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.Utils;
-import com.mygdx.screens.PlayableScreen;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.screens.generic.playable.PlayableScreen;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
 

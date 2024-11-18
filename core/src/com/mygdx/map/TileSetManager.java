@@ -13,6 +13,7 @@ public class TileSetManager {
     public TileSetManager(String path){
         map = new TmxMapLoader().load(path);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+        AnimatedTileMapManager.load(map);
     }
 
     public void render(OrthographicCamera camera){
