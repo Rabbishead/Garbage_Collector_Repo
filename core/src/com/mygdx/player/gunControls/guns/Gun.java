@@ -3,16 +3,19 @@ package com.mygdx.player.gunControls.guns;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Gun extends Actor {
     protected Sprite s;
+    protected Vector2 position;
 
     public Gun() {
     }
 
-    public Gun(Texture t) {
+    public Gun(Texture t, int angleOffset, int positionOffset) {
         s = new Sprite(t);
+        
     }
 
     @Override

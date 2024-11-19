@@ -62,12 +62,11 @@ public class HitboxHandler {
     }
 
     public void checkHitboxes() {
-        /*
         for (CopyOnWriteArrayList<Collider> listC : collidersA.values()) {
             for (Collider c : listC) {
                 checkForDefault(c);
             }
-        }*/
+        }
     }
 
     public void checkForAll(Collider c) {

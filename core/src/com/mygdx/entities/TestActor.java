@@ -14,7 +14,7 @@ import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-public class TestActor extends Actor{
+public class TestActor extends Actor {
     private ActorAnimationManager animationManager;
     private MovementStyle movementStyle;
 
@@ -30,22 +30,22 @@ public class TestActor extends Actor{
         setTouchable(Touchable.enabled);
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc",
-        (hitbox, collider) -> {
-            if (collider.containsTag("player")) {
-                npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
-                DialogueLoader.getLine("testNPCDialogue1"));
-                Utils.getStage().addActor(npcDialogue);
-                hitbox.setActive(false);
-                DelayManager.registerObject(this, 100, object -> {
-                    npcDialogue.remove();
-                    hitbox.setActive(true);
-                    collider.setCollided(false);
+                (hitbox, collider) -> {
+                    if (collider.containsTag("player")) {
+                        npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+                                DialogueLoader.getLine("testNPCDialogue1"));
+                        Utils.getStage().addActor(npcDialogue);
+                        hitbox.setActive(false);
+                        DelayManager.registerObject(this, 100, object -> {
+                            npcDialogue.remove();
+                            hitbox.setActive(true);
+                            collider.setCollided(false);
+                        });
+                    } else if (collider.containsTag("projectile")) {
+                        this.remove();
+                        Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+                    }
                 });
-            } else if (collider.containsTag("projectile")) {
-                this.remove();
-                Utils.getHitboxHandler().unRegisterHitbox(hitbox);
-            }
-        });
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         movementStyle = new NPCRealtimeMovementStyle(this);
         Utils.getHitboxHandler().registerHitbox(hitbox);
@@ -65,7 +65,7 @@ public class TestActor extends Actor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        
+        DelayManager.updateDelay(this);
         animationManager.setCurrentAnimation(movementStyle.move());
         animationManager.updateAnimation(delta);
     }
@@ -76,5 +76,5 @@ public class TestActor extends Actor{
         hitbox.setPosition(getX(), getY());
         npcDialogue.setPosition(getX() + 40, getY() + 50);
     }
-    
+
 }

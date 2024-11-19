@@ -34,6 +34,7 @@ public abstract class PlayableScreen extends GenericScreen{
     protected PlayableScreen(){}
 
     protected PlayableScreen(String name){
+        super();
         this.name = name;
         hitboxHandler = new HitboxHandler();
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
@@ -50,6 +51,7 @@ public abstract class PlayableScreen extends GenericScreen{
 
     @Override
     public void show() {
+        super.show();
         Utils.setPlayer(player);
         Utils.setHitboxHandler(hitboxHandler);
     }
