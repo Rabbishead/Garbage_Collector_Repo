@@ -3,43 +3,43 @@
  <image source="citytiles.png" width="240" height="280"/>
  <tile id="10">
   <properties>
-   <property name="blocked" type="bool" value="true"/>
+   <property name="blocked" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="15">
   <properties>
    <property name="animation" value="door"/>
    <property name="animationRate" type="float" value="0.33"/>
+  </properties>
+ </tile>
+ <tile id="18">
+  <properties>
    <property name="changeScreen" value="SECOND_SCREEN"/>
   </properties>
  </tile>
  <tile id="21">
   <properties>
    <property name="animation" value="door"/>
-   <property name="changeScreen" value="SECOND_SCREEN"/>
+  </properties>
+ </tile>
+ <tile id="24">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="27">
   <properties>
    <property name="animation" value="door"/>
-   <property name="changeScreen" value="SECOND_SCREEN"/>
   </properties>
  </tile>
  <tile id="33">
   <properties>
    <property name="animation" value="door"/>
-   <property name="changeScreen" value="SECOND_SCREEN"/>
   </properties>
  </tile>
  <tile id="39">
   <properties>
    <property name="animation" value="door"/>
-   <property name="changeScreen" value="SECOND_SCREEN"/>
-  </properties>
- </tile>
- <tile id="42">
-  <properties>
-   <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
 </tileset>

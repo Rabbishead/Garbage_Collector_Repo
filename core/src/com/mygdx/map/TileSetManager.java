@@ -16,9 +16,14 @@ public class TileSetManager {
         AnimatedTileMapManager.load(map);
     }
 
-    public void render(OrthographicCamera camera){
+    public void renderForeground(OrthographicCamera camera){
         tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
+        tiledMapRenderer.render(new int[]{1});
+    }
+
+    public void renderBackground(OrthographicCamera camera){
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render(new int[]{0});
     }
 
     public TiledMap getMap() {

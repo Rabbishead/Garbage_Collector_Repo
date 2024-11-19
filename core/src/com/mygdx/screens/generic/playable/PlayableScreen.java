@@ -69,13 +69,15 @@ public abstract class PlayableScreen extends GenericScreen{
         } 
         TileMapCollisionsManager.changeScreenIfNecessary();
         if(Utils.getActiveScreen() != this) return;
-        tileSetManager.render((OrthographicCamera) stage.getCamera());
 
         stage.act(Gdx.graphics.getDeltaTime());
+
         CameraController.updateCamera();
         hitboxHandler.checkHitboxes();
 
+        tileSetManager.renderBackground(camera);
         stage.draw();
+        tileSetManager.renderForeground(camera);
         hud.update();
         hud.draw();
     }
