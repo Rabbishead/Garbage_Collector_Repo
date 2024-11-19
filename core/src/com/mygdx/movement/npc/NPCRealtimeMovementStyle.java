@@ -13,14 +13,19 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     
     private final Actor npc;
     private String lastDirection;
-    private String[] path = {"wD", "wW" , "wW" , "wA", "wS" , "wS"}
-    ;
-    private int index;
+    private String[] path;
+    private int innerIndex;
+    private int outerIndex;
+    private Vector2 startingCoordinates;
 
-    public NPCRealtimeMovementStyle(Actor npc) {
+    public NPCRealtimeMovementStyle(Actor npc, String[] path) {
         this.npc = npc;
+        this.path = path;
         lastDirection = "-";
         DelayManager.registerObject(this, 200);
+        innerIndex = 0;
+        outerIndex = (int) (path.length * Math.random());
+        startingCoordinates = new Vector2(npc.getX(), npc.getY());
     }
 
     /**
@@ -29,21 +34,21 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     public String move() {
         String direction = "-";
         Vector2 finalPosition = new Vector2(0, 0);
-        String currentDirection = path[index];
+        char currentDirection = path[outerIndex].charAt(innerIndex);
         DelayManager.updateDelay(this);
 
         switch (currentDirection) {
-            case "wD" -> {
+            case 'D' -> {
                 finalPosition.x += 0.75;
             }
-            case "wA" -> {
+            case 'A' -> {
                 finalPosition.x -= 0.75;
             }
-            case "wW" -> {
+            case 'W' -> {
                 finalPosition.y += 0.75;
 
             }
-            case "wS" -> {
+            case 'S' -> {
                 finalPosition.y -= 0.75;
             }
         }
@@ -54,7 +59,7 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
             npc.setY(npc.getY() + finalPosition.y);
         }
 
-        if(!DelayManager.isDelayOver(this)) return currentDirection;
+        if(!DelayManager.isDelayOver(this)) return "w" + currentDirection;
        
         if(finalPosition.x == 0 && finalPosition.y == 0) direction = "-";
         if (direction.equals("-")) {
@@ -63,9 +68,13 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
 
         
         lastDirection = direction;
-        index++;
-        if(index >= path.length) index = 0;
+        innerIndex++;
+        if(innerIndex >= path[outerIndex].length()) innerIndex = 0;
         DelayManager.resetDelay(this);
-        return currentDirection;
+
+        if(npc.getX() == startingCoordinates.x && npc.getY() == startingCoordinates.y){
+            outerIndex = (int) (path.length * Math.random());
+        }
+        return "w" + currentDirection;
     }
 }

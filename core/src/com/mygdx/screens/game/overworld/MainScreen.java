@@ -1,21 +1,25 @@
 package com.mygdx.screens.game.overworld;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.dialogues.BossDialogue;
+import com.mygdx.entities.NPC;
 import com.mygdx.entities.Player;
-import com.mygdx.entities.TestActor;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
+import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
 
 public class MainScreen extends PlayableScreen {
-    TestActor testActor = new TestActor(160, 160);
+    NPC testNPC1 = new NPC.NPCBuilder().coordinates(new Vector2(160,160)).texture(ResourceEnum.PLAYER).path(new String[]{"DWW--ASS", "WWDSS-A"}).build();
+    NPC testNPC2 = new NPC.NPCBuilder().coordinates(new Vector2(200,300)).texture(ResourceEnum.PLAYER).path(new String[]{"DW-WASS", "W-WDS-SA"}).build();
     BossDialogue bossDialogue;
 
     public MainScreen(){
         super("MAIN_SCREEN");
-        stage.addActor(testActor);
+        stage.addActor(testNPC1);
+        stage.addActor(testNPC2);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
         player.setMovementStyle(Player.Styles.REALTIME);

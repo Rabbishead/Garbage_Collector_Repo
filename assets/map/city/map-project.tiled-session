@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "city_tileset.tsx",
+    "activeFile": "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -19,7 +19,7 @@
         },
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx": {
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 791.5,
                 "y": 164.5
@@ -64,16 +64,20 @@
         "cityMap.tmx",
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_map.tmx",
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_tileset.tsx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx"
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map.tmx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx"
     ],
     "project": "map-project.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_tileset.tsx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_map.tmx",
+        "city_tileset.tsx",
         "cityMap.tmx",
-        "city_tileset.tsx"
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_map.tmx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_tileset.tsx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map.tmx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 4,
