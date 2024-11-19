@@ -46,6 +46,7 @@ public class Player extends Actor {
         CameraController.calculateMouseAngle(center);
         this.debug();
     }
+    
     public Player(Vector2 coordinates) {
         setX(coordinates.x + 16);
         setY(coordinates.y + 16);
@@ -56,7 +57,7 @@ public class Player extends Actor {
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
         //GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
