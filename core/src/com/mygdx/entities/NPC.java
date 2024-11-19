@@ -24,8 +24,6 @@ public class NPC extends Actor{
 
     private NPCDialogue npcDialogue = new NPCDialogue(0, 0, "");
 
-    private String[] dialogueLines;
-
     private String[] path;
 
     protected NPC(NPCBuilder npcBuilder) {
@@ -40,8 +38,6 @@ public class NPC extends Actor{
         movementStyle = new NPCRealtimeMovementStyle(this, path);
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
-
-        dialogueLines = npcBuilder.dialogueLines;
         
         this.debug();
 
@@ -99,17 +95,11 @@ public class NPC extends Actor{
 
     public static class NPCBuilder {
         private Vector2 coordinates;
-        private String[] dialogueLines;
         private ResourceEnum textureEnum;
         private String[] path;
     
         public NPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
-            return this;
-        }
-    
-        public NPCBuilder dialogueLines(String[] dialogueLines) {
-            this.dialogueLines = dialogueLines;
             return this;
         }
     

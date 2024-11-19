@@ -12,7 +12,7 @@ import com.mygdx.movement.MovementStyle;
 public class NPCRealtimeMovementStyle extends MovementStyle {
     
     private final Actor npc;
-    private String lastDirection;
+    private char lastDirection;
     private String[] path;
     private int innerIndex;
     private int outerIndex;
@@ -21,7 +21,7 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     public NPCRealtimeMovementStyle(Actor npc, String[] path) {
         this.npc = npc;
         this.path = path;
-        lastDirection = "-";
+        lastDirection = '-';
         DelayManager.registerObject(this, 200);
         innerIndex = 0;
         outerIndex = (int) (path.length * Math.random());
@@ -32,9 +32,9 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
      * moves the npc and returns the correct direction of the body
      */
     public String move() {
-        String direction = "-";
         Vector2 finalPosition = new Vector2(0, 0);
         char currentDirection = path[outerIndex].charAt(innerIndex);
+        boolean isWalking = true;
         DelayManager.updateDelay(this);
 
         switch (currentDirection) {
@@ -46,35 +46,32 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
             }
             case 'W' -> {
                 finalPosition.y += 0.75;
-
             }
             case 'S' -> {
                 finalPosition.y -= 0.75;
             }
+            case '-' -> {
+                isWalking = false;
+            }
         }
 
-        if(TileMapCollisionsManager.getCurrentTileProprieties() == null) return "";
         if (TileMapCollisionsManager.canMove(npc.getX() + finalPosition.x, npc.getY() + finalPosition.y)) {
             npc.setX(npc.getX() + finalPosition.x);
             npc.setY(npc.getY() + finalPosition.y);
         }
 
-        if(!DelayManager.isDelayOver(this)) return "w" + currentDirection;
-       
-        if(finalPosition.x == 0 && finalPosition.y == 0) direction = "-";
-        if (direction.equals("-")) {
-            direction = "i" + lastDirection.substring(1);
-        }
-
+        if(!DelayManager.isDelayOver(this)) return isWalking ? "w" + currentDirection : "i" + lastDirection;
         
-        lastDirection = direction;
+        lastDirection = currentDirection;
+
         innerIndex++;
+
         if(innerIndex >= path[outerIndex].length()) innerIndex = 0;
         DelayManager.resetDelay(this);
 
         if(npc.getX() == startingCoordinates.x && npc.getY() == startingCoordinates.y){
             outerIndex = (int) (path.length * Math.random());
         }
-        return "w" + currentDirection;
+        return isWalking ? "w" + currentDirection : "i" + lastDirection;
     }
 }

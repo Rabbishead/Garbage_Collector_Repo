@@ -12,24 +12,31 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 
 public class MainScreen extends PlayableScreen {
-    NPC testNPC1 = new NPC.NPCBuilder()
+    private NPC testNPC1 = new NPC.NPCBuilder()
         .coordinates(new Vector2(160,160))
         .texture(ResourceEnum.PLAYER)
         .path(new String[]{"DWW--ASS", "WWDSS-A"})
         .build();
 
-    NPC testNPC2 = new NPC.NPCBuilder()
+    private NPC testNPC2 = new NPC.NPCBuilder()
         .coordinates(new Vector2(200,300))
         .texture(ResourceEnum.PLAYER)
         .path(new String[]{"DW-WASS", "W-WDS-SA"})
         .build();
+
+    private NPC testNPC3 = new NPC.NPCBuilder()
+        .coordinates(new Vector2(300,250))
+        .texture(ResourceEnum.PLAYER)
+        .path(new String[]{"DW-WASDD", "W-WDS-SA"})
+        .build();
         
-    BossDialogue bossDialogue;
+    //BossDialogue bossDialogue;
 
     public MainScreen(){
         super("MAIN_SCREEN");
         stage.addActor(testNPC1);
         stage.addActor(testNPC2);
+        stage.addActor(testNPC3);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
         player.setMovementStyle(Player.Styles.REALTIME);
