@@ -12,8 +12,18 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 
 public class MainScreen extends PlayableScreen {
-    NPC testNPC1 = new NPC.NPCBuilder().coordinates(new Vector2(160,160)).texture(ResourceEnum.PLAYER).path(new String[]{"DWW--ASS", "WWDSS-A"}).build();
-    NPC testNPC2 = new NPC.NPCBuilder().coordinates(new Vector2(200,300)).texture(ResourceEnum.PLAYER).path(new String[]{"DW-WASS", "W-WDS-SA"}).build();
+    NPC testNPC1 = new NPC.NPCBuilder()
+        .coordinates(new Vector2(160,160))
+        .texture(ResourceEnum.PLAYER)
+        .path(new String[]{"DWW--ASS", "WWDSS-A"})
+        .build();
+
+    NPC testNPC2 = new NPC.NPCBuilder()
+        .coordinates(new Vector2(200,300))
+        .texture(ResourceEnum.PLAYER)
+        .path(new String[]{"DW-WASS", "W-WDS-SA"})
+        .build();
+        
     BossDialogue bossDialogue;
 
     public MainScreen(){
