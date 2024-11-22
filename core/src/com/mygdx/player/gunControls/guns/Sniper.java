@@ -3,11 +3,12 @@ package com.mygdx.player.gunControls.guns;
 import com.mygdx.Utils;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.projectiles.Bullet;
+import com.mygdx.resources.ResourceEnum;
 
 public class Sniper extends Gun {
     
     public Sniper() {
-        super();
+        super(Utils.getTexture(ResourceEnum.DEFAULT), 0, 0);
     }
 
     public int leftTrigger() {

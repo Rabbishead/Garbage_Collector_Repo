@@ -59,7 +59,7 @@ public class Player extends Actor {
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
-        //GunController.get().loadGun(new Sniper());
+        GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
         this.debug();
     }

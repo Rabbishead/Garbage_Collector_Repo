@@ -3,11 +3,12 @@ package com.mygdx.player.gunControls.guns;
 import com.mygdx.Utils;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.projectiles.Stone;
+import com.mygdx.resources.ResourceEnum;
 
 public class Slingshot extends Gun {
 
     public Slingshot() {
-        super();
+        super(Utils.getTexture(ResourceEnum.DEFAULT), 0, 0);
     }
 
     public int leftTrigger() {
