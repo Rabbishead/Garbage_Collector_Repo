@@ -18,7 +18,7 @@ public class Utils {
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
     private static Player player;
-    private static GenericScreen activeSscreen;
+    private static GenericScreen activeScreen;
 
     /**
      * @Texture already loaded
@@ -76,7 +76,7 @@ public class Utils {
      * @param newScreen
      */
     public static void setScreen(GenericScreen newScreen){
-        activeSscreen = newScreen;
+        activeScreen = newScreen;
         game.setScreen(newScreen); 
     }
 
@@ -92,7 +92,7 @@ public class Utils {
      * @return active screen
      */
     public static GenericScreen getActiveScreen() {
-        return activeSscreen;
+        return activeScreen;
     }
 
     /**
