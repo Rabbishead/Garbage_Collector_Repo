@@ -1,8 +1,11 @@
 package com.mygdx.screens.generic.playable;
 
+import java.util.Comparator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
@@ -71,6 +74,7 @@ public abstract class PlayableScreen extends GenericScreen{
         TileMapCollisionsManager.changeScreenIfNecessary();
         if(Utils.getActiveScreen() != this) return;
 
+        stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));
         stage.act(Gdx.graphics.getDeltaTime());
 
         CameraController.updateCamera();

@@ -33,6 +33,7 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
         pathMap.put(ResourceEnum.HEATH_BAR, "hud/health.png");
+        pathMap.put(ResourceEnum.LAMP, "map/city/lamp.png");
     }
 
     public Texture getTexture(ResourceEnum e) {

@@ -61,7 +61,7 @@ public class Player extends Actor {
         Utils.getHitboxHandler().registerCollider(collider);
         GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
-        this.debug();
+        //this.debug();
     }
 
     /**

@@ -9,5 +9,6 @@ public enum ResourceEnum {
     ITAFLAG,
     ENGFLAG,
     PLAYBUTTON,
-    HEATH_BAR
+    HEATH_BAR,
+    LAMP
 }

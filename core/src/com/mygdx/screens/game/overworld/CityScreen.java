@@ -1,6 +1,8 @@
 package com.mygdx.screens.game.overworld;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
@@ -8,10 +10,14 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 public class CityScreen extends PlayableScreen {
 
+    ForegroundMapComponent lamp1;
+
     public CityScreen(){
         super("CITY_SCREEN");
+        lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
         stage.getCamera().translate(player.getX(),player.getY(), 0);
         player.setMovementStyle(Player.Styles.REALTIME);
+        stage.addActor(lamp1);
     }
 
     @Override
