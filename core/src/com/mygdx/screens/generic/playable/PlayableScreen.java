@@ -76,9 +76,8 @@ public abstract class PlayableScreen extends GenericScreen{
         CameraController.updateCamera();
         hitboxHandler.checkHitboxes();
 
-        tileSetManager.renderBackground(camera);
+        tileSetManager.render(camera);
         stage.draw();
-        tileSetManager.renderForeground(camera);
         hud.update();
         hud.draw();
     }
