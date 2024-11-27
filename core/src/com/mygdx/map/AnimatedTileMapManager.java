@@ -39,7 +39,7 @@ public class AnimatedTileMapManager {
             animatedTiledMapTiles.put(s, new AnimatedTiledMapTile(animationRate.get(s), staticTiledMapTiles.get(s)));
         }
 
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("foreground");
 
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
