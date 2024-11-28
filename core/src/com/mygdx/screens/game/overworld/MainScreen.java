@@ -28,8 +28,6 @@ public class MainScreen extends PlayableScreen {
             .path(new String[] { "DW-WASDD", "W-WDS-SA" })
             .build();
 
-    // BossDialogue bossDialogue;
-
     public MainScreen(){
         super("MAIN_SCREEN");
         stage.addActor(testNPC1);
@@ -51,29 +49,5 @@ public class MainScreen extends PlayableScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-
-        /*
-         * if(Gdx.input.isKeyPressed(Keys.Y)){
-         * stopGame();
-         * }
-         * if(Gdx.input.isKeyPressed(Keys.U)){
-         * resumeGame();
-         * if(bossDialogue != null){
-         * bossDialogue.remove();
-         * bossDialogue = null;
-         * }
-         * }
-         * if(stopGame){
-         * 
-         * if(bossDialogue == null){
-         * bossDialogue = new BossDialogue("Ciao");
-         * stage.addActor(bossDialogue);
-         * }
-         * tileSetManager.render((OrthographicCamera) stage.getCamera());
-         * stage.draw();
-         * hud.draw();
-         * return;
-         * }
-         */
     }
 }

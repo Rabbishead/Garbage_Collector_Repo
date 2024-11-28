@@ -13,8 +13,6 @@ import com.mygdx.resources.ResourceEnum;
 
 public class SimpleNPC extends GenericNPC{
 
-    private NPCDialogue npcDialogue;
-
     private String[] path;
 
     protected SimpleNPC(SimpleNPCBuilder npcBuilder) {

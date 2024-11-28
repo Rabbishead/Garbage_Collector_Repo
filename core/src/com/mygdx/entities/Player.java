@@ -30,23 +30,6 @@ public class Player extends Actor {
         REALTIME, TILED
     }
 
-    public Player(float playerX, float playerY) {
-        setX(playerX + 16);
-        setY(playerY + 16);
-        setWidth(17);
-        setHeight(32);
-        setOrigin(getWidth() / 2, getHeight() / 2);
-        setTouchable(Touchable.enabled);
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
-        animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
-        Utils.getHitboxHandler().registerCollider(collider);
-        GunController.get().loadGun(new Sniper());
-        CameraController.calculateMouseAngle(center);
-        this.debug();
-    }
-
     public Player(Vector2 coordinates) {
         setX(coordinates.x + 16);
         setY(coordinates.y + 16);
@@ -61,7 +44,7 @@ public class Player extends Actor {
         Utils.getHitboxHandler().registerCollider(collider);
         GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
-        // this.debug();
+        this.debug();
     }
 
     /**
