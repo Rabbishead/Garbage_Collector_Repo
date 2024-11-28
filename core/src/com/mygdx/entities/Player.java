@@ -46,7 +46,7 @@ public class Player extends Actor {
         CameraController.calculateMouseAngle(center);
         this.debug();
     }
-    
+
     public Player(Vector2 coordinates) {
         setX(coordinates.x + 16);
         setY(coordinates.y + 16);
@@ -61,7 +61,7 @@ public class Player extends Actor {
         Utils.getHitboxHandler().registerCollider(collider);
         GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
-        //this.debug();
+        // this.debug();
     }
 
     /**
@@ -71,12 +71,16 @@ public class Player extends Actor {
      */
     public void setMovementStyle(Styles s) {
         switch (s) {
-            case REALTIME:
+            case REALTIME: {
                 movementStyle = new PlayerRealtimeMovementStyle();
+                GunController.get().remove();
                 break;
-            case TILED:
+            }
+            case TILED: {
                 movementStyle = new PlayerTiledMovementStyle();
+                Utils.getStage().addActor(GunController.get());
                 break;
+            }
         }
     }
 
@@ -93,12 +97,10 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        //if (collider.isCollided()) return;
 
         CameraController.calculateMouseAngle(center);
         animationManager.setCurrentAnimation(movementStyle.move());
         animationManager.updateAnimation(delta);
-        GunController.get().act();
     }
 
     @Override

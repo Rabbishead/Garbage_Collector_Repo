@@ -4,14 +4,17 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.player.gunControls.guns.Gun;
 
-public class GunController {
+public class GunController extends Actor {
     private static GunController instance;
     private ArrayList<Gun> guns;
     private int gunIndex;
+    private Gun currentGun;
 
     public static GunController get() {
         if (instance == null)
@@ -32,20 +35,20 @@ public class GunController {
      */
     public GunController loadGun(Gun gun) {
         guns.add(gun);
-        Utils.getStage().addActor(gun);
+        //Utils.getStage().addActor(gun);
         return instance;
     }
 
     public void loadGuns(ArrayList<Gun> guns) {
         this.guns.addAll(guns);
-        for (Gun gun : guns) {
+        /*for (Gun gun : guns) {
             Utils.getStage().addActor(gun);
-        }
+        }*/
     }
 
     public void removeGun(Gun gun) {
         guns.remove(gun);
-        gun.remove();
+        //gun.remove();
     }
 
     public void setCooldown(int cooldown) {
@@ -56,11 +59,18 @@ public class GunController {
         DelayManager.resetDelay(this);
     }
 
-    public void act() {
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        currentGun.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public void act(float delta) {
         DelayManager.updateDelay(this);
+        currentGun = guns.get(gunIndex);
+        currentGun.act(delta);
         if (guns.isEmpty() || !DelayManager.isDelayOver(this))
             return;
-        Gun currentGun = guns.get(gunIndex);
         int j = 0;
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             j = currentGun.leftTrigger();

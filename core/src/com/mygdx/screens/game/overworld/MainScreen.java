@@ -9,27 +9,26 @@ import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
-
 public class MainScreen extends PlayableScreen {
     private SimpleNPC testNPC1 = new SimpleNPC.SimpleNPCBuilder()
-        .coordinates(new Vector2(160,160))
-        .texture(ResourceEnum.PLAYER)
-        .path(new String[]{"DWW--ASS", "WWDSS-A"})
-        .build();
+            .coordinates(new Vector2(160, 160))
+            .texture(ResourceEnum.PLAYER)
+            .path(new String[] { "DWW--ASS", "WWDSS-A" })
+            .build();
 
     private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
-        .coordinates(new Vector2(200,300))
-        .texture(ResourceEnum.PLAYER)
-        .path(new String[]{"DW-WASS", "W-WDS-SA"})
-        .build();
+            .coordinates(new Vector2(200, 300))
+            .texture(ResourceEnum.PLAYER)
+            .path(new String[] { "DW-WASS", "W-WDS-SA" })
+            .build();
 
     private SimpleNPC testNPC3 = new SimpleNPC.SimpleNPCBuilder()
-        .coordinates(new Vector2(300,250))
-        .texture(ResourceEnum.PLAYER)
-        .path(new String[]{"DW-WASDD", "W-WDS-SA"})
-        .build();
-        
-    //BossDialogue bossDialogue;
+            .coordinates(new Vector2(300, 250))
+            .texture(ResourceEnum.PLAYER)
+            .path(new String[] { "DW-WASDD", "W-WDS-SA" })
+            .build();
+
+    // BossDialogue bossDialogue;
 
     public MainScreen(){
         super("MAIN_SCREEN");
@@ -37,14 +36,14 @@ public class MainScreen extends PlayableScreen {
         stage.addActor(testNPC2);
         stage.addActor(testNPC3);
 
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
-        player.setMovementStyle(Player.Styles.REALTIME);
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
     }
 
     @Override
     public void show() {
         super.show();
         tileSetManager = new TileSetManager("map/map.tmx");
+        player.setMovementStyle(Player.Styles.REALTIME);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
     }
 
@@ -52,26 +51,28 @@ public class MainScreen extends PlayableScreen {
     public void render(float delta) {
         super.render(delta);
 
-        /*if(Gdx.input.isKeyPressed(Keys.Y)){
-            stopGame();
-        }
-        if(Gdx.input.isKeyPressed(Keys.U)){
-            resumeGame();
-            if(bossDialogue != null){
-                bossDialogue.remove();
-                bossDialogue = null;
-            } 
-        }
-        if(stopGame){
-            
-            if(bossDialogue == null){
-                bossDialogue = new BossDialogue("Ciao");
-                stage.addActor(bossDialogue);
-            } 
-            tileSetManager.render((OrthographicCamera) stage.getCamera());
-            stage.draw();
-            hud.draw();
-            return;
-        }*/
+        /*
+         * if(Gdx.input.isKeyPressed(Keys.Y)){
+         * stopGame();
+         * }
+         * if(Gdx.input.isKeyPressed(Keys.U)){
+         * resumeGame();
+         * if(bossDialogue != null){
+         * bossDialogue.remove();
+         * bossDialogue = null;
+         * }
+         * }
+         * if(stopGame){
+         * 
+         * if(bossDialogue == null){
+         * bossDialogue = new BossDialogue("Ciao");
+         * stage.addActor(bossDialogue);
+         * }
+         * tileSetManager.render((OrthographicCamera) stage.getCamera());
+         * stage.draw();
+         * hud.draw();
+         * return;
+         * }
+         */
     }
 }

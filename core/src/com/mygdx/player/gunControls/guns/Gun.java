@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.Utils;
 import com.mygdx.player.camera.CameraController;
 
 public class Gun extends Actor {
@@ -16,7 +17,7 @@ public class Gun extends Actor {
         s = new Sprite(t);
         setWidth(t.getWidth());
         setHeight(t.getHeight());
-        s.setOrigin(getWidth()/2, 0);
+        s.setOrigin(getWidth() / 2, 0);
         position = new Vector2().scl(positionOffset);
         s.setPosition(position.x, position.y);
         this.angleOffset = angleOffset;
@@ -25,6 +26,13 @@ public class Gun extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         s.draw(batch);
+    }
+
+    @Override
+    public void act(float delta) {
+        Vector2 center = Utils.getPlayer().center;
+        setPosition(center.x, center.y);
+        s.setPosition(getX(), getY());
         s.setRotation(CameraController.getMouseAngle() + angleOffset);
     }
 
