@@ -26,7 +26,6 @@ public class Gun extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         s.draw(batch);
-        s.setRotation(CameraController.getMouseAngle() + angleOffset);
     }
 
     @Override
@@ -34,6 +33,7 @@ public class Gun extends Actor {
         Vector2 center = Utils.getPlayer().center;
         setPosition(center.x, center.y);
         s.setPosition(getX(), getY());
+        s.setRotation(CameraController.getMouseAngle() + angleOffset);
     }
 
     public int leftTrigger() {
