@@ -35,20 +35,20 @@ public class GunController extends Actor {
      */
     public GunController loadGun(Gun gun) {
         guns.add(gun);
-        Utils.getStage().addActor(gun);
+        //Utils.getStage().addActor(gun);
         return instance;
     }
 
     public void loadGuns(ArrayList<Gun> guns) {
         this.guns.addAll(guns);
-        for (Gun gun : guns) {
+        /*for (Gun gun : guns) {
             Utils.getStage().addActor(gun);
-        }
+        }*/
     }
 
     public void removeGun(Gun gun) {
         guns.remove(gun);
-        gun.remove();
+        //gun.remove();
     }
 
     public void setCooldown(int cooldown) {
