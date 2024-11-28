@@ -2,26 +2,18 @@ package com.mygdx.dialogues;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * NPC dialogues manager
  * it's an actor so we can subscribe it to MainScreen's stage
  * @see MainScreen
  */
-public class NPCDialogue extends Actor{
-    private Texture texture;
-    private String textToDisplay;
-    private final BitmapFont font;
+public class NPCDialogue extends Dialogue{
+    
     public NPCDialogue(float x, float y, String textToDisplay){
-        font = new BitmapFont();
-        setX(x);
-        setY(y);
-        setWidth(2);
-        setHeight(3);
+        super(x, y, textToDisplay);
         texture = new Texture("dialogues/images/dialogueBox.jpg");
-        this.textToDisplay = textToDisplay;
+
     }
     @Override
     public void draw(Batch batch, float parentAlpha) {

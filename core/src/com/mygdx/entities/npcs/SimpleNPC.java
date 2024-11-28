@@ -1,47 +1,28 @@
-package com.mygdx.entities;
+package com.mygdx.entities.npcs;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
-import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
-import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-public class NPC extends Actor{
+public class SimpleNPC extends GenericNPC{
 
-    private ActorAnimationManager animationManager;
-    private MovementStyle movementStyle;
-
-    private Hitbox hitbox = new Hitbox(false, null);
-
-    private NPCDialogue npcDialogue = new NPCDialogue(0, 0, "");
+    private NPCDialogue npcDialogue;
 
     private String[] path;
 
-    protected NPC(NPCBuilder npcBuilder) {
-
-        setX(npcBuilder.coordinates.x);
-        setY(npcBuilder.coordinates.y);
-
-        setWidth(32);
-        setHeight(32);
+    protected SimpleNPC(SimpleNPCBuilder npcBuilder) {
+        super(npcBuilder);
+        npcDialogue = new NPCDialogue(0, 0, "");
 
         path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
-
-        animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
-        
-        this.debug();
-
-        setTouchable(Touchable.enabled);
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc",
             (hitbox, collider) -> {
@@ -62,6 +43,7 @@ public class NPC extends Actor{
         );
         
         Utils.getHitboxHandler().registerHitbox(hitbox);
+
     }
 
     @Override
@@ -78,43 +60,40 @@ public class NPC extends Actor{
     public void act(float delta) {
         super.act(delta);
         DelayManager.updateDelay(this);
-        animationManager.setCurrentAnimation(movementStyle.move());
-        animationManager.updateAnimation(delta);
+        npcDialogue.setPosition(getX() + 40, getY() + 50);
     }
 
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        hitbox.setPosition(getX(), getY());
-        npcDialogue.setPosition(getX() + 40, getY() + 50);
+        
     }
 
 
 
 
 
-    public static class NPCBuilder {
-        private Vector2 coordinates;
-        private ResourceEnum textureEnum;
+    public static class SimpleNPCBuilder extends GenericNPCBuilder{
+    
         private String[] path;
     
-        public NPCBuilder coordinates(Vector2 coordinates) {
+        public SimpleNPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
             return this;
         }
     
-        public NPCBuilder texture(ResourceEnum texture) {
+        public SimpleNPCBuilder texture(ResourceEnum texture) {
             this.textureEnum = texture;
             return this;
         }
 
-        public NPCBuilder path(String[] path){
+        public SimpleNPCBuilder path(String[] path){
             this.path = path;
             return this;
         }
     
-        public NPC build() {
-            return new NPC(this);
+        public SimpleNPC build() {
+            return new SimpleNPC(this);
         }
     }
 }

@@ -28,6 +28,10 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
         startingCoordinates = new Vector2(npc.getX(), npc.getY());
     }
 
+    public NPCRealtimeMovementStyle(Actor npc){
+        this(npc, new String[]{"-"});
+    }
+
     /**
      * moves the npc and returns the correct direction of the body
      */

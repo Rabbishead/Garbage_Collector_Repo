@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "cityMap.tmx",
+    "activeFile": "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -19,10 +19,10 @@
         },
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx": {
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 480,
-                "y": 352.5
+                "x": 478.5,
+                "y": 351.5
             }
         },
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_map.tmx": {
@@ -72,12 +72,12 @@
     "property.type": "bool",
     "recentFiles": [
         "city_tileset.tsx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map.tmx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx",
-        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_tileset.tsx",
+        "cityMap.tmx",
         "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_map.tmx",
-        "cityMap.tmx"
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/sandstone/sandstone_tileset.tsx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/tileset.tsx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map.tmx",
+        "C:/Users/chto2/Desktop/Garbage_Collector_Repo/assets/map/map_beta.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 4,

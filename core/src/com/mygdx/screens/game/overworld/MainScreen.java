@@ -2,9 +2,8 @@ package com.mygdx.screens.game.overworld;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.dialogues.BossDialogue;
-import com.mygdx.entities.NPC;
 import com.mygdx.entities.Player;
+import com.mygdx.entities.npcs.SimpleNPC;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
@@ -12,19 +11,19 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 
 public class MainScreen extends PlayableScreen {
-    private NPC testNPC1 = new NPC.NPCBuilder()
+    private SimpleNPC testNPC1 = new SimpleNPC.SimpleNPCBuilder()
         .coordinates(new Vector2(160,160))
         .texture(ResourceEnum.PLAYER)
         .path(new String[]{"DWW--ASS", "WWDSS-A"})
         .build();
 
-    private NPC testNPC2 = new NPC.NPCBuilder()
+    private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
         .coordinates(new Vector2(200,300))
         .texture(ResourceEnum.PLAYER)
         .path(new String[]{"DW-WASS", "W-WDS-SA"})
         .build();
 
-    private NPC testNPC3 = new NPC.NPCBuilder()
+    private SimpleNPC testNPC3 = new SimpleNPC.SimpleNPCBuilder()
         .coordinates(new Vector2(300,250))
         .texture(ResourceEnum.PLAYER)
         .path(new String[]{"DW-WASDD", "W-WDS-SA"})
