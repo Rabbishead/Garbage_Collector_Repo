@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.Utils;
 import com.mygdx.player.camera.CameraController;
 
 public class Gun extends Actor {
@@ -26,6 +27,13 @@ public class Gun extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         s.draw(batch);
         s.setRotation(CameraController.getMouseAngle() + angleOffset);
+    }
+
+    @Override
+    public void act(float delta) {
+        Vector2 center = Utils.getPlayer().center;
+        setPosition(center.x, center.y);
+        s.setPosition(getX(), getY());
     }
 
     public int leftTrigger() {

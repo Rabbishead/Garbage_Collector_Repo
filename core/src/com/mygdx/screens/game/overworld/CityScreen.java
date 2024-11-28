@@ -12,17 +12,18 @@ public class CityScreen extends PlayableScreen {
 
     ForegroundMapComponent lamp1;
 
-    public CityScreen(){
+    public CityScreen() {
         super("CITY_SCREEN");
-        lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
-        player.setMovementStyle(Player.Styles.REALTIME);
-        stage.addActor(lamp1);
     }
 
     @Override
     public void show() {
         super.show();
+        lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
+        player.setMovementStyle(Player.Styles.REALTIME);
+        stage.addActor(lamp1);
+
         tileSetManager = new TileSetManager("map/city/cityMap.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
     }
