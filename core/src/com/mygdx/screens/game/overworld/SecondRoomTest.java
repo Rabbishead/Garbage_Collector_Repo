@@ -16,6 +16,7 @@ public class SecondRoomTest extends PlayableScreen {
     @Override
     public void show() {
         super.show();
+
         player.setMovementStyle(Player.Styles.REALTIME);
         tileSetManager = new TileSetManager("map/map_beta.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));

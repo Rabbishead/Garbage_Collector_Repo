@@ -16,6 +16,7 @@ public class SandstoneArena extends PlayableScreen {
     @Override
     public void show() {
         super.show();
+
         player.setMovementStyle(Player.Styles.TILED);
         player.setX(player.getX() - 16);
         player.setY(player.getY() - 16);

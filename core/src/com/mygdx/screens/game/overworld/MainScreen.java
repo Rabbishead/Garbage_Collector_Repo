@@ -42,8 +42,9 @@ public class MainScreen extends PlayableScreen {
     @Override
     public void show() {
         super.show();
-        tileSetManager = new TileSetManager("map/map.tmx");
+
         player.setMovementStyle(Player.Styles.REALTIME);
+        tileSetManager = new TileSetManager("map/map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
     }
 
