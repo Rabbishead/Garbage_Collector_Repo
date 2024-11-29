@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.Data;
+import com.mygdx.Utils;
 
 /**
  * Boss dialogue manager
@@ -12,7 +13,7 @@ import com.mygdx.Data;
 public class BossDialogue extends Dialogue{
 
     public BossDialogue(String textToDisplay){
-        super(0, 0, textToDisplay);
+        super(Data.VIEWPORT_X - Utils.getPlayer().getX(), Utils.getPlayer().getY(), textToDisplay);
         texture = new Texture("dialogues/images/bossDialogueBox.png");
     }
     @Override
