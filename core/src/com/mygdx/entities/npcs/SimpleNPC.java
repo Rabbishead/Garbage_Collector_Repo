@@ -11,9 +11,10 @@ import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-public class SimpleNPC extends GenericNPC{
+public class SimpleNPC extends GenericNPC {
 
     private String[] path;
+    int lf = 100;
 
     protected SimpleNPC(SimpleNPCBuilder npcBuilder) {
         super(npcBuilder);
@@ -23,23 +24,26 @@ public class SimpleNPC extends GenericNPC{
         movementStyle = new NPCRealtimeMovementStyle(this, path);
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc",
-            (hitbox, collider) -> {
-                if (collider.containsTag("player")) {
-                    npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,DialogueLoader.getLine("testNPCDialogue1"));
-                    Utils.getStage().addActor(npcDialogue);
-                    hitbox.setActive(false);
-                    DelayManager.registerObject(this, 100, object -> {
-                        npcDialogue.remove();
-                        hitbox.setActive(true);
-                        collider.setCollided(false);
-                    });
-                } else if (collider.containsTag("projectile")) {
-                    this.remove();
-                    Utils.getHitboxHandler().unRegisterHitbox(hitbox);
-                }
-            }
-        );
-        
+                (hitbox, collider) -> {
+                    if (collider.containsTag("player")) {
+                        npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+                                DialogueLoader.getLine("testNPCDialogue1"));
+                        Utils.getStage().addActor(npcDialogue);
+                        hitbox.setActive(false);
+                        DelayManager.registerObject(this, 100, object -> {
+                            npcDialogue.remove();
+                            hitbox.setActive(true);
+                            collider.setCollided(false);
+                        });
+                    } else if (collider.containsTag("projectile")) {
+                        if (lf <= 0) {
+                            this.remove();
+                            Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+                        } else
+                            lf--;
+                    }
+                });
+
         Utils.getHitboxHandler().registerHitbox(hitbox);
 
     }
@@ -64,32 +68,28 @@ public class SimpleNPC extends GenericNPC{
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        
+
     }
 
+    public static class SimpleNPCBuilder extends GenericNPCBuilder {
 
-
-
-
-    public static class SimpleNPCBuilder extends GenericNPCBuilder{
-    
         private String[] path;
-    
+
         public SimpleNPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
             return this;
         }
-    
+
         public SimpleNPCBuilder texture(ResourceEnum texture) {
             this.textureEnum = texture;
             return this;
         }
 
-        public SimpleNPCBuilder path(String[] path){
+        public SimpleNPCBuilder path(String[] path) {
             this.path = path;
             return this;
         }
-    
+
         public SimpleNPC build() {
             return new SimpleNPC(this);
         }

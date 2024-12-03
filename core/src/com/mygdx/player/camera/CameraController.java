@@ -18,9 +18,9 @@ public class CameraController {
     public static void initCamera(){
         gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
         currentViewport = Utils.getStage().getViewport();
-        float shakeRadius = 30f;
+        float shakeRadius = 15f;
         float minimumShakeRadius = 3f;
-        float radiusFallOffFactor = 0.90f;
+        float radiusFallOffFactor = 0.50f;
         cameraShaker = new CameraShaker(gameCamera, shakeRadius, minimumShakeRadius, radiusFallOffFactor);
     }
 
