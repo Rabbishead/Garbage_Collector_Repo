@@ -10,16 +10,17 @@ import com.mygdx.player.camera.CameraController;
 
 public class Gun extends Actor {
     protected Sprite s;
-    protected Vector2 position;
+    protected Vector2 pos;
     protected int angleOffset;
 
     public Gun(Texture t, int angleOffset, float positionOffset) {
         s = new Sprite(t);
         setWidth(t.getWidth());
         setHeight(t.getHeight());
-        position = new Vector2(1, 0).scl(positionOffset);
-        s.setPosition(position.x, position.y);
-        s.setOrigin(getWidth() / 2, 0);
+        pos = new Vector2(1, 0).scl(positionOffset);
+        pos.set(pos.x - s.getWidth() / 2, pos.y - s.getHeight() / 2);
+        s.setOrigin(-pos.x, -pos.y);
+
         this.angleOffset = angleOffset;
     }
 
@@ -31,9 +32,13 @@ public class Gun extends Actor {
     @Override
     public void act(float delta) {
         Vector2 center = Utils.getPlayer().center;
-        setPosition(center.x, center.y);
-        s.setPosition(getX(), getY());
+        setPosition(center.x + pos.x, center.y + pos.y);
         s.setRotation(CameraController.getMouseAngle() + angleOffset);
+    }
+
+    @Override
+    protected void positionChanged() {
+        s.setPosition(getX(), getY());
     }
 
     public int leftTrigger() {

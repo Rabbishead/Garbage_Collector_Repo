@@ -46,8 +46,6 @@ public abstract class PlayableScreen extends GenericScreen{
         stage.addActor(player);
         stage.setKeyboardFocus(player);
 
-        GunController.get();
-
         hud = new Hud();
     }
 
