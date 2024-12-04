@@ -12,9 +12,12 @@ public class Gun extends Actor {
     protected Sprite s;
     protected Vector2 pos;
     protected int angleOffset;
+    protected boolean flipped, flipX, flipY;
 
-    public Gun(Texture t, int angleOffset, float positionOffset) {
+    public Gun(Texture t, int angleOffset, float positionOffset, boolean flipX, boolean flipY) {
         s = new Sprite(t);
+        s.flip(true, false);
+        flipped = true;
         setWidth(t.getWidth());
         setHeight(t.getHeight());
         pos = new Vector2(1, 0).scl(positionOffset);
@@ -22,6 +25,8 @@ public class Gun extends Actor {
         s.setOrigin(-pos.x, -pos.y);
 
         this.angleOffset = angleOffset;
+        this.flipX = flipX;
+        this.flipY = flipY;
     }
 
     @Override
@@ -33,7 +38,14 @@ public class Gun extends Actor {
     public void act(float delta) {
         Vector2 center = Utils.getPlayer().center;
         setPosition(center.x + pos.x, center.y + pos.y);
-        s.setRotation(CameraController.getMouseAngle() + angleOffset);
+        float angle = CameraController.getMouseAngle() + angleOffset;
+        s.setRotation(angle);
+        boolean left = flipped && angle > 90 && angle <= 270;
+        boolean right = !flipped && (angle <= 90 || angle > 270);
+        if (left || right) {
+            s.flip(flipX, flipY);
+            flipped = !flipped;
+        }
     }
 
     @Override
