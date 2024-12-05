@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
+import com.mygdx.animations.MapComponentAnimationManager;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.resources.ResourceEnum;
 
@@ -14,7 +15,7 @@ public class ForegroundMapComponent extends Actor{
 
     private Hitbox hitbox = new Hitbox(false, null);
 
-    private Texture texture;
+    private MapComponentAnimationManager animationManager;
 
     public ForegroundMapComponent(Vector2 coordinates) {
 
@@ -28,7 +29,7 @@ public class ForegroundMapComponent extends Actor{
 
         setTouchable(Touchable.enabled);
 
-        texture = Utils.getTexture(ResourceEnum.LAMP);
+        animationManager = new MapComponentAnimationManager(ResourceEnum.LAMP);
 
         hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc",
             (hitbox, collider) -> {
@@ -42,7 +43,7 @@ public class ForegroundMapComponent extends Actor{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(texture, getX(), getY());
+        batch.draw(animationManager.getCurrentFrame(), getX(), getY());
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -52,6 +53,9 @@ public class ForegroundMapComponent extends Actor{
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        animationManager.setCurrentAnimation(0);
+        animationManager.updateAnimation(delta);
     }
 
     @Override

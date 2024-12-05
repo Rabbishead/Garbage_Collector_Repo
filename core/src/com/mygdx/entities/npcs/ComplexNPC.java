@@ -58,7 +58,6 @@ public class ComplexNPC extends GenericNPC{
     @Override
     public void act(float delta) {
         super.act(delta);
-        System.out.println(Utils.getPlayer().getX() + " : " + (Data.VIEWPORT_X - Utils.getPlayer().getX()));
         DelayManager.updateDelay(this);
 
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("complexDialogueActive").equals("true")){
