@@ -16,7 +16,7 @@ public class GenericNPC extends Actor{
     protected MovementStyle movementStyle;
     protected Dialogue npcDialogue;
 
-    protected Hitbox hitbox = new Hitbox(false, null);
+    protected Hitbox hitbox = new Hitbox();
 
     protected GenericNPC(GenericNPCBuilder npcBuilder) {
         super();

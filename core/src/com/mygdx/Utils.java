@@ -39,6 +39,7 @@ public class Utils {
      */
     public static void setHitboxHandler(HitboxHandler newHitboxHandler) {
         hitboxHandler = newHitboxHandler;
+        hitboxHandler.clearContacts();
     }
 
     /**

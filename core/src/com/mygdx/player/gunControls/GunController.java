@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.player.gunControls.guns.Gun;
 
@@ -35,20 +34,15 @@ public class GunController extends Actor {
      */
     public GunController loadGun(Gun gun) {
         guns.add(gun);
-        //Utils.getStage().addActor(gun);
         return instance;
     }
 
     public void loadGuns(ArrayList<Gun> guns) {
         this.guns.addAll(guns);
-        /*for (Gun gun : guns) {
-            Utils.getStage().addActor(gun);
-        }*/
     }
 
     public void removeGun(Gun gun) {
         guns.remove(gun);
-        //gun.remove();
     }
 
     public void setCooldown(int cooldown) {
