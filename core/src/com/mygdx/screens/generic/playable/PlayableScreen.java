@@ -1,11 +1,8 @@
 package com.mygdx.screens.generic.playable;
 
-import java.util.Comparator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
@@ -15,7 +12,6 @@ import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.player.camera.CameraController;
-import com.mygdx.player.gunControls.GunController;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
@@ -76,7 +72,7 @@ public abstract class PlayableScreen extends GenericScreen{
         stage.act(Gdx.graphics.getDeltaTime());
 
         CameraController.updateCamera();
-        hitboxHandler.checkHitboxes();
+        hitboxHandler.checkRegistered();
 
         tileSetManager.render(camera);
         stage.draw();

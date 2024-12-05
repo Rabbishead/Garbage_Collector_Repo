@@ -23,7 +23,7 @@ public class PlayerTiledMovementStyle extends MovementStyle {
         inputs = new HashSet<>();
         this.player = Utils.getPlayer();
         movingDir = "-";
-        DelayManager.registerObject(this, 14);
+        DelayManager.registerObject(this, 18);
     }
 
     public String move() {

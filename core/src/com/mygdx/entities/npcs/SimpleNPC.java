@@ -23,26 +23,26 @@ public class SimpleNPC extends GenericNPC {
         path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
 
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc",
-                (hitbox, collider) -> {
-                    if (collider.containsTag("player")) {
-                        npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
-                                DialogueLoader.getLine("testNPCDialogue1"));
-                        Utils.getStage().addActor(npcDialogue);
-                        hitbox.setActive(false);
-                        DelayManager.registerObject(this, 100, object -> {
-                            npcDialogue.remove();
-                            hitbox.setActive(true);
-                            collider.setCollided(false);
-                        });
-                    } else if (collider.containsTag("projectile")) {
-                        if (lf <= 0) {
-                            this.remove();
-                            Utils.getHitboxHandler().unRegisterHitbox(hitbox);
-                        } else
-                            lf--;
-                    }
+        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
+        hitbox.setOnHit((hitbox, collider) -> {
+            if (collider.containsTag("player")) {
+                npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+                        DialogueLoader.getLine("testNPCDialogue1"));
+                Utils.getStage().addActor(npcDialogue);
+                hitbox.setActive(false);
+                DelayManager.registerObject(this, 100, object -> {
+                    npcDialogue.remove();
+                    hitbox.setActive(true);
+                    collider.setCollided(false);
                 });
+            } else if (collider.containsTag("projectile")) {
+                if (lf <= 0) {
+                    this.remove();
+                    Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+                } else
+                    lf--;
+            }
+        });
 
         Utils.getHitboxHandler().registerHitbox(hitbox);
 

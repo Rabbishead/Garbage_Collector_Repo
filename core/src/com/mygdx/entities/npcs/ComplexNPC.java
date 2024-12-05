@@ -2,19 +2,13 @@ package com.mygdx.entities.npcs;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.BossDialogue;
 import com.mygdx.dialogues.DialogueLoader;
-import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
@@ -30,16 +24,15 @@ public class ComplexNPC extends GenericNPC{
         movementStyle = new NPCRealtimeMovementStyle(this);
         StateManager.updateState("complexDialogueActive", "false");
 
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc",
-            (hitbox, collider) -> {
-                if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !StateManager.getState("complexDialogueActive").equals("true") && DelayManager.isDelayOver(this)) {
-                    npcDialogue = new BossDialogue(DialogueLoader.getLine("testNPCDialogue1"));
-                    
-                    Utils.getStage().addActor(npcDialogue);
-                    StateManager.updateState("complexDialogueActive", "true");
-                }
+        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
+        hitbox.setOnHit((hitbox, collider) -> {
+            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !StateManager.getState("complexDialogueActive").equals("true") && DelayManager.isDelayOver(this)) {
+                npcDialogue = new BossDialogue(DialogueLoader.getLine("testNPCDialogue1"));
+                
+                Utils.getStage().addActor(npcDialogue);
+                StateManager.updateState("complexDialogueActive", "true");
             }
-        );
+        });
         
         Utils.getHitboxHandler().registerHitbox(hitbox);
 

@@ -1,5 +1,8 @@
 package com.mygdx.hitboxes;
 
+import java.util.ArrayList;
+import java.util.function.BiConsumer;
+
 import com.badlogic.gdx.math.Polygon;
 
 public class Collider extends Polygon {
@@ -7,6 +10,9 @@ public class Collider extends Polygon {
     private String stringTags;
     private String[] searchTags;
     private boolean collided;
+    private BiConsumer<Collider, Hitbox> onHit;
+    private BiConsumer<Collider, Hitbox> onLeave;
+    private ArrayList<String> keys;
 
     public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
@@ -17,6 +23,7 @@ public class Collider extends Polygon {
         this.searchTags = searchTags.split(",");
         this.stringTags = tags;
         this.collided = false;
+        this.keys = new ArrayList<>();
     }
 
     public Collider(float x, float y, float width, float height, float degrees, String tags) {
@@ -27,16 +34,30 @@ public class Collider extends Polygon {
         this(x, y, width, height, degrees, "none", "all");
     }
 
-    public Collider(String tag, String searchTags) {
-        this(0, 0, 1, 1, 0, tag, searchTags);
-    }
-
-    public Collider(String tag) {
-        this(0, 0, 1, 1, 0, tag);
-    }
-
     public Collider() {
-        this(0, 0, 1, 1, 0);
+        super();
+    }
+
+    public void onHit(Hitbox h) {
+        if (onHit != null)
+            onHit.accept(this, h);
+    }
+
+    public void onLeave(Hitbox h) {
+        if (onLeave != null)
+            onLeave.accept(this, h);
+    }
+
+    public void register(Hitbox h) {
+        keys.add(h.toString());
+    }
+
+    public ArrayList<String> getKeys() {
+        return keys;
+    }
+
+    public void clearKeys() {
+        keys.clear();
     }
 
     public boolean containsTag(String tag) {
@@ -66,5 +87,13 @@ public class Collider extends Polygon {
 
     public void setCollided(boolean collided) {
         this.collided = collided;
+    }
+
+    public void setOnHit(BiConsumer<Collider, Hitbox> onHit) {
+        this.onHit = onHit;
+    }
+
+    public void setOnLeave(BiConsumer<Collider, Hitbox> onLeave) {
+        this.onLeave = onLeave;
     }
 }

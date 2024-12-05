@@ -5,6 +5,7 @@ public enum ResourceEnum {
     STONE,
     BULLET,
     DEFAULT,
+    SNIPER,
     TESTACTOR,
     ITAFLAG,
     ENGFLAG,

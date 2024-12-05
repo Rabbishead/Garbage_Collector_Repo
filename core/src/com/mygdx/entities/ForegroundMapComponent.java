@@ -1,6 +1,5 @@
 package com.mygdx.entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +12,7 @@ import com.mygdx.resources.ResourceEnum;
 
 public class ForegroundMapComponent extends Actor{
 
-    private Hitbox hitbox = new Hitbox(false, null);
+    private Hitbox hitbox = new Hitbox();
 
     private MapComponentAnimationManager animationManager;
 
@@ -31,11 +30,8 @@ public class ForegroundMapComponent extends Actor{
 
         animationManager = new MapComponentAnimationManager(ResourceEnum.LAMP, 1, 2, 5f);
 
-        hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc",
-            (hitbox, collider) -> {
-                
-            }
-        );
+        hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc");
+        hitbox.setOnHit((hitbox, collider) -> {});
         
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
