@@ -1,6 +1,7 @@
 package com.mygdx.animations;
 
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,29 +19,18 @@ public class MapComponentAnimationManager {
 
     private float stateTime;
 
-    public MapComponentAnimationManager(ResourceEnum e){
+    public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate){
         Texture animationSheet = Utils.getTexture(e);
 
         int FRAME_COLS = animationSheet.getWidth()/32;
-        int FRAME_ROWS = animationSheet.getHeight()/32;
+        int FRAME_ROWS = animationSheet.getHeight()/32 / height;
 
-        TextureRegion[][] tmp = TextureRegion.split(animationSheet,
+        TextureRegion[][] matrix = TextureRegion.split(animationSheet,
 				animationSheet.getWidth() / FRAME_COLS,
 				animationSheet.getHeight() / FRAME_ROWS);
 
-        //rotates matrix
-        for(int i=0; i < tmp.length; i++)  {  
-            for(int j = i; j < tmp.length; j++)  {  
-                if(i == j) continue;  
-                  
-                TextureRegion temp = tmp[i][j];  
-                tmp[i][j] = tmp[j][i];  
-                tmp[j][i] = temp;  
-            }
-        }
-
-        for (int i = 0; i < tmp.length; i++) {
-            animationMap.put(i, new Animation<TextureRegion>(0.3f, tmp[i]));
+        for (int i = 0; i < matrix.length; i++) {
+            animationMap.put(i, new Animation<TextureRegion>(animationRate, matrix[i]));
         }
 
         currentAnimation = 0;

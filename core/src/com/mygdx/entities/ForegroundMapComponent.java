@@ -29,7 +29,7 @@ public class ForegroundMapComponent extends Actor{
 
         setTouchable(Touchable.enabled);
 
-        animationManager = new MapComponentAnimationManager(ResourceEnum.LAMP);
+        animationManager = new MapComponentAnimationManager(ResourceEnum.LAMP, 1, 2, 5f);
 
         hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc",
             (hitbox, collider) -> {
