@@ -2,12 +2,14 @@ package com.mygdx.hitboxes;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.mygdx.Utils;
 
 import java.util.function.BiConsumer;
 
 public class Hitbox extends Polygon {
     private boolean active;
     private String[] tags;
+    private String stringTags;
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
 
@@ -18,6 +20,7 @@ public class Hitbox extends Polygon {
         this.setRotation(degrees);
         this.active = active;
         this.tags = tags.split(",");
+        this.stringTags = tags;
     }
 
     public Hitbox(float x, float y, float width, float height, int degrees, boolean active) {
@@ -33,9 +36,13 @@ public class Hitbox extends Polygon {
             return false;
         boolean collision = Intersector.overlapConvexPolygons(this, r);
         r.setCollided(collision);
-        if (!collision)
+        if (!collision) {
+            Utils.getHitboxHandler().removeContact(r, this);
             return false;
+        }
         if (activate) {
+            Utils.getHitboxHandler().storeContact(r, this);
+            r.register(this);
             onHit(r);
             r.onHit(this);
         }
@@ -58,6 +65,10 @@ public class Hitbox extends Polygon {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean containsTag(String tag) {
+        return stringTags.contains(tag);
     }
 
     public String[] getTags() {

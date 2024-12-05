@@ -40,6 +40,25 @@ public class HitboxHandler {
 
     public void unRegisterCollider(Collider r) {
         colliders.remove(r);
+        for (String hitboxKey : r.getKeys()) {
+            String key = r.toString() + hitboxKey;
+            if (!contacts.containsKey(key))
+                continue;
+            contacts.remove(key);
+        }
+    }
+
+    public void storeContact(Collider r, Hitbox h) {
+        contacts.put(r.toString() + h.toString(), true);
+    }
+
+    public void removeContact(Collider r, Hitbox h) {
+        String key = r.toString() + h.toString();
+        if (!contacts.containsKey(key))
+            return;
+        contacts.remove(key);
+        r.onLeave(h);
+        h.onLeave(r);
     }
 
     public boolean checkHitbox(Collider c, Hitbox h, boolean activate) {
@@ -99,5 +118,8 @@ public class HitboxHandler {
 
     public void clearContacts() {
         contacts.clear();
+        for (Collider r : colliders) {
+            r.clearKeys();
+        }
     }
 }
