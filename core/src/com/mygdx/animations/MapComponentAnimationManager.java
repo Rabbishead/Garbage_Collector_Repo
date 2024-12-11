@@ -1,8 +1,6 @@
 package com.mygdx.animations;
 
 import java.util.HashMap;
-import java.util.stream.IntStream;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -22,7 +20,7 @@ public class MapComponentAnimationManager {
     public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate){
         Texture animationSheet = Utils.getTexture(e);
 
-        int FRAME_COLS = animationSheet.getWidth()/32;
+        int FRAME_COLS = animationSheet.getWidth()/32 / width;
         int FRAME_ROWS = animationSheet.getHeight()/32 / height;
 
         TextureRegion[][] matrix = TextureRegion.split(animationSheet,
