@@ -9,7 +9,6 @@ import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.hitboxes.Collider;
-import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
