@@ -38,7 +38,6 @@ public abstract class PlayableScreen extends GenericScreen{
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
         player = new Player(SavingsManager.getPlayerCoordinates(name));
-        Utils.setPlayer(player);
         stage.addActor(player);
         stage.setKeyboardFocus(player);
 

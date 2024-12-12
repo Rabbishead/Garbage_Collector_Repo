@@ -67,4 +67,49 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         lastDirection = direction;
         return direction;
     }
+
+    /**
+     * moves the player and returns the correct direction of the body
+     */
+    public String moveTo() {
+        String direction = "-";
+        Vector2 finalPosition = new Vector2(0, 0);
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            finalPosition.x += 2;
+            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
+                direction = "wD";
+            }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            finalPosition.x -= 2;
+            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
+                direction = "wA";
+            }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            finalPosition.y += 2;
+            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
+                direction = "wW";
+            }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            finalPosition.y -= 2;
+            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
+                direction = "wS";
+            }
+        }
+        if(finalPosition.x == 0 && finalPosition.y == 0) direction = "-";
+        if (direction.equals("-")) {
+            direction = "i" + lastDirection.substring(1);
+        }
+        if(TileMapCollisionsManager.getCurrentTileProprieties() == null) return "";
+        if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
+            player.setX(player.getX() + finalPosition.x);
+            player.setY(player.getY() + finalPosition.y);
+            player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
+        }
+
+        lastDirection = direction;
+        return direction;
+    }
 }
