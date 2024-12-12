@@ -22,7 +22,11 @@ public class PlayerTiledMovementStyle extends MovementStyle {
     public PlayerTiledMovementStyle() {
         inputs = new HashSet<>();
         this.player = Utils.getPlayer();
-        player.setPosition(player.getX()+player.center.x%16, player.getY()-14-player.getY()%32);
+        player.setPosition(player.getX() + player.getX()%32, player.getY()-14-player.getY()%32);
+        System.out.println(player.center.x);
+        System.out.println(player.center.x%32);
+        System.out.println(player.getY());
+        System.out.println(player.getY()%32);
         movingDir = "-";
         DelayManager.registerObject(this, 13);
     }
