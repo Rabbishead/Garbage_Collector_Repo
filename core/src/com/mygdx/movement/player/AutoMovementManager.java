@@ -1,13 +1,8 @@
 package com.mygdx.movement.player;
 
-import java.util.Objects;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
-import com.mygdx.map.TileMapCollisionsManager;
 
 public class AutoMovementManager {
     
@@ -21,7 +16,6 @@ public class AutoMovementManager {
 
     public boolean update(){
         if(destination == null) return false;
-        float distance = player.getCoordinates().dst(destination);
         Vector2 difference = player.getCoordinates().sub(destination);
 
         System.out.println(difference);

@@ -8,10 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
-import com.mygdx.delay.DelayManager;
-import com.mygdx.dialogues.DialogueLoader;
-import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Collider;
+import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
@@ -19,7 +17,6 @@ import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.guns.Sniper;
 import com.mygdx.resources.ResourceEnum;
-import com.mygdx.states.StateManager;
 
 /**
  * player class with collision managing
@@ -63,8 +60,6 @@ public class Player extends Actor {
 
         autoMovementManager = new AutoMovementManager();
 
-        DelayManager.registerObject(this, 100);
-
         debug();
     }
 
@@ -101,16 +96,9 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        DelayManager.updateDelay(this);
-
-        if(DelayManager.isDelayOver(this)){
-            moveTo(new Vector2(100, 100));
-            DelayManager.resetDelay(this);
-        }
         
         CameraController.calculateMouseAngle(center);
 
-        if(autoMovementManager.update());
         animationManager.setCurrentAnimation(movementStyle.move());
         animationManager.updateAnimation(delta);
     }
