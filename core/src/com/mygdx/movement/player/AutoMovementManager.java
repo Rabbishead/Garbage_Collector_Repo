@@ -17,14 +17,12 @@ public class AutoMovementManager {
     public boolean update(){
         if(destination == null) return false;
         Vector2 difference = player.getCoordinates().sub(destination);
-
-        System.out.println(difference);
         if(player.getCoordinates().dst(destination) < 1) {
             animationInProgress = false;
             destination = null;
             return false;
         }
-
+        move();
 
         return true;
     }
@@ -37,5 +35,13 @@ public class AutoMovementManager {
         if(isAnimationInProgress()) return;
         animationInProgress = true;
         destination = coordinates;
+    }
+
+    public String getAnimationState(){
+        return "";
+    }
+
+    private void move(){
+
     }
 }

@@ -50,6 +50,10 @@ public class Player extends Actor {
 
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
+        collider.setOnHit((collider, hitbox) -> {
+                moveTo(new Vector2(100, 100));
+            });
+
 
         GunController.get().loadGun(new Sniper());
 
@@ -98,7 +102,10 @@ public class Player extends Actor {
         
         CameraController.calculateMouseAngle(center);
 
-        animationManager.setCurrentAnimation(movementStyle.move());
+        autoMovementManager.update();
+
+        animationManager.setCurrentAnimation(autoMovementManager.update() ? autoMovementManager.getAnimationState() : movementStyle.move());
+        
         animationManager.updateAnimation(delta);
     }
 
