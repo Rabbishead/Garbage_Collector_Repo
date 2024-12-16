@@ -51,7 +51,7 @@ public class Player extends Actor {
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
         collider.setOnHit((collider, hitbox) -> {
-                moveTo(new Vector2(100, 100));
+                moveTo(new Vector2(400, 1500));
             });
 
 
@@ -103,8 +103,7 @@ public class Player extends Actor {
         CameraController.calculateMouseAngle(center);
 
         autoMovementManager.update();
-
-        animationManager.setCurrentAnimation(autoMovementManager.update() ? autoMovementManager.getAnimationState() : movementStyle.move());
+        animationManager.setCurrentAnimation(autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
         
         animationManager.updateAnimation(delta);
     }
@@ -123,5 +122,9 @@ public class Player extends Actor {
 
     public Vector2 getCoordinates(){
         return new Vector2(getX(), getY());
+    }
+    public void setCoordinates(Vector2 coordinates){
+        setX(coordinates.x);
+        setY(coordinates.y);
     }
 }
