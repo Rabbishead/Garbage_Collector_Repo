@@ -102,7 +102,6 @@ public class Player extends Actor {
         
         CameraController.calculateMouseAngle(center);
 
-        autoMovementManager.update();
         animationManager.setCurrentAnimation(autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
         
         animationManager.updateAnimation(delta);

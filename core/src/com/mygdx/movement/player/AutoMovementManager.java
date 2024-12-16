@@ -45,7 +45,7 @@ public class AutoMovementManager {
 
         direction = calculateAngle(coordinates);
 
-        velocity = new Vector2(direction).scl(50);
+        velocity = new Vector2(direction).scl(100);
         
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
 
