@@ -41,7 +41,7 @@ public class CameraController {
         mouseAngle = dir.angleDeg();
     }
 
-    public static void calculateThowardsPlayer(Vector2 position1, Vector2 position2) {
+    public static void calculateThowardsPos(Vector2 position1, Vector2 position2) {
         Vector2 dir = new Vector2();
         dir.set(position2).sub(position1.x, position1.y).nor();
         xDirection = dir;
