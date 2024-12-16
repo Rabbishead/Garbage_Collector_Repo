@@ -40,18 +40,19 @@ public class AutoMovementManager {
     public void goTo(Vector2 coordinates){
         if(isAnimationInProgress()) return;
         animationInProgress = true;
+
         destination = coordinates;
-        System.out.println(destination);
+
         direction = calculateAngle(coordinates);
+
         velocity = new Vector2(direction).scl(50);
+        
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
-        System.out.println(direction);
+
         if(direction.x > 0 && direction.x >= direction.y) orientation = "wD";
         if(direction.x < 0 && direction.x <= direction.y) orientation = "wS";
         if(direction.y > 0 && direction.y > direction.x) orientation = "wW";
         if(direction.y < 0 && direction.y < direction.x) orientation = "wS";
-        System.out.println(orientation);
-
     }
 
     public String getOrientation() {
