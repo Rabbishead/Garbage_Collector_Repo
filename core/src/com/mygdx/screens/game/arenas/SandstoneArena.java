@@ -27,8 +27,8 @@ public class SandstoneArena extends PlayableScreen {
         super.show();
 
         player.setMovementStyle(Player.Styles.TILED);
-        player.setX(player.getX() - 16);
-        player.setY(player.getY() - 16);
+        player.setX(player.getX());
+        player.setY(player.getY());
 
         tileSetManager = new TileSetManager("map/sandstone/sandstone_map.tmx");
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get(0));
