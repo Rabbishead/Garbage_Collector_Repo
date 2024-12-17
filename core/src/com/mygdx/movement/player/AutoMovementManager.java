@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
+import com.mygdx.map.TileMapCollisionsManager;
 
 public class AutoMovementManager {
     
@@ -21,15 +22,13 @@ public class AutoMovementManager {
 
     public boolean update(){
         if(destination == null) return false;
-
-        player.setCoordinates(player.getCoordinates().add(movement));
-        player.getStage().getCamera().translate(movement.x, movement.y, 0);
-
-        if(player.getCoordinates().dst(destination) < 1) {
+        if(!TileMapCollisionsManager.canMove(player.getX() + movement.x, player.getY() + movement.y) || player.getCoordinates().dst(destination) < 1){
             animationInProgress = false;
             destination = null;
             return false;
         }
+        player.setCoordinates(player.getCoordinates().add(movement));
+        player.getStage().getCamera().translate(movement.x, movement.y, 0);
         return true;
     }
 

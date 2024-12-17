@@ -51,7 +51,7 @@ public class Player extends Actor {
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
         collider.setOnHit((collider, hitbox) -> {
-                moveTo(new Vector2(400, 1500));
+                moveTo(new Vector2(400, 2000));
             });
 
 
