@@ -2,6 +2,7 @@ package com.mygdx.screens.generic.playable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
@@ -15,6 +16,7 @@ import com.mygdx.player.camera.CameraController;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
+import com.mygdx.states.StateManager;
 
 /**
  * generic abstract class for every playable screen
@@ -29,15 +31,25 @@ public abstract class PlayableScreen extends GenericScreen{
     protected HitboxHandler hitboxHandler;
     
     protected Player player;
+
     protected PlayableScreen(){}
 
-    protected PlayableScreen(String name){
+    protected PlayableScreen(String name, String mapPath){
         super();
         this.name = name;
+        tileSetManager = new TileSetManager(mapPath, name);
+        TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
+
         hitboxHandler = new HitboxHandler();
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
-        player = new Player(SavingsManager.getPlayerCoordinates(name));
+
+        if(StateManager.getState("isExiting").equals("true")){
+            player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
+            player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
+        }
+        else player = new Player(SavingsManager.getPlayerCoordinates());
+
         stage.addActor(player);
         stage.setKeyboardFocus(player);
 
@@ -47,6 +59,15 @@ public abstract class PlayableScreen extends GenericScreen{
     @Override
     public void show() {
         super.show();
+        TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
+
+        //tileSetManager.debug();
+
+        if(StateManager.getState("isExiting").equals("true") && !player.isAutoWalking()){
+            player.setCoordinates(tileSetManager.getCoord().cpy().add(8, 8));
+            player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
+        }
+
         Utils.setPlayer(player);
         Utils.setHitboxHandler(hitboxHandler);
     }
@@ -64,7 +85,7 @@ public abstract class PlayableScreen extends GenericScreen{
         if(Gdx.input.isKeyPressed(Keys.R)){
             CameraController.applyShakeEffect();
         } 
-        TileMapCollisionsManager.changeScreenIfNecessary();
+        
         if(Utils.getActiveScreen() != this) return;
 
         stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));

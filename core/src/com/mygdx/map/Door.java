@@ -1,0 +1,60 @@
+package com.mygdx.map;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class Door {
+    private String name;
+    private String destination;
+    private String orientation;
+    private Vector2 center;
+    private Vector2 exitPoint;
+
+    public Door(String name, String destination, String orientation, Vector2 center){
+        this.name = name;
+        this.destination = destination;
+        this.orientation = orientation;
+        this.center = center;
+
+        switch (orientation) {
+            case "w" -> {
+                exitPoint = center.cpy().add(0, -32);
+            }
+            case "s" -> {
+                exitPoint = center.cpy().add(0, 32);
+            }
+            case "a" -> {
+                exitPoint = center.cpy().add(-32, 0);
+            }
+            case "d" -> {
+                exitPoint = center.cpy().add(32, 0);
+            }
+        
+            default -> {}
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getDestination() {
+        return destination;
+    }
+    public String getOrientation() {
+        return orientation;
+    }
+    public Vector2 getCenter() {
+        return center;
+    }
+    public Vector2 getExitPoint() {
+        return exitPoint;
+    }
+
+    public void print(){
+        System.out.println(
+            "Name: " + name + "\n" + 
+            "Destination: " + destination + "\n" + 
+            "Orientation: " + orientation + "\n" +
+            "Center: " + center.toString() + "\n" +
+            "ExitPoint: " + exitPoint.toString() + "\n");
+    }
+}

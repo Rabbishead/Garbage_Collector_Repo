@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.mygdx.Utils;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.states.StateManager;
 
 public class GarbageCollection extends Game {
 	
@@ -11,6 +12,9 @@ public class GarbageCollection extends Game {
 	public void create () {
 		Utils.setGame(this);
 		SavingsManager.load();
+		StateManager.updateState("isEntering", "");
+		StateManager.updateState("isExiting", "");
+		StateManager.updateState("destination", "");
 		setScreen(ScreensManager.getScreen("MENU_SCREEN"));
 	}
 

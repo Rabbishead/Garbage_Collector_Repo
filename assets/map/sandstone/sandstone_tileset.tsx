@@ -3,7 +3,9 @@
  <image source="Sandstone tileset 4px border.png" width="160" height="81"/>
  <tile id="3">
   <properties>
-   <property name="changeScreen" value="SECOND_SCREEN"/>
+   <property name="destination" value="CITY_ROOM_1_DOOR_2"/>
+   <property name="name" value="ARENA_ROOM_1_DOOR_1"/>
+   <property name="orientation" value="w"/>
   </properties>
  </tile>
  <tile id="6">

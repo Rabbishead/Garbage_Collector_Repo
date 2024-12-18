@@ -1,19 +1,7 @@
 {
-"LAST_ROOM": "SECOND_SCREEN",
-"MAIN_SCREEN": {
-	"x": 698,
-	"y": 448
-},
-"SECOND_SCREEN": {
-	"x": 86,
-	"y": 78
-},
-"SANDSTONE_ARENA": {
-	"x": 506.8917,
-	"y": 508.84
-},
-"CITY_SCREEN": {
-	"x": 154,
-	"y": 1520
+"LAST_ROOM": "CITY_ROOM_1",
+"PLAYER": {
+	"x": 860,
+	"y": 276.27844
 }
 }

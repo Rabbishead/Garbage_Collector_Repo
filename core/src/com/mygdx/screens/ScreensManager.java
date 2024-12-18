@@ -2,9 +2,8 @@ package com.mygdx.screens;
 
 import java.util.HashMap;
 import com.mygdx.screens.game.arenas.SandstoneArena;
-import com.mygdx.screens.game.overworld.CityScreen;
-import com.mygdx.screens.game.overworld.MainScreen;
-import com.mygdx.screens.game.overworld.SecondRoomTest;
+import com.mygdx.screens.game.overworld.CityRoom1;
+import com.mygdx.screens.game.overworld.CityRoom2;
 import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
@@ -17,23 +16,20 @@ public class ScreensManager {
     public static GenericScreen getScreen(String screenName){
         if(map.get(screenName) == null){
             switch (screenName) {
-                case "MAIN_SCREEN" -> {
-                    map.put("MAIN_SCREEN", new MainScreen());
-                }
                 case "MENU_SCREEN" -> {
                     map.put("MENU_SCREEN", new MenuScreen());
                 }
                 case "PAUSE_SCREEN" -> {
                     map.put("PAUSE_SCREEN", new PauseScreen());
                 }
-                case "SECOND_SCREEN" -> {
-                    map.put("SECOND_SCREEN", new SecondRoomTest());
+                case "ARENA_ROOM_1" -> {
+                    map.put("ARENA_ROOM_1", new SandstoneArena());
                 }
-                case "SANDSTONE_ARENA" -> {
-                    map.put("SANDSTONE_ARENA", new SandstoneArena());
+                case "CITY_ROOM_1" -> {
+                    map.put("CITY_ROOM_1", new CityRoom1());
                 }
-                case "CITY_SCREEN" -> {
-                    map.put("CITY_SCREEN", new CityScreen());
+                case "CITY_ROOM_2" -> {
+                    map.put("CITY_ROOM_2", new CityRoom2());
                 }
             }
         }

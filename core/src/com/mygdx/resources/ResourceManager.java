@@ -29,7 +29,6 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.BULLET, "bullets/bullet.png");
         pathMap.put(ResourceEnum.DEFAULT, "weapons/default.png");
         pathMap.put(ResourceEnum.SNIPER, "weapons/sniper.png");
-        pathMap.put(ResourceEnum.TESTACTOR, "testActor.png");
         pathMap.put(ResourceEnum.PLAYBUTTON, "menu/play.png");
         pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");

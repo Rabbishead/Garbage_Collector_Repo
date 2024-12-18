@@ -11,7 +11,6 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.DialogueLoader.Languages;
-import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.generic.gui.GuiScreen;
@@ -52,8 +51,7 @@ public class MenuScreen extends GuiScreen {
         engButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                //DialogueLoader.setLang(Languages.ENGLISH);
-                CameraController.applyShakeEffect();
+                DialogueLoader.setLang(Languages.ENGLISH);
                 return true;
             }
         });

@@ -41,8 +41,8 @@ public class SavingsManager {
         } catch (IOException e) {e.printStackTrace();}
     }
 
-    public static Vector2 getPlayerCoordinates(String screenName){
-        return s.getPlayerCoordinates(screenName);
+    public static Vector2 getPlayerCoordinates(){
+        return s.getPlayerCoordinates();
     }
 
     public static PlayableScreen getLastRoom(){;

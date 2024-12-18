@@ -50,10 +50,6 @@ public class Player extends Actor {
 
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
         Utils.getHitboxHandler().registerCollider(collider);
-        collider.setOnHit((collider, hitbox) -> {
-                moveTo(new Vector2(400, 2000));
-            });
-
 
         GunController.get().loadGun(new Sniper());
 
@@ -125,5 +121,9 @@ public class Player extends Actor {
     public void setCoordinates(Vector2 coordinates){
         setX(coordinates.x);
         setY(coordinates.y);
+    }
+
+    public boolean isAutoWalking(){
+        return autoMovementManager.isAnimationInProgress();
     }
 }

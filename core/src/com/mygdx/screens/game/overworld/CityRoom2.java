@@ -1,16 +1,13 @@
 package com.mygdx.screens.game.overworld;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.ComplexNPC;
-import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
-public class CityScreen extends PlayableScreen {
+public class CityRoom2 extends PlayableScreen {
 
     private ForegroundMapComponent lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
 
@@ -20,8 +17,8 @@ public class CityScreen extends PlayableScreen {
         .build();
     
 
-    public CityScreen(){
-        super("CITY_SCREEN");
+    public CityRoom2(){
+        super("CITY_ROOM_2", "assets\\map\\cityRoom2\\cityRoom2.tmx");
         stage.addActor(lamp1);
         stage.addActor(reflection);
 
@@ -32,8 +29,6 @@ public class CityScreen extends PlayableScreen {
     public void show() {
         super.show();
         player.setMovementStyle(Player.Styles.REALTIME);
-        tileSetManager = new TileSetManager("map/city/cityMap.tmx");
-        TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
     }
 
     @Override
