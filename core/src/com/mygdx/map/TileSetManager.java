@@ -71,7 +71,7 @@ public class TileSetManager {
         Door intersectingDoor = null;
 
         for (Door door : doors) {
-            if(door.getCenter().dst(Utils.getPlayer().getCoordinates()) < 32){
+            if(door.getCenter().dst(Utils.getPlayer().getCoords()) < 32){
                 intersectingDoor = door;
             }
         }

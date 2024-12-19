@@ -64,7 +64,7 @@ public abstract class PlayableScreen extends GenericScreen{
         //tileSetManager.debug();
 
         if(StateManager.getState("isExiting").equals("true") && !player.isAutoWalking()){
-            player.setCoordinates(tileSetManager.getCoord().cpy().add(8, 8));
+            player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         }
 
