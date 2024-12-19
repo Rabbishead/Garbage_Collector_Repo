@@ -22,12 +22,12 @@ public class AutoMovementManager {
 
     public boolean update(){
         if(destination == null) return false;
-        if(!TileMapCollisionsManager.canMove(player.getX() + movement.x, player.getY() + movement.y) || player.getCoordinates().dst(destination) < 1){
+        if(!TileMapCollisionsManager.canMove(player.getX() + movement.x, player.getY() + movement.y) || player.getCoords().dst(destination) < 1){
             animationInProgress = false;
             destination = null;
             return false;
         }
-        player.setCoordinates(player.getCoordinates().add(movement));
+        player.setCoords(player.getCoords().add(movement));
         player.getStage().getCamera().translate(movement.x, movement.y, 0);
         return true;
     }
@@ -60,7 +60,7 @@ public class AutoMovementManager {
 
     private Vector2 calculateAngle(Vector2 coordinates){
         Vector2 dir = new Vector2();
-        dir.set(coordinates).sub(player.getCoordinates()).nor();
+        dir.set(coordinates).sub(player.getCoords()).nor();
         return dir;
     }
 }

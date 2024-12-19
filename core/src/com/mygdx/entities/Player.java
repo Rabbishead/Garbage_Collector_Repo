@@ -35,10 +35,10 @@ public class Player extends Actor {
     public Player(Vector2 coordinates) {
         Utils.setPlayer(this);
 
-        setX(coordinates.x + 16);
-        setY(coordinates.y + 16);
+        setX(coordinates.x);
+        setY(coordinates.y);
 
-        setWidth(17);
+        setWidth(16);
         setHeight(32);
 
         setOrigin(getWidth() / 2, getHeight() / 2);
@@ -111,16 +111,16 @@ public class Player extends Actor {
         center.y = getY() + getOriginY();
     }
 
-    public void moveTo(Vector2 coordinates){
-        autoMovementManager.goTo(coordinates);
+    public void moveTo(Vector2 coords){
+        autoMovementManager.goTo(coords);
     }
 
-    public Vector2 getCoordinates(){
+    public Vector2 getCoords(){
         return new Vector2(getX(), getY());
     }
-    public void setCoordinates(Vector2 coordinates){
-        setX(coordinates.x);
-        setY(coordinates.y);
+    public void setCoords(Vector2 coords){
+        setX(coords.x);
+        setY(coords.y);
     }
 
     public boolean isAutoWalking(){
