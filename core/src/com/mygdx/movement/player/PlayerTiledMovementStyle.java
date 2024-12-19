@@ -23,7 +23,6 @@ public class PlayerTiledMovementStyle extends MovementStyle {
         inputs = new HashSet<>();
         this.player = Utils.getPlayer();
         //player.setPosition(player.getX() + player.getX()%32, player.getY()-14-player.getY()%32);
-        player.setPosition(128, 128);
         movingDir = "-";
         DelayManager.registerObject(this, 13);
     }
@@ -82,6 +81,7 @@ public class PlayerTiledMovementStyle extends MovementStyle {
             mba.setDuration(0.1f);
             player.addAction(mba);
         }
+        
         return movingDir;
     }
 }

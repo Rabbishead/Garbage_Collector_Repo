@@ -49,7 +49,7 @@ public class AutoMovementManager {
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
 
         if(direction.x > 0 && direction.x >= direction.y) orientation = "wD";
-        if(direction.x < 0 && direction.x <= direction.y) orientation = "wS";
+        if(direction.x < 0 && direction.x <= direction.y) orientation = "wA";
         if(direction.y > 0 && direction.y > direction.x) orientation = "wW";
         if(direction.y < 0 && direction.y < direction.x) orientation = "wS";
     }

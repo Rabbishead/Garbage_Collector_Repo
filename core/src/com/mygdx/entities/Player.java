@@ -82,6 +82,11 @@ public class Player extends Actor {
         }
     }
 
+    public void swapMovementStyle(){
+        if(movementStyle instanceof PlayerRealtimeMovementStyle) movementStyle = new PlayerTiledMovementStyle();
+        else movementStyle = new PlayerRealtimeMovementStyle();
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);

@@ -11,6 +11,7 @@ import com.mygdx.Utils;
  */
 public class TileMapCollisionsManager {
     public static TiledMapTileLayer layer;
+    public static boolean transitionInCooldown = false;
 
     /**
      * @param incomingX
@@ -29,5 +30,22 @@ public class TileMapCollisionsManager {
     public static MapProperties getCurrentTileProprieties(){
         TiledMapTile tile = layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile();
         return tile instanceof AnimatedTiledMapTile ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties() : tile.getProperties();
+    }
+
+    /**
+     * @param x
+     * @param y
+     * @return CurrentTileProprieties set
+     */
+    public static boolean changeMovementStyle(){
+        if(!transitionInCooldown && getCurrentTileProprieties().containsKey("transition")){
+            transitionInCooldown = true;
+            return true;
+        }
+
+        if(!getCurrentTileProprieties().containsKey("transition") && transitionInCooldown){
+            transitionInCooldown = false;
+        }
+        return false;
     }
 }
