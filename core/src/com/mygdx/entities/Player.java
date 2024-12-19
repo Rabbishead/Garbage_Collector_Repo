@@ -95,11 +95,12 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        
+
         CameraController.calculateMouseAngle(center);
 
-        animationManager.setCurrentAnimation(autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
-        
+        animationManager.setCurrentAnimation(
+                autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
+
         animationManager.updateAnimation(delta);
     }
 
@@ -111,19 +112,20 @@ public class Player extends Actor {
         center.y = getY() + getOriginY();
     }
 
-    public void moveTo(Vector2 coords){
+    public void moveTo(Vector2 coords) {
         autoMovementManager.goTo(coords);
     }
 
-    public Vector2 getCoords(){
+    public Vector2 getCoords() {
         return new Vector2(getX(), getY());
     }
-    public void setCoords(Vector2 coords){
+
+    public void setCoords(Vector2 coords) {
         setX(coords.x);
         setY(coords.y);
     }
 
-    public boolean isAutoWalking(){
+    public boolean isAutoWalking() {
         return autoMovementManager.isAnimationInProgress();
     }
 }
