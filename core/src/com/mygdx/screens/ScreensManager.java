@@ -4,6 +4,7 @@ import java.util.HashMap;
 import com.mygdx.screens.game.arenas.SandstoneArena;
 import com.mygdx.screens.game.overworld.CityRoom1;
 import com.mygdx.screens.game.overworld.CityRoom2;
+import com.mygdx.screens.game.overworld.CityRoom3;
 import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
@@ -30,6 +31,9 @@ public class ScreensManager {
                 }
                 case "CITY_ROOM_2" -> {
                     map.put("CITY_ROOM_2", new CityRoom2());
+                }
+                case "CITY_ROOM_3" -> {
+                    map.put("CITY_ROOM_3", new CityRoom3());
                 }
             }
         }

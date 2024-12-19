@@ -17,6 +17,13 @@
    <property name="orientation" value="w"/>
   </properties>
  </tile>
+ <tile id="23">
+  <properties>
+   <property name="destination" value="CITY_ROOM_3_DOOR_2"/>
+   <property name="name" value="CITY_ROOM_1_DOOR_3"/>
+   <property name="orientation" value="d"/>
+  </properties>
+ </tile>
  <tile id="26">
   <properties>
    <property name="blocked" type="bool" value="true"/>
@@ -34,6 +41,27 @@
    <property name="destination" value="CITY_ROOM_1_DOOR_1"/>
    <property name="name" value="CITY_ROOM_2_DOOR_1"/>
    <property name="orientation" value="s"/>
+  </properties>
+ </tile>
+ <tile id="35">
+  <properties>
+   <property name="destination" value="CITY_ROOM_2_DOOR_2"/>
+   <property name="name" value="CITY_ROOM_3_DOOR_1"/>
+   <property name="orientation" value="a"/>
+  </properties>
+ </tile>
+ <tile id="40">
+  <properties>
+   <property name="destination" value="CITY_ROOM_3_DOOR_1"/>
+   <property name="name" value="CITY_ROOM_2_DOOR_2"/>
+   <property name="orientation" value="d"/>
+  </properties>
+ </tile>
+ <tile id="41">
+  <properties>
+   <property name="destination" value="CITY_ROOM_1_DOOR_3"/>
+   <property name="name" value="CITY_ROOM_3_DOOR_2"/>
+   <property name="orientation" value="a"/>
   </properties>
  </tile>
 </tileset>

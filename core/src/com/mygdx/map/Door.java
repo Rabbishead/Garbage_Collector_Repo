@@ -23,10 +23,10 @@ public class Door {
                 exitPoint = center.cpy().add(0, 32);
             }
             case "a" -> {
-                exitPoint = center.cpy().add(-32, 0);
+                exitPoint = center.cpy().add(32, 0);
             }
             case "d" -> {
-                exitPoint = center.cpy().add(32, 0);
+                exitPoint = center.cpy().add(-32, 0);
             }
         
             default -> {}
