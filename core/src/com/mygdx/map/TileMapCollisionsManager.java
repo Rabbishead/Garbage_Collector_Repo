@@ -3,7 +3,6 @@ package com.mygdx.map;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.mygdx.Utils;
 
 /**
@@ -20,7 +19,7 @@ public class TileMapCollisionsManager {
      */
     public static boolean canMove(float incomingX, float incomingY){
         TiledMapTile tile = layer.getCell((int) (incomingX + Utils.getPlayer().getWidth()/2) / 32, (int) (incomingY) / 32).getTile();
-        return tile instanceof AnimatedTiledMapTile ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties().get("blocked") == null : tile.getProperties().get("blocked") == null;
+        return tile.getProperties().get("blocked") == null;
     }
     /**
      * @param x
@@ -29,7 +28,7 @@ public class TileMapCollisionsManager {
      */
     public static MapProperties getCurrentTileProprieties(){
         TiledMapTile tile = layer.getCell((int) (Utils.getPlayer().getX() + Utils.getPlayer().getWidth()/2) / 32, (int) (Utils.getPlayer().getY() + Utils.getPlayer().getHeight()/2) / 32).getTile();
-        return tile instanceof AnimatedTiledMapTile ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties() : tile.getProperties();
+        return tile.getProperties();
     }
 
     /**

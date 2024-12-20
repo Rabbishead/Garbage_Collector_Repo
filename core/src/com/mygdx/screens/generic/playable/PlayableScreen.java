@@ -70,6 +70,8 @@ public abstract class PlayableScreen extends GenericScreen{
 
         Utils.setPlayer(player);
         Utils.setHitboxHandler(hitboxHandler);
+
+        stage.getCamera().position.set(getPlayerCoordinates(), 0);
     }
 
     @Override

@@ -80,6 +80,7 @@ public class TileSetManager {
         if(!StateManager.getState("isEntering").equals("true") && !StateManager.getState("isExiting").equals("true")){
             Utils.getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
             StateManager.updateState("isEntering", "true");
+            intersectingDoor.print();
         }
         if(!Utils.getPlayer().isAutoWalking() && StateManager.getState("isEntering").equals("true")){
             StateManager.updateState("isEntering", "false");

@@ -1,9 +1,6 @@
 package com.mygdx.screens.game.arenas;
 
-import java.text.NumberFormat.Style;
-
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.SimpleNPC;
 import com.mygdx.map.TileMapCollisionsManager;
