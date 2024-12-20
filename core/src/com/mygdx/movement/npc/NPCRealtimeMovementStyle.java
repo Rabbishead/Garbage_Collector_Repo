@@ -13,10 +13,10 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     
     private final Actor npc;
     private char lastDirection;
-    private String[] path;
+    private final String[] path;
     private int innerIndex;
     private int outerIndex;
-    private Vector2 startingCoordinates;
+    private final Vector2 startingCoordinates;
 
     public NPCRealtimeMovementStyle(Actor npc, String[] path) {
         this.npc = npc;
@@ -43,16 +43,16 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
 
         switch (currentDirection) {
             case 'D' -> {
-                finalPosition.x += 0.75;
+                finalPosition.x += 0.75F;
             }
             case 'A' -> {
-                finalPosition.x -= 0.75;
+                finalPosition.x -= 0.75F;
             }
             case 'W' -> {
-                finalPosition.y += 0.75;
+                finalPosition.y += 0.75F;
             }
             case 'S' -> {
-                finalPosition.y -= 0.75;
+                finalPosition.y -= 0.75F;
             }
             case '-' -> {
                 isWalking = false;

@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 
 /**
- * Class ussed to subsribe objects to a delay and update delays
+ * Class used to subscribe objects to a delay and update delays
  */
 public class DelayManager {
-    //nsert here an object and an integer, this will be the amount of delay associated with the object
-    private static HashMap<Object, Integer> originalDelays = new HashMap<>();
+    //insert here an object and an integer, this will be the amount of delay associated with the object
+    private static final HashMap<Object, Integer> originalDelays = new HashMap<>();
     //here you can see the current state of the delay for the given object
-    private static HashMap<Object, Integer> currentDelays = new HashMap<>();
+    private static final HashMap<Object, Integer> currentDelays = new HashMap<>();
     //actions called when delay ends
-    private static HashMap<Object, Consumer<?>> actions = new HashMap<>();
+    private static final HashMap<Object, Consumer<?>> actions = new HashMap<>();
 
     /**
      * registers an object to the delayManager
@@ -38,7 +38,6 @@ public class DelayManager {
 
     /**
      * unregisters an object from the delay manager 
-     * @param o
      */
     public static void unregisterObject(Object o) {
         originalDelays.remove(o);
@@ -49,7 +48,6 @@ public class DelayManager {
 
     /**
      * resets the delay associated with o
-     * @param o
      */
     public static void resetDelay(Object o) {
         currentDelays.replace(o, originalDelays.get(o));
@@ -57,7 +55,6 @@ public class DelayManager {
 
     /**
      * updates the delay associated with o
-     * @param o
     */
     public static void updateDelay(Object o) {
         Integer i = currentDelays.get(o);
@@ -76,7 +73,6 @@ public class DelayManager {
     }
 
     /**
-     * @param o
      * @return current delay associated with o
      */
     public static Integer getCurrentDelay(Object o) {
@@ -84,7 +80,6 @@ public class DelayManager {
     }
 
     /**
-     * @param o
      * @return true if delay is over
      */
     public static boolean isDelayOver(Object o) {

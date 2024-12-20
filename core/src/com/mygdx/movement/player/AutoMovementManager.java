@@ -8,12 +8,10 @@ import com.mygdx.map.TileMapCollisionsManager;
 
 public class AutoMovementManager {
     
-    private Player player;
+    private final Player player;
     private boolean animationInProgress;
     private Vector2 destination;
-    private Vector2 velocity = new Vector2(2,2);
-    private Vector2 movement = new Vector2();
-    private Vector2 direction;
+    private final Vector2 movement = new Vector2();
     private String orientation = "-";
 
     public AutoMovementManager(){
@@ -42,9 +40,9 @@ public class AutoMovementManager {
 
         destination = coordinates;
 
-        direction = calculateAngle(coordinates);
+        Vector2 direction = calculateAngle(coordinates);
 
-        velocity = new Vector2(direction).scl(100);
+        Vector2 velocity = new Vector2(direction).scl(100);
         
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
 

@@ -14,7 +14,7 @@ public class ForegroundMapComponent extends Actor{
 
     private Hitbox hitbox = new Hitbox();
 
-    private MapComponentAnimationManager animationManager;
+    private final MapComponentAnimationManager animationManager;
 
     public ForegroundMapComponent(Vector2 coordinates) {
 

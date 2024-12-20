@@ -15,7 +15,7 @@ import com.mygdx.player.camera.CameraController;
 
 public class Projectile extends Actor {
     protected Vector2 position = new Vector2();
-    protected Vector2 velocity = new Vector2();
+    protected Vector2 velocity;
     protected Vector2 movement = new Vector2();
 
     protected Vector2 touch = new Vector2();
@@ -25,7 +25,7 @@ public class Projectile extends Actor {
 
     protected Sprite sprite;
 
-    protected Collider collider = new Collider();
+    protected Collider collider;
 
     public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, float speed, int time,
             float rotation) {
@@ -49,9 +49,7 @@ public class Projectile extends Actor {
 
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), CameraController.getMouseAngle() + rotation, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
-        DelayManager.registerObject(this, time, e -> {
-            delete();
-        });
+        DelayManager.registerObject(this, time, e -> delete());
     }
 
     public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, int time, float rotation) {

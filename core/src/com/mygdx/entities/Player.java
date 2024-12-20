@@ -26,7 +26,7 @@ public class Player extends Actor {
     private MovementStyle movementStyle;
     private Collider collider = new Collider();
     public Vector2 center = new Vector2();
-    private AutoMovementManager autoMovementManager;
+    private final AutoMovementManager autoMovementManager;
 
     public enum Styles {
         REALTIME, TILED
@@ -64,8 +64,6 @@ public class Player extends Actor {
 
     /**
      * sets player's movement style between REALTIME and TILED
-     * 
-     * @param s
      */
     public void setMovementStyle(Styles s) {
         switch (s) {

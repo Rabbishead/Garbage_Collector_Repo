@@ -11,7 +11,7 @@ import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 public class ScreensManager {
 
-    private static HashMap<String, GenericScreen> map = new HashMap<>();
+    private static final HashMap<String, GenericScreen> map = new HashMap<>();
     private static String lastPlayableActiveScreen;
 
     public static GenericScreen getScreen(String screenName){
@@ -45,7 +45,7 @@ public class ScreensManager {
     }
 
     public static boolean isNull(String screenName){
-        return map.get(screenName) == null ? true : false;
+        return map.get(screenName) == null;
 
     }
     public static String getLastPlayableActiveScreen() {

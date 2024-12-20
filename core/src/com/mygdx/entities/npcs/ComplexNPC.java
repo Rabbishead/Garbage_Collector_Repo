@@ -3,7 +3,6 @@ package com.mygdx.entities.npcs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
@@ -42,10 +41,6 @@ public class ComplexNPC extends GenericNPC{
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(animationManager.getCurrentFrame(), getX(), getY());
-    }
-
-    public void drawDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.polygon(hitbox.getTransformedVertices());
     }
 
     @Override

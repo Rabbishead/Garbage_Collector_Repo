@@ -9,7 +9,7 @@ import com.mygdx.resources.ResourceEnum;
 
 public class MapComponentAnimationManager {
 
-    private HashMap<Integer, Animation<TextureRegion>> animationMap = new HashMap<>();
+    private final HashMap<Integer, Animation<TextureRegion>> animationMap = new HashMap<>();
 
     private int currentAnimation;
     
@@ -28,7 +28,7 @@ public class MapComponentAnimationManager {
 				animationSheet.getHeight() / FRAME_ROWS);
 
         for (int i = 0; i < matrix.length; i++) {
-            animationMap.put(i, new Animation<TextureRegion>(animationRate, matrix[i]));
+            animationMap.put(i, new Animation<>(animationRate, matrix[i]));
         }
 
         currentAnimation = 0;
@@ -45,7 +45,6 @@ public class MapComponentAnimationManager {
 
     /**
      * updates currentFrame state
-     * @param delta
      */
     public void updateAnimation(float delta){
         stateTime += delta;

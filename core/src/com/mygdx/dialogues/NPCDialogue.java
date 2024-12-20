@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 /**
  * NPC dialogues manager
- * it's an actor so we can subscribe it to MainScreen's stage
- * @see MainScreen
+ * it's an actor, so we can subscribe it to MainScreen's stage
  */
 public class NPCDialogue extends Dialogue{
     
@@ -20,8 +19,5 @@ public class NPCDialogue extends Dialogue{
         super.draw(batch, parentAlpha);
         batch.draw(texture, getX(), getY(), 80, 50);
         font.draw(batch, textToDisplay, getX()+20, getY()+25);
-    }
-    public void setTextToDisplay(String text){
-        textToDisplay = text;
     }
 }

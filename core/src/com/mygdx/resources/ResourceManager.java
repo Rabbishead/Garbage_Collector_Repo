@@ -12,7 +12,7 @@ public class ResourceManager {
 
     public ResourceManager() {
         manager = new AssetManager();
-        pathMap = new EnumMap<ResourceEnum, String>(ResourceEnum.class);
+        pathMap = new EnumMap<>(ResourceEnum.class);
         loadPathMap();
         loadTextures();
     }

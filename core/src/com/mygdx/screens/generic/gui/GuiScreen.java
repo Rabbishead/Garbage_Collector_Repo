@@ -11,7 +11,7 @@ public abstract class GuiScreen extends GenericScreen{
 
     public GuiScreen(){
         super();
-        camera.translate(Data.VIEWPORT_X/2, Data.VIEWPORT_Y/2, 0);
+        camera.translate((float) Data.VIEWPORT_X /2, (float) Data.VIEWPORT_Y /2, 0);
     }
 
     @Override

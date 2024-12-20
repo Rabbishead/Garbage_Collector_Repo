@@ -9,17 +9,15 @@ import com.mygdx.hud.actors.Fps;
 import com.mygdx.hud.actors.HealthBar;
 
 public class Hud implements Disposable{
-    private Stage stage;
-    private FitViewport viewport;
-    private Fps fps;
-    private HealthBar healthBar;
+    private final Stage stage;
+    private final Fps fps;
 
     public Hud(){
-        viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
+        FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
         stage = new Stage(viewport);
         fps = new Fps();
         stage.addActor(fps);
-        healthBar = new HealthBar();
+        HealthBar healthBar = new HealthBar();
         stage.addActor(healthBar);
     }
     public void draw(){

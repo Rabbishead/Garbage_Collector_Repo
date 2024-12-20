@@ -57,14 +57,14 @@ public class ActorAnimationManager {
             walkLeftFrames[i] = tmp[i][6];
         }
 
-        idleDown = new Animation<TextureRegion>(0.3f, idleDownFrames);
-        idleRight = new Animation<TextureRegion>(0.3f, idleRightFrames);
-        idleLeft = new Animation<TextureRegion>(0.3f, idleLeftFrames);
-        idleUp = new Animation<TextureRegion>(0.3f, idleUpFrames);
-        walkDownAnimation = new Animation<TextureRegion>(0.2f, walkDownFrames);
-        walkUpAnimation = new Animation<TextureRegion>(0.2f, walkUpFrames);
-        walkRightAnimation = new Animation<TextureRegion>(0.2f, walkRightFrames);
-        walkLeftAnimation = new Animation<TextureRegion>(0.2f, walkLeftFrames);
+        idleDown = new Animation<>(0.3f, idleDownFrames);
+        idleRight = new Animation<>(0.3f, idleRightFrames);
+        idleLeft = new Animation<>(0.3f, idleLeftFrames);
+        idleUp = new Animation<>(0.3f, idleUpFrames);
+        walkDownAnimation = new Animation<>(0.2f, walkDownFrames);
+        walkUpAnimation = new Animation<>(0.2f, walkUpFrames);
+        walkRightAnimation = new Animation<>(0.2f, walkRightFrames);
+        walkLeftAnimation = new Animation<>(0.2f, walkLeftFrames);
 
         currentAnimation = idleDown;
 
@@ -80,7 +80,6 @@ public class ActorAnimationManager {
 
     /**
      * updates currentFrame state
-     * @param delta
      */
     public void updateAnimation(float delta){
         stateTime += delta;

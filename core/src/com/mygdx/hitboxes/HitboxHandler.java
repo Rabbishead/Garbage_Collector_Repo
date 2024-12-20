@@ -7,8 +7,8 @@ import com.mygdx.Utils;
 
 public class HitboxHandler {
     private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
-    private ConcurrentHashMap<String, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<String, Boolean> contacts = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Boolean> contacts = new ConcurrentHashMap<>();
 
     public HitboxHandler() {
         Utils.setHitboxHandler(this);
@@ -41,7 +41,7 @@ public class HitboxHandler {
     public void unRegisterCollider(Collider r) {
         colliders.remove(r);
         for (String hitboxKey : r.getKeys()) {
-            String key = r.toString() + hitboxKey;
+            String key = r + hitboxKey;
             if (!contacts.containsKey(key))
                 continue;
             contacts.remove(key);

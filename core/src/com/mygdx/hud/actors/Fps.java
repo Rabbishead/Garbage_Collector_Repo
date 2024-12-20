@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Fps extends Actor implements Disposable{
-    private BitmapFont font;
+    private final BitmapFont font;
 
     public Fps(){
         font = new BitmapFont();

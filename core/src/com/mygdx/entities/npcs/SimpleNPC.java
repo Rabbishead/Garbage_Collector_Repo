@@ -1,7 +1,6 @@
 package com.mygdx.entities.npcs;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
@@ -13,14 +12,13 @@ import com.mygdx.resources.ResourceEnum;
 
 public class SimpleNPC extends GenericNPC {
 
-    private String[] path;
     int lf = 100;
 
     protected SimpleNPC(SimpleNPCBuilder npcBuilder) {
         super(npcBuilder);
         npcDialogue = new NPCDialogue(0, 0, "");
 
-        path = npcBuilder.path;
+        String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
@@ -52,10 +50,6 @@ public class SimpleNPC extends GenericNPC {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(animationManager.getCurrentFrame(), getX(), getY());
-    }
-
-    public void drawDebug(ShapeRenderer shapeRenderer) {
-        shapeRenderer.polygon(hitbox.getTransformedVertices());
     }
 
     @Override

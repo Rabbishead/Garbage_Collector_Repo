@@ -29,7 +29,7 @@ public class DialogueLoader {
     private static Languages activeLanguage;
 
     /**
-     * loades the .txt file corrisponding to the selected language
+     * loads the .txt file corresponding to the selected language
      */
     public static void loadFile() {
         File file = null;
@@ -43,10 +43,11 @@ public class DialogueLoader {
 
         loadedLines = new HashMap<>();
         try {
+            assert file != null;
             BufferedReader br = new BufferedReader(new FileReader(file));
             while (br.ready()) {
                 String line = br.readLine();
-                if (line == "" || line.startsWith("#"))
+                if (line.isEmpty() || line.startsWith("#"))
                     continue;
                 String[] keyVal = line.split("=");
                 loadedLines.put(keyVal[0].trim(), keyVal[1].trim());
@@ -58,7 +59,6 @@ public class DialogueLoader {
     }
 
     /**
-     * @param key
      * @return the dialogue associated with key
      */
     public static String getLine(String key) {
@@ -67,7 +67,6 @@ public class DialogueLoader {
 
     /**
      * sets the active language
-     * @param language
      */
     public static void setLang(Languages language){
         activeLanguage = language;

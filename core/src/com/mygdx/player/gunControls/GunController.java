@@ -11,7 +11,7 @@ import com.mygdx.player.gunControls.guns.Gun;
 
 public class GunController extends Actor {
     private static GunController instance;
-    private ArrayList<Gun> guns;
+    private final ArrayList<Gun> guns;
     private int gunIndex;
     private Gun currentGun;
 

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Utils;
 
 public class CameraController {
-    private static OrthographicCamera gameCamera;
     private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
     private static Vector2 mouseDirection;
@@ -16,7 +15,7 @@ public class CameraController {
     private static float xAngle;
 
     public static void initCamera(){
-        gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
+        OrthographicCamera gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
         currentViewport = Utils.getStage().getViewport();
         float shakeRadius = 15f;
         float minimumShakeRadius = 3f;

@@ -3,7 +3,7 @@ package com.mygdx.states;
 import java.util.HashMap;
 
 public class StateManager {
-    private static HashMap<String, String> stateMap = new HashMap<>();
+    private static final HashMap<String, String> stateMap = new HashMap<>();
 
 
     public static void updateState(String stateName, String stateValue){

@@ -16,13 +16,6 @@ import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.gui.GuiScreen;
 
 public class PauseScreen extends GuiScreen{
-    private ImageButton fullScreenButton;
-
-    private ImageButton engButton;
-
-    private ImageButton itaButton;
-
-    private ImageButton playButton;
 
 
     public PauseScreen(){
@@ -32,14 +25,14 @@ public class PauseScreen extends GuiScreen{
     @Override
     public void show() {
         super.show();
-        
-        engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
-        itaButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ITAFLAG))));
+        ImageButton engButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
-        playButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAYBUTTON))));
+        ImageButton itaButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ITAFLAG))));
 
-        fullScreenButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
+        ImageButton playButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAYBUTTON))));
+
+        ImageButton fullScreenButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
 
         int row_height = Data.VIEWPORT_X / 24;
