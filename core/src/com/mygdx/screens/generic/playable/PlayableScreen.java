@@ -54,6 +54,7 @@ public abstract class PlayableScreen extends GenericScreen{
         stage.setKeyboardFocus(player);
 
         hud = new Hud();
+        Utils.setCurrentHud(hud);
     }
 
     @Override
@@ -91,13 +92,16 @@ public abstract class PlayableScreen extends GenericScreen{
         if(Utils.getActiveScreen() != this) return;
 
         stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));
-        stage.act(Gdx.graphics.getDeltaTime());
+
+        if(StateManager.getState("pause").equals("false"))
+            stage.act(Gdx.graphics.getDeltaTime());
 
         CameraController.updateCamera();
         hitboxHandler.checkRegistered();
 
         tileSetManager.render(camera);
         stage.draw();
+        
         hud.update();
         hud.draw();
     }

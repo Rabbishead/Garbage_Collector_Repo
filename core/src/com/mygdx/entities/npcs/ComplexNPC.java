@@ -17,24 +17,19 @@ public class ComplexNPC extends GenericNPC{
 
     protected ComplexNPC(ComplexNPCBuilder npcBuilder) {
         super(npcBuilder);
-        npcDialogue = new BossDialogue("");
         DelayManager.registerObject(this, 100);
 
         movementStyle = new NPCRealtimeMovementStyle(this);
-        StateManager.updateState("complexDialogueActive", "false");
 
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
-            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && !StateManager.getState("complexDialogueActive").equals("true") && DelayManager.isDelayOver(this)) {
-                npcDialogue = new BossDialogue(DialogueLoader.getLine("testNPCDialogue1"));
-                
-                Utils.getStage().addActor(npcDialogue);
-                StateManager.updateState("complexDialogueActive", "true");
+            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
+                Utils.getCurrentHud().addComponent(new BossDialogue(DialogueLoader.getLine("testNPCDialogue1")));
+                StateManager.updateState("pause", "true");
             }
         });
         
         Utils.getHitboxHandler().registerHitbox(hitbox);
-
     }
 
     @Override
@@ -47,27 +42,12 @@ public class ComplexNPC extends GenericNPC{
     public void act(float delta) {
         super.act(delta);
         DelayManager.updateDelay(this);
-
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("complexDialogueActive").equals("true")){
-            StateManager.updateState("complexDialogueActive", "false");
-            DelayManager.resetDelay(this);
-            npcDialogue.remove();
-        }
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && StateManager.getState("complexDialogueActive").equals("true")){
-            StateManager.updateState("complexDialogueActive", "false");
-            DelayManager.resetDelay(this);
-            npcDialogue.remove();
-        }
     }
 
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        
     }
-
-
-
 
 
     public static class ComplexNPCBuilder extends GenericNPCBuilder{

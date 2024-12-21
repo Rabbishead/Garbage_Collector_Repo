@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
+import com.mygdx.hud.Hud;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
 import com.mygdx.screens.generic.GenericScreen;
@@ -19,6 +20,7 @@ public class Utils {
     private static HitboxHandler hitboxHandler;
     private static Player player;
     private static GenericScreen activeScreen;
+    private static Hud currentHud;
 
     /**
      * @Texture already loaded
@@ -101,5 +103,12 @@ public class Utils {
      */
     public static void dispose() {
         manager.dispose();
+    }
+
+    public static Hud getCurrentHud() {
+        return currentHud;
+    }
+    public static void setCurrentHud(Hud currentHud) {
+        Utils.currentHud = currentHud;
     }
 }

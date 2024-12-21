@@ -15,6 +15,7 @@ public class GarbageCollection extends Game {
 		StateManager.updateState("isEntering", "false");
 		StateManager.updateState("isExiting", "false");
 		StateManager.updateState("destination", "");
+		StateManager.updateState("pause", "false");
 		setScreen(ScreensManager.getScreen("MENU_SCREEN"));
 	}
 
