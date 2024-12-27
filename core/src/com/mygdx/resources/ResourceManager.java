@@ -34,6 +34,9 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
         pathMap.put(ResourceEnum.HEATH_BAR, "hud/health.png");
         pathMap.put(ResourceEnum.LAMP, "map/city/lamp.png");
+        pathMap.put(ResourceEnum.COMPLEX_DIALOGUE, "dialogues/images/bossDialogueBox.png");
+        pathMap.put(ResourceEnum.SIMPLE_DIALOGUE, "dialogues/images/dialogueBox.jpg");
+        pathMap.put(ResourceEnum.CHOICE, "dialogues/images/choice.png");
     }
 
     public Texture getTexture(ResourceEnum e) {

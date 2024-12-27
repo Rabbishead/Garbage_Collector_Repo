@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
-import com.mygdx.dialogues.BossDialogue;
+import com.mygdx.dialogues.ComplexDialogue;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
@@ -24,7 +24,7 @@ public class ComplexNPC extends GenericNPC{
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
-                Utils.getCurrentHud().addComponent(new BossDialogue(DialogueLoader.getLine("testNPCDialogue1")));
+                Utils.getCurrentHud().addComponent(new ComplexDialogue(DialogueLoader.getLine("testNPCDialogue1"), "BLA BLA BLA", "CIAO GIGI"));
                 StateManager.updateState("pause", "true");
             }
         });

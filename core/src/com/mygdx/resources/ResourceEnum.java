@@ -11,5 +11,8 @@ public enum ResourceEnum {
     ENGFLAG,
     PLAYBUTTON,
     HEATH_BAR,
-    LAMP
+    LAMP,
+    COMPLEX_DIALOGUE,
+    SIMPLE_DIALOGUE,
+    CHOICE
 }

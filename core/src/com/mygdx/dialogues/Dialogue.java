@@ -14,8 +14,6 @@ public class Dialogue extends Actor{
         font = new BitmapFont();
         setX(x);
         setY(y);
-        setWidth(2);
-        setHeight(3);
         this.textToDisplay = textToDisplay;
     }
     @Override
