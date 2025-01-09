@@ -19,8 +19,8 @@ public class Utils {
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
     private static Player player;
-    private static GenericScreen activeScreen;
-    private static Hud currentHud;
+    private static GenericScreen activeScreen; //Current Screen
+    private static Hud currentHud;  //Current HUD
 
     /**
      * @Texture already loaded
