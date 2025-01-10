@@ -23,7 +23,7 @@ public class ActorAnimationManager {
     
     private TextureRegion currentFrame;
 
-    private float stateTime;
+    private float stateTime; //changes with delta
 
     public ActorAnimationManager(ResourceEnum e){
         Texture walkSheet = Utils.getTexture(e);
