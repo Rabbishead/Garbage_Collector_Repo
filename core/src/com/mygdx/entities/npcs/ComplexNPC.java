@@ -24,7 +24,7 @@ public class ComplexNPC extends GenericNPC{
         hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
-                Utils.getCurrentHud().addComponent(new ComplexDialogue(DialogueLoader.getLine("testNPCDialogue1"), "BLA BLA BLA", "CIAO GIGI"));
+                Utils.getCurrentHud().addComponent(new ComplexDialogue());
                 StateManager.updateState("pause", "true");
             }
         });

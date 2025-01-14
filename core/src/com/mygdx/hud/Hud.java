@@ -17,7 +17,7 @@ import com.mygdx.states.StateManager;
 public class Hud implements Disposable{
     private final Stage stage;
     private final Fps fps;
-    private ComplexDialogue bossDialogue;
+    private ComplexDialogue complexDialogue;
 
     public Hud(){
         FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
@@ -34,19 +34,38 @@ public class Hud implements Disposable{
     public void update() {
         stage.act();
 
-        DelayManager.updateDelay(bossDialogue);
+        DelayManager.updateDelay(complexDialogue);
 
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("true") && DelayManager.isDelayOver(bossDialogue)){
-            StateManager.updateState("pause", "false");
-            DelayManager.resetDelay(bossDialogue);
-            System.out.println(bossDialogue.getChoice1Text());
-            removeDialogue();
-        }
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && StateManager.getState("pause").equals("true") && DelayManager.isDelayOver(bossDialogue)){
-            StateManager.updateState("pause", "false");
-            DelayManager.resetDelay(bossDialogue);
-            System.out.println(bossDialogue.getChoice2Text());
-            removeDialogue();
+        if(StateManager.getState("pause").equals("true") && DelayManager.isDelayOver(complexDialogue)){
+
+            int numberOfChoices = complexDialogue.getNumberOfChoices();
+            if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+                if(numberOfChoices>0)
+                    complexDialogue.chose(0);
+
+                if(complexDialogue.canContinue())
+                    complexDialogue.continueDialogue();
+
+                else {
+                    StateManager.updateState("pause", "false");
+                    DelayManager.resetDelay(complexDialogue);
+                    removeDialogue();
+                    System.out.println("Destroy");
+                }
+            }
+            if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+                if(complexDialogue.canContinue()){
+                    if(numberOfChoices>0) complexDialogue.chose(1);
+                    complexDialogue.continueDialogue();
+
+                }
+                else {
+                    System.out.println("Destroy");
+                    StateManager.updateState("pause", "false");
+                    DelayManager.resetDelay(complexDialogue);
+                    removeDialogue();
+                }
+            }
         }
     }
 
@@ -59,8 +78,8 @@ public class Hud implements Disposable{
     public void addComponent(Actor actor){
         stage.addActor(actor);
         if(actor instanceof ComplexDialogue){
-            bossDialogue = (ComplexDialogue) actor;
-            DelayManager.registerObject(bossDialogue, 100);  
+            complexDialogue = (ComplexDialogue) actor;
+            DelayManager.registerObject(complexDialogue, 100);
         } 
     }
 

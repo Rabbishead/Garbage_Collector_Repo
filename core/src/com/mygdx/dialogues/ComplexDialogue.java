@@ -21,22 +21,23 @@ public class ComplexDialogue extends Dialogue{
     private String question;
     private BitmapFont font;
 
-    public ComplexDialogue(String npcText, String choice1Text, String choice2Text){
-        super(0, 0, npcText);
+    public ComplexDialogue(){
+        super(0, 0, "");
         texture = Utils.getTexture(ResourceEnum.COMPLEX_DIALOGUE);
         choice1 = Utils.getTexture(ResourceEnum.CHOICE);
-        this.choice1Text = choice1Text;
         choice2 = Utils.getTexture(ResourceEnum.CHOICE);
-        this.choice2Text = choice2Text;
         font = new BitmapFont();
+        choice1Text = "";
+        choice2Text = "";
         complexDialogueManager = new ComplexDialogueManager();
+        complexDialogueManager.continueStory();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(choice1, 32, 64, 410, 128);
-        batch.draw(choice2, Data.VIEWPORT_X-410-32, 64, 410, 128);
+        if(!choice1Text.isEmpty()) batch.draw(choice1, 32, 64, 410, 128);
+        if(!choice2Text.isEmpty()) batch.draw(choice2, Data.VIEWPORT_X-410-32, 64, 410, 128);
         batch.draw(texture, 32, Data.VIEWPORT_Y - 128 - 128, Data.VIEWPORT_X - 64, 128);
         font.draw(batch, choice1Text, 32+32, 64+32);
         font.draw(batch, choice2Text, Data.VIEWPORT_X-410, 64+32);
@@ -46,11 +47,20 @@ public class ComplexDialogue extends Dialogue{
     @Override
     public void act(float delta) {
         super.act(delta);
-        complexDialogueManager.continueStory();
         question = complexDialogueManager.getQuestion();
         ArrayList<String> choices = complexDialogueManager.getResponses();
-        choice1Text = choices.get(0);
-        choice2Text = choices.get(1);
+        if(choices.isEmpty()){
+            choice1Text = "";
+            choice2Text = "";
+        }
+        else if(choices.size() == 1){
+            choice1Text = choices.get(0);
+        }
+        else {
+            choice1Text = choices.get(0);
+            choice2Text = choices.get(1);
+        }
+
     }
 
     public String getChoice1Text() {
@@ -58,5 +68,18 @@ public class ComplexDialogue extends Dialogue{
     }
     public String getChoice2Text() {
         return choice2Text;
+    }
+
+    public boolean canContinue(){
+        return complexDialogueManager.canContinue();
+    }
+    public void continueDialogue(){
+        complexDialogueManager.continueStory();
+    }
+    public void chose(int optionNumber){
+        complexDialogueManager.chose(optionNumber);
+    }
+    public int getNumberOfChoices(){
+        return complexDialogueManager.choiceNumber();
     }
 }

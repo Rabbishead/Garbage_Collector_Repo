@@ -1,6 +1,5 @@
 package com.mygdx.dialogues;
 
-import com.bladecoder.ink.runtime.Choice;
 import com.bladecoder.ink.runtime.Story;
 
 import java.io.*;
@@ -12,7 +11,7 @@ public class ComplexDialogueManager {
     private Story story;
 
     public ComplexDialogueManager(){
-        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/test.json");
+        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/complexTest.json");
         String json = getString(systemResourceAsStream);
 
         try {
@@ -25,7 +24,7 @@ public class ComplexDialogueManager {
 
     public String getString(InputStream systemResourceAsStream) {
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(systemResourceAsStream), StandardCharsets.UTF_8));){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(systemResourceAsStream), StandardCharsets.UTF_8))){
             String line = br.readLine();
 
             while (line != null) {
@@ -38,8 +37,7 @@ public class ComplexDialogueManager {
             e.printStackTrace();
         }
 
-        String json = sb.toString().replace('\uFEFF', ' ');
-        return json;
+        return sb.toString().replace('\uFEFF', ' ');
     }
     public String getQuestion() {
         try {
@@ -63,5 +61,22 @@ public class ComplexDialogueManager {
                 e.printStackTrace();
             }
         }
+    }
+    public boolean canContinue(){
+        return story.canContinue();
+    }
+
+    public void chose(int optionNumber){
+        try {
+
+            story.chooseChoiceIndex(optionNumber);
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+    }
+    public int choiceNumber(){
+        return story.getCurrentChoices().size();
     }
 }
