@@ -25,7 +25,7 @@ public class Projectile extends Actor {
 
     protected Sprite sprite;
 
-    protected Collider collider;
+    protected Collider collider = new Collider();
 
     public Projectile(Texture t, float width, float height, float nozzleX, float nozzleY, float speed, int time,
             float rotation) {

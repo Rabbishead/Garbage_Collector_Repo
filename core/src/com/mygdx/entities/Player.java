@@ -81,8 +81,13 @@ public class Player extends Actor {
     }
 
     public void swapMovementStyle(){
-        if(movementStyle instanceof PlayerRealtimeMovementStyle) movementStyle = new PlayerTiledMovementStyle();
-        else movementStyle = new PlayerRealtimeMovementStyle();
+        if(movementStyle instanceof PlayerRealtimeMovementStyle) {
+            movementStyle = new PlayerTiledMovementStyle();
+            Utils.getStage().addActor(GunController.get());
+        } else {
+            movementStyle = new PlayerRealtimeMovementStyle();
+            GunController.get().remove();
+        }
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.mygdx.resources.ResourceEnum;
 public class Sniper extends Gun {
     
     public Sniper() {
-        super(Utils.getTexture(ResourceEnum.SNIPER), 0, 30, false, true);
+        super(Utils.getTexture(ResourceEnum.SNIPER), 45, 30, false, true);
     }
 
     public int leftTrigger() {
