@@ -39,10 +39,14 @@ public class Gun extends Actor {
         Vector2 center = Utils.getPlayer().center;
         setPosition(center.x + pos.x, center.y + pos.y);
         float angle = CameraController.getMouseAngle();
-        boolean left = flipped && angle > 90 && angle <= 270;
-        boolean right = !flipped && (angle <= 90 || angle > 270);
 
-        if (left || right) {
+        boolean left = angle > 90 && angle <= 270;
+        boolean right = (angle <= 90 || angle > 270);
+
+        boolean flipLeft = flipped && left;
+        boolean flipRight = !flipped && right;
+
+        if (flipLeft || flipRight) {
             s.flip(flipX, flipY);
             angleOffset = -angleOffset;
             flipped = !flipped;
@@ -50,19 +54,16 @@ public class Gun extends Actor {
 
         float calculatedAngle = angle + angleOffset;
         if (angleOffset != 0) {
-            boolean lockAt90left = angle > 90 && angle <= 270 && (calculatedAngle <= 90 || calculatedAngle > 270) && angleOffset < 0;
-            boolean lockAt90right = (angle <= 90 || angle > 270) && calculatedAngle > 90 && calculatedAngle <= 270 && angleOffset > 0;
-            boolean lockAt270left = angle > 90 && angle <= 270 && (calculatedAngle <= 90 || calculatedAngle > 270) && angleOffset > 0;
-            boolean lockAt270right = (angle <= 90 || angle > 270) && calculatedAngle > 90 && calculatedAngle <= 270 && angleOffset < 0;
+            boolean calculatedLeft = calculatedAngle > 90 && calculatedAngle <= 270;
+            boolean calculatedRight = (calculatedAngle <= 90 || calculatedAngle > 270);
 
-            if (lockAt90left)
-                calculatedAngle = 90.01f;
-            if (lockAt90right)
-                calculatedAngle = 90;
-            if (lockAt270left)
-                calculatedAngle = 270;
-            if (lockAt270right)
-                calculatedAngle = 169.99f;
+            boolean lockAtLeft = left && calculatedRight;
+            boolean lockAtRight = right && calculatedLeft;
+
+            if (lockAtLeft)
+                calculatedAngle = angleOffset < 0 ? 90 : 270;
+            if (lockAtRight)
+                calculatedAngle = angleOffset < 0 ? 270 : 90;
         }
 
         s.setRotation(calculatedAngle);
