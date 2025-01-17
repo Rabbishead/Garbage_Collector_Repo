@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Garbage Collection");
-		config.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);
+		config.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);	//Resolution
 		new Lwjgl3Application(new GarbageCollection(), config);
 	}
 }
