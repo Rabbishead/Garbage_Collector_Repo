@@ -37,6 +37,8 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.COMPLEX_DIALOGUE, "dialogues/images/bossDialogueBox.png");
         pathMap.put(ResourceEnum.SIMPLE_DIALOGUE, "dialogues/images/dialogueBox.jpg");
         pathMap.put(ResourceEnum.CHOICE, "dialogues/images/choice.png");
+        pathMap.put(ResourceEnum.JERKINS, "npcs/jenkins_spritesheet.png");
+        pathMap.put(ResourceEnum.BLACKMARKETEER, "npcs/blackmarketeer_spritesheet.png");
     }
 
     public Texture getTexture(ResourceEnum e) {

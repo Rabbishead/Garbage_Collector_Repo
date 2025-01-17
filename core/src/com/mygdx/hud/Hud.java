@@ -1,7 +1,5 @@
 package com.mygdx.hud;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,7 +10,6 @@ import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.ComplexDialogue;
 import com.mygdx.hud.actors.Fps;
 import com.mygdx.hud.actors.HealthBar;
-import com.mygdx.states.StateManager;
 
 public class Hud implements Disposable{
     private final Stage stage;
@@ -36,37 +33,7 @@ public class Hud implements Disposable{
 
         DelayManager.updateDelay(complexDialogue);
 
-        if(StateManager.getState("pause").equals("true") && DelayManager.isDelayOver(complexDialogue)){
-
-            int numberOfChoices = complexDialogue.getNumberOfChoices();
-            if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-                if(numberOfChoices>0)
-                    complexDialogue.chose(0);
-
-                if(complexDialogue.canContinue())
-                    complexDialogue.continueDialogue();
-
-                else {
-                    StateManager.updateState("pause", "false");
-                    DelayManager.resetDelay(complexDialogue);
-                    removeDialogue();
-                    System.out.println("Destroy");
-                }
-            }
-            if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-                if(complexDialogue.canContinue()){
-                    if(numberOfChoices>0) complexDialogue.chose(1);
-                    complexDialogue.continueDialogue();
-
-                }
-                else {
-                    System.out.println("Destroy");
-                    StateManager.updateState("pause", "false");
-                    DelayManager.resetDelay(complexDialogue);
-                    removeDialogue();
-                }
-            }
-        }
+        if(complexDialogue != null) complexDialogue.manage();
     }
 
     @Override

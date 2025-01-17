@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.animations.ActorAnimationManager;
-import com.mygdx.dialogues.Dialogue;
+import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.resources.ResourceEnum;
@@ -14,7 +14,7 @@ import com.mygdx.resources.ResourceEnum;
 public class GenericNPC extends Actor{
     protected ActorAnimationManager animationManager;
     protected MovementStyle movementStyle;
-    protected Dialogue npcDialogue;
+    protected NPCDialogue npcDialogue;
 
     protected Hitbox hitbox = new Hitbox();
 

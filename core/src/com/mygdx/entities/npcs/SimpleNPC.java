@@ -21,7 +21,7 @@ public class SimpleNPC extends GenericNPC {
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
 
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
+        hitbox = new Hitbox(getX(), getY(), 16, 16, 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player")) {
                 npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,

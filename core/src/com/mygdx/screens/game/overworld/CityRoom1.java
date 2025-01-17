@@ -14,12 +14,17 @@ public class CityRoom1 extends PlayableScreen {
 
     private ComplexNPC reflection = new ComplexNPC.ComplexNPCBuilder()
         .coordinates(new Vector2(200, 1200))
-        .texture(ResourceEnum.PLAYER)
+        .texture(ResourceEnum.BLACKMARKETEER)
         .build();
 
     private SimpleNPC testNPC1 = new SimpleNPC.SimpleNPCBuilder()
         .coordinates(new Vector2(160, 1000))
-        .texture(ResourceEnum.PLAYER)
+        .texture(ResourceEnum.JERKINS)
+        .path(new String[] { "DWW--ASS", "WWDSS-A" })
+        .build();
+        private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
+        .coordinates(new Vector2(300, 700))
+        .texture(ResourceEnum.BLACKMARKETEER)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
         .build();
     
@@ -29,6 +34,7 @@ public class CityRoom1 extends PlayableScreen {
         stage.addActor(lamp1);
         stage.addActor(reflection);
         stage.addActor(testNPC1);
+        stage.addActor(testNPC2);
 
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }

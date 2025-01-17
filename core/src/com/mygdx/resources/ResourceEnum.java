@@ -14,5 +14,7 @@ public enum ResourceEnum {
     LAMP,
     COMPLEX_DIALOGUE,
     SIMPLE_DIALOGUE,
-    CHOICE
+    CHOICE,
+    JERKINS,
+    BLACKMARKETEER
 }

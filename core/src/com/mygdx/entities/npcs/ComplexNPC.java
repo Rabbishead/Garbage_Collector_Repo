@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.ComplexDialogue;
-import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
@@ -20,8 +19,7 @@ public class ComplexNPC extends GenericNPC{
         DelayManager.registerObject(this, 100);
 
         movementStyle = new NPCRealtimeMovementStyle(this);
-
-        hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight(), 0, true, "enemy,npc");
+        hitbox = new Hitbox(getX(), getY(), 16, 16, 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue());
