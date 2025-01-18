@@ -22,6 +22,7 @@ public class NPCDialogue extends Actor{
         setY(y);
         texture = Utils.getTexture(ResourceEnum.SIMPLE_DIALOGUE);
         font = new BitmapFont();
+        this.textToDisplay = textToDisplay;
 
     }
     @Override
