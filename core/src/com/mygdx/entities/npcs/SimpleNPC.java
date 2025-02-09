@@ -1,5 +1,6 @@
 package com.mygdx.entities.npcs;
 
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
@@ -7,6 +8,7 @@ import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.hitboxes.Hitbox;
+import com.mygdx.messages.MsgManager;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
@@ -20,7 +22,6 @@ public class SimpleNPC extends GenericNPC {
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
-
         hitbox = new Hitbox(getX(), getY(), 16, 16, 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player")) {
@@ -28,6 +29,7 @@ public class SimpleNPC extends GenericNPC {
                         DialogueLoader.getLine("testNPCDialogue1"));
                 Utils.getStage().addActor(npcDialogue);
                 hitbox.setActive(false);
+                MsgManager.sendStageMsg(0);
                 DelayManager.registerObject(this, 100, object -> {
                     npcDialogue.remove();
                     hitbox.setActive(true);

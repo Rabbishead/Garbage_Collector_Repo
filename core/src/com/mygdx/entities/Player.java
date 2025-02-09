@@ -20,7 +20,7 @@ import com.mygdx.resources.ResourceEnum;
 /**
  * player class with collision managing
  */
-public class Player extends Actor {
+public class Player extends GameActor {
 
     private final ActorAnimationManager animationManager;
     private MovementStyle movementStyle;

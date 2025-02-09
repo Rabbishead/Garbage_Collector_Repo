@@ -1,17 +1,20 @@
 package com.mygdx.entities.npcs;
 
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.animations.ActorAnimationManager;
+import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.NPCDialogue;
+import com.mygdx.entities.GameActor;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-public class GenericNPC extends Actor{
+public class GenericNPC extends GameActor {
     protected ActorAnimationManager animationManager;
     protected MovementStyle movementStyle;
     protected NPCDialogue npcDialogue;
@@ -25,6 +28,8 @@ public class GenericNPC extends Actor{
 
         setWidth(32);
         setHeight(32);
+
+        DelayManager.registerObject(this, 0);
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
         
@@ -54,6 +59,12 @@ public class GenericNPC extends Actor{
     protected void positionChanged() {
         super.positionChanged();
         hitbox.setPosition(getX(), getY());
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        System.out.println("Handled!!");
+        return true;
     }
 
 

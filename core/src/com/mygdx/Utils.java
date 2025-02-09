@@ -1,6 +1,7 @@
 package com.mygdx;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
@@ -9,6 +10,8 @@ import com.mygdx.hud.Hud;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
 import com.mygdx.screens.generic.GenericScreen;
+
+import static java.util.Objects.isNull;
 
 public class Utils {
 

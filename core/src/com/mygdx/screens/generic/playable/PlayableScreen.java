@@ -55,6 +55,8 @@ public abstract class PlayableScreen extends GenericScreen{
 
         hud = new Hud();
         Utils.setCurrentHud(hud);
+
+        stageMsg.addListener(player, 0);
     }
 
     @Override
@@ -86,7 +88,7 @@ public abstract class PlayableScreen extends GenericScreen{
             SavingsManager.save();
         }
         if(Gdx.input.isKeyPressed(Keys.R)){
-            CameraController.applyShakeEffect();
+            stageMsg.dispatchMessage(0);
         } 
         
         if(Utils.getActiveScreen() != this) return;

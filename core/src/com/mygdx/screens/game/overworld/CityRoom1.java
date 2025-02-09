@@ -36,6 +36,10 @@ public class CityRoom1 extends PlayableScreen {
         stage.addActor(testNPC1);
         stage.addActor(testNPC2);
 
+        stageMsg.addListener(testNPC1, 0);
+        stageMsg.addListener(testNPC2, 0);
+        stageMsg.addListener(reflection, 0);
+
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }
 
