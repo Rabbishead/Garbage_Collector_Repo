@@ -2,11 +2,6 @@ package com.mygdx.movement.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
@@ -17,7 +12,6 @@ import com.mygdx.player.camera.CameraController;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
 public class PlayerTiledMovementStyle extends MovementStyle {
 

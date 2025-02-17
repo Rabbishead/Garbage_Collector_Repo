@@ -14,7 +14,7 @@ public class Sniper extends Gun {
 
     public int leftTrigger() {
         Utils.getStage().addActor(new Bullet(getWidth(), CameraController.getMouseAngle() + angleOffset));
-        CameraController.applyShakeEffect();
+        //CameraController.applyShakeEffect();
         GunController.get().setCooldown(3);
         GunController.get().resetCooldown();
         return 1;

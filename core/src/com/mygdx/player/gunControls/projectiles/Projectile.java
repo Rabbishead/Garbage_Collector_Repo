@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
 import com.mygdx.hitboxes.Collider;
-import com.mygdx.player.camera.CameraController;
 
 public class Projectile extends Actor {
     protected Vector2 pos;
@@ -27,26 +26,25 @@ public class Projectile extends Actor {
         s = new Sprite(t);
         this.speed = speed;
         this.distance = distance;
+        anchor = new Vector2(Utils.getPlayer().center);
 
         setWidth(s.getWidth());
         setHeight(s.getHeight());
         setTouchable(Touchable.enabled);
 
-        pos = new Vector2(1, 0).scl(barrel);
-        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
+        pos = new Vector2(1, 0).scl(barrel).setAngleDeg(rotation);
+        pos.set(anchor.x + pos.x - getWidth() / 2, anchor.y + pos.y - getHeight() / 2);
 
-        Vector2 velocity = new Vector2(CameraController.getMouseDirection()).scl(speed);
+        Vector2 velocity = new Vector2(new Vector2(1, 0).setAngleDeg(rotation)).scl(speed);
         movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
-
-        anchor = new Vector2(Utils.getPlayer().center);
-        pos.add(anchor.x, anchor.y);
+        
+        s.setCenter(anchor.x, anchor.y);
         s.setOrigin(getWidth() / 2, getHeight() / 2);
-        s.setRotation(rotation);
+        s.setRotation(rotation - 90);
 
-        setX(pos.x);
-        setY(pos.y);
+        setPosition(anchor.x + pos.x, anchor.y + pos.y);
 
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), rotation, "projectile");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), rotation - 90, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
     }
 
