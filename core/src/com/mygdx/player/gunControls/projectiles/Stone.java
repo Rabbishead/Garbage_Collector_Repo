@@ -13,6 +13,6 @@ public class Stone extends Projectile {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        sprite.rotate(10);
+        s.rotate(10);
     }
 }

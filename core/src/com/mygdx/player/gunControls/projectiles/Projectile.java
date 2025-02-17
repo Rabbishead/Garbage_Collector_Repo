@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.player.camera.CameraController;
 
@@ -32,9 +31,9 @@ public class Projectile extends Actor {
         setWidth(s.getWidth());
         setHeight(s.getHeight());
         setTouchable(Touchable.enabled);
-        
+
         pos = new Vector2(1, 0).scl(barrel);
-        pos.set(pos.x - getWidth()/2, pos.y - getHeight()/2);
+        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
 
         Vector2 velocity = new Vector2(CameraController.getMouseDirection()).scl(speed);
         movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
@@ -47,14 +46,14 @@ public class Projectile extends Actor {
         setX(pos.x);
         setY(pos.y);
 
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(),rotation, "projectile");
+        collider = new Collider(getX(), getY(), getWidth(), getHeight(), rotation, "projectile");
         Utils.getHitboxHandler().registerCollider(collider);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        sprite.draw(batch);
+        s.draw(batch);
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -87,4 +86,3 @@ public class Projectile extends Actor {
         Utils.getHitboxHandler().unRegisterCollider(collider);
     }
 }
- 
