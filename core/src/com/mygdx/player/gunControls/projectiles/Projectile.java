@@ -51,26 +51,6 @@ public class Projectile extends Actor {
         Utils.getHitboxHandler().registerCollider(collider);
     }
 
-    public Projectile(Texture t, float barrel, float distance, float rotation) {
-        this(t, barrel, 500, distance, rotation);
-    }
-
-    public Projectile(Texture t, float barrel, float speed, float rotation) {
-        this(t, barrel, speed, 150, rotation);
-    }
-
-    public Projectile(Texture t, float barrel, int distance) {
-        this(t, barrel, 500, distance, 0);
-    }
-
-    public Projectile(Texture t, float barrel, float speed) {
-        this(t, barrel, speed, 150, 0);
-    }
-
-    public Projectile(Texture t, float barrel) {
-        this(t, barrel, 500, 150, 0);
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
