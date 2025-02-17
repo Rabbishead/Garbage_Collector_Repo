@@ -7,13 +7,13 @@ import com.mygdx.player.gunControls.projectiles.Bullet;
 import com.mygdx.resources.ResourceEnum;
 
 public class Sniper extends Gun {
-    
+
     public Sniper() {
         super(Utils.getTexture(ResourceEnum.SNIPER), 45, 30, false, true);
     }
 
     public int leftTrigger() {
-        Utils.getStage().addActor(new Bullet(Utils.getPlayer().center.x, Utils.getPlayer().center.y));
+        Utils.getStage().addActor(new Bullet(getWidth(), CameraController.getMouseAngle() + angleOffset));
         CameraController.applyShakeEffect();
         GunController.get().setCooldown(3);
         GunController.get().resetCooldown();
@@ -21,7 +21,7 @@ public class Sniper extends Gun {
     }
     
     public int rightTrigger() {
-        Utils.getStage().addActor(new Bullet(Utils.getPlayer().center.x, Utils.getPlayer().center.y));
+        Utils.getStage().addActor(new Bullet(getWidth(), CameraController.getMouseAngle() + angleOffset));
         GunController.get().setCooldown(50);
         return 2;
     }

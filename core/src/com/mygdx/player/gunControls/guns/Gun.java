@@ -12,16 +12,16 @@ public class Gun extends Actor {
     protected Sprite s;
     protected Vector2 pos;
     protected int angleOffset;
-    protected boolean flipped, flipX, flipY;
+    protected boolean flipped, flipX, flipY, stop = false;
 
     public Gun(Texture t, int angleOffset, float positionOffset, boolean flipX, boolean flipY) {
         s = new Sprite(t);
         s.flip(true, false);
         flipped = true;
-        setWidth(t.getWidth());
-        setHeight(t.getHeight());
+        setWidth(s.getWidth());
+        setHeight(s.getHeight());
         pos = new Vector2(1, 0).scl(positionOffset);
-        pos.set(pos.x - s.getWidth() / 2, pos.y - s.getHeight() / 2);
+        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
         s.setOrigin(-pos.x, -pos.y);
 
         this.angleOffset = angleOffset;
@@ -53,7 +53,7 @@ public class Gun extends Actor {
         }
 
         float calculatedAngle = angle + angleOffset;
-        if (angleOffset != 0) {
+        if (angleOffset != 0 && stop) {
             boolean calculatedLeft = calculatedAngle > 90 && calculatedAngle <= 270;
             boolean calculatedRight = (calculatedAngle <= 90 || calculatedAngle > 270);
 
@@ -84,5 +84,9 @@ public class Gun extends Actor {
 
     public int middleTrigger() {
         return 0;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
     }
 }
