@@ -18,10 +18,10 @@ public class Gun extends Actor {
         s = new Sprite(t);
         s.flip(true, false);
         flipped = true;
-        setWidth(t.getWidth());
-        setHeight(t.getHeight());
+        setWidth(s.getWidth());
+        setHeight(s.getHeight());
         pos = new Vector2(1, 0).scl(positionOffset);
-        pos.set(pos.x - s.getWidth() / 2, pos.y - s.getHeight() / 2);
+        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
         s.setOrigin(-pos.x, -pos.y);
 
         this.angleOffset = angleOffset;
