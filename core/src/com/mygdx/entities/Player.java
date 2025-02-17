@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.messages.MsgManager;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
@@ -84,11 +86,14 @@ public class Player extends GameActor {
         if(movementStyle instanceof PlayerRealtimeMovementStyle) {
             movementStyle = new PlayerTiledMovementStyle();
             Utils.getStage().addActor(GunController.get());
+            setCoords(new Vector2(getCoords().x / 32, getCoords().y / 32).scl(32));
+            MsgManager.sendStageMsg(MsgManager.MSG.BLOCK_WALLS);
         } else {
             movementStyle = new PlayerRealtimeMovementStyle();
             GunController.get().remove();
         }
     }
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -136,4 +141,5 @@ public class Player extends GameActor {
     public boolean isAutoWalking() {
         return autoMovementManager.isAnimationInProgress();
     }
+    public boolean isTiledWalking(){return movementStyle instanceof PlayerTiledMovementStyle;}
 }

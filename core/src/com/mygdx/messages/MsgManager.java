@@ -5,16 +5,21 @@ import com.mygdx.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MsgManager {
     public static Map<MSG, Integer> codes = Map.of(
             MSG.DIALOGUE_TRIGGERED, 0,
-            MSG.DIALOGUE_DONE, 1
+            MSG.DIALOGUE_DONE, 1,
+            MSG.BLOCK_WALLS, 2,
+            MSG.UNBLOCK_WALLS, 3
     );
 
     public enum MSG{
         DIALOGUE_TRIGGERED,
-        DIALOGUE_DONE
+        DIALOGUE_DONE,
+        BLOCK_WALLS,
+        UNBLOCK_WALLS
     }
 
     private static final MessageDispatcher systemMsg = new MessageDispatcher();

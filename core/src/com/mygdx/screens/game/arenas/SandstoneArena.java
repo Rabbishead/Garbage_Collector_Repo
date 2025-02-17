@@ -2,6 +2,7 @@ package com.mygdx.screens.game.arenas;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.Player;
+import com.mygdx.entities.bosses.Reflection;
 import com.mygdx.entities.npcs.SimpleNPC;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
@@ -13,10 +14,15 @@ public class SandstoneArena extends PlayableScreen {
             .texture(ResourceEnum.PLAYER)
             .path(new String[] { "-" })
             .build();
+    private Reflection reflection = new Reflection.ReflectionBuilder()
+            .coordinates(new Vector2(300, 300))
+            .texture(ResourceEnum.BLACKMARKETEER)
+            .build();
 
     public SandstoneArena() {
         super("ARENA_ROOM_1", "assets\\map\\arenaRoom1\\sandstone_map.tmx");
         stage.addActor(testNPC2);
+        stage.addActor(reflection);
         stage.getCamera().translate(player.getX(),player.getY(), 0);
     }
 

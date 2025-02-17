@@ -3,8 +3,10 @@ package com.mygdx.screens.game.overworld;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
+import com.mygdx.entities.bosses.Reflection;
 import com.mygdx.entities.npcs.ComplexNPC;
 import com.mygdx.entities.npcs.SimpleNPC;
+import com.mygdx.messages.MsgManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
@@ -12,7 +14,7 @@ public class CityRoom1 extends PlayableScreen {
 
     private ForegroundMapComponent lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
 
-    private ComplexNPC reflection = new ComplexNPC.ComplexNPCBuilder()
+    private Reflection reflection = new Reflection.ReflectionBuilder()
         .coordinates(new Vector2(200, 1200))
         .texture(ResourceEnum.BLACKMARKETEER)
         .build();
@@ -24,7 +26,7 @@ public class CityRoom1 extends PlayableScreen {
         .build();
         private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
         .coordinates(new Vector2(300, 700))
-        .texture(ResourceEnum.BLACKMARKETEER)
+        .texture(ResourceEnum.JERKINS)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
         .build();
     
@@ -36,7 +38,7 @@ public class CityRoom1 extends PlayableScreen {
         stage.addActor(testNPC1);
         stage.addActor(testNPC2);
 
-        stageMsg.addListener(testNPC1, 0);
+        stageMsg.addListener(testNPC1, MsgManager.codes.get(MsgManager.MSG.DIALOGUE_DONE));
         stageMsg.addListener(testNPC2, 0);
         stageMsg.addListener(reflection, 0);
 

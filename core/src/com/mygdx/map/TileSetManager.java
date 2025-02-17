@@ -2,6 +2,8 @@ package com.mygdx.map;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -13,10 +15,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.messages.MsgManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateManager;
 
-public class TileSetManager {
+public class TileSetManager implements Telegraph {
     private final TiledMapRenderer tiledMapRenderer;
     private final TiledMap map;
     private ArrayList<Door> doors;
@@ -57,6 +60,23 @@ public class TileSetManager {
             }
         }
     }
+
+    public void replaceAllWallables(){
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
+        for (int x = 0; x < layer.getWidth(); x++) {
+            for (int y = 0; y < layer.getHeight(); y++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+
+                if(cell == null) continue;
+
+                MapProperties properties = cell.getTile().getProperties();
+                if(properties.get("blockable") == null) continue;
+
+                cell.setTile(map.getTileSets().getTile(7));
+            }
+        }
+    }
+
 
     /** 
      * if player is on the tile of a door, changes current screen based on the properties of the tile
@@ -110,5 +130,13 @@ public class TileSetManager {
 
     public void debug(){
         doors.forEach(Door::print);
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        if(2 == msg.message){
+            replaceAllWallables();
+        }
+        return true;
     }
 }

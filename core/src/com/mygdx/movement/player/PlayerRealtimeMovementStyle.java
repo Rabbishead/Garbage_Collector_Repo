@@ -61,7 +61,6 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);
             player.setY(player.getY() + finalPosition.y);
-            player.getStage().getCamera().translate(finalPosition.x, finalPosition.y, 0);
         }
 
         lastDirection = direction;

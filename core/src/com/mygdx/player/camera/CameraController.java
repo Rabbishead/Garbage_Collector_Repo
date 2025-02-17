@@ -3,6 +3,7 @@ package com.mygdx.player.camera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Utils;
 
@@ -13,6 +14,7 @@ public class CameraController {
     private static float mouseAngle;
     private static Vector2 xDirection;
     private static float xAngle;
+    private static final float lerpFactor = 5;
 
     public static void initCamera(){
         OrthographicCamera gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
@@ -25,6 +27,14 @@ public class CameraController {
 
     public static void updateCamera(){
         cameraShaker.update(Gdx.graphics.getDeltaTime());
+
+        Vector3 cameraPosition = Utils.getStage().getCamera().position;
+        cameraPosition.x += (Utils.getPlayer().getX() - cameraPosition.x) * lerpFactor * Gdx.graphics.getDeltaTime();
+        cameraPosition.y += (Utils.getPlayer().getY() - cameraPosition.y) * lerpFactor * Gdx.graphics.getDeltaTime();
+
+        // Apply the changes
+        Utils.getStage().getCamera().position.set(cameraPosition);
+        Utils.getStage().getCamera().update();
     }
 
     public static void applyShakeEffect(){
