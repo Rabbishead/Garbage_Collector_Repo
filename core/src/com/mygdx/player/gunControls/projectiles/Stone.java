@@ -6,8 +6,8 @@ import com.mygdx.resources.ResourceEnum;
 
 public class Stone extends Projectile {
 
-    public Stone(float nozzleX, float nozzleY) {
-        super(Utils.getTexture(ResourceEnum.STONE), 6, 6, nozzleX, nozzleY, 500f);
+    public Stone(float barrel) {
+        super(Utils.getTexture(ResourceEnum.STONE), barrel, 500f, 150f, 0f);
     }
 
     @Override
