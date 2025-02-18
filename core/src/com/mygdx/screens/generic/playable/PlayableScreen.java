@@ -12,7 +12,6 @@ import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
-import com.mygdx.messages.MsgManager;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;

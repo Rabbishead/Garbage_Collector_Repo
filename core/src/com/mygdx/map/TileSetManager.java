@@ -15,7 +15,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
-import com.mygdx.messages.MsgManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateManager;
 

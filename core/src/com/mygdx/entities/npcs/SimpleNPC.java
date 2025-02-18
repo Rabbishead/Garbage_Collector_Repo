@@ -1,6 +1,5 @@
 package com.mygdx.entities.npcs;
 
-import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;

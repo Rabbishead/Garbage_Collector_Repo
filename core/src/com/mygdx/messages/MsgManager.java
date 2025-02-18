@@ -1,11 +1,7 @@
 package com.mygdx.messages;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
-import com.mygdx.Utils;
-
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class MsgManager {
     public static Map<MSG, Integer> codes = Map.of(

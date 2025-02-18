@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
-import com.mygdx.entities.npcs.ComplexNPC;
 import com.mygdx.entities.npcs.SimpleNPC;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.resources.ResourceEnum;
