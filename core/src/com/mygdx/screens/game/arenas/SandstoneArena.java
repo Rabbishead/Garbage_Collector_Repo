@@ -3,20 +3,22 @@ package com.mygdx.screens.game.arenas;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
-import com.mygdx.entities.npcs.SimpleNPC;
+import com.mygdx.entities.npcs.NPC;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
 public class SandstoneArena extends PlayableScreen {
-    private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
+    private NPC testNPC2 = new NPC.NPCBuilder()
             .coordinates(new Vector2(200, 300))
             .texture(ResourceEnum.PLAYER)
             .path(new String[] { "-" })
             .build();
+
     private Reflection reflection = new Reflection.ReflectionBuilder()
             .coordinates(new Vector2(300, 300))
             .texture(ResourceEnum.BLACKMARKETEER)
+            .path(new String[] {"-"})
             .build();
 
     public SandstoneArena() {

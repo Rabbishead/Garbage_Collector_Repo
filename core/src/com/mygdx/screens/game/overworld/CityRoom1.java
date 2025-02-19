@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
-import com.mygdx.entities.npcs.SimpleNPC;
+import com.mygdx.entities.npcs.NPC;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
@@ -16,14 +16,15 @@ public class CityRoom1 extends PlayableScreen {
     private Reflection reflection = new Reflection.ReflectionBuilder()
         .coordinates(new Vector2(200, 1200))
         .texture(ResourceEnum.BLACKMARKETEER)
+        .path(new String[]{"-"})
         .build();
 
-    private SimpleNPC testNPC1 = new SimpleNPC.SimpleNPCBuilder()
+    private NPC testNPC1 = new NPC.NPCBuilder()
         .coordinates(new Vector2(160, 1000))
         .texture(ResourceEnum.JERKINS)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
         .build();
-        private SimpleNPC testNPC2 = new SimpleNPC.SimpleNPCBuilder()
+        private NPC testNPC2 = new NPC.NPCBuilder()
         .coordinates(new Vector2(300, 700))
         .texture(ResourceEnum.JERKINS)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
