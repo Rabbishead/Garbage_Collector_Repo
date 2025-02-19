@@ -84,7 +84,7 @@ public class Player extends GameActor {
         if(movementStyle instanceof PlayerRealtimeMovementStyle) {
             movementStyle = new PlayerTiledMovementStyle();
             Utils.getStage().addActor(GunController.get());
-            setCoords(new Vector2(getCoords().x / 32, getCoords().y / 32).scl(32));
+            moveTo(new Vector2(((int)(getCoords().x / 32) * 32)+8, ((int)(getCoords().y / 32) * 32)+8));
             MsgManager.sendStageMsg(MsgManager.MSG.BLOCK_WALLS);
         } else {
             movementStyle = new PlayerRealtimeMovementStyle();
