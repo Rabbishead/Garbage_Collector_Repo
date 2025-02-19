@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.resources.ResourceEnum;
 
@@ -55,6 +54,10 @@ public class Reflection extends NPC {
         }
         public ReflectionBuilder path(String[] path) {
             this.path = path;
+            return this;
+        }
+        public ReflectionBuilder complexDialoguePath(String path) {
+            this.complexDialoguePath = path;
             return this;
         }
 

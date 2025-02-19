@@ -35,7 +35,7 @@ public class ComplexDialogue extends Actor{
 
     private Story story;
 
-    public ComplexDialogue(){
+    public ComplexDialogue(String path){
         setX(0);
         setY(0);
         questionString = "";
@@ -46,7 +46,7 @@ public class ComplexDialogue extends Actor{
 
         font = new BitmapFont();
 
-        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/complexTest.json");
+        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream(path);
         String json = getString(systemResourceAsStream);
 
         try {

@@ -17,17 +17,21 @@ public class CityRoom1 extends PlayableScreen {
         .coordinates(new Vector2(200, 1200))
         .texture(ResourceEnum.BLACKMARKETEER)
         .path(new String[]{"-"})
+        .complexDialoguePath("dialogues/complexTest.json")
         .build();
 
     private NPC testNPC1 = new NPC.NPCBuilder()
         .coordinates(new Vector2(160, 1000))
         .texture(ResourceEnum.JERKINS)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
+        .complexDialoguePath("dialogues/generics/adeptus1_JSON.json")
         .build();
-        private NPC testNPC2 = new NPC.NPCBuilder()
+
+    private NPC testNPC2 = new NPC.NPCBuilder()
         .coordinates(new Vector2(300, 700))
         .texture(ResourceEnum.JERKINS)
         .path(new String[] { "DWW--ASS", "WWDSS-A" })
+        .complexDialoguePath("dialogues/generics/adeptus2_JSON.json")
         .build();
     
 

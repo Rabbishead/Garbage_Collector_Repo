@@ -15,7 +15,6 @@ import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.GameActor;
 import com.mygdx.hitboxes.Hitbox;
-import com.mygdx.messages.MsgManager;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
@@ -45,7 +44,6 @@ public class NPC extends GameActor{
         this.debug();
 
         setTouchable(Touchable.enabled);
-        
 
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0);
@@ -59,7 +57,7 @@ public class NPC extends GameActor{
         hitbox = new Hitbox(getX(), getY(), 16, 16, 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
-                Utils.getCurrentHud().addComponent(new ComplexDialogue());
+                Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.complexDialoguePath));
                 StateManager.updateState("pause", "true");
                 return;
             }
@@ -122,6 +120,7 @@ public class NPC extends GameActor{
         protected Vector2 coordinates;
         protected ResourceEnum textureEnum;
         protected String[] path;
+        protected String complexDialoguePath;
     
         public NPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
@@ -134,6 +133,10 @@ public class NPC extends GameActor{
         }
         public NPCBuilder path(String[] path) {
             this.path = path;
+            return this;
+        }
+        public NPCBuilder complexDialoguePath(String path) {
+            this.complexDialoguePath = path;
             return this;
         }
     
