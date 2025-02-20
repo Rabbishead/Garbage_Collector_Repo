@@ -16,7 +16,7 @@ public class CameraController {
     private static float xAngle;
     private static final float lerpFactor = 5;
 
-    public static void initCamera(){
+    public static void initCamera() {
         OrthographicCamera gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
         currentViewport = Utils.getStage().getViewport();
         float shakeRadius = 15f;
@@ -25,10 +25,15 @@ public class CameraController {
         cameraShaker = new CameraShaker(gameCamera, shakeRadius, minimumShakeRadius, radiusFallOffFactor);
     }
 
-    public static void updateCamera(){
+    public static void updateCamera() {
+        Vector3 cameraPosition = Utils.getStage().getCamera().position;
+        
+        if (!cameraShaker.isCameraShaking()) {
+            cameraShaker.origPosition = cameraPosition.cpy();
+        }
         cameraShaker.update(Gdx.graphics.getDeltaTime());
 
-        Vector3 cameraPosition = Utils.getStage().getCamera().position;
+        
         cameraPosition.x += (Utils.getPlayer().getX() - cameraPosition.x) * lerpFactor * Gdx.graphics.getDeltaTime();
         cameraPosition.y += (Utils.getPlayer().getY() - cameraPosition.y) * lerpFactor * Gdx.graphics.getDeltaTime();
 
@@ -37,7 +42,7 @@ public class CameraController {
         Utils.getStage().getCamera().update();
     }
 
-    public static void applyShakeEffect(){
+    public static void applyShakeEffect() {
         cameraShaker.startShaking();
     }
 
@@ -56,7 +61,7 @@ public class CameraController {
         xDirection = dir;
         xAngle = dir.angleDeg();
     }
-    
+
     public static Vector2 getMouseDirection() {
         return mouseDirection;
     }
@@ -64,7 +69,7 @@ public class CameraController {
     public static float getMouseAngle() {
         return mouseAngle;
     }
-    
+
     public static Vector2 getXDirection() {
         return xDirection;
     }
