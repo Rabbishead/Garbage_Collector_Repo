@@ -28,11 +28,8 @@ public class CameraController {
     public static void updateCamera() {
         Vector3 cameraPosition = Utils.getStage().getCamera().position;
         
-        if (!cameraShaker.isCameraShaking()) {
-            cameraShaker.origPosition = cameraPosition.cpy();
-        }
+        cameraShaker.origPosition = cameraPosition.cpy();
         cameraShaker.update(Gdx.graphics.getDeltaTime());
-
         
         cameraPosition.x += (Utils.getPlayer().getX() - cameraPosition.x) * lerpFactor * Gdx.graphics.getDeltaTime();
         cameraPosition.y += (Utils.getPlayer().getY() - cameraPosition.y) * lerpFactor * Gdx.graphics.getDeltaTime();
