@@ -115,6 +115,10 @@ public class NPC extends GameActor{
         return true;
     }
 
+    public Vector2 getCoords(){
+        return new Vector2(getX(), getY());
+    }
+
 
     public static class NPCBuilder{
         protected Vector2 coordinates;

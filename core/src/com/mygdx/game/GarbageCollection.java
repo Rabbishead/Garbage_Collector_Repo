@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.*;
+import com.mygdx.Logger;
 import com.mygdx.Utils;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
@@ -16,6 +17,7 @@ public class GarbageCollection extends Game {
 		StateManager.updateState("isExiting", "false");
 		StateManager.updateState("destination", "");
 		StateManager.updateState("pause", "false");
+		Logger.init();
 		setScreen(ScreensManager.getScreen("MENU_SCREEN"));
 	}
 
