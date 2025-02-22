@@ -18,10 +18,12 @@ public class TileMapCollisionsManager{
      * @return true if player can move in the incoming position
      */
     public static boolean canMove(float incomingX, float incomingY){
-        TiledMapTile tile = layer.getCell(
-            (int) (incomingX + Utils.getPlayer().getWidth()/2) / 32, 
-            (int) (incomingY + Utils.getPlayer().getHeight()/2 - 16) / 32)
-            .getTile();
+        TiledMapTileLayer.Cell cell = layer.getCell(
+                (int) (incomingX + Utils.getPlayer().getWidth()/2) / 32,
+                (int) (incomingY + Utils.getPlayer().getHeight()/2 - 16) / 32);
+        if(cell == null) return false;
+
+        TiledMapTile tile = cell.getTile();
         return tile.getProperties().get("blocked") == null;
     }
 

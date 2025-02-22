@@ -6,8 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Logger;
 import com.mygdx.Utils;
+import com.mygdx.delay.DelayManager;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.StateController;
+import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 
 import javax.swing.plaf.nimbus.State;
@@ -15,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Random;
 
 public class Reflection extends NPC {
 
@@ -25,7 +29,6 @@ public class Reflection extends NPC {
         super(npcBuilder);
         stateController = new StateController();
         stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
-        
     }
 
     @Override
@@ -48,26 +51,36 @@ public class Reflection extends NPC {
                 System.out.println("STANDING");
             }
             case FOLLOW_PLAYER -> {
-                movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
-                addAction(movement);
+                if(TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)){
+                    movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
+                    addAction(movement);
+                }
 
                 if(Utils.getPlayer().getCoords().dst(getCoords()) < 100){
                     stateController.setState(StateController.StateEnum.FLEE);
+                    getActions().clear();
                 }
             }
             case CIRLE_AROUND -> {
+                if(TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)){
+
+                }
                 System.out.println("CIRCLING");
             }
             case FLEE -> {
-                Vector2 oppositeDir = getCoords().scl(2).rotateAroundDeg(playerPos, 90);
+                CameraController.calculateThowardsPos(playerPos, getCoords());
+                float angle = CameraController.getXAngle();
+                float rand = new Random().nextFloat()%0.8f;
+                Vector2 mov = new Vector2(1,rand).setAngleDeg(angle).scl(2);
 
-                System.out.println(playerPos + " " + getCoords() + " " + oppositeDir);
-                Logger.log(playerPos + " " + getCoords() + " " + oppositeDir);
-                movement = Actions.moveTo(oppositeDir.x, oppositeDir.y, 5);
-                addAction(movement);
+                if(TileMapCollisionsManager.canMove(getX() + mov.x, getY() + mov.y)){
+                    setX(getX() + mov.x);
+                    setY(getY() + mov.y);
+                }
 
-                if(Utils.getPlayer().getCoords().dst(getCoords()) > 100){
-                    //stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
+                if(Utils.getPlayer().getCoords().dst(getCoords()) > 500){
+                    stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
+                    getActions().clear();
                 }
             }
             case WANDER -> {

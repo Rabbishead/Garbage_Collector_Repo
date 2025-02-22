@@ -10,11 +10,19 @@ public class StateController {
     }
 
     private StateEnum state;
+    private StateEnum prevState;
 
     public StateEnum getState() {
         return state;
     }
+
+    public StateEnum getPrevState() {
+        return prevState;
+    }
+
     public void setState(StateEnum state) {
+        this.prevState = this.state;
         this.state = state;
+        System.out.println(state);
     }
 }
