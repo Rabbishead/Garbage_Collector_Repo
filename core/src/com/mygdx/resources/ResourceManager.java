@@ -32,8 +32,9 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.PLAYBUTTON, "menu/play.png");
         pathMap.put(ResourceEnum.ENGFLAG, "dialogues/images/engFlag.jpg");
         pathMap.put(ResourceEnum.ITAFLAG, "dialogues/images/itaFlag.png");
-        pathMap.put(ResourceEnum.HEATH_BAR, "hud/health.png");
+        pathMap.put(ResourceEnum.HEALTH_BAR, "hud/health.png");
         pathMap.put(ResourceEnum.LAMP, "map/city/lamp.png");
+        pathMap.put(ResourceEnum.PALACE, "map/city/palace.png");
         pathMap.put(ResourceEnum.COMPLEX_DIALOGUE, "dialogues/images/bossDialogueBox.png");
         pathMap.put(ResourceEnum.SIMPLE_DIALOGUE, "dialogues/images/dialogueBox.jpg");
         pathMap.put(ResourceEnum.CHOICE, "dialogues/images/choice.png");

@@ -9,7 +9,12 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 public class CityRoom2 extends PlayableScreen {
 
-    private ForegroundMapComponent lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
+    private ForegroundMapComponent lamp1 = new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(200, 1338))
+            .texture(ResourceEnum.LAMP)
+            .singlePieceWidth(4)
+            .singlePieceHeight(4)
+            .build();
 
     private NPC reflection = new NPC.NPCBuilder()
         .coordinates(new Vector2(100, 1200))

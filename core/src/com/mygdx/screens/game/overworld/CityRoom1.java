@@ -11,7 +11,24 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 
 public class CityRoom1 extends PlayableScreen {
 
-    private ForegroundMapComponent lamp1 = new ForegroundMapComponent(new Vector2(200, 1338));
+    private ForegroundMapComponent lamp1 = new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(200, 1338))
+            .texture(ResourceEnum.LAMP)
+            .singlePieceWidth(1)
+            .singlePieceHeight(2)
+            .build();
+    private ForegroundMapComponent palace1 = new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(200, 400))
+            .texture(ResourceEnum.PALACE)
+            .singlePieceWidth(4)
+            .singlePieceHeight(4)
+            .build();
+    private ForegroundMapComponent palace2 = new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(400, 800))
+            .texture(ResourceEnum.PALACE)
+            .singlePieceWidth(4)
+            .singlePieceHeight(4)
+            .build();
 
     private Reflection reflection = new Reflection.ReflectionBuilder()
         .coordinates(new Vector2(200, 1200))
@@ -38,6 +55,8 @@ public class CityRoom1 extends PlayableScreen {
     public CityRoom1(){
         super("CITY_ROOM_1", "assets\\map\\cityRoom1\\cityRoom1.tmx");
         stage.addActor(lamp1);
+        stage.addActor(palace1);
+        stage.addActor(palace2);
         stage.addActor(reflection);
         stage.addActor(testNPC1);
         stage.addActor(testNPC2);

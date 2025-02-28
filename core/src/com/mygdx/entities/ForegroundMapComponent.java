@@ -1,11 +1,13 @@
 package com.mygdx.entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
 import com.mygdx.animations.MapComponentAnimationManager;
+import com.mygdx.entities.npcs.NPC;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.resources.ResourceEnum;
 
@@ -15,22 +17,18 @@ public class ForegroundMapComponent extends GameActor {
 
     private final MapComponentAnimationManager animationManager;
 
-    public ForegroundMapComponent(Vector2 coordinates) {
+    public ForegroundMapComponent(ForegroundMapComponentBuilder builder) {
+        super();
+        setX(builder.coordinates.x);
+        setY(builder.coordinates.y);
 
-        setX(coordinates.x);
-        setY(coordinates.y);
-
-        setWidth(32);
-        setHeight(32);
-        
         //this.debug();
 
-        setTouchable(Touchable.enabled);
 
-        animationManager = new MapComponentAnimationManager(ResourceEnum.LAMP, 1, 2, 5f);
+        animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth, builder.singlePieceHeight, 5f);
 
-        hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc");
-        hitbox.setOnHit((hitbox, collider) -> {});
+        //hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc");
+        //hitbox.setOnHit((hitbox, collider) -> {});
         
         Utils.getHitboxHandler().registerHitbox(hitbox);
     }
@@ -59,4 +57,33 @@ public class ForegroundMapComponent extends GameActor {
         hitbox.setPosition(getX(), getY());
     }
 
+    public static class ForegroundMapComponentBuilder {
+        protected Vector2 coordinates;
+        protected ResourceEnum textureEnum;
+        protected int singlePieceWidth;
+        protected int singlePieceHeight;
+
+
+        public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
+            this.coordinates = coordinates;
+            return this;
+        }
+
+        public ForegroundMapComponentBuilder texture(ResourceEnum texture) {
+            this.textureEnum = texture;
+            return this;
+        }
+        public ForegroundMapComponentBuilder singlePieceWidth(int singlePieceWidth) {
+            this.singlePieceWidth = singlePieceWidth;
+            return this;
+        }
+        public ForegroundMapComponentBuilder singlePieceHeight(int singlePieceHeight) {
+            this.singlePieceHeight = singlePieceHeight;
+            return this;
+        }
+
+        public ForegroundMapComponent build() {
+            return new ForegroundMapComponent(this);
+        }
+    }
 }

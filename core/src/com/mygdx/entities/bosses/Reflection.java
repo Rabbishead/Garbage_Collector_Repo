@@ -48,7 +48,7 @@ public class Reflection extends NPC {
         }
         switch (stateController.getState()){
             case STILL -> {
-                System.out.println("STANDING");
+                getActions().clear();
             }
             case FOLLOW_PLAYER -> {
                 if(TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)){

@@ -10,7 +10,7 @@ public class HealthBar extends Actor{
     Texture t;
 
     public HealthBar(){
-        t = Utils.getTexture(ResourceEnum.HEATH_BAR);
+        t = Utils.getTexture(ResourceEnum.HEALTH_BAR);
     }
 
     @Override
