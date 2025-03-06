@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
 import com.badlogic.gdx.math.Polygon;
+import com.mygdx.Utils;
 
 public class Collider extends Polygon {
     private String[] tags;
@@ -13,6 +14,7 @@ public class Collider extends Polygon {
     private BiConsumer<Collider, Hitbox> onHit;
     private BiConsumer<Collider, Hitbox> onLeave;
     private ArrayList<String> keys;
+    public final boolean isNull;
 
     public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
@@ -24,6 +26,7 @@ public class Collider extends Polygon {
         this.stringTags = tags;
         this.collided = false;
         this.keys = new ArrayList<>();
+        isNull = false;
     }
 
     public Collider(float x, float y, float width, float height, float degrees, String tags) {
@@ -36,6 +39,7 @@ public class Collider extends Polygon {
 
     public Collider() {
         super();
+        isNull = true;
     }
 
     public void onHit(Hitbox h) {
@@ -95,5 +99,29 @@ public class Collider extends Polygon {
 
     public void setOnLeave(BiConsumer<Collider, Hitbox> onLeave) {
         this.onLeave = onLeave;
+    }
+
+    /***
+     * Register method to add the Collider to the Event handler with a check.
+     * 
+     * @return {@code true} if the Collider has been added.
+     */
+    public boolean register() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().registerCollider(this);
+        return true;
+    }
+
+    /***
+     * Register method to remove the Collider to the Event handler with a check.
+     * 
+     * @return {@code true} if the Collider has been removed.
+     */
+    public boolean unregister() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().unRegisterCollider(this);
+        return true;
     }
 }

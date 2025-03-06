@@ -49,7 +49,7 @@ public class Player extends GameActor {
         center.y = getY() + getOriginY();
 
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
-        Utils.getHitboxHandler().registerCollider(collider);
+        collider.register();
 
         GunController.get().loadGun(new Sniper());
 

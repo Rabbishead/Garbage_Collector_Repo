@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.Utils;
 import com.mygdx.hitboxes.Collider;
 
@@ -15,37 +14,32 @@ public class Projectile extends Actor {
     protected Vector2 pos;
     protected Vector2 movement;
     protected Vector2 anchor;
-
-    protected float speed, distance;
-
+    protected float distance, angle;
     protected Sprite s;
-
     protected Collider collider = new Collider();
 
     public Projectile(Texture t, float barrel, float speed, float distance, float rotation) {
         s = new Sprite(t);
-        this.speed = speed;
         this.distance = distance;
+        this.angle = rotation;
         anchor = new Vector2(Utils.getPlayer().center);
 
         setWidth(s.getWidth());
         setHeight(s.getHeight());
-        setTouchable(Touchable.enabled);
 
-        pos = new Vector2(1, 0).scl(barrel).setAngleDeg(rotation);
+        pos = new Vector2(barrel, 0).setAngleDeg(rotation);
         pos.set(anchor.x + pos.x - getWidth() / 2, anchor.y + pos.y - getHeight() / 2);
+        setPosition(anchor.x + pos.x, anchor.y + pos.y);
 
-        Vector2 velocity = new Vector2(new Vector2(1, 0).setAngleDeg(rotation)).scl(speed);
+        Vector2 velocity = new Vector2(speed, 0).setAngleDeg(rotation);
         movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
         
         s.setCenter(anchor.x, anchor.y);
         s.setOrigin(getWidth() / 2, getHeight() / 2);
         s.setRotation(rotation - 90);
 
-        setPosition(anchor.x + pos.x, anchor.y + pos.y);
-
         collider = new Collider(getX(), getY(), getWidth(), getHeight(), rotation - 90, "projectile");
-        Utils.getHitboxHandler().registerCollider(collider);
+        collider.register();
     }
 
     @Override
@@ -81,6 +75,20 @@ public class Projectile extends Actor {
 
     protected void delete() {
         this.remove();
-        Utils.getHitboxHandler().unRegisterCollider(collider);
+        collider.unregister();
+    }
+
+    public void flip(boolean x, boolean y) {
+        s.flip(x, y);
+    }
+
+    public void setOffset(Vector2 offset) {
+        setOffset(offset.x, offset.y);
+    }
+
+    public void setOffset(float x, float y) {
+        Vector2 tmp = new Vector2(1, 0).setAngleDeg(angle).scl(x, y);
+        pos.add(tmp);
+        setPosition(pos.x, pos.y);
     }
 }

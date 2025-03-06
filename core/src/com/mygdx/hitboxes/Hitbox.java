@@ -12,6 +12,7 @@ public class Hitbox extends Polygon {
     private String stringTags;
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
+    public final boolean isNull;
 
     public Hitbox(float x, float y, float width, float height, int degrees, boolean active, String tags) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
@@ -21,6 +22,7 @@ public class Hitbox extends Polygon {
         this.active = active;
         this.tags = tags.split(",");
         this.stringTags = tags;
+        isNull = false;
     }
 
     public Hitbox(float x, float y, float width, float height, int degrees, boolean active) {
@@ -29,6 +31,7 @@ public class Hitbox extends Polygon {
 
     public Hitbox() {
         super();
+        isNull = true;
     }
 
     public boolean isHit(Collider r, boolean activate) {
@@ -85,5 +88,29 @@ public class Hitbox extends Polygon {
 
     public void setOnLeave(BiConsumer<Hitbox, Collider> onLeave) {
         this.onLeave = onLeave;
+    }
+
+    /***
+     * Register method to add the HitBox to the Event handler with a check.
+     * 
+     * @return {@code true} if the HitBox has been added.
+     */
+    public boolean register() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().registerHitbox(this);
+        return true;
+    }
+
+    /***
+     * Register method to remove the HitBox to the Event handler with a check.
+     * 
+     * @return {@code true} if the HitBox has been removed.
+     */
+    public boolean unregister() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().unRegisterHitbox(this);
+        return true;
     }
 }

@@ -30,7 +30,7 @@ public class ForegroundMapComponent extends GameActor {
         //hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc");
         //hitbox.setOnHit((hitbox, collider) -> {});
         
-        Utils.getHitboxHandler().registerHitbox(hitbox);
+        hitbox.register();
     }
 
     @Override

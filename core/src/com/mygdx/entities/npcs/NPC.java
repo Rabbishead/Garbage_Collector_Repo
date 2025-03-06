@@ -74,13 +74,13 @@ public class NPC extends GameActor{
             } else if (collider.containsTag("projectile")) {
                 if (lf <= 0) {
                     this.remove();
-                    Utils.getHitboxHandler().unRegisterHitbox(hitbox);
+                    hitbox.unregister();
                 } else
                     lf--;
             }
         });
         
-        Utils.getHitboxHandler().registerHitbox(hitbox);
+        hitbox.register();
     }
 
     @Override
