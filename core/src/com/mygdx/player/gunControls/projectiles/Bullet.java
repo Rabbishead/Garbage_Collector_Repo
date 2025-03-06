@@ -7,6 +7,7 @@ public class Bullet extends Projectile {
 
     public Bullet(float barrel, float angle) {
         super(Utils.getTexture(ResourceEnum.BULLET), barrel, 1000f, 1500f, angle);
+        flip(false, true);
         this.debug();
     }
 }
