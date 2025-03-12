@@ -15,7 +15,7 @@ public class Sniper extends Gun {
     }
 
     public int leftTrigger() {
-        Utils.getStage().addActor(new Bullet(getWidth(), CameraController.getMouseAngle() + angleOffset));
+        Utils.getStage().addActor(new Bullet(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
         CameraController.applyShakeEffect();
         GunController.get().setCooldown(3);
         GunController.get().resetCooldown();
@@ -23,7 +23,7 @@ public class Sniper extends Gun {
     }
     
     public int rightTrigger() {
-        Utils.getStage().addActor(new Bullet(getWidth(), CameraController.getMouseAngle() + angleOffset));
+        Utils.getStage().addActor(new Bullet(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
         GunController.get().setCooldown(50);
         return 2;
     }

@@ -35,8 +35,6 @@ public class SandstoneArena extends PlayableScreen {
         super.show();
 
         player.setMovementStyle(Player.Styles.REALTIME);
-        player.setX(player.getX());
-        player.setY(player.getY());
     }
 
     @Override

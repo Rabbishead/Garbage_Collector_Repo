@@ -20,7 +20,7 @@ import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateManager;
 
-public class NPC extends GameActor{
+public class NPC extends GameActor {
 
     protected int lf = 100;
 
@@ -29,18 +29,15 @@ public class NPC extends GameActor{
     protected NPCDialogue npcDialogue;
     protected Hitbox hitbox = new Hitbox();
     protected boolean smallDialogueGoing;
-
+    public Vector2 center = new Vector2();
 
     public NPC(NPCBuilder npcBuilder) {
         super();
-        setX(npcBuilder.coordinates.x);
-        setY(npcBuilder.coordinates.y);
-
-        setWidth(32);
-        setHeight(32);
+        setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
+        setSize(32, 32);
+        setOrigin(getWidth() / 2, getHeight() / 2);
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
-        
         this.debug();
 
         setTouchable(Touchable.enabled);
@@ -54,9 +51,12 @@ public class NPC extends GameActor{
 
         smallDialogueGoing = false;
 
-        hitbox = new Hitbox(getX(), getY(), 16, 16, 0, true, "enemy,npc");
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+        hitbox = new Hitbox(center.x, center.y, 16, 16, 0, true, "enemy,npc");
         hitbox.setOnHit((hitbox, collider) -> {
-            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
+            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
+                    && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.complexDialoguePath));
                 StateManager.updateState("pause", "true");
                 return;
@@ -79,7 +79,7 @@ public class NPC extends GameActor{
                     lf--;
             }
         });
-        
+
         hitbox.register();
     }
 
@@ -102,7 +102,9 @@ public class NPC extends GameActor{
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        hitbox.setPosition(getX(), getY());
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+        hitbox.setPosition(center.x, center.y);
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -115,35 +117,36 @@ public class NPC extends GameActor{
         return true;
     }
 
-    public Vector2 getCoords(){
+    public Vector2 getCoords() {
         return new Vector2(getX(), getY());
     }
 
-
-    public static class NPCBuilder{
+    public static class NPCBuilder {
         protected Vector2 coordinates;
         protected ResourceEnum textureEnum;
         protected String[] path;
         protected String complexDialoguePath;
-    
+
         public NPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
             return this;
         }
-    
+
         public NPCBuilder texture(ResourceEnum texture) {
             this.textureEnum = texture;
             return this;
         }
+
         public NPCBuilder path(String[] path) {
             this.path = path;
             return this;
         }
+
         public NPCBuilder complexDialoguePath(String path) {
             this.complexDialoguePath = path;
             return this;
         }
-    
+
         public NPC build() {
             return new NPC(this);
         }

@@ -12,22 +12,22 @@ public class MapComponentAnimationManager {
     private final HashMap<Integer, Animation<TextureRegion>> animationMap = new HashMap<>();
 
     private int currentAnimation;
-    
+
     private TextureRegion currentFrame;
 
     private float stateTime;
 
-    public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate){
+    public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate) {
         Texture animationSheet = Utils.getTexture(e);
 
-        int FRAME_COLS = animationSheet.getWidth()/32 / width;
-        int FRAME_ROWS = animationSheet.getHeight()/32 / height;
+        int FRAME_COLS = animationSheet.getWidth() / 32 / width;
+        int FRAME_ROWS = animationSheet.getHeight() / 32 / height;
 
         System.out.println(FRAME_COLS + " " + FRAME_ROWS);
 
         TextureRegion[][] matrix = TextureRegion.split(animationSheet,
-				animationSheet.getWidth() / FRAME_COLS,
-				animationSheet.getHeight() / FRAME_ROWS);
+                animationSheet.getWidth() / FRAME_COLS,
+                animationSheet.getHeight() / FRAME_ROWS);
 
         for (int i = 0; i < matrix.length; i++) {
             animationMap.put(i, new Animation<>(animationRate, matrix[i]));
@@ -35,7 +35,7 @@ public class MapComponentAnimationManager {
 
         currentAnimation = 0;
 
-		stateTime = 0f;
+        stateTime = 0f;
     }
 
     /**
@@ -48,12 +48,12 @@ public class MapComponentAnimationManager {
     /**
      * updates currentFrame state
      */
-    public void updateAnimation(float delta){
+    public void updateAnimation(float delta) {
         stateTime += delta;
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
     }
 
-    public void setCurrentAnimation(int animationCode){
+    public void setCurrentAnimation(int animationCode) {
         currentAnimation = animationCode;
     }
 }

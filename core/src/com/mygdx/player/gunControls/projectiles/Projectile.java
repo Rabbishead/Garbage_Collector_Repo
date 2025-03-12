@@ -7,38 +7,40 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.Utils;
 import com.mygdx.hitboxes.Collider;
 
 public class Projectile extends Actor {
     protected Vector2 pos;
     protected Vector2 movement;
-    protected Vector2 anchor;
+    protected Vector2 origin;
+    public Vector2 center = new Vector2();
     protected float distance, angle;
     protected Sprite s;
     protected Collider collider = new Collider();
 
-    public Projectile(Texture t, float barrel, float speed, float distance, float rotation) {
+    public Projectile(Texture t, Vector2 origin, float barrel, float speed, float distance, float rotation) {
         s = new Sprite(t);
         this.distance = distance;
         this.angle = rotation;
-        anchor = new Vector2(Utils.getPlayer().center);
+        this.origin = origin;
 
-        setWidth(s.getWidth());
-        setHeight(s.getHeight());
+        setSize(s.getWidth(), s.getHeight());
+        setOrigin(getWidth() / 2, getHeight() / 2);
 
         pos = new Vector2(barrel, 0).setAngleDeg(rotation);
-        pos.set(anchor.x + pos.x - getWidth() / 2, anchor.y + pos.y - getHeight() / 2);
-        setPosition(anchor.x + pos.x, anchor.y + pos.y);
+        pos.set(origin.x + pos.x - getOriginX(), origin.y + pos.y - getOriginY());
+        setPosition(pos.x, pos.y);
 
         Vector2 velocity = new Vector2(speed, 0).setAngleDeg(rotation);
         movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
-        
-        s.setCenter(anchor.x, anchor.y);
-        s.setOrigin(getWidth() / 2, getHeight() / 2);
-        s.setRotation(rotation - 90);
 
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), rotation - 90, "projectile");
+        s.setCenter(origin.x, origin.y);
+        s.setOrigin(getOriginX(), getOriginY());
+        s.setRotation(rotation);
+
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+        collider = new Collider(center.x, center.y, getWidth(), getHeight(), rotation, "projectile");
         collider.register();
     }
 
@@ -62,7 +64,7 @@ public class Projectile extends Actor {
 
         if (collider.isCollided())
             delete();
-        if (anchor.dst(pos) > distance)
+        if (origin.dst(pos) > distance)
             delete();
     }
 
@@ -70,7 +72,9 @@ public class Projectile extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         s.setPosition(getX(), getY());
-        collider.setPosition(getX(), getY());
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+        collider.setPosition(center.x, center.y);
     }
 
     protected void delete() {

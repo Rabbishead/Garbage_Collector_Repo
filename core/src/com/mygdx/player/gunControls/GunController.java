@@ -29,6 +29,7 @@ public class GunController extends Actor {
 
     /**
      * Adds the gun to the list
+     * 
      * @param gun The gun to add
      * @return This instance for chaining
      */

@@ -35,28 +35,21 @@ public class Player extends GameActor {
     public Player(Vector2 coordinates) {
         Utils.setPlayer(this);
 
-        setX(coordinates.x);
-        setY(coordinates.y);
-
-        setWidth(16);
-        setHeight(32);
-
+        setPosition(coordinates.x, coordinates.y);
+        setSize(16, 32);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         setTouchable(Touchable.enabled);
 
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-
-        collider = new Collider(getX(), getY(), getWidth(), getHeight(), 0, "player", "npc");
+        collider = new Collider(center.x, center.y, getWidth(), getHeight(), 0, "player", "npc");
         collider.register();
 
         GunController.get().loadGun(new Sniper());
-
         CameraController.calculateMouseAngle(center);
 
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
-
         autoMovementManager = new AutoMovementManager();
 
         debug();
@@ -80,18 +73,17 @@ public class Player extends GameActor {
         }
     }
 
-    public void swapMovementStyle(){
-        if(movementStyle instanceof PlayerRealtimeMovementStyle) {
+    public void swapMovementStyle() {
+        if (movementStyle instanceof PlayerRealtimeMovementStyle) {
             movementStyle = new PlayerTiledMovementStyle();
             Utils.getStage().addActor(GunController.get());
-            moveTo(new Vector2(((int)(getCoords().x / 32) * 32)+8, ((int)(getCoords().y / 32) * 32)+8));
+            moveTo(new Vector2(((int) (getCoords().x / 32) * 32) + 8, ((int) (getCoords().y / 32) * 32) + 8));
             MsgManager.sendStageMsg(MsgManager.MSG.BLOCK_WALLS);
         } else {
             movementStyle = new PlayerRealtimeMovementStyle();
             GunController.get().remove();
         }
     }
-
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -118,9 +110,9 @@ public class Player extends GameActor {
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        collider.setPosition(getX(), getY());
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
+        collider.setPosition(center.x, center.y);
     }
 
     public void moveTo(Vector2 coords) {
@@ -139,5 +131,8 @@ public class Player extends GameActor {
     public boolean isAutoWalking() {
         return autoMovementManager.isAnimationInProgress();
     }
-    public boolean isTiledWalking(){return movementStyle instanceof PlayerTiledMovementStyle;}
+
+    public boolean isTiledWalking() {
+        return movementStyle instanceof PlayerTiledMovementStyle;
+    }
 }
