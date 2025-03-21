@@ -1,6 +1,7 @@
 package com.mygdx;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.entities.Player;
@@ -112,4 +113,15 @@ public class Utils {
         Utils.currentHud = currentHud;
     }
 
+
+    public static void playAudio(ResourceEnum e){
+        if(!manager.getAudio(e).isPlaying()) manager.getAudio(e).play();
+    }
+    public static void stopAudio(ResourceEnum e){
+        if(manager.getAudio(e).isPlaying()) manager.getAudio(e).stop();
+    }
+
+    public static void stopAllAudio(){
+        manager.getAllAudio().stream().filter(Music::isPlaying).forEach(Music::stop);
+    }
 }

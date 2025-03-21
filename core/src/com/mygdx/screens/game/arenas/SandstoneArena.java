@@ -1,6 +1,7 @@
 package com.mygdx.screens.game.arenas;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
 import com.mygdx.entities.npcs.NPC;
@@ -33,7 +34,7 @@ public class SandstoneArena extends PlayableScreen {
     @Override
     public void show() {
         super.show();
-
+        Utils.playAudio(ResourceEnum.REFLECTION_1);
         player.setMovementStyle(Player.Styles.REALTIME);
     }
 
