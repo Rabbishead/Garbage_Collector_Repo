@@ -34,7 +34,8 @@ public class SandstoneArena extends PlayableScreen {
     @Override
     public void show() {
         super.show();
-        Utils.playAudio(ResourceEnum.REFLECTION_1);
+        if(Math.random() < 0.5f) Utils.playAudio(ResourceEnum.REFLECTION_1);
+        else Utils.playAudio(ResourceEnum.REFLECTION_3);
         player.setMovementStyle(Player.Styles.REALTIME);
     }
 

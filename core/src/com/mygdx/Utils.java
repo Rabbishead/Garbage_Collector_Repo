@@ -80,6 +80,7 @@ public class Utils {
      * @param newScreen
      */
     public static void setScreen(GenericScreen newScreen){
+        stopAllAudio();
         activeScreen = newScreen;
         game.setScreen(newScreen); 
     }
