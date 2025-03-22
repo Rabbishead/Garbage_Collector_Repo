@@ -116,7 +116,10 @@ public class Utils {
 
 
     public static void playAudio(ResourceEnum e){
-        if(!manager.getAudio(e).isPlaying()) manager.getAudio(e).play();
+        if(!manager.getAudio(e).isPlaying()){
+            manager.getAudio(e).play();
+            manager.getAudio(e).setLooping(true);
+        } 
     }
     public static void stopAudio(ResourceEnum e){
         if(manager.getAudio(e).isPlaying()) manager.getAudio(e).stop();
