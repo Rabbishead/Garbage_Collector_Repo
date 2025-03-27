@@ -59,9 +59,9 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
             }
         }
 
-        if (TileMapCollisionsManager.canMove(npc.getX() + finalPosition.x, npc.getY() + finalPosition.y)) {
-            npc.setX(npc.getX() + finalPosition.x);
-            npc.setY(npc.getY() + finalPosition.y);
+        float newX = npc.getX() + finalPosition.x, newY = npc.getY() + finalPosition.y;
+        if (TileMapCollisionsManager.canMove(newX, newY)) {
+            npc.setPosition(newX, newY);
         }
 
         if (!DelayManager.isDelayOver(this))

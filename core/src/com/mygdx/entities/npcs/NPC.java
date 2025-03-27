@@ -79,7 +79,6 @@ public class NPC extends GameActor {
                     lf--;
             }
         });
-
         hitbox.register();
     }
 
