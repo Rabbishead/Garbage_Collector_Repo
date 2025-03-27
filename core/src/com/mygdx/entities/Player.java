@@ -43,7 +43,6 @@ public class Player extends GameActor {
 
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        say("Initializing player");
         collider = new Collider(center.x, center.y, getWidth(), getHeight(), 0, "player", "npc");
         collider.register();
 
@@ -53,17 +52,7 @@ public class Player extends GameActor {
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         autoMovementManager = new AutoMovementManager();
 
-        say("Initialized player");
         debug();
-    }
-
-    private void say(String mg) {
-        System.out.println(mg + ":");
-        System.out.println("-----");
-        System.out.println("Player center: " + center);
-        System.out.println("Player coords: " + getCoords());
-        System.out.println("Collider coords: (" + collider.getX() + "," + collider.getY() + ")");
-        System.out.println("-----");
     }
 
     /**
@@ -82,7 +71,6 @@ public class Player extends GameActor {
                 break;
             }
         }
-        say("Edited movement style");
     }
 
     public void swapMovementStyle() {
@@ -95,7 +83,6 @@ public class Player extends GameActor {
             movementStyle = new PlayerRealtimeMovementStyle();
             GunController.get().remove();
         }
-        say("Swapped movement style");
     }
 
     @Override
