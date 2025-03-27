@@ -14,7 +14,6 @@ public class Logger {
         } catch (Exception e) {
             System.out.println("You bozo deleted the log file");
         }
-        ;
     }
 
     public static void log(String s) {
@@ -25,6 +24,5 @@ public class Logger {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
