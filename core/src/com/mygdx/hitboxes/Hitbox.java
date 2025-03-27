@@ -12,20 +12,16 @@ public class Hitbox extends Polygon {
     private String stringTags;
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
-    private float width, height;
     public final boolean isNull;
 
     public Hitbox(float x, float y, float width, float height, int degrees, boolean active, String tags) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
-        this.width = width;
-        this.height = height;
-        float hW = width / 2, hH = height / 2;
-        this.setPosition(x - hW, y - hH);
-        this.setOrigin(hW, hH);
-        this.setRotation(degrees);
+        setOrigin(width / 2, height / 2);
+        setPosition(x, y);
+        setRotation(degrees);
         this.active = active;
         this.tags = tags.split(",");
-        this.stringTags = tags;
+        stringTags = tags;
         isNull = false;
     }
 
@@ -40,8 +36,7 @@ public class Hitbox extends Polygon {
 
     @Override
     public void setPosition(float x, float y) {
-        float hW = width / 2, hH = height / 2;
-        super.setPosition(x - hW, y - hH);
+        super.setPosition(x - getOriginX(), y - getOriginY());
     }
 
     public boolean isHit(Collider r, boolean activate) {

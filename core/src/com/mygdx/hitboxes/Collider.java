@@ -14,22 +14,18 @@ public class Collider extends Polygon {
     private BiConsumer<Collider, Hitbox> onHit;
     private BiConsumer<Collider, Hitbox> onLeave;
     private ArrayList<String> keys;
-    private float width, height;
     public final boolean isNull;
 
     public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
-        this.width = width;
-        this.height = height;
-        float hW = width / 2, hH = height / 2;
-        this.setPosition(x - hW, y - hH);
-        this.setOrigin(hW, hH);
-        this.setRotation(degrees);
+        setOrigin(width / 2, height / 2);
+        setPosition(x, y);
+        setRotation(degrees);
         this.tags = tags.split(",");
         this.searchTags = searchTags.split(",");
-        this.stringTags = tags;
-        this.collided = false;
-        this.keys = new ArrayList<>();
+        stringTags = tags;
+        collided = false;
+        keys = new ArrayList<>();
         isNull = false;
     }
 
@@ -48,8 +44,7 @@ public class Collider extends Polygon {
 
     @Override
     public void setPosition(float x, float y) {
-        float hW = width / 2, hH = height / 2;
-        super.setPosition(x - hW, y - hH);
+        super.setPosition(x - getOriginX(), y - getOriginY());
     }
 
     public void onHit(Hitbox h) {
