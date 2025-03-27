@@ -10,3 +10,4 @@
 *.bin
 /savings
 *.ini
+log.txt

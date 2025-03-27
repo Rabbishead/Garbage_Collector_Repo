@@ -10,7 +10,6 @@ public class Logger {
     public static void init() {
         try {
             bw = new BufferedWriter(new FileWriter("log.txt"));
-
         } catch (Exception e) {
             System.out.println("You bozo deleted the log file");
         }
