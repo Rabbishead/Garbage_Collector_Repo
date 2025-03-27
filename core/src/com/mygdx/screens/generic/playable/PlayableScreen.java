@@ -21,7 +21,7 @@ import com.mygdx.states.StateManager;
 /**
  * generic abstract class for every playable screen
  */
-public abstract class PlayableScreen extends GenericScreen{
+public abstract class PlayableScreen extends GenericScreen {
     protected boolean stopGame = false;
 
     protected Hud hud;
@@ -29,12 +29,13 @@ public abstract class PlayableScreen extends GenericScreen{
     protected TileSetManager tileSetManager;
 
     protected HitboxHandler hitboxHandler;
-    
+
     protected Player player;
 
-    protected PlayableScreen(){}
+    protected PlayableScreen() {
+    }
 
-    protected PlayableScreen(String name, String mapPath){
+    protected PlayableScreen(String name, String mapPath) {
         super();
         this.name = name;
         tileSetManager = new TileSetManager(mapPath, name);
@@ -44,11 +45,11 @@ public abstract class PlayableScreen extends GenericScreen{
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
 
-        if(StateManager.getState("isExiting").equals("true")){
+        if (StateManager.getState("isExiting").equals("true")) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
-        }
-        else player = new Player(SavingsManager.getPlayerCoordinates());
+        } else
+            player = new Player(SavingsManager.getPlayerCoordinates());
 
         stage.addActor(player);
         stage.setKeyboardFocus(player);
@@ -65,9 +66,9 @@ public abstract class PlayableScreen extends GenericScreen{
         super.show();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
-        //tileSetManager.debug();
+        // tileSetManager.debug();
 
-        if(StateManager.getState("isExiting").equals("true") && !player.isAutoWalking()){
+        if (StateManager.getState("isExiting").equals("true") && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         }
@@ -81,22 +82,23 @@ public abstract class PlayableScreen extends GenericScreen{
     @Override
     public void render(float delta) {
         super.render(delta);
-        if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
             Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
             return;
-        } 
-        if(Gdx.input.isKeyPressed(Keys.M)){
+        }
+        if (Gdx.input.isKeyPressed(Keys.M)) {
             SavingsManager.save();
         }
-        if(Gdx.input.isKeyPressed(Keys.R)){
+        if (Gdx.input.isKeyPressed(Keys.R)) {
             stageMsg.dispatchMessage(0);
-        } 
-        
-        if(Utils.getActiveScreen() != this) return;
+        }
+
+        if (Utils.getActiveScreen() != this)
+            return;
 
         stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));
 
-        if(StateManager.getState("pause").equals("false"))
+        if (StateManager.getState("pause").equals("false"))
             stage.act(Gdx.graphics.getDeltaTime());
 
         CameraController.updateCamera();
@@ -104,18 +106,20 @@ public abstract class PlayableScreen extends GenericScreen{
 
         tileSetManager.render(camera);
         stage.draw();
-        
+
         hud.update();
         hud.draw();
     }
 
-    protected void stopGame(){
+    protected void stopGame() {
         stopGame = true;
     }
-    protected void resumeGame(){
+
+    protected void resumeGame() {
         stopGame = false;
     }
-    public Vector2 getPlayerCoordinates(){
+
+    public Vector2 getPlayerCoordinates() {
         return new Vector2(player.getX(), player.getY());
     }
 }

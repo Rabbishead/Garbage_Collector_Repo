@@ -22,14 +22,15 @@ public class ForegroundMapComponent extends GameActor {
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
 
-        //this.debug();
+        // this.debug();
 
+        animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth,
+                builder.singlePieceHeight, 5f);
 
-        animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth, builder.singlePieceHeight, 5f);
+        // hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true,
+        // "enemy,npc");
+        // hitbox.setOnHit((hitbox, collider) -> {});
 
-        //hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true, "enemy,npc");
-        //hitbox.setOnHit((hitbox, collider) -> {});
-        
         hitbox.register();
     }
 
@@ -63,7 +64,6 @@ public class ForegroundMapComponent extends GameActor {
         protected int singlePieceWidth;
         protected int singlePieceHeight;
 
-
         public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
             return this;
@@ -73,10 +73,12 @@ public class ForegroundMapComponent extends GameActor {
             this.textureEnum = texture;
             return this;
         }
+
         public ForegroundMapComponentBuilder singlePieceWidth(int singlePieceWidth) {
             this.singlePieceWidth = singlePieceWidth;
             return this;
         }
+
         public ForegroundMapComponentBuilder singlePieceHeight(int singlePieceHeight) {
             this.singlePieceHeight = singlePieceHeight;
             return this;

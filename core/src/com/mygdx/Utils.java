@@ -20,8 +20,8 @@ public class Utils {
     private static final ResourceManager manager = new ResourceManager();
     private static HitboxHandler hitboxHandler;
     private static Player player;
-    private static GenericScreen activeScreen; //Current Screen
-    private static Hud currentHud;  //Current HUD
+    private static GenericScreen activeScreen; // Current Screen
+    private static Hud currentHud; // Current HUD
 
     /**
      * @Texture already loaded
@@ -54,6 +54,7 @@ public class Utils {
 
     /**
      * TOBE called every time you change screen
+     * 
      * @param stage new stage
      */
     public static void setStage(Stage stage) {
@@ -69,6 +70,7 @@ public class Utils {
 
     /**
      * sets current player object
+     * 
      * @param player
      */
     public static void setPlayer(Player player) {
@@ -77,16 +79,18 @@ public class Utils {
 
     /**
      * sets active screen
+     * 
      * @param newScreen
      */
-    public static void setScreen(GenericScreen newScreen){
+    public static void setScreen(GenericScreen newScreen) {
         stopAllAudio();
         activeScreen = newScreen;
-        game.setScreen(newScreen); 
+        game.setScreen(newScreen);
     }
 
     /**
      * sets game object
+     * 
      * @param game
      */
     public static void setGame(Game game) {
@@ -110,22 +114,24 @@ public class Utils {
     public static Hud getCurrentHud() {
         return currentHud;
     }
+
     public static void setCurrentHud(Hud currentHud) {
         Utils.currentHud = currentHud;
     }
 
-
-    public static void playAudio(ResourceEnum e){
-        if(!manager.getAudio(e).isPlaying()){
+    public static void playAudio(ResourceEnum e) {
+        if (!manager.getAudio(e).isPlaying()) {
             manager.getAudio(e).play();
             manager.getAudio(e).setLooping(true);
-        } 
-    }
-    public static void stopAudio(ResourceEnum e){
-        if(manager.getAudio(e).isPlaying()) manager.getAudio(e).stop();
+        }
     }
 
-    public static void stopAllAudio(){
+    public static void stopAudio(ResourceEnum e) {
+        if (manager.getAudio(e).isPlaying())
+            manager.getAudio(e).stop();
+    }
+
+    public static void stopAllAudio() {
         manager.getAllAudio().stream().filter(Music::isPlaying).forEach(Music::stop);
     }
 }

@@ -10,7 +10,7 @@ import com.mygdx.movement.MovementStyle;
  * RealtimeMovement for the overworld
  */
 public class NPCRealtimeMovementStyle extends MovementStyle {
-    
+
     private final Actor npc;
     private char lastDirection;
     private final String[] path;
@@ -28,8 +28,8 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
         startingCoordinates = new Vector2(npc.getX(), npc.getY());
     }
 
-    public NPCRealtimeMovementStyle(Actor npc){
-        this(npc, new String[]{"-"});
+    public NPCRealtimeMovementStyle(Actor npc) {
+        this(npc, new String[] { "-" });
     }
 
     /**
@@ -64,16 +64,18 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
             npc.setY(npc.getY() + finalPosition.y);
         }
 
-        if(!DelayManager.isDelayOver(this)) return isWalking ? "w" + currentDirection : "i" + lastDirection;
-        
+        if (!DelayManager.isDelayOver(this))
+            return isWalking ? "w" + currentDirection : "i" + lastDirection;
+
         lastDirection = currentDirection;
 
         innerIndex++;
 
-        if(innerIndex >= path[outerIndex].length()) innerIndex = 0;
+        if (innerIndex >= path[outerIndex].length())
+            innerIndex = 0;
         DelayManager.resetDelay(this);
 
-        if(npc.getX() == startingCoordinates.x && npc.getY() == startingCoordinates.y){
+        if (npc.getX() == startingCoordinates.x && npc.getY() == startingCoordinates.y) {
             outerIndex = (int) (path.length * Math.random());
         }
         return isWalking ? "w" + currentDirection : "i" + lastDirection;

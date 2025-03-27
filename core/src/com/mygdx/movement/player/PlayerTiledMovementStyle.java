@@ -81,7 +81,7 @@ public class PlayerTiledMovementStyle extends MovementStyle {
             player.addAction(mba);
 
         }
-        
+
         return movingDir;
     }
 }

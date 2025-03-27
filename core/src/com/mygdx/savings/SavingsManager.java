@@ -14,38 +14,41 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 public class SavingsManager {
     private static Json json;
     private static Settings s;
-    
-    public static void save(){
-        if(json == null) {
+
+    public static void save() {
+        if (json == null) {
             json = new Json();
             json.setOutputType(OutputType.json);
         }
         s.updateData();
         writeFile(json.prettyPrint(s));
     }
-    public static void load(){
-        if(json == null){
+
+    public static void load() {
+        if (json == null) {
             json = new Json();
             json.setOutputType(OutputType.json);
-        } 
+        }
         FileHandle file = Gdx.files.local("savings/savings.json");
         String jsonFile = file.readString();
         s = json.fromJson(Settings.class, jsonFile);
     }
 
-    private static void writeFile(String s){
+    private static void writeFile(String s) {
         try {
             FileWriter myWriter = new FileWriter("savings/savings.json");
             myWriter.write(s);
             myWriter.close();
-        } catch (IOException e) {e.printStackTrace();}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static Vector2 getPlayerCoordinates(){
+    public static Vector2 getPlayerCoordinates() {
         return s.getPlayerCoordinates();
     }
 
-    public static PlayableScreen getLastRoom(){
+    public static PlayableScreen getLastRoom() {
         return ScreensManager.getPlayableScreen(s.getLastRoom());
     }
 }

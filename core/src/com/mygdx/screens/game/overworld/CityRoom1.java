@@ -31,28 +31,27 @@ public class CityRoom1 extends PlayableScreen {
             .build();
 
     private Reflection reflection = new Reflection.ReflectionBuilder()
-        .coordinates(new Vector2(200, 1200))
-        .texture(ResourceEnum.BLACKMARKETEER)
-        .path(new String[]{"-"})
-        .complexDialoguePath("dialogues/complexTest.json")
-        .build();
+            .coordinates(new Vector2(200, 1200))
+            .texture(ResourceEnum.BLACKMARKETEER)
+            .path(new String[] { "-" })
+            .complexDialoguePath("dialogues/complexTest.json")
+            .build();
 
     private NPC testNPC1 = new NPC.NPCBuilder()
-        .coordinates(new Vector2(160, 1000))
-        .texture(ResourceEnum.JERKINS)
-        .path(new String[] { "DWW--ASS", "WWDSS-A" })
-        .complexDialoguePath("dialogues/generics/adeptus1_JSON.json")
-        .build();
+            .coordinates(new Vector2(160, 1000))
+            .texture(ResourceEnum.JERKINS)
+            .path(new String[] { "DWW--ASS", "WWDSS-A" })
+            .complexDialoguePath("dialogues/generics/adeptus1_JSON.json")
+            .build();
 
     private NPC testNPC2 = new NPC.NPCBuilder()
-        .coordinates(new Vector2(300, 700))
-        .texture(ResourceEnum.JERKINS)
-        .path(new String[] { "DWW--ASS", "WWDSS-A" })
-        .complexDialoguePath("dialogues/generics/adeptus2_JSON.json")
-        .build();
-    
+            .coordinates(new Vector2(300, 700))
+            .texture(ResourceEnum.JERKINS)
+            .path(new String[] { "DWW--ASS", "WWDSS-A" })
+            .complexDialoguePath("dialogues/generics/adeptus2_JSON.json")
+            .build();
 
-    public CityRoom1(){
+    public CityRoom1() {
         super("CITY_ROOM_1", "assets\\map\\cityRoom1\\cityRoom1.tmx");
         stage.addActor(lamp1);
         stage.addActor(palace1);
@@ -65,14 +64,14 @@ public class CityRoom1 extends PlayableScreen {
         stageMsg.addListener(testNPC2, 0);
         stageMsg.addListener(reflection, 0);
 
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
     }
 
     @Override
     public void show() {
         super.show();
         player.setMovementStyle(Player.Styles.REALTIME);
-        
+
     }
 
     @Override

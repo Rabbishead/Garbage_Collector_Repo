@@ -9,13 +9,14 @@ import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
+
 public class ScreensManager {
 
     private static final HashMap<String, GenericScreen> map = new HashMap<>();
     private static String lastPlayableActiveScreen;
 
-    public static GenericScreen getScreen(String screenName){
-        if(map.get(screenName) == null){
+    public static GenericScreen getScreen(String screenName) {
+        if (map.get(screenName) == null) {
             switch (screenName) {
                 case "MENU_SCREEN" -> {
                     map.put("MENU_SCREEN", new MenuScreen());
@@ -37,17 +38,20 @@ public class ScreensManager {
                 }
             }
         }
-        if(map.get(screenName) instanceof PlayableScreen) lastPlayableActiveScreen = screenName;
+        if (map.get(screenName) instanceof PlayableScreen)
+            lastPlayableActiveScreen = screenName;
         return map.get(screenName);
     }
-    public static PlayableScreen getPlayableScreen(String screenName){
+
+    public static PlayableScreen getPlayableScreen(String screenName) {
         return (PlayableScreen) getScreen(screenName);
     }
 
-    public static boolean isNull(String screenName){
+    public static boolean isNull(String screenName) {
         return map.get(screenName) == null;
 
     }
+
     public static String getLastPlayableActiveScreen() {
         return lastPlayableActiveScreen;
     }

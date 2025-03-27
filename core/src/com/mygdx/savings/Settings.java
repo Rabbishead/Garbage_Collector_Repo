@@ -6,14 +6,15 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.Utils;
 import com.mygdx.screens.ScreensManager;
 
-public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
+public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
     private String lastRoom;
     private Vector2 lastRoomCoordinates = new Vector2();
 
-    public void updateData(){
+    public void updateData() {
         lastRoom = Utils.getActiveScreen().getName();
-        lastRoomCoordinates = ScreensManager.getPlayableScreen(ScreensManager.getLastPlayableActiveScreen()).getPlayerCoordinates();
+        lastRoomCoordinates = ScreensManager.getPlayableScreen(ScreensManager.getLastPlayableActiveScreen())
+                .getPlayerCoordinates();
     }
 
     @Override
@@ -31,7 +32,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable{
         lastRoomCoordinates.y = jsonData.get("PLAYER").getFloat("y");
     }
 
-    public Vector2 getPlayerCoordinates(){
+    public Vector2 getPlayerCoordinates() {
         return lastRoomCoordinates;
     }
 

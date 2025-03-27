@@ -8,16 +8,18 @@ import java.util.function.Consumer;
  * Class used to subscribe objects to a delay and update delays
  */
 public class DelayManager {
-    //insert here an object and an integer, this will be the amount of delay associated with the object
+    // insert here an object and an integer, this will be the amount of delay
+    // associated with the object
     private static final HashMap<Object, Integer> originalDelays = new HashMap<>();
-    //here you can see the current state of the delay for the given object
+    // here you can see the current state of the delay for the given object
     private static final HashMap<Object, Integer> currentDelays = new HashMap<>();
-    //actions called when delay ends
+    // actions called when delay ends
     private static final HashMap<Object, Consumer<?>> actions = new HashMap<>();
 
     /**
      * registers an object to the delayManager
-     * @param o the object you wish to register
+     * 
+     * @param o    the object you wish to register
      * @param time the amount of delay you need for the object
      */
     public static void registerObject(Object o, Integer time) {
@@ -27,8 +29,9 @@ public class DelayManager {
 
     /**
      * registers an object to the delayManager
-     * @param o the object you wish to register
-     * @param time the amount of delay you need for the object
+     * 
+     * @param o      the object you wish to register
+     * @param time   the amount of delay you need for the object
      * @param action action invoked when delay ends
      */
     public static void registerObject(Object o, Integer time, Consumer<?> action) {
@@ -37,7 +40,7 @@ public class DelayManager {
     }
 
     /**
-     * unregisters an object from the delay manager 
+     * unregisters an object from the delay manager
      */
     public static void unregisterObject(Object o) {
         originalDelays.remove(o);
@@ -55,10 +58,11 @@ public class DelayManager {
 
     /**
      * updates the delay associated with o
-    */
+     */
     public static void updateDelay(Object o) {
         Integer i = currentDelays.get(o);
-        if (i == null) return;
+        if (i == null)
+            return;
 
         if (i > 0) {
             currentDelays.replace(o, i - 2);

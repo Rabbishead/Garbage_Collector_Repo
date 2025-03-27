@@ -60,13 +60,13 @@ public class ResourceManager {
         return manager.get(pathMap.get(e));
     }
 
-    public Music getAudio(ResourceEnum e){
+    public Music getAudio(ResourceEnum e) {
         manager.finishLoadingAsset(audioMap.get(e));
         return manager.get(audioMap.get(e));
     }
 
-    public ArrayList<Music> getAllAudio(){
-        ArrayList<Music> audioArr = new ArrayList<>(); 
+    public ArrayList<Music> getAllAudio() {
+        ArrayList<Music> audioArr = new ArrayList<>();
         for (ResourceEnum e : audioMap.keySet()) {
             audioArr.add(getAudio(e));
         }

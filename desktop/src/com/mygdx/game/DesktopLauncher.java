@@ -6,11 +6,11 @@ import com.mygdx.Data;
 
 // Please note that on macOS your application needs to wbe started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main(String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Garbage Collection");
-		config.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);	//Resolution
+		config.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y); // Resolution
 		new Lwjgl3Application(new GarbageCollection(), config);
 	}
 }
