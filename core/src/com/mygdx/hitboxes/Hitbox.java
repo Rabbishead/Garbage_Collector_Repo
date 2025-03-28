@@ -14,7 +14,8 @@ public class Hitbox extends Polygon {
     private BiConsumer<Hitbox, Collider> onLeave;
     public final boolean isNull;
 
-    public Hitbox(float x, float y, float width, float height, int degrees, boolean active, String tags) {
+    public Hitbox(float x, float y, float width, float height, int degrees, String tags, float[] vertices,
+            boolean active) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
         setOrigin(width / 2, height / 2);
         setPosition(x, y);
@@ -25,10 +26,51 @@ public class Hitbox extends Polygon {
         isNull = false;
     }
 
-    public Hitbox(float x, float y, float width, float height, int degrees, boolean active) {
-        this(x, y, width, height, degrees, active, "all");
+    /**
+     * Creates a box Hitbox with specified position, size, rotation, and tags.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param x       where am I? (horizontally speaking)
+     * @param y       where am I? (vertically speaking)
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the hitbox's rotation.
+     * @param tags    hitbox's tags to get differentiated in groups.
+     */
+    public Hitbox(float x, float y, float width, float height, int degrees, String tags, boolean active) {
+        this(x, y, width, height, degrees, tags, new float[] { 0, 0, width, 0, width, height, 0, height }, active);
     }
 
+    /**
+     * Creates a box Hitbox with specified position, size, and rotation.
+     * 
+     * @param x       where am I? (horizontally speaking)
+     * @param y       where am I? (vertically speaking)
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the hitbox's rotation.
+     */
+    public Hitbox(float x, float y, float width, float height, int degrees, boolean active) {
+        this(x, y, width, height, degrees, "all", active);
+    }
+
+    /**
+     * Creates a box Hitbox with specified position and size.
+     * 
+     * @param x      where am I? (horizontally speaking)
+     * @param y      where am I? (vertically speaking)
+     * @param width  as large as the sea!
+     * @param height as tall as the sky!
+     */
+    public Hitbox(float x, float y, float width, float height, boolean active) {
+        this(x, y, width, height, 0, active);
+    }
+
+    /**
+     * Creates a voided Hitbox to modify with no consequences before creating the
+     * actual Hitbox.
+     */
     public Hitbox() {
         super();
         isNull = true;

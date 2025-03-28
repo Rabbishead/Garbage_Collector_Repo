@@ -16,8 +16,25 @@ public class Collider extends Polygon {
     private ArrayList<String> keys;
     public final boolean isNull;
 
-    public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
-        super(new float[] { 0, 0, width, 0, width, height, 0, height });
+    /**
+     * Creates a Collider with specified position, size, rotation, tags, and form.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param x          where am I? (horizontally speaking)
+     * @param y          where am I? (vertically speaking)
+     * @param width      as large as the sea!
+     * @param height     as tall as the sky!
+     * @param degrees    specifies the collider's rotation.
+     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param searchTags specifies what hiboxes can the collider collide with.
+     * @param vertices   an array where every even element represents the horizontal
+     *                   part of a point, and the following element representing the
+     *                   vertical part.
+     */
+    public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags,
+            float[] vertices) {
+        super(vertices);
         setOrigin(width / 2, height / 2);
         setPosition(x, y);
         setRotation(degrees);
@@ -29,14 +46,68 @@ public class Collider extends Polygon {
         isNull = false;
     }
 
+    /**
+     * Creates a box Collider with specified position, size, rotation, and tags.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param x          where am I? (horizontally speaking)
+     * @param y          where am I? (vertically speaking)
+     * @param width      as large as the sea!
+     * @param height     as tall as the sky!
+     * @param degrees    specifies the collider's rotation.
+     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param searchTags specifies what hiboxes can the collider collide with.
+     */
+    public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
+        this(x, y, width, height, degrees, tags, searchTags, new float[] { 0, 0, width, 0, width, height, 0, height });
+    }
+
+    /**
+     * Creates a box Collider with specified position, size, rotation, and tags.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param x       where am I? (horizontally speaking)
+     * @param y       where am I? (vertically speaking)
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the collider's rotation.
+     * @param tags    collider's tags to differentiate what to do on collision.
+     */
     public Collider(float x, float y, float width, float height, float degrees, String tags) {
         this(x, y, width, height, degrees, tags, "all");
     }
 
+    /**
+     * Creates a box Collider with specified position, size, and rotation.
+     * 
+     * @param x       where am I? (horizontally speaking)
+     * @param y       where am I? (vertically speaking)
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the collider's rotation.
+     */
     public Collider(float x, float y, float width, float height, float degrees) {
-        this(x, y, width, height, degrees, "none", "all");
+        this(x, y, width, height, degrees, "none");
     }
 
+    /**
+     * Creates a box Collider with specified position and size.
+     * 
+     * @param x      where am I? (horizontally speaking)
+     * @param y      where am I? (vertically speaking)
+     * @param width  as large as the sea!
+     * @param height as tall as the sky!
+     */
+    public Collider(float x, float y, float width, float height) {
+        this(x, y, width, height, 0);
+    }
+
+    /**
+     * Creates a voided Collider to modify with no consequences before creating the
+     * actual Collider.
+     */
     public Collider() {
         super();
         isNull = true;

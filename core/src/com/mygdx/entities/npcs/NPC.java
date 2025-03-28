@@ -53,7 +53,7 @@ public class NPC extends GameActor {
 
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        hitbox = new Hitbox(center.x, center.y, 16, 16, 0, true, "enemy,npc");
+        hitbox = new Hitbox(center.x, center.y, 16, 16, 0, "enemy,npc", true);
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
