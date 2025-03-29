@@ -28,9 +28,8 @@ public class Collider extends Polygon {
      * @param degrees    specifies the collider's rotation.
      * @param tags       collider's tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
-     * @param vertices   an array where every even element represents the horizontal
-     *                   part of a point, and the following element representing the
-     *                   vertical part.
+     * @param vertices   an array whose elements in pairs represent the x and y of
+     *                   the polygon's vertices.
      */
     public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags,
             float[] vertices) {

@@ -14,6 +14,20 @@ public class Hitbox extends Polygon {
     private BiConsumer<Hitbox, Collider> onLeave;
     public final boolean isNull;
 
+    /**
+     * Creates a Hitbox with specified position, size, rotation, tags, and form.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param x        where am I? (horizontally speaking)
+     * @param y        where am I? (vertically speaking)
+     * @param width    as large as the sea!
+     * @param height   as tall as the sky!
+     * @param degrees  specifies the hitbox's rotation.
+     * @param tags     hitbox's tags to get differentiated in groups.
+     * @param vertices an array whose elements in pairs represent the x and y of the
+     *                 polygon's vertices.
+     */
     public Hitbox(float x, float y, float width, float height, int degrees, String tags, float[] vertices,
             boolean active) {
         super(new float[] { 0, 0, width, 0, width, height, 0, height });
