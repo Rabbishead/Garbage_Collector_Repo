@@ -33,27 +33,21 @@ public class NPC extends GameActor {
 
     public NPC(NPCBuilder npcBuilder) {
         super();
-        setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
+        setTouchable(Touchable.enabled);
+
         setSize(32, 32);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
-        this.debug();
-
-        setTouchable(Touchable.enabled);
-
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0);
         DelayManager.registerObject(this, 0);
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
-
         smallDialogueGoing = false;
 
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
-        hitbox = new Hitbox(center.x, center.y, 16, 16, 0, "enemy,npc", true);
+        hitbox = new Hitbox(center, 16, 16, 0, "enemy,npc", true);
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
@@ -80,6 +74,9 @@ public class NPC extends GameActor {
             }
         });
         hitbox.register();
+        setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
+
+        debug();
     }
 
     @Override
@@ -103,7 +100,7 @@ public class NPC extends GameActor {
         super.positionChanged();
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        hitbox.setPosition(center.x, center.y);
+        hitbox.setPosition();
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {

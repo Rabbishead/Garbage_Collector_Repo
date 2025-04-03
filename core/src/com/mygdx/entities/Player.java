@@ -34,17 +34,14 @@ public class Player extends GameActor {
 
     public Player(Vector2 coordinates) {
         Utils.setPlayer(this);
+        setTouchable(Touchable.enabled);
 
-        setPosition(coordinates.x, coordinates.y);
         setSize(16, 32);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        setTouchable(Touchable.enabled);
-
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
-        collider = new Collider(center.x, center.y, getWidth(), getHeight(), 0, "player", "npc");
+        collider = new Collider(center, getWidth(), getHeight(), 0, "player", "npc");
         collider.register();
+        setPosition(coordinates.x, coordinates.y);
 
         GunController.get().loadGun(new Sniper());
         CameraController.calculateMouseAngle(center);
@@ -112,7 +109,7 @@ public class Player extends GameActor {
         super.positionChanged();
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        collider.setPosition(center.x, center.y);
+        collider.setPosition();
     }
 
     public void moveTo(Vector2 coords) {

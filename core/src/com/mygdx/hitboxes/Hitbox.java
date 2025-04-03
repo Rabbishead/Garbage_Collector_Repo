@@ -1,15 +1,16 @@
 package com.mygdx.hitboxes;
 
+import java.util.function.BiConsumer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
-
-import java.util.function.BiConsumer;
 
 public class Hitbox extends Polygon {
     private boolean active;
     private String[] tags;
     private String stringTags;
+    private Vector2 center;
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
     public final boolean isNull;
@@ -19,8 +20,7 @@ public class Hitbox extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param x        where am I? (horizontally speaking)
-     * @param y        where am I? (vertically speaking)
+     * @param center the hitbox's center coordinates.
      * @param width    as large as the sea!
      * @param height   as tall as the sky!
      * @param degrees  specifies the hitbox's rotation.
@@ -28,11 +28,12 @@ public class Hitbox extends Polygon {
      * @param vertices an array whose elements in pairs represent the x and y of the
      *                 polygon's vertices.
      */
-    public Hitbox(float x, float y, float width, float height, int degrees, String tags, float[] vertices,
+    public Hitbox(Vector2 center, float width, float height, int degrees, String tags, float[] vertices,
             boolean active) {
-        super(new float[] { 0, 0, width, 0, width, height, 0, height });
+        super(vertices);
+        this.center = center;
         setOrigin(width / 2, height / 2);
-        setPosition(x, y);
+        setPosition();
         setRotation(degrees);
         this.active = active;
         this.tags = tags.split(",");
@@ -45,40 +46,37 @@ public class Hitbox extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param x       where am I? (horizontally speaking)
-     * @param y       where am I? (vertically speaking)
+     * @param center the hitbox's center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the hitbox's rotation.
      * @param tags    hitbox's tags to get differentiated in groups.
      */
-    public Hitbox(float x, float y, float width, float height, int degrees, String tags, boolean active) {
-        this(x, y, width, height, degrees, tags, new float[] { 0, 0, width, 0, width, height, 0, height }, active);
+    public Hitbox(Vector2 center, float width, float height, int degrees, String tags, boolean active) {
+        this(center, width, height, degrees, tags, new float[] { 0, 0, width, 0, width, height, 0, height }, active);
     }
 
     /**
      * Creates a box Hitbox with specified position, size, and rotation.
      * 
-     * @param x       where am I? (horizontally speaking)
-     * @param y       where am I? (vertically speaking)
+     * @param center the hitbox's center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the hitbox's rotation.
      */
-    public Hitbox(float x, float y, float width, float height, int degrees, boolean active) {
-        this(x, y, width, height, degrees, "all", active);
+    public Hitbox(Vector2 center, float width, float height, int degrees, boolean active) {
+        this(center, width, height, degrees, "all", active);
     }
 
     /**
      * Creates a box Hitbox with specified position and size.
      * 
-     * @param x      where am I? (horizontally speaking)
-     * @param y      where am I? (vertically speaking)
+     * @param center the hitbox's center coordinates.
      * @param width  as large as the sea!
      * @param height as tall as the sky!
      */
-    public Hitbox(float x, float y, float width, float height, boolean active) {
-        this(x, y, width, height, 0, active);
+    public Hitbox(Vector2 center, float width, float height, boolean active) {
+        this(center, width, height, 0, active);
     }
 
     /**
@@ -90,9 +88,19 @@ public class Hitbox extends Polygon {
         isNull = true;
     }
 
+    public void setPosition() {
+        super.setPosition(center.x - getOriginX(), center.y - getOriginY());
+    }
+
+    public void setPosition(Vector2 center) {
+        this.center = center;
+        setPosition();
+    }
+
     @Override
     public void setPosition(float x, float y) {
-        super.setPosition(x - getOriginX(), y - getOriginY());
+        this.center = new Vector2(x, y);
+        setPosition();
     }
 
     public boolean isHit(Collider r, boolean activate) {

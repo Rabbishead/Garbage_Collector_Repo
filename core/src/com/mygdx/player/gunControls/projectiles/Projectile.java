@@ -29,7 +29,6 @@ public class Projectile extends Actor {
 
         pos = new Vector2(barrel, 0).setAngleDeg(rotation);
         pos.set(origin.x + pos.x - getOriginX(), origin.y + pos.y - getOriginY());
-        setPosition(pos.x, pos.y);
 
         Vector2 velocity = new Vector2(speed, 0).setAngleDeg(rotation);
         movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
@@ -38,10 +37,9 @@ public class Projectile extends Actor {
         s.setOrigin(getOriginX(), getOriginY());
         s.setRotation(rotation);
 
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
-        collider = new Collider(center.x, center.y, getWidth(), getHeight(), rotation, "projectile");
+        collider = new Collider(center, getWidth(), getHeight(), rotation, "projectile");
         collider.register();
+        setPosition(pos.x, pos.y);
     }
 
     @Override
@@ -74,7 +72,7 @@ public class Projectile extends Actor {
         s.setPosition(getX(), getY());
         center.x = getX() + getOriginX();
         center.y = getY() + getOriginY();
-        collider.setPosition(center.x, center.y);
+        collider.setPosition();
     }
 
     protected void delete() {
