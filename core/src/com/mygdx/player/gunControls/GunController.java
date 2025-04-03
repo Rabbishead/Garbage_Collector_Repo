@@ -7,13 +7,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.delay.DelayManager;
-import com.mygdx.player.gunControls.guns.Gun;
+import com.mygdx.player.gunControls.guns.BaseGun;
+
 
 public class GunController extends Actor {
     private static GunController instance;
-    private final ArrayList<Gun> guns;
+    private final ArrayList<BaseGun> guns;
     private int gunIndex;
-    private Gun currentGun;
+    private BaseGun currentGun;
 
     public static GunController get() {
         if (instance == null)
@@ -32,13 +33,13 @@ public class GunController extends Actor {
      * 
      * @param guns The guns instances to add.
      */
-    public void loadGuns(Gun ...guns) {
-        for (Gun gun : guns) {
+    public void loadGuns(BaseGun ...guns) {
+        for (BaseGun gun : guns) {
             this.guns.add(gun);
         }
     }
 
-    public void removeGun(Gun gun) {
+    public void removeGun(BaseGun gun) {
         guns.remove(gun);
     }
 

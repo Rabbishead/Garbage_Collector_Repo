@@ -5,7 +5,7 @@ import com.mygdx.player.gunControls.GunController;
 import com.mygdx.player.gunControls.projectiles.Stone;
 import com.mygdx.resources.ResourceEnum;
 
-public class Slingshot extends Gun {
+public class Slingshot extends BaseGun {
 
     public Slingshot() {
         super(Utils.getTexture(ResourceEnum.DEFAULT), 0);

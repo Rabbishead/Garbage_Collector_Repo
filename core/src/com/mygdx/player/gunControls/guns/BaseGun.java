@@ -8,13 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.player.camera.CameraController;
 
-public class Gun extends Actor {
+public class BaseGun extends Actor {
     protected Sprite s;
     protected Vector2 pos;
     protected int angleOffset;
     protected boolean flipped, stop = false;
 
-    public Gun(Texture t, int angleOffset) {
+    public BaseGun(Texture t, int angleOffset) {
         s = new Sprite(t);
         flipped = true;
         setWidth(s.getWidth());

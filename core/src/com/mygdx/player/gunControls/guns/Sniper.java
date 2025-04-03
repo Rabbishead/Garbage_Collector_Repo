@@ -3,10 +3,10 @@ package com.mygdx.player.gunControls.guns;
 import com.mygdx.Utils;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
-import com.mygdx.player.gunControls.projectiles.Bullet;
+import com.mygdx.player.gunControls.projectiles.Projectile;
 import com.mygdx.resources.ResourceEnum;
 
-public class Sniper extends Gun {
+public class Sniper extends BaseGun {
     private float bullets = 100;
 
     public Sniper() {
@@ -18,7 +18,7 @@ public class Sniper extends Gun {
     public int leftTrigger() {
         if (bullets > 0) {
             Utils.getStage().addActor(
-                    new Bullet(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
+                    new Projectile(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
             CameraController.applyShakeEffect();
             GunController.get().setCooldown(3);
             GunController.get().resetCooldown();
@@ -32,7 +32,7 @@ public class Sniper extends Gun {
 
     public int rightTrigger() {
         Utils.getStage().addActor(
-                new Bullet(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
+                new Projectile(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
         GunController.get().setCooldown(50);
         return 2;
     }
