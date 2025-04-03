@@ -28,18 +28,14 @@ public class GunController extends Actor {
     }
 
     /**
-     * Adds the gun to the list
+     * Adds a chain of guns to the Gunlist.
      * 
-     * @param gun The gun to add
-     * @return This instance for chaining
+     * @param guns The guns instances to add.
      */
-    public GunController loadGun(Gun gun) {
-        guns.add(gun);
-        return instance;
-    }
-
-    public void loadGuns(ArrayList<Gun> guns) {
-        this.guns.addAll(guns);
+    public void loadGuns(Gun ...guns) {
+        for (Gun gun : guns) {
+            this.guns.add(gun);
+        }
     }
 
     public void removeGun(Gun gun) {

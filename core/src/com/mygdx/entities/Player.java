@@ -14,6 +14,7 @@ import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
+import com.mygdx.player.gunControls.guns.Slingshot;
 import com.mygdx.player.gunControls.guns.Sniper;
 import com.mygdx.resources.ResourceEnum;
 
@@ -43,7 +44,7 @@ public class Player extends GameActor {
         collider.register();
         setPosition(coordinates.x, coordinates.y);
 
-        GunController.get().loadGun(new Sniper());
+        GunController.get().loadGuns(new Sniper(), new Slingshot());
         CameraController.calculateMouseAngle(center);
 
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
