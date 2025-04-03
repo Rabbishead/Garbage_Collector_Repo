@@ -20,7 +20,7 @@ public class Hitbox extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center the hitbox's center coordinates.
+     * @param center   the hitbox's center coordinates.
      * @param width    as large as the sea!
      * @param height   as tall as the sky!
      * @param degrees  specifies the hitbox's rotation.
@@ -46,7 +46,7 @@ public class Hitbox extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center the hitbox's center coordinates.
+     * @param center  the hitbox's center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the hitbox's rotation.
@@ -59,7 +59,7 @@ public class Hitbox extends Polygon {
     /**
      * Creates a box Hitbox with specified position, size, and rotation.
      * 
-     * @param center the hitbox's center coordinates.
+     * @param center  the hitbox's center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the hitbox's rotation.
