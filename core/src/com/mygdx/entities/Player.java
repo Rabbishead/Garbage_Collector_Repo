@@ -1,9 +1,5 @@
 package com.mygdx.entities;
 
-import java.util.Arrays;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -18,8 +14,6 @@ import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.player.camera.CameraController;
 import com.mygdx.player.gunControls.GunController;
-import com.mygdx.player.gunControls.GunsEnum;
-import com.mygdx.player.gunControls.guns.BaseGun;
 import com.mygdx.resources.ResourceEnum;
 
 /**
@@ -48,8 +42,7 @@ public class Player extends GameActor {
         collider.register();
         setPosition(coordinates.x, coordinates.y);
 
-        var aslist = Arrays.asList(GunsEnum.values()).stream().map(e -> e.gun()).collect(Collectors.toList());
-        GunController.get().loadGuns((BaseGun[]) aslist.toArray());
+        GunController.get().loadGuns();
         CameraController.calculateMouseAngle(center);
 
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);

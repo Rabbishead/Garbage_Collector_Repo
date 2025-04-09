@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.player.gunControls.guns.BaseGun;
 
-
 public class GunController extends Actor {
     private static GunController instance;
     private final ArrayList<BaseGun> guns;
@@ -29,13 +28,22 @@ public class GunController extends Actor {
     }
 
     /**
+     * Gets the guns from the GunsEnum to add them to the Gunlist.
+     */
+    public void loadGuns() {
+        loadGuns(GunsEnum.values());
+    }
+
+    /**
      * Adds a chain of guns to the Gunlist.
      * 
      * @param guns The guns instances to add.
      */
-    public void loadGuns(BaseGun ...guns) {
-        for (BaseGun gun : guns) {
-            this.guns.add(gun);
+    public void loadGuns(GunsEnum... guns) {
+        for (GunsEnum gun : guns) {
+            if (!gun.isActive())
+                continue;
+            this.guns.add(gun.gun());
         }
     }
 
