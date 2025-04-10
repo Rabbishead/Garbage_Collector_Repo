@@ -1,6 +1,7 @@
 package com.mygdx.screens.game.arenas;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.Utils;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
 import com.mygdx.entities.npcs.NPC;
@@ -19,7 +20,7 @@ public class SandstoneArena extends PlayableScreen {
     private Reflection reflection = new Reflection.ReflectionBuilder()
             .coordinates(new Vector2(300, 300))
             .texture(ResourceEnum.BLACKMARKETEER)
-            .path(new String[] {"-"})
+            .path(new String[] { "-" })
             .complexDialoguePath("dialogues/complexTest.json")
             .build();
 
@@ -27,22 +28,24 @@ public class SandstoneArena extends PlayableScreen {
         super("ARENA_ROOM_1", "assets\\map\\arenaRoom1\\sandstone_map.tmx");
         stage.addActor(testNPC2);
         stage.addActor(reflection);
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
     }
 
     @Override
     public void show() {
         super.show();
-
+        if (Math.random() < 0.5f)
+            Utils.playAudio(ResourceEnum.REFLECTION_1);
+        else
+            Utils.playAudio(ResourceEnum.REFLECTION_3);
         player.setMovementStyle(Player.Styles.REALTIME);
-        player.setX(player.getX());
-        player.setY(player.getY());
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        if(TileMapCollisionsManager.changeMovementStyle()) player.swapMovementStyle();
+        if (TileMapCollisionsManager.changeMovementStyle())
+            player.swapMovementStyle();
     }
 }

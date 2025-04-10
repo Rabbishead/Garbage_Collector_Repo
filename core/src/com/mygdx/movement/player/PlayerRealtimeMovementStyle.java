@@ -14,7 +14,7 @@ import java.util.Objects;
  * RealtimeMovement for the overworld
  */
 public class PlayerRealtimeMovementStyle extends MovementStyle {
-    
+
     private final Actor player;
     private String lastDirection;
 
@@ -53,11 +53,13 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
                 direction = "wS";
             }
         }
-        if(finalPosition.x == 0 && finalPosition.y == 0) direction = "-";
+        if (finalPosition.x == 0 && finalPosition.y == 0)
+            direction = "-";
         if (direction.equals("-")) {
             direction = "i" + lastDirection.substring(1);
         }
-        if(TileMapCollisionsManager.getCurrentTileProprieties() == null) return "";
+        if (TileMapCollisionsManager.getCurrentTileProprieties() == null)
+            return "";
         if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);
             player.setY(player.getY() + finalPosition.y);

@@ -20,20 +20,20 @@ public class ActorAnimationManager {
     private final Animation<TextureRegion> walkLeftAnimation;
 
     private Animation<TextureRegion> currentAnimation;
-    
+
     private TextureRegion currentFrame;
 
-    private float stateTime; //changes with delta
+    private float stateTime; // changes with delta
 
-    public ActorAnimationManager(ResourceEnum e){
+    public ActorAnimationManager(ResourceEnum e) {
         Texture walkSheet = Utils.getTexture(e);
 
         int FRAME_COLS = 7;
         int FRAME_ROWS = 3;
 
         TextureRegion[][] tmp = TextureRegion.split(walkSheet,
-				walkSheet.getWidth() / FRAME_COLS,
-				walkSheet.getHeight() / FRAME_ROWS);
+                walkSheet.getWidth() / FRAME_COLS,
+                walkSheet.getHeight() / FRAME_ROWS);
 
         TextureRegion[] idleDownFrames = new TextureRegion[FRAME_ROWS];
         TextureRegion[] idleRightFrames = new TextureRegion[FRAME_ROWS];
@@ -46,12 +46,12 @@ public class ActorAnimationManager {
         TextureRegion[] walkLeftFrames = new TextureRegion[FRAME_ROWS];
 
         idleUpFrames[0] = tmp[0][4];
-		for (int i = 0; i < FRAME_ROWS; i++) {
+        for (int i = 0; i < FRAME_ROWS; i++) {
             idleDownFrames[i] = tmp[i][0];
             idleRightFrames[i] = tmp[i][1];
             idleLeftFrames[i] = tmp[i][2];
 
-			walkDownFrames[i] = tmp[i][3];
+            walkDownFrames[i] = tmp[i][3];
             walkUpFrames[i] = tmp[i][4];
             walkRightFrames[i] = tmp[i][5];
             walkLeftFrames[i] = tmp[i][6];
@@ -68,7 +68,7 @@ public class ActorAnimationManager {
 
         currentAnimation = idleDown;
 
-		stateTime = 0f;
+        stateTime = 0f;
     }
 
     /**
@@ -81,15 +81,16 @@ public class ActorAnimationManager {
     /**
      * updates currentFrame state
      */
-    public void updateAnimation(float delta){
+    public void updateAnimation(float delta) {
         stateTime += delta;
         currentFrame = currentAnimation.getKeyFrame(stateTime, true);
     }
 
     /**
-     * @param direction iS: idleDown, iD:idleRight, iA: idleLeft, iW: idleUp, wS: walkDown, wW: walkUp, wA: walkLeft, wD: walkRight
-     * */
-    public void setCurrentAnimation(String direction){
+     * @param direction iS: idleDown, iD:idleRight, iA: idleLeft, iW: idleUp, wS:
+     *                  walkDown, wW: walkUp, wA: walkLeft, wD: walkRight
+     */
+    public void setCurrentAnimation(String direction) {
         switch (direction) {
             case "iS" -> currentAnimation = idleDown;
             case "iD" -> currentAnimation = idleRight;

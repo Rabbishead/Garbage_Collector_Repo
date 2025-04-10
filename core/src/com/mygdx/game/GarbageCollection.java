@@ -8,9 +8,9 @@ import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateManager;
 
 public class GarbageCollection extends Game {
-	
+
 	@Override
-	public void create () {
+	public void create() {
 		Utils.setGame(this);
 		SavingsManager.load();
 		StateManager.updateState("isEntering", "false");
@@ -22,12 +22,12 @@ public class GarbageCollection extends Game {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		super.render();
 	}
-	
+
 	@Override
-	public void dispose () {
+	public void dispose() {
 		Utils.dispose();
 	}
 }

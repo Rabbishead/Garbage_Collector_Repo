@@ -2,40 +2,127 @@ package com.mygdx.hitboxes;
 
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
-
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.Utils;
 
 public class Collider extends Polygon {
     private String[] tags;
     private String stringTags;
     private String[] searchTags;
     private boolean collided;
+    private Vector2 center;
     private BiConsumer<Collider, Hitbox> onHit;
     private BiConsumer<Collider, Hitbox> onLeave;
     private ArrayList<String> keys;
+    public final boolean isNull;
 
-    public Collider(float x, float y, float width, float height, float degrees, String tags, String searchTags) {
-        super(new float[] { 0, 0, width, 0, width, height, 0, height });
-        this.setPosition(x, y);
-        this.setOrigin(width / 2, height / 2);
-        this.setRotation(degrees);
+    /**
+     * Creates a Collider with specified position, size, rotation, tags, and form.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param center     the collider's center coordinates.
+     * @param width      as large as the sea!
+     * @param height     as tall as the sky!
+     * @param degrees    specifies the collider's rotation.
+     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param searchTags specifies what hiboxes can the collider collide with.
+     * @param vertices   an array whose elements in pairs represent the x and y of
+     *                   the polygon's vertices.
+     */
+    public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags,
+            float[] vertices) {
+        super(vertices);
+        this.center = center;
+        setOrigin(width / 2, height / 2);
+        setPosition();
+        setRotation(degrees);
         this.tags = tags.split(",");
         this.searchTags = searchTags.split(",");
-        this.stringTags = tags;
-        this.collided = false;
-        this.keys = new ArrayList<>();
+        stringTags = tags;
+        collided = false;
+        keys = new ArrayList<>();
+        isNull = false;
     }
 
-    public Collider(float x, float y, float width, float height, float degrees, String tags) {
-        this(x, y, width, height, degrees, tags, "all");
+    /**
+     * Creates a box Collider with specified position, size, rotation, and tags.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param center     the collider's center coordinates.
+     * @param width      as large as the sea!
+     * @param height     as tall as the sky!
+     * @param degrees    specifies the collider's rotation.
+     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param searchTags specifies what hiboxes can the collider collide with.
+     */
+    public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags) {
+        this(center, width, height, degrees, tags, searchTags,
+                new float[] { 0, 0, width, 0, width, height, 0, height });
     }
 
-    public Collider(float x, float y, float width, float height, float degrees) {
-        this(x, y, width, height, degrees, "none", "all");
+    /**
+     * Creates a box Collider with specified position, size, rotation, and tags.
+     * Tags are a list of names separated by a comma, the String should contain no
+     * spaces.
+     * 
+     * @param center  the collider's center coordinates.
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the collider's rotation.
+     * @param tags    collider's tags to differentiate what to do on collision.
+     */
+    public Collider(Vector2 center, float width, float height, float degrees, String tags) {
+        this(center, width, height, degrees, tags, "all");
     }
 
+    /**
+     * Creates a box Collider with specified position, size, and rotation.
+     * 
+     * @param center  the collider's center coordinates.
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the collider's rotation.
+     */
+    public Collider(Vector2 center, float width, float height, float degrees) {
+        this(center, width, height, degrees, "none");
+    }
+
+    /**
+     * Creates a box Collider with specified position and size.
+     * 
+     * @param center the collider's center coordinates.
+     * @param width  as large as the sea!
+     * @param height as tall as the sky!
+     */
+    public Collider(Vector2 center, float width, float height) {
+        this(center, width, height, 0);
+    }
+
+    /**
+     * Creates a voided Collider to modify with no consequences before creating the
+     * actual Collider.
+     */
     public Collider() {
         super();
+        isNull = true;
+    }
+
+    public void setPosition() {
+        super.setPosition(center.x - getOriginX(), center.y - getOriginY());
+    }
+
+    public void setPosition(Vector2 center) {
+        this.center = center;
+        setPosition();
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        this.center = new Vector2(x, y);
+        setPosition();
     }
 
     public void onHit(Hitbox h) {
@@ -95,5 +182,29 @@ public class Collider extends Polygon {
 
     public void setOnLeave(BiConsumer<Collider, Hitbox> onLeave) {
         this.onLeave = onLeave;
+    }
+
+    /***
+     * Register method to add the Collider to the Event handler with a check.
+     * 
+     * @return {@code true} if the Collider has been added.
+     */
+    public boolean register() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().registerCollider(this);
+        return true;
+    }
+
+    /***
+     * Register method to remove the Collider to the Event handler with a check.
+     * 
+     * @return {@code true} if the Collider has been removed.
+     */
+    public boolean unregister() {
+        if (isNull)
+            return false;
+        Utils.getHitboxHandler().unRegisterCollider(this);
+        return true;
     }
 }

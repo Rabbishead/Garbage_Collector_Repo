@@ -5,13 +5,13 @@ import com.mygdx.Data;
 import com.mygdx.screens.generic.GenericScreen;
 
 /**
- * generic class for every GUI  
+ * generic class for every GUI
  */
-public abstract class GuiScreen extends GenericScreen{
+public abstract class GuiScreen extends GenericScreen {
 
-    public GuiScreen(){
+    public GuiScreen() {
         super();
-        camera.translate((float) Data.VIEWPORT_X /2, (float) Data.VIEWPORT_Y /2, 0);
+        camera.translate((float) Data.VIEWPORT_X / 2, (float) Data.VIEWPORT_Y / 2, 0);
     }
 
     @Override

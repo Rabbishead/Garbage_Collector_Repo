@@ -23,14 +23,14 @@ public class TileSetManager implements Telegraph {
     private final TiledMap map;
     private ArrayList<Door> doors;
 
-    public TileSetManager(String path, String roomName){
+    public TileSetManager(String path, String roomName) {
         map = new TmxMapLoader().load(path);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
     }
 
-    public void render(OrthographicCamera camera){
+    public void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         tryChangeRoom();
@@ -40,49 +40,51 @@ public class TileSetManager implements Telegraph {
         return map;
     }
 
-    private void loadDoors(){
+    private void loadDoors() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int w = 0; w < layer.getWidth(); w++) {
             for (int h = 0; h < layer.getHeight(); h++) {
                 TiledMapTile tile = layer.getCell(w, h).getTile();
-                MapProperties prop = 
-                    tile instanceof AnimatedTiledMapTile ? 
-                        ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties() : 
-                        tile.getProperties();
-                if(prop.get("name") == null) continue;
+                MapProperties prop = tile instanceof AnimatedTiledMapTile
+                        ? ((AnimatedTiledMapTile) tile).getCurrentFrame().getProperties()
+                        : tile.getProperties();
+                if (prop.get("name") == null)
+                    continue;
                 doors.add(
-                    new Door(
-                        prop.get("name").toString(), 
-                        prop.get("destination").toString(), 
-                        prop.get("orientation").toString(), 
-                        new Vector2((w) * 32, (h) * 32)));
+                        new Door(
+                                prop.get("name").toString(),
+                                prop.get("destination").toString(),
+                                prop.get("orientation").toString(),
+                                new Vector2((w) * 32, (h) * 32)));
             }
         }
     }
 
-    public void replaceAllWallables(){
+    public void replaceAllWallables() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
 
-                if(cell == null) continue;
+                if (cell == null)
+                    continue;
 
                 MapProperties properties = cell.getTile().getProperties();
-                if(properties.get("blockable") == null) continue;
+                if (properties.get("blockable") == null)
+                    continue;
 
                 cell.setTile(map.getTileSets().getTile(7));
             }
         }
     }
 
-
-    /** 
-     * if player is on the tile of a door, changes current screen based on the properties of the tile
-    */
-    public void tryChangeRoom(){
+    /**
+     * if player is on the tile of a door, changes current screen based on the
+     * properties of the tile
+     */
+    public void tryChangeRoom() {
         MapProperties properties = TileMapCollisionsManager.getCurrentTileProprieties();
-        if(properties.get("name") == null){
+        if (properties.get("name") == null) {
             StateManager.updateState("isExiting", "false");
             return;
         }
@@ -90,18 +92,19 @@ public class TileSetManager implements Telegraph {
         Door intersectingDoor = null;
 
         for (Door door : doors) {
-            if(door.getCenter().dst(Utils.getPlayer().getCoords()) < 32){
+            if (door.getCenter().dst(Utils.getPlayer().getCoords()) < 32) {
                 intersectingDoor = door;
             }
         }
-        if(intersectingDoor == null) return;
+        if (intersectingDoor == null)
+            return;
 
-        if(!StateManager.getState("isEntering").equals("true") && !StateManager.getState("isExiting").equals("true")){
+        if (!StateManager.getState("isEntering").equals("true") && !StateManager.getState("isExiting").equals("true")) {
             Utils.getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
             StateManager.updateState("isEntering", "true");
             intersectingDoor.print();
         }
-        if(!Utils.getPlayer().isAutoWalking() && StateManager.getState("isEntering").equals("true")){
+        if (!Utils.getPlayer().isAutoWalking() && StateManager.getState("isEntering").equals("true")) {
             StateManager.updateState("isEntering", "false");
             StateManager.updateState("isExiting", "true");
             String[] temp = intersectingDoor.getDestination().split("_");
@@ -109,31 +112,32 @@ public class TileSetManager implements Telegraph {
             Utils.setScreen(ScreensManager.getPlayableScreen(temp[0] + "_" + temp[1] + "_" + temp[2]));
         }
     }
-    public Vector2 getCoord(){
+
+    public Vector2 getCoord() {
         for (Door door : doors) {
-            if(door.getName().equals(StateManager.getState("destination"))){
+            if (door.getName().equals(StateManager.getState("destination"))) {
                 return door.getCenter();
             }
         }
         return new Vector2();
     }
 
-    public Vector2 getExitPoint(){
+    public Vector2 getExitPoint() {
         for (Door door : doors) {
-            if(door.getName().equals(StateManager.getState("destination"))){
+            if (door.getName().equals(StateManager.getState("destination"))) {
                 return door.getExitPoint();
             }
         }
         return new Vector2();
     }
 
-    public void debug(){
+    public void debug() {
         doors.forEach(Door::print);
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(2 == msg.message){
+        if (2 == msg.message) {
             replaceAllWallables();
         }
         return true;

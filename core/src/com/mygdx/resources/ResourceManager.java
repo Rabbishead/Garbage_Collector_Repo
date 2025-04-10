@@ -1,18 +1,22 @@
 package com.mygdx.resources;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class ResourceManager {
 
     private final AssetManager manager;
     private final EnumMap<ResourceEnum, String> pathMap;
+    private final EnumMap<ResourceEnum, String> audioMap;
 
     public ResourceManager() {
         manager = new AssetManager();
         pathMap = new EnumMap<>(ResourceEnum.class);
+        audioMap = new EnumMap<>(ResourceEnum.class);
         loadPathMap();
         loadTextures();
     }
@@ -20,6 +24,9 @@ public class ResourceManager {
     private void loadTextures() {
         for (ResourceEnum key : pathMap.keySet()) {
             manager.load(pathMap.get(key), Texture.class);
+        }
+        for (ResourceEnum key : audioMap.keySet()) {
+            manager.load(audioMap.get(key), Music.class);
         }
     }
 
@@ -41,11 +48,30 @@ public class ResourceManager {
         pathMap.put(ResourceEnum.CHOICE, "dialogues/images/choice.png");
         pathMap.put(ResourceEnum.JERKINS, "npcs/jenkins_spritesheet.png");
         pathMap.put(ResourceEnum.BLACKMARKETEER, "npcs/blackmarketeer_spritesheet.png");
+
+        audioMap.put(ResourceEnum.REFLECTION_1, "audio/reflection_1.mp3");
+        audioMap.put(ResourceEnum.REFLECTION_2, "audio/reflection_2.mp3");
+        audioMap.put(ResourceEnum.REFLECTION_3, "audio/reflection_3.mp3");
+        audioMap.put(ResourceEnum.REFLECTION_4, "audio/reflection_4.mp3");
+        audioMap.put(ResourceEnum.REFLECTION_5, "audio/reflection_5.mp3");
     }
 
     public Texture getTexture(ResourceEnum e) {
         manager.finishLoadingAsset(pathMap.get(e));
         return manager.get(pathMap.get(e));
+    }
+
+    public Music getAudio(ResourceEnum e) {
+        manager.finishLoadingAsset(audioMap.get(e));
+        return manager.get(audioMap.get(e));
+    }
+
+    public ArrayList<Music> getAllAudio() {
+        ArrayList<Music> audioArr = new ArrayList<>();
+        for (ResourceEnum e : audioMap.keySet()) {
+            audioArr.add(getAudio(e));
+        }
+        return audioArr;
     }
 
     public void dispose() {

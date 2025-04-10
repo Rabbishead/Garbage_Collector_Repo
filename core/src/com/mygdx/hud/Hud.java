@@ -11,12 +11,12 @@ import com.mygdx.dialogues.ComplexDialogue;
 import com.mygdx.hud.actors.Fps;
 import com.mygdx.hud.actors.HealthBar;
 
-public class Hud implements Disposable{
+public class Hud implements Disposable {
     private final Stage stage;
     private final Fps fps;
     private ComplexDialogue complexDialogue;
 
-    public Hud(){
+    public Hud() {
         FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
         stage = new Stage(viewport);
         fps = new Fps();
@@ -24,7 +24,8 @@ public class Hud implements Disposable{
         HealthBar healthBar = new HealthBar();
         stage.addActor(healthBar);
     }
-    public void draw(){
+
+    public void draw() {
         stage.draw();
     }
 
@@ -33,7 +34,8 @@ public class Hud implements Disposable{
 
         DelayManager.updateDelay(complexDialogue);
 
-        if(complexDialogue != null) complexDialogue.manage();
+        if (complexDialogue != null)
+            complexDialogue.manage();
     }
 
     @Override
@@ -42,17 +44,17 @@ public class Hud implements Disposable{
         fps.dispose();
     }
 
-    public void addComponent(Actor actor){
+    public void addComponent(Actor actor) {
         stage.addActor(actor);
-        if(actor instanceof ComplexDialogue){
+        if (actor instanceof ComplexDialogue) {
             complexDialogue = (ComplexDialogue) actor;
             DelayManager.registerObject(complexDialogue, 100);
-        } 
+        }
     }
 
-    public void removeDialogue(){
+    public void removeDialogue() {
         stage.getActors().forEach(actor -> {
-            if(actor instanceof ComplexDialogue){
+            if (actor instanceof ComplexDialogue) {
                 actor.remove();
                 return;
             }

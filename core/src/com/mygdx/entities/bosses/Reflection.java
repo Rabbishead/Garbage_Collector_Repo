@@ -42,27 +42,26 @@ public class Reflection extends NPC {
 
         Vector2 playerPos = Utils.getPlayer().getCoords();
 
-        if(!Utils.getPlayer().isTiledWalking()) {
+        if (!Utils.getPlayer().isTiledWalking()) {
             getActions().clear();
             return;
         }
-        switch (stateController.getState()){
+        switch (stateController.getState()) {
             case STILL -> {
                 getActions().clear();
             }
             case FOLLOW_PLAYER -> {
-                if(TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)){
+                if (TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)) {
                     movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
                     addAction(movement);
                 }
-
-                if(Utils.getPlayer().getCoords().dst(getCoords()) < 100){
+                if (Utils.getPlayer().getCoords().dst(getCoords()) < 100) {
                     stateController.setState(StateController.StateEnum.FLEE);
                     getActions().clear();
                 }
             }
             case CIRLE_AROUND -> {
-                if(TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)){
+                if (TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)) {
 
                 }
                 System.out.println("CIRCLING");
@@ -70,15 +69,15 @@ public class Reflection extends NPC {
             case FLEE -> {
                 CameraController.calculateThowardsPos(playerPos, getCoords());
                 float angle = CameraController.getXAngle();
-                float rand = new Random().nextFloat()%0.8f;
-                Vector2 mov = new Vector2(1,rand).setAngleDeg(angle).scl(2);
+                float rand = new Random().nextFloat() % 0.8f;
+                Vector2 mov = new Vector2(1, rand).setAngleDeg(angle).scl(2);
 
-                if(TileMapCollisionsManager.canMove(getX() + mov.x, getY() + mov.y)){
+                if (TileMapCollisionsManager.canMove(getX() + mov.x, getY() + mov.y)) {
                     setX(getX() + mov.x);
                     setY(getY() + mov.y);
                 }
 
-                if(Utils.getPlayer().getCoords().dst(getCoords()) > 500){
+                if (Utils.getPlayer().getCoords().dst(getCoords()) > 500) {
                     stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
                     getActions().clear();
                 }
@@ -90,7 +89,6 @@ public class Reflection extends NPC {
                 System.out.println("NOT IN A STATE");
             }
         }
-
     }
 
     @Override
@@ -98,7 +96,7 @@ public class Reflection extends NPC {
         super.positionChanged();
     }
 
-    public static class ReflectionBuilder extends NPCBuilder{
+    public static class ReflectionBuilder extends NPCBuilder {
 
         public ReflectionBuilder coordinates(Vector2 coordinates) {
             super.coordinates(coordinates);
@@ -109,10 +107,12 @@ public class Reflection extends NPC {
             this.textureEnum = texture;
             return this;
         }
+
         public ReflectionBuilder path(String[] path) {
             this.path = path;
             return this;
         }
+
         public ReflectionBuilder complexDialoguePath(String path) {
             this.complexDialoguePath = path;
             return this;

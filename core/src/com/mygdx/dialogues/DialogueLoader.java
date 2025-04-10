@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 
 public class DialogueLoader {
-    
+
     /**
      * Contains all the dialogue lines of the selected language
      */
@@ -15,7 +15,7 @@ public class DialogueLoader {
     /**
      * all the supported languages
      */
-    public enum Languages{
+    public enum Languages {
         ITALIAN,
         ENGLISH,
         SPANISH,
@@ -34,11 +34,18 @@ public class DialogueLoader {
     public static void loadFile() {
         File file = null;
         switch (activeLanguage) {
-            case ITALIAN -> { file = new File("assets/dialogues/lang/dialoguesIta.txt"); }
-            case ENGLISH -> { file = new File("assets/dialogues/lang/dialoguesEng.txt"); }
-            case FRENCH -> {}
-            case SPANISH -> {}
-            case RUSSIAN -> {}
+            case ITALIAN -> {
+                file = new File("assets/dialogues/lang/dialoguesIta.txt");
+            }
+            case ENGLISH -> {
+                file = new File("assets/dialogues/lang/dialoguesEng.txt");
+            }
+            case FRENCH -> {
+            }
+            case SPANISH -> {
+            }
+            case RUSSIAN -> {
+            }
         }
 
         loadedLines = new HashMap<>();
@@ -68,7 +75,7 @@ public class DialogueLoader {
     /**
      * sets the active language
      */
-    public static void setLang(Languages language){
+    public static void setLang(Languages language) {
         activeLanguage = language;
     }
 }

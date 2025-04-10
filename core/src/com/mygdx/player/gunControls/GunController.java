@@ -7,13 +7,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.delay.DelayManager;
-import com.mygdx.player.gunControls.guns.Gun;
+import com.mygdx.player.gunControls.guns.BaseGun;
 
 public class GunController extends Actor {
     private static GunController instance;
-    private final ArrayList<Gun> guns;
+    private final ArrayList<BaseGun> guns;
     private int gunIndex;
-    private Gun currentGun;
+    private BaseGun currentGun;
 
     public static GunController get() {
         if (instance == null)
@@ -28,20 +28,26 @@ public class GunController extends Actor {
     }
 
     /**
-     * Adds the gun to the list
-     * @param gun The gun to add
-     * @return This instance for chaining
+     * Gets the guns from the GunsEnum to add them to the Gunlist.
      */
-    public GunController loadGun(Gun gun) {
-        guns.add(gun);
-        return instance;
+    public void loadGuns() {
+        loadGuns(GunsEnum.values());
     }
 
-    public void loadGuns(ArrayList<Gun> guns) {
-        this.guns.addAll(guns);
+    /**
+     * Adds a chain of guns to the Gunlist.
+     * 
+     * @param guns The guns instances to add.
+     */
+    public void loadGuns(GunsEnum... guns) {
+        for (GunsEnum gun : guns) {
+            if (!gun.isActive())
+                continue;
+            this.guns.add(gun.gun());
+        }
     }
 
-    public void removeGun(Gun gun) {
+    public void removeGun(BaseGun gun) {
         guns.remove(gun);
     }
 

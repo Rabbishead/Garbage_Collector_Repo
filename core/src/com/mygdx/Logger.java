@@ -8,24 +8,20 @@ public class Logger {
     private static BufferedWriter bw;
 
     public static void init() {
-        try{
+        try {
             bw = new BufferedWriter(new FileWriter("log.txt"));
-
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("You bozo deleted the log file");
-        };
+        }
     }
 
-    public static void log(String s){
-        try{
+    public static void log(String s) {
+        try {
             bw.write(s);
             bw.newLine();
             bw.flush();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 }

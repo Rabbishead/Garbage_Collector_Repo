@@ -17,19 +17,18 @@ public class CityRoom2 extends PlayableScreen {
             .build();
 
     private NPC reflection = new NPC.NPCBuilder()
-        .coordinates(new Vector2(100, 1200))
-        .texture(ResourceEnum.PLAYER)
-        .path(new String[] {"-"})
-        .complexDialoguePath("dialogues/complexTest.json")
-        .build();
-    
+            .coordinates(new Vector2(100, 1200))
+            .texture(ResourceEnum.PLAYER)
+            .path(new String[] { "-" })
+            .complexDialoguePath("dialogues/complexTest.json")
+            .build();
 
-    public CityRoom2(){
+    public CityRoom2() {
         super("CITY_ROOM_2", "assets\\map\\cityRoom2\\cityRoom2.tmx");
         stage.addActor(lamp1);
         stage.addActor(reflection);
 
-        stage.getCamera().translate(player.getX(),player.getY(), 0);
+        stage.getCamera().translate(player.getX(), player.getY(), 0);
     }
 
     @Override
