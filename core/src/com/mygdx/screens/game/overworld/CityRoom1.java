@@ -30,6 +30,13 @@ public class CityRoom1 extends PlayableScreen {
             .singlePieceHeight(4)
             .build();
 
+    private ForegroundMapComponent longLamp = new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(400, 1000))
+            .texture(ResourceEnum.LONG_LAMP)
+            .singlePieceWidth(2)
+            .singlePieceHeight(2)
+            .build();
+
     private Reflection reflection = new Reflection.ReflectionBuilder()
             .coordinates(new Vector2(200, 1200))
             .texture(ResourceEnum.BLACKMARKETEER)
@@ -54,6 +61,7 @@ public class CityRoom1 extends PlayableScreen {
     public CityRoom1() {
         super("CITY_ROOM_1", "assets\\map\\cityRoom1\\cityRoom1.tmx");
         stage.addActor(lamp1);
+        stage.addActor(longLamp);
         stage.addActor(palace1);
         stage.addActor(palace2);
         stage.addActor(reflection);

@@ -12,6 +12,7 @@ public enum ResourceEnum {
     PLAYBUTTON,
     HEALTH_BAR,
     LAMP,
+    LONG_LAMP,
     PALACE,
     COMPLEX_DIALOGUE,
     SIMPLE_DIALOGUE,
