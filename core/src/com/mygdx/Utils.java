@@ -132,7 +132,7 @@ public class Utils {
     }
 
     public static void stopAllAudio() {
-        manager.getAllAudio().stream().filter(Music::isPlaying).forEach(Music::stop);
+        manager.getAllAudio().filter(Music::isPlaying).forEach(Music::stop);
     }
 
     public static void setDebugString(String debugString) {
