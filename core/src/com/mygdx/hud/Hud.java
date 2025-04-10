@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.ComplexDialogue;
+import com.mygdx.hud.actors.DebugData;
 import com.mygdx.hud.actors.Fps;
 import com.mygdx.hud.actors.HealthBar;
 
@@ -16,6 +17,8 @@ public class Hud implements Disposable {
     private final Fps fps;
     private ComplexDialogue complexDialogue;
 
+    private DebugData debugData;
+
     public Hud() {
         FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
         stage = new Stage(viewport);
@@ -23,6 +26,10 @@ public class Hud implements Disposable {
         stage.addActor(fps);
         HealthBar healthBar = new HealthBar();
         stage.addActor(healthBar);
+
+        debugData = new DebugData();
+
+        stage.addActor(debugData);
     }
 
     public void draw() {
@@ -59,5 +66,9 @@ public class Hud implements Disposable {
                 return;
             }
         });
+    }
+
+    public void setDebugSting(String debugSting) {
+        debugData.setText(debugSting);
     }
 }

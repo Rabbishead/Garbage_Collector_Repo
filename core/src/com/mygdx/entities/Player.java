@@ -8,12 +8,12 @@ import com.mygdx.messages.MsgManager;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
+import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.hitboxes.Collider;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
-import com.mygdx.player.camera.CameraController;
-import com.mygdx.player.gunControls.GunController;
 import com.mygdx.resources.ResourceEnum;
 
 /**

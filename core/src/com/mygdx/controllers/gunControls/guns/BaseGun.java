@@ -1,4 +1,4 @@
-package com.mygdx.player.gunControls.guns;
+package com.mygdx.controllers.gunControls.guns;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
-import com.mygdx.player.camera.CameraController;
+import com.mygdx.controllers.camera.CameraController;
 
 public class BaseGun extends Actor {
     protected Sprite s;
@@ -24,6 +24,9 @@ public class BaseGun extends Actor {
         s.setOrigin(-pos.x, -pos.y);
 
         this.angleOffset = angleOffset;
+    }
+
+    public BaseGun() {
     }
 
     @Override
@@ -69,6 +72,12 @@ public class BaseGun extends Actor {
     @Override
     protected void positionChanged() {
         s.setPosition(getX(), getY());
+    }
+
+    public void onSwitched() {
+    }
+
+    public void onCurrent() {
     }
 
     public int leftTrigger() {

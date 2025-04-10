@@ -1,6 +1,6 @@
-package com.mygdx.player.gunControls;
+package com.mygdx.controllers.gunControls;
 
-import com.mygdx.player.gunControls.guns.*;
+import com.mygdx.controllers.gunControls.guns.*;
 
 public enum GunsEnum {
     SNIPER(new Sniper(), true);

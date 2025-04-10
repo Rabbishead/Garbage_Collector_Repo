@@ -6,11 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Logger;
 import com.mygdx.Utils;
+import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.player.camera.CameraController;
 import com.mygdx.resources.ResourceEnum;
 
 import javax.swing.plaf.nimbus.State;

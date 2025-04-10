@@ -1,0 +1,35 @@
+package com.mygdx.hud.actors;
+
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Disposable;
+import com.mygdx.Data;
+
+public class DebugData extends Actor implements Disposable{
+    private final BitmapFont font;
+
+    private String text = "";
+
+    public DebugData() {
+        font = new BitmapFont();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        font.draw(batch, "Debug: =" + text, Data.VIEWPORT_X-128,
+                getStage().getCamera().viewportHeight);
+    }
+
+    @Override
+    public void dispose() {
+        font.dispose();
+    }
+
+    public String getText() {
+        return text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
+}

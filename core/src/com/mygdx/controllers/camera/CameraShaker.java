@@ -1,4 +1,4 @@
-package com.mygdx.player.camera;
+package com.mygdx.controllers.camera;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.MathUtils;

@@ -1,8 +1,8 @@
-package com.mygdx.player.gunControls.guns;
+package com.mygdx.controllers.gunControls.guns;
 
 import com.mygdx.Utils;
-import com.mygdx.player.gunControls.GunController;
-import com.mygdx.player.gunControls.projectiles.Stone;
+import com.mygdx.controllers.gunControls.GunController;
+import com.mygdx.controllers.gunControls.projectiles.Stone;
 import com.mygdx.resources.ResourceEnum;
 
 public class Slingshot extends BaseGun {

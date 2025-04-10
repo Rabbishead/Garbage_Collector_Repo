@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
+import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.messages.MsgManager;
-import com.mygdx.player.camera.CameraController;
 
 /**
  * generic abstract class for every screen

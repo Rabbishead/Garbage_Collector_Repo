@@ -1,4 +1,4 @@
-package com.mygdx.player.gunControls.projectiles;
+package com.mygdx.controllers.gunControls.projectiles;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
