@@ -35,6 +35,8 @@ public class ComplexDialogue extends Actor {
 
     private Story story;
 
+    private final int CHOICE_WIDTH = 410, CHOICE_HEIGHT = 128;
+
     public ComplexDialogue(String path) {
         setX(0);
         setY(0);
@@ -60,13 +62,15 @@ public class ComplexDialogue extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (!choice1String.isEmpty())
-            batch.draw(choiceTexture, 32, 64, 410, 128);
-        if (!choice2String.isEmpty())
-            batch.draw(choiceTexture, Data.VIEWPORT_X - 410 - 32, 64, 410, 128);
-        batch.draw(questionTexture, 32, Data.VIEWPORT_Y - 128 - 128, Data.VIEWPORT_X - 64, 128);
-        font.draw(batch, choice1String, 32 + 32, 64 + 32);
-        font.draw(batch, choice2String, Data.VIEWPORT_X - 410, 64 + 32);
+        if (!choice1String.isEmpty()){
+            batch.draw(choiceTexture, 32, 64, CHOICE_WIDTH, CHOICE_HEIGHT);
+            font.draw(batch, choice1String, 64, 96);
+        }
+        if (!choice2String.isEmpty()){
+            batch.draw(choiceTexture, Data.VIEWPORT_X - CHOICE_WIDTH - 32, 64, CHOICE_WIDTH, CHOICE_HEIGHT);
+            font.draw(batch, choice2String, Data.VIEWPORT_X - CHOICE_WIDTH, 96);
+        }
+        batch.draw(questionTexture, 32, Data.VIEWPORT_Y - 256, Data.VIEWPORT_X - 64, CHOICE_HEIGHT);
         font.draw(batch, questionString, 64, Data.VIEWPORT_Y - 160);
     }
 
@@ -150,7 +154,7 @@ public class ComplexDialogue extends Actor {
 
         } catch (Exception e) {
 
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
