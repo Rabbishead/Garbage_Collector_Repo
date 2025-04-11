@@ -76,9 +76,9 @@ public class CityRoom1 extends PlayableScreen {
     public CityRoom1() {
         super("CITY_ROOM_1", "assets\\map\\cityRoom1\\cityRoom1.tmx");
         Stream.of(mapComponents).forEach(comp -> stage.addActor(comp));
-        //stage.addActor(reflection);
-        //stage.addActor(testNPC1);
-        //stage.addActor(testNPC2);
+        stage.addActor(reflection);
+        stage.addActor(testNPC1);
+        stage.addActor(testNPC2);
 
         stageMsg.addListener(testNPC1, MsgManager.codes.get(MsgManager.MSG.DIALOGUE_DONE));
         stageMsg.addListener(testNPC2, 0);
