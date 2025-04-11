@@ -4,25 +4,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.Logger;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
-
-import javax.swing.plaf.nimbus.State;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.Random;
 
 public class Reflection extends NPC {
 
-    private Action movement;
     private StateController stateController;
 
     public Reflection(NPCBuilder npcBuilder) {
@@ -52,7 +43,7 @@ public class Reflection extends NPC {
             }
             case FOLLOW_PLAYER -> {
                 if (TileMapCollisionsManager.canMove(playerPos.x, playerPos.y)) {
-                    movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
+                    Action movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
                     addAction(movement);
                 }
                 if (Utils.getPlayer().getCoords().dst(getCoords()) < 100) {

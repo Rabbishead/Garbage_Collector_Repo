@@ -22,11 +22,11 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center     the collider's center coordinates.
+     * @param center     the colliders' center coordinates.
      * @param width      as large as the sea!
      * @param height     as tall as the sky!
-     * @param degrees    specifies the collider's rotation.
-     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param degrees    specifies the colliders' rotation.
+     * @param tags       colliders' tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
      * @param vertices   an array whose elements in pairs represent the x and y of
      *                   the polygon's vertices.
@@ -51,11 +51,11 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center     the collider's center coordinates.
+     * @param center     the colliders' center coordinates.
      * @param width      as large as the sea!
      * @param height     as tall as the sky!
-     * @param degrees    specifies the collider's rotation.
-     * @param tags       collider's tags to differentiate what to do on collision.
+     * @param degrees    specifies the colliders' rotation.
+     * @param tags       colliders' tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
      */
     public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags) {
@@ -68,11 +68,11 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center  the collider's center coordinates.
+     * @param center  the colliders' center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
-     * @param degrees specifies the collider's rotation.
-     * @param tags    collider's tags to differentiate what to do on collision.
+     * @param degrees specifies the colliders' rotation.
+     * @param tags    colliders' tags to differentiate what to do on collision.
      */
     public Collider(Vector2 center, float width, float height, float degrees, String tags) {
         this(center, width, height, degrees, tags, "all");
@@ -81,10 +81,10 @@ public class Collider extends Polygon {
     /**
      * Creates a box Collider with specified position, size, and rotation.
      * 
-     * @param center  the collider's center coordinates.
+     * @param center  the colliders' center coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
-     * @param degrees specifies the collider's rotation.
+     * @param degrees specifies the colliders' rotation.
      */
     public Collider(Vector2 center, float width, float height, float degrees) {
         this(center, width, height, degrees, "none");
@@ -93,7 +93,7 @@ public class Collider extends Polygon {
     /**
      * Creates a box Collider with specified position and size.
      * 
-     * @param center the collider's center coordinates.
+     * @param center the colliders' center coordinates.
      * @param width  as large as the sea!
      * @param height as tall as the sky!
      */
@@ -102,7 +102,7 @@ public class Collider extends Polygon {
     }
 
     /**
-     * Creates a voided Collider to modify with no consequences before creating the
+     * Creates a voided Collider to modify with no consequences of creating the
      * actual Collider.
      */
     public Collider() {

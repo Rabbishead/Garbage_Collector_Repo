@@ -16,11 +16,7 @@ public class HitboxHandler {
 
     public void registerHitbox(Hitbox h) {
         for (String string : h.getTags()) {
-            CopyOnWriteArrayList<Hitbox> list = hitboxes.get(string);
-            if (list == null) {
-                list = new CopyOnWriteArrayList<>();
-                hitboxes.put(string, list);
-            }
+            CopyOnWriteArrayList<Hitbox> list = hitboxes.computeIfAbsent(string, k -> new CopyOnWriteArrayList<>());
             list.add(h);
         }
     }

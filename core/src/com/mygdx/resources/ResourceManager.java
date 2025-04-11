@@ -41,7 +41,7 @@ public class ResourceManager {
     public Stream<Music> getAllAudio() {
         return Stream.of(ResourceEnum.values())
             .filter(e -> e.type.equals(TypeEnum.AUDIO))
-            .map(e -> getAudio(e));
+            .map(this::getAudio);
     }
 
     public void dispose() {

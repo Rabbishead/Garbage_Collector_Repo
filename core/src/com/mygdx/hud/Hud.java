@@ -63,7 +63,6 @@ public class Hud implements Disposable {
         stage.getActors().forEach(actor -> {
             if (actor instanceof ComplexDialogue) {
                 actor.remove();
-                return;
             }
         });
     }
