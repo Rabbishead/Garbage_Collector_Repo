@@ -104,8 +104,8 @@ public class Reflection extends NPC {
             return this;
         }
 
-        public ReflectionBuilder complexDialoguePath(String path) {
-            this.complexDialoguePath = path;
+        public ReflectionBuilder story(ResourceEnum e) {
+            this.story = Utils.getStory(e);
             return this;
         }
 

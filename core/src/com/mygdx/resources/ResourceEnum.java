@@ -36,6 +36,11 @@ public enum ResourceEnum {
     COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),
     SIMPLE_DIALOGUE("dialogues/images/dialogueBox.jpg", TypeEnum.TEXTURE),
     CHOICE("dialogues/images/choice.png", TypeEnum.TEXTURE),
+    ADEPTUS_1("adeptus1_JSON.json", TypeEnum.DIALOGUE),
+    ADEPTUS_2("adeptus2_JSON.json", TypeEnum.DIALOGUE),
+    ADEPTUS_3("adeptus3_JSON.json", TypeEnum.DIALOGUE),
+    ADEPTUS_4("adeptus4_JSON.json", TypeEnum.DIALOGUE),
+
     
     //MUSIC
     REFLECTION_1("audio/reflection_1.mp3", TypeEnum.AUDIO),
@@ -46,8 +51,8 @@ public enum ResourceEnum {
 
     //SOUND EFFECTS
 
-    String label;
-    TypeEnum type;
+    public String label;
+    public TypeEnum type;
 
     ResourceEnum(String label, TypeEnum type) {
         this.label = label;

@@ -23,8 +23,6 @@ public class MapComponentAnimationManager {
         int FRAME_COLS = animationSheet.getWidth() / 32 / width;
         int FRAME_ROWS = animationSheet.getHeight() / 32 / height;
 
-        System.out.println(FRAME_COLS + " " + FRAME_ROWS);
-
         TextureRegion[][] matrix = TextureRegion.split(animationSheet,
                 animationSheet.getWidth() / FRAME_COLS,
                 animationSheet.getHeight() / FRAME_ROWS);

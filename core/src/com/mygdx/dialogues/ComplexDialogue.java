@@ -12,13 +12,7 @@ import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateManager;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Boss dialogue manager
@@ -37,7 +31,7 @@ public class ComplexDialogue extends Actor {
 
     private final int CHOICE_WIDTH = 410, CHOICE_HEIGHT = 128;
 
-    public ComplexDialogue(String path) {
+    public ComplexDialogue(Story story) {
         setX(0);
         setY(0);
         questionString = "";
@@ -45,17 +39,8 @@ public class ComplexDialogue extends Actor {
         choice2String = "";
         questionTexture = Utils.getTexture(ResourceEnum.COMPLEX_DIALOGUE);
         choiceTexture = Utils.getTexture(ResourceEnum.CHOICE);
-
+        this.story = story;
         font = new BitmapFont();
-
-        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream(path);
-        String json = getString(systemResourceAsStream);
-
-        try {
-            story = new Story(json);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         continueStory();
     }
 
@@ -97,25 +82,6 @@ public class ComplexDialogue extends Actor {
 
     public String getChoice2Text() {
         return choice2String;
-    }
-
-    public String getString(InputStream systemResourceAsStream) {
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(Objects.requireNonNull(systemResourceAsStream), StandardCharsets.UTF_8))) {
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return sb.toString().replace('\uFEFF', ' ');
     }
 
     public String getQuestion() {

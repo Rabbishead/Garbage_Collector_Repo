@@ -1,7 +1,6 @@
 package com.mygdx.screens.game.overworld;
 
 import java.util.stream.Stream;
-
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
@@ -56,21 +55,21 @@ public class CityRoom1 extends PlayableScreen {
             .coordinates(new Vector2(200, 1200))
             .texture(ResourceEnum.BLACKMARKETEER)
             .path(new String[] { "-" })
-            .complexDialoguePath("dialogues/complexTest.json")
+            .story(ResourceEnum.ADEPTUS_1)
             .build();
 
     private NPC testNPC1 = new NPC.NPCBuilder()
             .coordinates(new Vector2(160, 1000))
             .texture(ResourceEnum.JERKINS)
             .path(new String[] { "DWW--ASS", "WWDSS-A" })
-            .complexDialoguePath("dialogues/generics/adeptus1_JSON.json")
+            .story(ResourceEnum.ADEPTUS_1)
             .build();
 
     private NPC testNPC2 = new NPC.NPCBuilder()
             .coordinates(new Vector2(300, 700))
             .texture(ResourceEnum.JERKINS)
             .path(new String[] { "DWW--ASS", "WWDSS-A" })
-            .complexDialoguePath("dialogues/generics/adeptus2_JSON.json")
+            .story(ResourceEnum.ADEPTUS_1)
             .build();
 
     public CityRoom1() {

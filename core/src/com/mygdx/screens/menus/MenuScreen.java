@@ -9,8 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.Data;
 import com.mygdx.Utils;
-import com.mygdx.dialogues.DialogueLoader;
-import com.mygdx.dialogues.DialogueLoader.Languages;
+import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.generic.gui.GuiScreen;
@@ -19,7 +18,7 @@ public class MenuScreen extends GuiScreen {
 
     public MenuScreen() {
         super();
-        DialogueLoader.setLang(Languages.ITALIAN);
+        Utils.setActiveLanguage(LangEnum.ITA);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class MenuScreen extends GuiScreen {
         engButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DialogueLoader.setLang(Languages.ENGLISH);
+                Utils.setActiveLanguage(LangEnum.ENG);
                 return true;
             }
         });
@@ -56,7 +55,7 @@ public class MenuScreen extends GuiScreen {
         itaButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DialogueLoader.setLang(Languages.ITALIAN);
+                Utils.setActiveLanguage(LangEnum.ITA);
                 return true;
             }
         });
@@ -67,7 +66,6 @@ public class MenuScreen extends GuiScreen {
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DialogueLoader.loadFile();
                 Utils.setScreen(SavingsManager.getLastRoom());
                 return true;
             }

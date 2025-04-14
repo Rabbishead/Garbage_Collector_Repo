@@ -14,14 +14,14 @@ public class SandstoneArena extends PlayableScreen {
             .coordinates(new Vector2(200, 300))
             .texture(ResourceEnum.PLAYER)
             .path(new String[] { "-" })
-            .complexDialoguePath("dialogues/generics/adeptus3_JSON.json")
+            .story(ResourceEnum.ADEPTUS_2)
             .build();
 
     private Reflection reflection = new Reflection.ReflectionBuilder()
             .coordinates(new Vector2(300, 300))
             .texture(ResourceEnum.BLACKMARKETEER)
             .path(new String[] { "-" })
-            .complexDialoguePath("dialogues/complexTest.json")
+            .story(ResourceEnum.ADEPTUS_2)
             .build();
 
     public SandstoneArena() {

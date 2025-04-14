@@ -4,9 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.bladecoder.ink.runtime.Story;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
+import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
 import com.mygdx.screens.generic.GenericScreen;
@@ -17,17 +19,32 @@ public class Utils {
 
     private static Stage stage;
 
-    private static final ResourceManager manager = new ResourceManager();
+    private static ResourceManager manager;
     private static HitboxHandler hitboxHandler;
     private static Player player;
     private static GenericScreen activeScreen; // Current Screen
     private static Hud currentHud; // Current HUD
+
+    private static LangEnum activeLanguage = LangEnum.ITA;
+
+    public static LangEnum getActiveLanguage() {
+        return activeLanguage;
+    }
+    public static void setActiveLanguage(LangEnum activeLanguage) {
+        if(manager == null) manager = new ResourceManager();
+        Utils.activeLanguage = activeLanguage;
+        manager.updateLang();
+    }
 
     /**
      * @Texture already loaded
      */
     public static Texture getTexture(ResourceEnum e) {
         return manager.getTexture(e);
+    }
+
+    public static Story getStory(ResourceEnum e){
+        return manager.getDialogueStory(e);
     }
 
     /**

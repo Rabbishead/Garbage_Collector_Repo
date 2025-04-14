@@ -7,11 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.ComplexDialogue;
-import com.mygdx.dialogues.DialogueLoader;
 import com.mygdx.dialogues.NPCDialogue;
 import com.mygdx.entities.GameActor;
 import com.mygdx.hitboxes.Hitbox;
@@ -51,11 +51,13 @@ public class NPC extends GameActor {
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
-                Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.complexDialoguePath));
+                Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
                 StateManager.updateState("pause", "true");
                 return;
             }
             if (collider.containsTag("player") && !smallDialogueGoing) {
+
+                /* 
                 npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
                         DialogueLoader.getLine("testNPCDialogue1"));
                 Utils.getStage().addActor(npcDialogue);
@@ -64,7 +66,8 @@ public class NPC extends GameActor {
                     npcDialogue.remove();
                     smallDialogueGoing = false;
                     collider.setCollided(false);
-                });
+                    
+                });*/
             } else if (collider.containsTag("projectile")) {
                 if (lf <= 0) {
                     this.remove();
@@ -121,7 +124,7 @@ public class NPC extends GameActor {
         protected Vector2 coordinates;
         protected ResourceEnum textureEnum;
         protected String[] path;
-        protected String complexDialoguePath;
+        protected Story story;
 
         public NPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
@@ -138,8 +141,8 @@ public class NPC extends GameActor {
             return this;
         }
 
-        public NPCBuilder complexDialoguePath(String path) {
-            this.complexDialoguePath = path;
+        public NPCBuilder story(ResourceEnum e) {
+            this.story = Utils.getStory(e);
             return this;
         }
 

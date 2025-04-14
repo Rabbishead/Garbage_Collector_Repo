@@ -20,7 +20,7 @@ public class CityRoom2 extends PlayableScreen {
             .coordinates(new Vector2(100, 1200))
             .texture(ResourceEnum.PLAYER)
             .path(new String[] { "-" })
-            .complexDialoguePath("dialogues/complexTest.json")
+            .story(ResourceEnum.ADEPTUS_2)
             .build();
 
     public CityRoom2() {

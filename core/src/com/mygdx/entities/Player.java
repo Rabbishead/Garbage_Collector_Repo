@@ -16,9 +16,6 @@ import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-/**
- * player class with collision managing
- */
 public class Player extends GameActor {
 
     private final ActorAnimationManager animationManager;
