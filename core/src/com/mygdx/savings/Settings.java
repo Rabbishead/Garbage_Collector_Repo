@@ -10,18 +10,20 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
     private String lastRoom;
     private Vector2 lastRoomCoordinates = new Vector2();
+    private boolean[] flags;
 
     public void updateData() {
         lastRoom = Utils.getActiveScreen().getName();
         lastRoomCoordinates = ScreensManager.getPlayableScreen(ScreensManager.getLastPlayableActiveScreen())
                 .getPlayerCoordinates();
+        flags = new boolean[] { true, true, false };
     }
 
     @Override
     public void write(Json json) {
         json.writeValue("LAST_ROOM", lastRoom);
         json.writeValue("PLAYER", lastRoomCoordinates);
-
+        json.writeValue("FLAGS", flags);
     }
 
     @Override
@@ -30,6 +32,8 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
         lastRoomCoordinates.x = jsonData.get("PLAYER").getFloat("x");
         lastRoomCoordinates.y = jsonData.get("PLAYER").getFloat("y");
+
+        flags = jsonData.get("FLAGS").asBooleanArray();
     }
 
     public Vector2 getPlayerCoordinates() {
@@ -38,5 +42,9 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
     public String getLastRoom() {
         return lastRoom;
+    }
+
+    public boolean getFlag(int i) {
+        return flags[i];
     }
 }

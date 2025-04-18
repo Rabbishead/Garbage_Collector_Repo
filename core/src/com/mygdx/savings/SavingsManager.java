@@ -51,4 +51,8 @@ public class SavingsManager {
     public static PlayableScreen getLastRoom() {
         return ScreensManager.getPlayableScreen(s.getLastRoom());
     }
+
+    public static boolean getFlag(int index){
+        return s.getFlag(index);
+    }
 }

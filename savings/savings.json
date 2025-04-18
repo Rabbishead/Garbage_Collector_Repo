@@ -1,7 +1,12 @@
 {
 "LAST_ROOM": "CITY_ROOM_1",
 "PLAYER": {
-	"x": 670,
-	"y": 295.98218
-}
+	"x": 947.8725,
+	"y": 162.59361
+},
+"FLAGS": [
+	true,
+	true,
+	false
+]
 }

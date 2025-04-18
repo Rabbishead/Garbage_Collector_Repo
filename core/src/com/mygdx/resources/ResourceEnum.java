@@ -13,6 +13,7 @@ public enum ResourceEnum {
     BULLET("bullets/bullet.png", TypeEnum.TEXTURE),
     DEFAULT("weapons/default.png", TypeEnum.TEXTURE),
     SNIPER("weapons/sniper.png", TypeEnum.TEXTURE),
+    USBLADE("weapons/usblade.png", TypeEnum.TEXTURE),
 
     //MENU
     ITAFLAG("dialogues/images/itaFlag.png", TypeEnum.TEXTURE),
@@ -36,6 +37,7 @@ public enum ResourceEnum {
     COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),
     SIMPLE_DIALOGUE("dialogues/images/dialogueBox.jpg", TypeEnum.TEXTURE),
     CHOICE("dialogues/images/choice.png", TypeEnum.TEXTURE),
+
     ADEPTUS_1("adeptus1_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_2("adeptus2_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_3("adeptus3_JSON.json", TypeEnum.DIALOGUE),
@@ -48,6 +50,8 @@ public enum ResourceEnum {
     REFLECTION_3("audio/reflection_3.mp3", TypeEnum.AUDIO),
     REFLECTION_4("audio/reflection_4.mp3", TypeEnum.AUDIO),
     REFLECTION_5("audio/reflection_5.mp3", TypeEnum.AUDIO);
+
+
 
     //SOUND EFFECTS
 

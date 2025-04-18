@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
-import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.messages.MsgManager.MSG;
 
@@ -114,5 +113,12 @@ public class BaseGun extends Actor {
         pos = new Vector2(x, y);
         pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
         s.setOrigin(-pos.x, -pos.y);
+    }
+
+    public void destroy() {
+    }
+
+    public void discard() {
+        // TODO DISCARD
     }
 }

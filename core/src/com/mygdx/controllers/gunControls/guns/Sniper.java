@@ -14,10 +14,6 @@ public class Sniper extends BaseGun {
         super(Utils.getTexture(ResourceEnum.SNIPER), 0);
         setOffset(30, 0);
         flip(true, false);
-    }
-
-    @Override
-    public void onCurrent() {
         DelayManager.registerObject(this, 90f);
     }
 
@@ -31,12 +27,6 @@ public class Sniper extends BaseGun {
             return;
         if (bullets < 100)
             bullets += 1;
-        
-    }
-
-    @Override
-    public void onSwitched() {
-        DelayManager.unregisterObject(this);
     }
 
     public int leftTrigger() {
@@ -71,5 +61,10 @@ public class Sniper extends BaseGun {
 
     public int getBullets() {
         return bullets;
+    }
+
+    @Override
+    public void destroy() {
+        DelayManager.unregisterObject(this);
     }
 }
