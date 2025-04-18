@@ -40,8 +40,8 @@ public class NPC extends GameActor {
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
         npcDialogue = new NPCDialogue(0, 0, "");
-        DelayManager.registerObject(npcDialogue, 0);
-        DelayManager.registerObject(this, 0);
+        DelayManager.registerObject(npcDialogue, 0f);
+        DelayManager.registerObject(this, 0f);
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);

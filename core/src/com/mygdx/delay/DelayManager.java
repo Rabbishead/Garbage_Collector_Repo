@@ -4,15 +4,17 @@ import java.util.HashMap;
 
 import java.util.function.Consumer;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Class used to subscribe objects to a delay and update delays
  */
 public class DelayManager {
     // insert here an object and an integer, this will be the amount of delay
     // associated with the object
-    private static final HashMap<Object, Integer> originalDelays = new HashMap<>();
+    private static final HashMap<Object, Float> originalDelays = new HashMap<>();
     // here you can see the current state of the delay for the given object
-    private static final HashMap<Object, Integer> currentDelays = new HashMap<>();
+    private static final HashMap<Object, Float> currentDelays = new HashMap<>();
     // actions called when delay ends
     private static final HashMap<Object, Consumer<?>> actions = new HashMap<>();
 
@@ -22,7 +24,7 @@ public class DelayManager {
      * @param o    the object you wish to register
      * @param time the amount of delay you need for the object
      */
-    public static void registerObject(Object o, Integer time) {
+    public static void registerObject(Object o, Float time) {
         originalDelays.put(o, time);
         currentDelays.put(o, time);
     }
@@ -34,7 +36,7 @@ public class DelayManager {
      * @param time   the amount of delay you need for the object
      * @param action action invoked when delay ends
      */
-    public static void registerObject(Object o, Integer time, Consumer<?> action) {
+    public static void registerObject(Object o, Float time, Consumer<?> action) {
         registerObject(o, time);
         actions.put(o, action);
     }
@@ -60,12 +62,12 @@ public class DelayManager {
      * updates the delay associated with o
      */
     public static void updateDelay(Object o) {
-        Integer i = currentDelays.get(o);
+        Float i = currentDelays.get(o);
         if (i == null)
             return;
 
         if (i > 0) {
-            currentDelays.replace(o, i - 2);
+            currentDelays.replace(o, i - 100 * Gdx.graphics.getDeltaTime());
             return;
         }
 
@@ -79,7 +81,7 @@ public class DelayManager {
     /**
      * @return current delay associated with o
      */
-    public static Integer getCurrentDelay(Object o) {
+    public static Float getCurrentDelay(Object o) {
         return currentDelays.get(o);
     }
 

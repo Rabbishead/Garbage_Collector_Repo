@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
-
 import java.util.Objects;
 
 /**
@@ -30,25 +29,25 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         String direction = "-";
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            finalPosition.x += 2;
+            finalPosition.x += 100;
             if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
                 direction = "wD";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            finalPosition.x -= 2;
+            finalPosition.x -= 100;
             if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
                 direction = "wA";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            finalPosition.y += 2;
+            finalPosition.y += 100;
             if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
                 direction = "wW";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            finalPosition.y -= 2;
+            finalPosition.y -= 100;
             if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
                 direction = "wS";
             }
@@ -60,6 +59,8 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         }
         if (TileMapCollisionsManager.getCurrentTileProprieties() == null)
             return "";
+
+        finalPosition.scl(Gdx.graphics.getDeltaTime());
         if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);
             player.setY(player.getY() + finalPosition.y);

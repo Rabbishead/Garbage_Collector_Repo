@@ -18,7 +18,7 @@ public class Sniper extends BaseGun {
 
     @Override
     public void onCurrent() {
-        DelayManager.registerObject(this, 90);
+        DelayManager.registerObject(this, 90f);
     }
 
     @Override
@@ -41,6 +41,7 @@ public class Sniper extends BaseGun {
 
     public int leftTrigger() {
         if (bullets > 0) {
+            super.leftTrigger();
             Utils.getStage().addActor(
                     new Projectile(Utils.getPlayer().center, getWidth(),
                             CameraController.getMouseAngle() + angleOffset));
@@ -57,12 +58,14 @@ public class Sniper extends BaseGun {
     }
 
     public int rightTrigger() {
+        super.rightTrigger();
         Utils.getStage().addActor(
                 new Projectile(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
         return 2;
     }
 
     public int middleTrigger() {
+        super.middleTrigger();
         return 0;
     }
 

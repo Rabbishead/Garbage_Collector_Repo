@@ -6,6 +6,7 @@ import com.mygdx.entities.Player;
 import com.mygdx.entities.bosses.Reflection;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.messages.MsgManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
@@ -29,6 +30,8 @@ public class SandstoneArena extends PlayableScreen {
         stage.addActor(testNPC2);
         stage.addActor(reflection);
         stage.getCamera().translate(player.getX(), player.getY(), 0);
+
+        stageMsg.addListener(reflection, MsgManager.codes.get(MsgManager.MSG.SHOT));
     }
 
     @Override

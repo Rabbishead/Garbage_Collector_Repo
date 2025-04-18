@@ -20,7 +20,7 @@ public class DebugData extends Actor implements Disposable{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         g.setText(font, "Debug: =" + text);
-        System.out.println(g.width);
+        
         font.draw(batch, g, Data.VIEWPORT_X-128,
                 getStage().getCamera().viewportHeight);
     }

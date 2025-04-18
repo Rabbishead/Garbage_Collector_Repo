@@ -1,5 +1,6 @@
 package com.mygdx.movement.npc;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.delay.DelayManager;
@@ -22,7 +23,7 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
         this.npc = npc;
         this.path = path;
         lastDirection = '-';
-        DelayManager.registerObject(this, 200);
+        DelayManager.registerObject(this, 200f);
         innerIndex = 0;
         outerIndex = (int) (path.length * Math.random());
         startingCoordinates = new Vector2(npc.getX(), npc.getY());
@@ -43,21 +44,23 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
 
         switch (currentDirection) {
             case 'D' -> {
-                finalPosition.x += 0.75F;
+                finalPosition.x += 60;
             }
             case 'A' -> {
-                finalPosition.x -= 0.75F;
+                finalPosition.x -= 60;
             }
             case 'W' -> {
-                finalPosition.y += 0.75F;
+                finalPosition.y += 60;
             }
             case 'S' -> {
-                finalPosition.y -= 0.75F;
+                finalPosition.y -= 60;
             }
             case '-' -> {
                 isWalking = false;
             }
         }
+
+        finalPosition.scl(Gdx.graphics.getDeltaTime());
 
         float newX = npc.getX() + finalPosition.x, newY = npc.getY() + finalPosition.y;
         if (TileMapCollisionsManager.canMove(newX, newY)) {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 
@@ -17,7 +18,11 @@ public class MapComponentAnimationManager {
 
     private float stateTime;
 
-    public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate) {
+   private float delay;
+
+   private float animationRate;
+
+    public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate, float delay) {
         Texture animationSheet = Utils.getTexture(e);
 
         int FRAME_COLS = animationSheet.getWidth() / 32 / width;
@@ -29,13 +34,17 @@ public class MapComponentAnimationManager {
 
         for (int i = 0; i < matrix.length; i++) {
             animationMap.put(i, new Animation<>(animationRate, matrix[i]));
+            animationMap.get(i).setPlayMode(PlayMode.LOOP);
         }
 
         currentAnimation = 0;
 
         stateTime = 0f;
-    }
 
+        this.delay = delay;
+
+        this.animationRate = animationRate;
+    }
     /**
      * @return currant frame in the animation
      */
@@ -48,6 +57,16 @@ public class MapComponentAnimationManager {
      */
     public void updateAnimation(float delta) {
         stateTime += delta;
+
+        //System.out.println(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime));
+
+        if(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) == 0){
+            animationMap.get(currentAnimation).setFrameDuration(delay);
+        }
+        else{
+            animationMap.get(currentAnimation).setFrameDuration(animationRate);
+        }
+
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
     }
 

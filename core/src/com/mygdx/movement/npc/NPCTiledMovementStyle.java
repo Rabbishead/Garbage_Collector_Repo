@@ -22,7 +22,7 @@ public class NPCTiledMovementStyle extends MovementStyle {
         inputs = new HashSet<>();
         this.player = player;
         movingDir = "-";
-        DelayManager.registerObject(this, 14);
+        DelayManager.registerObject(this, 14f);
     }
 
     public String move() {

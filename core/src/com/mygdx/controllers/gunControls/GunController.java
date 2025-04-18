@@ -26,7 +26,7 @@ public class GunController extends Actor {
         gunlist = new ArrayList<>();
         dummyGun = new DummyGun();
         gunlist.add(dummyGun);
-        DelayManager.registerObject(this, 10);
+        DelayManager.registerObject(this, 10f);
         init();
     }
 
@@ -69,7 +69,7 @@ public class GunController extends Actor {
         init();
     }
 
-    public void setCooldown(int cooldown) {
+    public void setCooldown(float cooldown) {
         DelayManager.registerObject(this, cooldown);
         DelayManager.resetDelay(this);
     }

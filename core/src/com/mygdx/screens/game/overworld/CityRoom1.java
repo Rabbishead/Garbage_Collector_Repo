@@ -16,21 +16,23 @@ public class CityRoom1 extends PlayableScreen {
 
     private ForegroundMapComponent[] mapComponents = new ForegroundMapComponent[] {
         new ForegroundMapComponent.ForegroundMapComponentBuilder()
-            .coordinates(new Vector2(TILE * 20, TILE * 8))
+            .coordinates(new Vector2(TILE * 20, TILE * 12))
             .texture(ResourceEnum.LAMP)
             .singlePieceWidth(1)
             .singlePieceHeight(2)
+            .animationRate(1000f)
             .build(),
 
         new ForegroundMapComponent.ForegroundMapComponentBuilder()
             .coordinates(new Vector2(TILE * 20, TILE * 7))
-            .texture(ResourceEnum.ABANDONED_BUILDING)
-            .singlePieceWidth(4)
+            .texture(ResourceEnum.SPARK_BUILDING_2)
+            .singlePieceWidth(5)
             .singlePieceHeight(2)
+            .animationRate(0.1f)
             .build(),
 
         new ForegroundMapComponent.ForegroundMapComponentBuilder()
-            .coordinates(new Vector2(200, 400))
+            .coordinates(new Vector2(TILE * 10, TILE *20))
             .texture(ResourceEnum.PALACE)
             .singlePieceWidth(4)
             .singlePieceHeight(4)
@@ -79,9 +81,7 @@ public class CityRoom1 extends PlayableScreen {
         stage.addActor(testNPC1);
         stage.addActor(testNPC2);
 
-        stageMsg.addListener(testNPC1, MsgManager.codes.get(MsgManager.MSG.DIALOGUE_DONE));
-        stageMsg.addListener(testNPC2, 0);
-        stageMsg.addListener(reflection, 0);
+        stageMsg.addListener(reflection, MsgManager.codes.get(MsgManager.MSG.SHOT));
 
         stage.getCamera().translate(player.getX(), player.getY(), 0);
     }

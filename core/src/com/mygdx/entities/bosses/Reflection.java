@@ -1,5 +1,6 @@
 package com.mygdx.entities.bosses;
 
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -9,6 +10,8 @@ import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.messages.MsgManager;
+import com.mygdx.messages.MsgManager.MSG;
 import com.mygdx.resources.ResourceEnum;
 import java.util.Random;
 
@@ -87,6 +90,13 @@ public class Reflection extends NPC {
         super.positionChanged();
     }
 
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        if(msg.message == MsgManager.codes.get(MSG.SHOT)){
+            System.out.println("HEY");
+        }
+        return true;
+    }
     public static class ReflectionBuilder extends NPCBuilder {
 
         public ReflectionBuilder coordinates(Vector2 coordinates) {

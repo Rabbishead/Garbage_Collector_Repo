@@ -55,7 +55,7 @@ public class Hud implements Disposable {
         stage.addActor(actor);
         if (actor instanceof ComplexDialogue) {
             complexDialogue = (ComplexDialogue) actor;
-            DelayManager.registerObject(complexDialogue, 100);
+            DelayManager.registerObject(complexDialogue, 100f);
         }
     }
 
