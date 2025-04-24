@@ -18,6 +18,7 @@ import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
 public class NPC extends GameActor {
@@ -50,9 +51,9 @@ public class NPC extends GameActor {
         hitbox = new Hitbox(center, 16, 16, 0, "enemy,npc", true);
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
-                    && StateManager.getState("pause").equals("false") && DelayManager.isDelayOver(this)) {
+                    && StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
-                StateManager.updateState("pause", "true");
+                StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
             }
             if (collider.containsTag("player") && !smallDialogueGoing) {

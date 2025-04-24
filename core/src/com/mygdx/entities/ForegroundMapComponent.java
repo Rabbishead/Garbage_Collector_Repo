@@ -21,9 +21,10 @@ public class ForegroundMapComponent extends GameActor {
         // this.debug();
 
         float animationRate = builder.animationRate == 0 ? 4f : builder.animationRate;
+        float delay = builder.delay;
 
         animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth,
-                builder.singlePieceHeight, animationRate, 5);
+                builder.singlePieceHeight, animationRate, builder.delay);
 
         // hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true,
         // "enemy,npc");
@@ -62,6 +63,7 @@ public class ForegroundMapComponent extends GameActor {
         protected int singlePieceWidth;
         protected int singlePieceHeight;
         protected float animationRate;
+        protected float delay;
 
         public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
@@ -85,6 +87,11 @@ public class ForegroundMapComponent extends GameActor {
 
         public ForegroundMapComponentBuilder animationRate(float animationRate){
             this.animationRate = animationRate;
+            return this;
+        }
+
+        public ForegroundMapComponentBuilder delay(float delay){
+            this.delay = delay;
             return this;
         }
 

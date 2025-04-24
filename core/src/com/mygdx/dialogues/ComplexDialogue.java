@@ -11,6 +11,7 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 import java.util.ArrayList;
 
@@ -129,7 +130,7 @@ public class ComplexDialogue extends Actor {
     }
 
     public void manage() {
-        if (StateManager.getState("pause").equals("true") && DelayManager.isDelayOver(this)) {
+        if (StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)) {
 
             int numberOfChoices = getNumberOfChoices();
 
@@ -141,7 +142,7 @@ public class ComplexDialogue extends Actor {
                     continueStory();
 
                 else {
-                    StateManager.updateState("pause", "false");
+                    StateManager.updateBoolState(StateEnum.PAUSE, false);
                     DelayManager.resetDelay(this);
                     remove();
                 }
@@ -154,7 +155,7 @@ public class ComplexDialogue extends Actor {
                     continueStory();
 
                 else {
-                    StateManager.updateState("pause", "false");
+                    StateManager.updateBoolState(StateEnum.PAUSE, false);
                     DelayManager.resetDelay(this);
                     remove();
                 }

@@ -16,6 +16,7 @@ import com.mygdx.map.TileSetManager;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
+import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
 /**
@@ -45,7 +46,7 @@ public abstract class PlayableScreen extends GenericScreen {
         viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
         stage.setViewport(viewport);
 
-        if (StateManager.getState("isExiting").equals("true")) {
+        if (StateManager.getBoolState(StateEnum.IS_EXITING)) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         } else
@@ -68,7 +69,7 @@ public abstract class PlayableScreen extends GenericScreen {
 
         // tileSetManager.debug();
 
-        if (StateManager.getState("isExiting").equals("true") && !player.isAutoWalking()) {
+        if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         }
@@ -98,7 +99,7 @@ public abstract class PlayableScreen extends GenericScreen {
 
         stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));
 
-        if (StateManager.getState("pause").equals("false"))
+        if (!StateManager.getBoolState(StateEnum.PAUSE))
             stage.act(Gdx.graphics.getDeltaTime());
 
         CameraController.updateCamera();

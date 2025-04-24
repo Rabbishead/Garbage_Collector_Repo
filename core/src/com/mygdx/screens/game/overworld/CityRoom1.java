@@ -20,7 +20,8 @@ public class CityRoom1 extends PlayableScreen {
             .texture(ResourceEnum.LAMP)
             .singlePieceWidth(1)
             .singlePieceHeight(2)
-            .animationRate(1000f)
+            .animationRate(2f)
+            .delay(100)
             .build(),
 
         new ForegroundMapComponent.ForegroundMapComponentBuilder()
@@ -28,10 +29,11 @@ public class CityRoom1 extends PlayableScreen {
             .texture(ResourceEnum.SPARK_BUILDING_2)
             .singlePieceWidth(5)
             .singlePieceHeight(2)
-            .animationRate(0.1f)
+            .animationRate(0.2f)
+            .delay(1000)
             .build(),
 
-        new ForegroundMapComponent.ForegroundMapComponentBuilder()
+        /*new ForegroundMapComponent.ForegroundMapComponentBuilder()
             .coordinates(new Vector2(TILE * 10, TILE *20))
             .texture(ResourceEnum.PALACE)
             .singlePieceWidth(4)
@@ -50,7 +52,7 @@ public class CityRoom1 extends PlayableScreen {
             .texture(ResourceEnum.LONG_LAMP)
             .singlePieceWidth(2)
             .singlePieceHeight(2)
-            .build()
+            .build()*/
     };
 
     private Reflection reflection = new Reflection.ReflectionBuilder()

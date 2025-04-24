@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.mygdx.Utils;
+import com.mygdx.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
 
 public class MapComponentAnimationManager {
@@ -18,9 +19,10 @@ public class MapComponentAnimationManager {
 
     private float stateTime;
 
-   private float delay;
+    private  float prevAnimation;
 
-   private float animationRate;
+   private boolean paused;
+   private boolean alreadyPausedOnce;
 
     public MapComponentAnimationManager(ResourceEnum e, int width, int height, float animationRate, float delay) {
         Texture animationSheet = Utils.getTexture(e);
@@ -41,9 +43,11 @@ public class MapComponentAnimationManager {
 
         stateTime = 0f;
 
-        this.delay = delay;
+        prevAnimation = 0;
 
-        this.animationRate = animationRate;
+        DelayManager.registerObject(this, delay);
+
+        paused = false;
     }
     /**
      * @return currant frame in the animation
@@ -56,17 +60,34 @@ public class MapComponentAnimationManager {
      * updates currentFrame state
      */
     public void updateAnimation(float delta) {
+        prevAnimation = animationMap.get(currentAnimation).getKeyFrameIndex(stateTime);
         stateTime += delta;
 
-        //System.out.println(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime));
+        if(paused){
+            stateTime -= delta;
+            DelayManager.updateDelay(this);
+            alreadyPausedOnce = true;
 
-        if(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) == 0){
-            animationMap.get(currentAnimation).setFrameDuration(delay);
-        }
-        else{
-            animationMap.get(currentAnimation).setFrameDuration(animationRate);
+            if(DelayManager.isDelayOver(this)){
+                paused = false;
+            }
+            return;
         }
 
+        if(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) == 0 && prevAnimation != 0 && !alreadyPausedOnce){
+            currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
+            DelayManager.resetDelay(this);
+            paused = true;
+            stateTime -= delta;
+            
+            return;
+        }
+
+        if(animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) != 0){
+            paused = false;
+            alreadyPausedOnce = false;
+        } 
+        
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
     }
 

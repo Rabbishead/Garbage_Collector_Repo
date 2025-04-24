@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
 public class TileSetManager implements Telegraph {
@@ -85,7 +86,7 @@ public class TileSetManager implements Telegraph {
     public void tryChangeRoom() {
         MapProperties properties = TileMapCollisionsManager.getCurrentTileProprieties();
         if (properties.get("name") == null) {
-            StateManager.updateState("isExiting", "false");
+            StateManager.updateBoolState(StateEnum.IS_EXITING, false);
             return;
         }
 
@@ -99,23 +100,23 @@ public class TileSetManager implements Telegraph {
         if (intersectingDoor == null)
             return;
 
-        if (!StateManager.getState("isEntering").equals("true") && !StateManager.getState("isExiting").equals("true")) {
+        if (!StateManager.getBoolState(StateEnum.IS_ENTERING) && !StateManager.getBoolState(StateEnum.IS_EXITING)) {
             Utils.getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
-            StateManager.updateState("isEntering", "true");
+            StateManager.updateBoolState(StateEnum.IS_ENTERING, true);
             intersectingDoor.print();
         }
-        if (!Utils.getPlayer().isAutoWalking() && StateManager.getState("isEntering").equals("true")) {
-            StateManager.updateState("isEntering", "false");
-            StateManager.updateState("isExiting", "true");
+        if (!Utils.getPlayer().isAutoWalking() && StateManager.getBoolState(StateEnum.IS_ENTERING)) {
+            StateManager.updateBoolState(StateEnum.IS_ENTERING, false);
+            StateManager.updateBoolState(StateEnum.IS_EXITING, true);
             String[] temp = intersectingDoor.getDestination().split("_");
-            StateManager.updateState("destination", intersectingDoor.getDestination());
+            StateManager.updateStringState(StateEnum.DESTINATION, intersectingDoor.getDestination());
             Utils.setScreen(ScreensManager.getPlayableScreen(temp[0] + "_" + temp[1] + "_" + temp[2]));
         }
     }
 
     public Vector2 getCoord() {
         for (Door door : doors) {
-            if (door.getName().equals(StateManager.getState("destination"))) {
+            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION))) {
                 return door.getCenter();
             }
         }
@@ -124,7 +125,7 @@ public class TileSetManager implements Telegraph {
 
     public Vector2 getExitPoint() {
         for (Door door : doors) {
-            if (door.getName().equals(StateManager.getState("destination"))) {
+            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION))) {
                 return door.getExitPoint();
             }
         }
