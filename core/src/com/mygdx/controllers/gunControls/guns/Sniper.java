@@ -11,7 +11,7 @@ public class Sniper extends BaseGun {
     private int bullets = 100;
 
     public Sniper() {
-        super(Utils.getTexture(ResourceEnum.SNIPER), 0);
+        super(Utils.getTexture(ResourceEnum.SNIPER), Utils.getPlayer().center, 0);
         setOffset(30, 0);
         flip(true, false);
         DelayManager.registerObject(this, 90f);
