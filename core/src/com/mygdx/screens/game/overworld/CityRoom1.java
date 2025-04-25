@@ -32,6 +32,15 @@ public class CityRoom1 extends PlayableScreen {
             .animationRate(0.2f)
             .delay(1000)
             .build(),
+            
+        new ForegroundMapComponent.ForegroundMapComponentBuilder()
+            .coordinates(new Vector2(TILE * 23, TILE * 7))
+            .texture(ResourceEnum.MARMOT_PIZZA)
+            .singlePieceWidth(3)
+            .singlePieceHeight(3)
+            .animationRate(1)
+            .delay(2000)
+            .build(),
 
         /*new ForegroundMapComponent.ForegroundMapComponentBuilder()
             .coordinates(new Vector2(TILE * 10, TILE *20))

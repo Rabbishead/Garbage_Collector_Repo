@@ -32,6 +32,7 @@ public enum ResourceEnum {
     SPARK_BUILDING_1("map/city/building_skyscraper_electro_spark_animation_flow.png", TypeEnum.TEXTURE),
     SPARK_BUILDING_2("map/city/building_skyscraper_electro_spark_animation_turning_on.png", TypeEnum.TEXTURE),
     SKYSCRAPER("map/city/building_skyscraper_high.png", TypeEnum.TEXTURE),
+    MARMOT_PIZZA("assets/map/city/pizza_marmot.png", TypeEnum.TEXTURE),
 
     //DIALOGUES
     COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),
