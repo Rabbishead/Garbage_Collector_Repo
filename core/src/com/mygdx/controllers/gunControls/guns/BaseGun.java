@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.messages.MsgManager.MSG;
@@ -38,6 +39,7 @@ public class BaseGun extends Actor {
 
     @Override
     public void act(float delta) {
+        origin = Utils.getPlayer().center;
         setPosition(origin.x + pos.x, origin.y + pos.y);
         float angle = CameraController.getMouseAngle();
 

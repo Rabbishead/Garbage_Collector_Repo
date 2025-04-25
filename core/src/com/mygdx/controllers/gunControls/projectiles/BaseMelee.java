@@ -3,6 +3,7 @@ package com.mygdx.controllers.gunControls.projectiles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.hitboxes.Collider;
@@ -29,21 +30,28 @@ public class BaseMelee extends Actor {
         }
         end = angle + arc;
 
-        flipped = true;
-        setWidth(s.getWidth());
-        setHeight(s.getHeight());
+        setSize(s.getWidth(), s.getHeight());
+        setOrigin(getWidth() / 2, getHeight() / 2);
+
         pos = new Vector2(0, 0);
         s.setOrigin(-pos.x, -pos.y);
 
-        collider = new Collider(center, getWidth(), getHeight(), angle, "projectile");
+        collider = new Collider(origin, getWidth(), getHeight(), angle, "projectile");
         collider.register();
 
+        collider.setOrigin(-pos.x, -pos.y);
+
         pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
+        this.debug();
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         s.draw(batch);
+    }
+
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.polygon(collider.getTransformedVertices());
     }
 
     @Override
