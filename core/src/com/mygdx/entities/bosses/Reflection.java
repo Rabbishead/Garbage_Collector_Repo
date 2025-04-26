@@ -13,6 +13,7 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.messages.MsgManager.MSG;
 import com.mygdx.resources.ResourceEnum;
+
 import java.util.Random;
 
 public class Reflection extends NPC {
@@ -98,10 +99,16 @@ public class Reflection extends NPC {
         }
         return true;
     }
-    public static class ReflectionBuilder extends NPCBuilder {
+
+    public static class ReflectionBuilder extends NPCBuilder{
 
         public ReflectionBuilder coordinates(Vector2 coordinates) {
-            super.coordinates(coordinates);
+            this.coordinates = coordinates;
+            return this;
+        }
+
+        public ReflectionBuilder size(Vector2 size) {
+            this.size = size;
             return this;
         }
 

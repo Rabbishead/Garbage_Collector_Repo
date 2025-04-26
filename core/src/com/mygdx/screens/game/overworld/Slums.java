@@ -65,7 +65,7 @@ public class Slums extends PlayableScreen {
                         .build());
 
         Collections.addAll(npcs,
-                new Reflection.ReflectionBuilder()
+                new Reflection.NPCBuilder()
                         .coordinates(new Vector2(200, 1200))
                         .texture(ResourceEnum.BLACKMARKETEER)
                         .path(new String[] { "-" })

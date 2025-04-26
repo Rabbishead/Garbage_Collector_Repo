@@ -12,7 +12,7 @@ public class BaseMelee extends Actor {
     protected Sprite s;
     protected Vector2 pos, origin;
     protected float angle, arc, speed, end;
-    protected boolean flipped;
+    private boolean flipped;
     public Vector2 center = new Vector2();
     protected Collider collider = new Collider();
 
@@ -23,6 +23,7 @@ public class BaseMelee extends Actor {
         this.angle = angle;
         this.arc = arc;
         this.speed = speed;
+        this.flipped = flipped;
 
         if (flipped) {
             arc = arc * -1;
@@ -58,8 +59,7 @@ public class BaseMelee extends Actor {
     public void act(float delta) {
         setPosition(origin.x + pos.x, origin.y + pos.y);
 
-        // multiply by delta
-        angle += speed;
+        angle += speed * delta;
 
         s.setRotation(angle);
         collider.setRotation(angle);
@@ -96,5 +96,6 @@ public class BaseMelee extends Actor {
         pos = new Vector2(x, y);
         pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
         s.setOrigin(-pos.x, -pos.y);
+        collider.setOffset(x, y);
     }
 }

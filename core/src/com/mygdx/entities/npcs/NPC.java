@@ -23,7 +23,7 @@ import com.mygdx.states.StateManager;
 
 public class NPC extends GameActor {
 
-    protected int lf = 100;
+    protected int lf = 1;
 
     protected ActorAnimationManager animationManager;
     protected MovementStyle movementStyle;
@@ -36,7 +36,7 @@ public class NPC extends GameActor {
         super();
         setTouchable(Touchable.enabled);
 
-        setSize(32, 32);
+        setSize(npcBuilder.size.x, npcBuilder.size.y);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
@@ -58,17 +58,18 @@ public class NPC extends GameActor {
             }
             if (collider.containsTag("player") && !smallDialogueGoing) {
 
-                /* 
-                npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
-                        DialogueLoader.getLine("testNPCDialogue1"));
-                Utils.getStage().addActor(npcDialogue);
-                smallDialogueGoing = true;
-                DelayManager.registerObject(npcDialogue, 100, object -> {
-                    npcDialogue.remove();
-                    smallDialogueGoing = false;
-                    collider.setCollided(false);
-                    
-                });*/
+                /*
+                 * npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
+                 * DialogueLoader.getLine("testNPCDialogue1"));
+                 * Utils.getStage().addActor(npcDialogue);
+                 * smallDialogueGoing = true;
+                 * DelayManager.registerObject(npcDialogue, 100, object -> {
+                 * npcDialogue.remove();
+                 * smallDialogueGoing = false;
+                 * collider.setCollided(false);
+                 * 
+                 * });
+                 */
             } else if (collider.containsTag("projectile")) {
                 if (lf <= 0) {
                     this.remove();
@@ -122,13 +123,18 @@ public class NPC extends GameActor {
     }
 
     public static class NPCBuilder {
-        protected Vector2 coordinates;
+        protected Vector2 coordinates, size = new Vector2(32, 32);
         protected ResourceEnum textureEnum;
-        protected String[] path;
+        protected String[] path = new String[] { "-" };
         protected Story story;
 
         public NPCBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
+            return this;
+        }
+
+        public NPCBuilder size(Vector2 size) {
+            this.size = size;
             return this;
         }
 
