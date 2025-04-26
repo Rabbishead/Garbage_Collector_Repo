@@ -24,6 +24,11 @@ public enum ResourceEnum {
     HEALTH_BAR("hud/health.png", TypeEnum.TEXTURE),
 
     //MAP
+    SLUMS("map/slums//slums.tmx", TypeEnum.MAP),
+    RICH_DISTRICT("map/rich_disctirct/rich_district.tmx", TypeEnum.MAP),
+    PARK("map/park/park.tmx", TypeEnum.MAP),
+    REFLECTION_ARENA("map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
+
     LAMP("map/city/lamp.png", TypeEnum.TEXTURE),
     LONG_LAMP("map/city/long_lamp.png", TypeEnum.TEXTURE),
     PALACE("map/city/palace.png", TypeEnum.TEXTURE),
@@ -32,7 +37,7 @@ public enum ResourceEnum {
     SPARK_BUILDING_1("map/city/building_skyscraper_electro_spark_animation_flow.png", TypeEnum.TEXTURE),
     SPARK_BUILDING_2("map/city/building_skyscraper_electro_spark_animation_turning_on.png", TypeEnum.TEXTURE),
     SKYSCRAPER("map/city/building_skyscraper_high.png", TypeEnum.TEXTURE),
-    MARMOT_PIZZA("assets/map/city/pizza_marmot.png", TypeEnum.TEXTURE),
+    MARMOT_PIZZA("map/city/pizza_marmot.png", TypeEnum.TEXTURE),
 
     //DIALOGUES
     COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),

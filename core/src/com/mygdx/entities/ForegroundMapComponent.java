@@ -21,7 +21,6 @@ public class ForegroundMapComponent extends GameActor {
         // this.debug();
 
         float animationRate = builder.animationRate == 0 ? 4f : builder.animationRate;
-        float delay = builder.delay;
 
         animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth,
                 builder.singlePieceHeight, animationRate, builder.delay);

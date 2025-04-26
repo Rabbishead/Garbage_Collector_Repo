@@ -3,6 +3,8 @@ package com.mygdx.resources;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Utils;
 import java.io.BufferedReader;
@@ -17,10 +19,12 @@ public class ResourceManager {
 
     private final AssetManager manager;
     private final EnumMap<ResourceEnum, Story> dialogueMap;
+    private final EnumMap<ResourceEnum, TiledMap> maps;
 
     public ResourceManager() {
         manager = new AssetManager();
         dialogueMap = new EnumMap<>(ResourceEnum.class);
+        maps = new EnumMap<>(ResourceEnum.class);
         loadManager();
     }
 
@@ -36,6 +40,9 @@ public class ResourceManager {
                 case DIALOGUE -> {
                     loadDialogue(e);
                 }
+                case MAP -> {
+                    maps.put(e, new TmxMapLoader().load(e.label));
+                }
                 default -> {
                 }
             }
@@ -50,6 +57,10 @@ public class ResourceManager {
     public Music getAudio(ResourceEnum e) {
         manager.finishLoadingAsset(e.label);
         return manager.get(e.label);
+    }
+
+    public TiledMap getMap(ResourceEnum e){
+        return maps.get(e);
     }
 
     public Story getDialogueStory(ResourceEnum e) {

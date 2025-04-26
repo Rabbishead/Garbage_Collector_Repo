@@ -10,11 +10,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
@@ -24,8 +24,8 @@ public class TileSetManager implements Telegraph {
     private final TiledMap map;
     private ArrayList<Door> doors;
 
-    public TileSetManager(String path, String roomName) {
-        map = new TmxMapLoader().load(path);
+    public TileSetManager(ResourceEnum e, String roomName) {
+        map = Utils.getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
@@ -108,9 +108,10 @@ public class TileSetManager implements Telegraph {
         if (!Utils.getPlayer().isAutoWalking() && StateManager.getBoolState(StateEnum.IS_ENTERING)) {
             StateManager.updateBoolState(StateEnum.IS_ENTERING, false);
             StateManager.updateBoolState(StateEnum.IS_EXITING, true);
-            String[] temp = intersectingDoor.getDestination().split("_");
+            String[] temp = intersectingDoor.getDestination().split("-");
             StateManager.updateStringState(StateEnum.DESTINATION, intersectingDoor.getDestination());
-            Utils.setScreen(ScreensManager.getPlayableScreen(temp[0] + "_" + temp[1] + "_" + temp[2]));
+            System.out.println(temp[0]);
+            Utils.setScreen(ScreensManager.getPlayableScreen(temp[0]));
         }
     }
 

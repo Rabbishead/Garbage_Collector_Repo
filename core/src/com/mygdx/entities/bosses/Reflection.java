@@ -23,6 +23,7 @@ public class Reflection extends NPC {
         super(npcBuilder);
         stateController = new StateController();
         stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
+        Utils.subscribeToStageMsg(this, MSG.SHOT);
     }
 
     @Override

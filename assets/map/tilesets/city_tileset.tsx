@@ -12,16 +12,16 @@
  </tile>
  <tile id="17">
   <properties>
-   <property name="destination" value="CITY_ROOM_2_DOOR_1"/>
-   <property name="name" value="CITY_ROOM_1_DOOR_1"/>
-   <property name="orientation" value="w"/>
+   <property name="destination" value="PARK-SLUMS"/>
+   <property name="name" value="SLUMS-PARK"/>
+   <property name="orientation" value="d"/>
   </properties>
  </tile>
  <tile id="23">
   <properties>
-   <property name="destination" value="CITY_ROOM_3_DOOR_2"/>
-   <property name="name" value="CITY_ROOM_1_DOOR_3"/>
-   <property name="orientation" value="d"/>
+   <property name="destination" value="SLUMS-PARK"/>
+   <property name="name" value="PARK-SLUMS"/>
+   <property name="orientation" value="a"/>
   </properties>
  </tile>
  <tile id="26">
@@ -31,30 +31,30 @@
  </tile>
  <tile id="29">
   <properties>
-   <property name="destination" value="ARENA_ROOM_1_DOOR_1"/>
-   <property name="name" value="CITY_ROOM_1_DOOR_2"/>
-   <property name="orientation" value="s"/>
+   <property name="destination" value="RICH_DISTRICT-PARK"/>
+   <property name="name" value="PARK-RICH_DISTRICT"/>
+   <property name="orientation" value="d"/>
   </properties>
  </tile>
  <tile id="34">
   <properties>
-   <property name="destination" value="CITY_ROOM_1_DOOR_1"/>
-   <property name="name" value="CITY_ROOM_2_DOOR_1"/>
+   <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
+   <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="orientation" value="s"/>
   </properties>
  </tile>
  <tile id="35">
   <properties>
-   <property name="destination" value="CITY_ROOM_2_DOOR_2"/>
-   <property name="name" value="CITY_ROOM_3_DOOR_1"/>
+   <property name="destination" value="PARK-RICH_DISTRICT"/>
+   <property name="name" value="RICH_DISTRICT-PARK"/>
    <property name="orientation" value="a"/>
   </properties>
  </tile>
  <tile id="40">
   <properties>
-   <property name="destination" value="CITY_ROOM_3_DOOR_1"/>
-   <property name="name" value="CITY_ROOM_2_DOOR_2"/>
-   <property name="orientation" value="d"/>
+   <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
+   <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
+   <property name="orientation" value="w"/>
   </properties>
  </tile>
  <tile id="41">

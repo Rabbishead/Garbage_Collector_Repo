@@ -78,8 +78,7 @@ public class MapComponentAnimationManager {
             currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
             DelayManager.resetDelay(this);
             paused = true;
-            stateTime -= delta;
-            
+            stateTime = 0;
             return;
         }
 

@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.entities.GameActor;
 import com.mygdx.messages.MsgManager;
+import com.mygdx.messages.MsgManager.MSG;
 
 /**
  * generic abstract class for every screen
@@ -34,6 +36,8 @@ public abstract class GenericScreen extends ScreenAdapter{
 
         stageMsg = new MessageDispatcher();
         MsgManager.setCurrentStageMsg(stageMsg);
+
+        Utils.setActiveScreen(this);
     }
     @Override
     public void show() {
@@ -57,5 +61,9 @@ public abstract class GenericScreen extends ScreenAdapter{
     }
     public String getName() {
         return name;
+    }
+
+    public void subscribe(GameActor a, MSG msg){
+        stageMsg.addListener(a, MsgManager.codes.get(msg));
     }
 }

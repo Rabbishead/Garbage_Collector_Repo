@@ -3,11 +3,14 @@ package com.mygdx;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.bladecoder.ink.runtime.Story;
+import com.mygdx.entities.GameActor;
 import com.mygdx.entities.Player;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
+import com.mygdx.messages.MsgManager.MSG;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
@@ -45,6 +48,10 @@ public class Utils {
 
     public static Story getStory(ResourceEnum e){
         return manager.getDialogueStory(e);
+    }
+
+    public static TiledMap getMap(ResourceEnum e){
+        return manager.getMap(e);
     }
 
     /**
@@ -101,8 +108,12 @@ public class Utils {
      */
     public static void setScreen(GenericScreen newScreen) {
         stopAllAudio();
-        activeScreen = newScreen;
+        Utils.setActiveScreen(newScreen);
         game.setScreen(newScreen);
+    }
+
+    public static void setActiveScreen(GenericScreen screen){
+        activeScreen = screen;
     }
 
     /**
@@ -156,5 +167,9 @@ public class Utils {
 
     public static void setDebugString(String debugString) {
         currentHud.setDebugSting(debugString);
+    }
+
+    public static void subscribeToStageMsg(GameActor a, MSG msg){
+        getActiveScreen().subscribe(a, msg);
     }
 }

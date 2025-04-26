@@ -1,5 +1,6 @@
 package com.mygdx.screens.generic.playable;
 
+import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -8,11 +9,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
+import com.mygdx.entities.npcs.NPC;
 import com.mygdx.hitboxes.HitboxHandler;
 import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
+import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
@@ -33,13 +37,13 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected Player player;
 
-    protected PlayableScreen() {
-    }
+    protected ArrayList<ForegroundMapComponent> mapComponents;
+    protected ArrayList<NPC> npcs;
 
-    protected PlayableScreen(String name, String mapPath) {
+    protected PlayableScreen(String name, ResourceEnum map) {
         super();
         this.name = name;
-        tileSetManager = new TileSetManager(mapPath, name);
+        tileSetManager = new TileSetManager(map, name);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
         hitboxHandler = new HitboxHandler();
@@ -58,8 +62,8 @@ public abstract class PlayableScreen extends GenericScreen {
         hud = new Hud();
         Utils.setCurrentHud(hud);
 
-        stageMsg.addListener(player, 0);
-        stageMsg.addListener(tileSetManager, 2);
+        mapComponents = new ArrayList<>();
+        npcs = new ArrayList<>();
     }
 
     @Override
@@ -122,5 +126,10 @@ public abstract class PlayableScreen extends GenericScreen {
 
     public Vector2 getPlayerCoordinates() {
         return new Vector2(player.getX(), player.getY());
+    }
+
+    public void updateStage(){
+        mapComponents.forEach(comp -> stage.addActor(comp));
+        npcs.forEach(npc -> stage.addActor(npc));
     }
 }

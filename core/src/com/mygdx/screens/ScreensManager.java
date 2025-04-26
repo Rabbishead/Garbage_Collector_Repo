@@ -2,9 +2,9 @@ package com.mygdx.screens;
 
 import java.util.HashMap;
 import com.mygdx.screens.game.arenas.SandstoneArena;
-import com.mygdx.screens.game.overworld.CityRoom1;
-import com.mygdx.screens.game.overworld.CityRoom2;
-import com.mygdx.screens.game.overworld.CityRoom3;
+import com.mygdx.screens.game.overworld.Slums;
+import com.mygdx.screens.game.overworld.Park;
+import com.mygdx.screens.game.overworld.RichDistrict;
 import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
@@ -24,17 +24,17 @@ public class ScreensManager {
                 case "PAUSE_SCREEN" -> {
                     map.put("PAUSE_SCREEN", new PauseScreen());
                 }
-                case "ARENA_ROOM_1" -> {
-                    map.put("ARENA_ROOM_1", new SandstoneArena());
+                case "REFLECTION_ARENA" -> {
+                    map.put("REFLECTION_ARENA", new SandstoneArena());
                 }
-                case "CITY_ROOM_1" -> {
-                    map.put("CITY_ROOM_1", new CityRoom1());
+                case "SLUMS" -> {
+                    map.put("SLUMS", new Slums());
                 }
-                case "CITY_ROOM_2" -> {
-                    map.put("CITY_ROOM_2", new CityRoom2());
+                case "PARK" -> {
+                    map.put("PARK", new Park());
                 }
-                case "CITY_ROOM_3" -> {
-                    map.put("CITY_ROOM_3", new CityRoom3());
+                case "RICH_DISTRICT" -> {
+                    map.put("RICH_DISTRICT", new RichDistrict());
                 }
             }
         }

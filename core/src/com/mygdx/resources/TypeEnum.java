@@ -4,5 +4,6 @@ public enum TypeEnum {
     TEXTURE,
     AUDIO,
     FONT,
-    DIALOGUE;
+    DIALOGUE,
+    MAP;
 }
