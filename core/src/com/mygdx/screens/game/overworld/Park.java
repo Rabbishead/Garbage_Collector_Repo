@@ -12,7 +12,7 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 public class Park extends PlayableScreen {
 
     public Park() {
-        super("PARK", ResourceEnum.PARK);
+        super(ResourceEnum.PARK);
 
         Collections.addAll(mapComponents,
                 new ForegroundMapComponent.ForegroundMapComponentBuilder()

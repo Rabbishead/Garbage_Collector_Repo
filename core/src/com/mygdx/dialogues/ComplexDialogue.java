@@ -15,9 +15,6 @@ import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 import java.util.ArrayList;
 
-/**
- * Boss dialogue manager
- */
 public class ComplexDialogue extends Actor {
 
     private String questionString;
@@ -48,11 +45,11 @@ public class ComplexDialogue extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (!choice1String.isEmpty()){
+        if (!choice1String.isEmpty()) {
             batch.draw(choiceTexture, 32, 64, CHOICE_WIDTH, CHOICE_HEIGHT);
             font.draw(batch, choice1String, 64, 96);
         }
-        if (!choice2String.isEmpty()){
+        if (!choice2String.isEmpty()) {
             batch.draw(choiceTexture, Data.VIEWPORT_X - CHOICE_WIDTH - 32, 64, CHOICE_WIDTH, CHOICE_HEIGHT);
             font.draw(batch, choice2String, Data.VIEWPORT_X - CHOICE_WIDTH, 96);
         }
@@ -130,40 +127,42 @@ public class ComplexDialogue extends Actor {
     }
 
     public void manage() {
-        if (StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)) {
+        if (!StateManager.getBoolState(StateEnum.PAUSE) || !DelayManager.isDelayOver(this))
+            return;
 
-            int numberOfChoices = getNumberOfChoices();
+        int numberOfChoices = getNumberOfChoices();
 
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-                if (numberOfChoices > 0)
-                    chose(0);
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            if (numberOfChoices > 0)
+                chose(0);
 
-                if (canContinue())
-                    continueStory();
+            if (canContinue())
+                continueStory();
 
-                else {
-                    StateManager.updateBoolState(StateEnum.PAUSE, false);
-                    DelayManager.resetDelay(this);
-                    remove();
-                }
+            else {
+                removeDialogue();
             }
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
-                if (numberOfChoices > 0)
-                    chose(1);
+        }
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
+            if (numberOfChoices > 0)
+                chose(1);
 
-                if (canContinue())
-                    continueStory();
+            if (canContinue())
+                continueStory();
 
-                else {
-                    StateManager.updateBoolState(StateEnum.PAUSE, false);
-                    DelayManager.resetDelay(this);
-                    remove();
-                }
+            else {
+                removeDialogue();
             }
         }
     }
 
     private int getNumberOfChoices() {
         return story.getCurrentChoices().size();
+    }
+
+    private void removeDialogue(){
+        StateManager.updateBoolState(StateEnum.PAUSE, false);
+        DelayManager.resetDelay(this);
+        remove();
     }
 }

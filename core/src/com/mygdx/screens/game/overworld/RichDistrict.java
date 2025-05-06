@@ -7,7 +7,7 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 public class RichDistrict extends PlayableScreen {
 
     public RichDistrict() {
-        super("RICH_DISTRICT", ResourceEnum.RICH_DISTRICT);
+        super(ResourceEnum.RICH_DISTRICT);
         stage.getCamera().translate(player.getX(), player.getY(), 0);
     }
 

@@ -14,7 +14,7 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 public class SandstoneArena extends PlayableScreen {
 
     public SandstoneArena() {
-        super("REFLECTION_ARENA", ResourceEnum.REFLECTION_ARENA);
+        super(ResourceEnum.REFLECTION_ARENA);
 
         stage.getCamera().translate(player.getX(), player.getY(), 0);
         Collections.addAll(npcs,

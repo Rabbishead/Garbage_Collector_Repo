@@ -24,7 +24,7 @@ public class TileSetManager implements Telegraph {
     private final TiledMap map;
     private ArrayList<Door> doors;
 
-    public TileSetManager(ResourceEnum e, String roomName) {
+    public TileSetManager(ResourceEnum e) {
         map = Utils.getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();

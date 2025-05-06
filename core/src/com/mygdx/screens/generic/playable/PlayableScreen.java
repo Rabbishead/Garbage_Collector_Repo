@@ -40,10 +40,9 @@ public abstract class PlayableScreen extends GenericScreen {
     protected ArrayList<ForegroundMapComponent> mapComponents;
     protected ArrayList<NPC> npcs;
 
-    protected PlayableScreen(String name, ResourceEnum map) {
+    protected PlayableScreen(ResourceEnum map) {
         super();
-        this.name = name;
-        tileSetManager = new TileSetManager(map, name);
+        tileSetManager = new TileSetManager(map);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
         hitboxHandler = new HitboxHandler();
@@ -71,7 +70,7 @@ public abstract class PlayableScreen extends GenericScreen {
         super.show();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
-        // tileSetManager.debug();
+        // tileSetManager.debug();paolopaolo
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));

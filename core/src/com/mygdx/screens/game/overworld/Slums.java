@@ -13,7 +13,7 @@ import com.mygdx.screens.generic.playable.PlayableScreen;
 public class Slums extends PlayableScreen {
 
     public Slums() {
-        super("SLUMS", ResourceEnum.SLUMS);
+        super(ResourceEnum.SLUMS);
 
         Collections.addAll(mapComponents,
                 new ForegroundMapComponent.ForegroundMapComponentBuilder()
