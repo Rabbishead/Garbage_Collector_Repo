@@ -40,8 +40,6 @@ public class BaseMelee extends Actor {
         collider = new Collider(origin, getWidth(), getHeight(), angle, "projectile");
         collider.register();
 
-        collider.setOrigin(-pos.x, -pos.y);
-
         pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
         this.debug();
     }

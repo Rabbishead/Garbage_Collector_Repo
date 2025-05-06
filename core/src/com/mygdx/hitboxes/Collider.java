@@ -126,8 +126,10 @@ public class Collider extends Polygon {
     }
 
     public void setOffset(float x, float y) {
-        setPosition(getX() + x - getOriginX(), getY() + y - getOriginY());
-        setOrigin(-getX(), -getY());
+        Vector2 pos = new Vector2(x, y);
+        pos.set(pos.x - getOriginX(), pos.y - getOriginY());
+        setPosition(center.x + pos.x, center.y + pos.y);
+        setOrigin(-pos.x, -pos.y);
     }
 
     public void onHit(Hitbox h) {
