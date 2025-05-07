@@ -1,4 +1,4 @@
-package com.mygdx.entities.npcs;
+package com.mygdx.entities;
 
 public class StateController {
     public enum StateEnum {

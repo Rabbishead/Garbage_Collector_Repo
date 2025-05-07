@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.entities.Player;
-import com.mygdx.entities.bosses.Reflection;
+import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;

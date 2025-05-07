@@ -1,4 +1,4 @@
-package com.mygdx.entities.bosses;
+package com.mygdx.entities.npcs;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,12 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
-import com.mygdx.entities.npcs.NPC;
-import com.mygdx.entities.npcs.StateController;
+import com.mygdx.entities.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.messages.MsgManager.MSG;
-import com.mygdx.resources.ResourceEnum;
 
 import java.util.Random;
 
@@ -20,7 +18,7 @@ public class Reflection extends NPC {
 
     private StateController stateController;
 
-    public Reflection(NPCBuilder npcBuilder) {
+    public Reflection(ReflectionBuilder npcBuilder) {
         super(npcBuilder);
         stateController = new StateController();
         stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
@@ -100,35 +98,15 @@ public class Reflection extends NPC {
         return true;
     }
 
-    public static class ReflectionBuilder extends NPCBuilder{
-
-        public ReflectionBuilder coordinates(Vector2 coordinates) {
-            this.coordinates = coordinates;
-            return this;
-        }
-
-        public ReflectionBuilder size(Vector2 size) {
-            this.size = size;
-            return this;
-        }
-
-        public ReflectionBuilder texture(ResourceEnum texture) {
-            this.textureEnum = texture;
-            return this;
-        }
-
-        public ReflectionBuilder path(String[] path) {
-            this.path = path;
-            return this;
-        }
-
-        public ReflectionBuilder story(ResourceEnum e) {
-            this.story = Utils.getStory(e);
-            return this;
-        }
+    public static class ReflectionBuilder extends NPCBuilder{    
 
         public Reflection build() {
             return new Reflection(this);
+        }
+
+        @Override
+        public ReflectionBuilder getThis() {
+            return this;
         }
     }
 }

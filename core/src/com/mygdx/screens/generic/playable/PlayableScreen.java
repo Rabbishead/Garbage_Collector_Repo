@@ -70,7 +70,7 @@ public abstract class PlayableScreen extends GenericScreen {
         super.show();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
-        // tileSetManager.debug();paolopaolo
+        // tileSetManager.debug();
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));

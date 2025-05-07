@@ -7,17 +7,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.delay.DelayManager;
 import com.mygdx.dialogues.ComplexDialogue;
 import com.mygdx.dialogues.NPCDialogue;
+import com.mygdx.entities.AbstractNPCBuilder;
 import com.mygdx.entities.GameActor;
 import com.mygdx.hitboxes.Hitbox;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
-import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
@@ -122,39 +121,17 @@ public class NPC extends GameActor {
         return new Vector2(getX(), getY());
     }
 
-    public static class NPCBuilder {
-        protected Vector2 coordinates, size = new Vector2(32, 32);
-        protected ResourceEnum textureEnum;
-        protected String[] path = new String[] { "-" };
-        protected Story story;
-
-        public NPCBuilder coordinates(Vector2 coordinates) {
-            this.coordinates = coordinates;
-            return this;
-        }
-
-        public NPCBuilder size(Vector2 size) {
-            this.size = size;
-            return this;
-        }
-
-        public NPCBuilder texture(ResourceEnum texture) {
-            this.textureEnum = texture;
-            return this;
-        }
-
-        public NPCBuilder path(String[] path) {
-            this.path = path;
-            return this;
-        }
-
-        public NPCBuilder story(ResourceEnum e) {
-            this.story = Utils.getStory(e);
-            return this;
-        }
+    public static class NPCBuilder extends AbstractNPCBuilder<NPCBuilder>{    
 
         public NPC build() {
             return new NPC(this);
         }
+
+        @Override
+        public NPCBuilder getThis() {
+            return this;
+        }
     }
+
+    
 }
