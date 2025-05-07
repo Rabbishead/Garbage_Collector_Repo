@@ -42,6 +42,7 @@ public class NPC extends GameActor {
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0f);
         DelayManager.registerObject(this, 0f);
+        
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
@@ -50,7 +51,7 @@ public class NPC extends GameActor {
         hitbox = new Hitbox(center, 16, 16, 0, "enemy,npc", true);
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
-                    && StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)) {
+                    && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;

@@ -11,14 +11,6 @@ public class MsgManager {
             MSG.UNBLOCK_WALLS, 3,
             MSG.SHOT, 4);
 
-    public enum MSG {
-        DIALOGUE_TRIGGERED,
-        DIALOGUE_DONE,
-        BLOCK_WALLS,
-        UNBLOCK_WALLS,
-        SHOT;
-    }
-
     private static final MessageDispatcher systemMsg = new MessageDispatcher();
     private static MessageDispatcher currentStageMsg;
 

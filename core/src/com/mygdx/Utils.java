@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
-import com.mygdx.controllers.messages.MsgManager.MSG;
+import com.mygdx.controllers.messages.MSG;
 import com.mygdx.entities.GameActor;
 import com.mygdx.entities.Player;
 import com.mygdx.hud.Hud;

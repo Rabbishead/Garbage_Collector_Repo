@@ -7,11 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.controllers.messages.MSG;
+import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.messages.MsgManager;
-import com.mygdx.messages.MsgManager.MSG;
-import com.mygdx.resources.ResourceEnum;
 
 import java.util.Random;
 

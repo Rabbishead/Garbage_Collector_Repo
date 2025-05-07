@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.mygdx.controllers.messages.MSG;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
@@ -71,7 +72,7 @@ public class Player extends GameActor {
             movementStyle = new PlayerTiledMovementStyle();
             Utils.getStage().addActor(GunController.get());
             moveTo(new Vector2(((int) (getCoords().x / 32) * 32) + 8, ((int) (getCoords().y / 32) * 32) + 8));
-            MsgManager.sendStageMsg(MsgManager.MSG.BLOCK_WALLS);
+            MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
         } else {
             movementStyle = new PlayerRealtimeMovementStyle();
             GunController.get().remove();
