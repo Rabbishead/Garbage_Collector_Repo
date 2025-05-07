@@ -1,4 +1,4 @@
-package com.mygdx.messages;
+package com.mygdx.controllers.messages;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import java.util.Map;

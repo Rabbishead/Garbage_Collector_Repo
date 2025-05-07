@@ -3,7 +3,7 @@ package com.mygdx.movement.npc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.delay.DelayManager;
+import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
 

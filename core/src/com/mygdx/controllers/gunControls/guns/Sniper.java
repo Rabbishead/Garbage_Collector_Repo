@@ -2,9 +2,9 @@ package com.mygdx.controllers.gunControls.guns;
 
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.gunControls.projectiles.Projectile;
-import com.mygdx.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
 
 public class Sniper extends BaseGun {

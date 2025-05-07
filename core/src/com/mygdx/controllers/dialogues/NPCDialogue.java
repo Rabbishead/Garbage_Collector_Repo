@@ -1,4 +1,4 @@
-package com.mygdx.dialogues;
+package com.mygdx.controllers.dialogues;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;

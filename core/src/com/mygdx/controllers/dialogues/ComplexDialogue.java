@@ -1,4 +1,4 @@
-package com.mygdx.dialogues;
+package com.mygdx.controllers.dialogues;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Data;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
+import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
