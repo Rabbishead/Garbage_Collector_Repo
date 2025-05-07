@@ -10,7 +10,7 @@ import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
-import com.mygdx.hitboxes.Collider;
+import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;

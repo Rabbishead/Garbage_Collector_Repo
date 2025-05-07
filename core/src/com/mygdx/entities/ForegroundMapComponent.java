@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.animations.MapComponentAnimationManager;
-import com.mygdx.hitboxes.Hitbox;
+import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.resources.ResourceEnum;
 
 public class ForegroundMapComponent extends GameActor {

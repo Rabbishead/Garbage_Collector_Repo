@@ -1,4 +1,4 @@
-package com.mygdx.hitboxes;
+package com.mygdx.controllers.hitboxes;
 
 import java.util.function.BiConsumer;
 import com.badlogic.gdx.math.Intersector;
