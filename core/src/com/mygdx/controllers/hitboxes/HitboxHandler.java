@@ -1,4 +1,4 @@
-package com.mygdx.hitboxes;
+package com.mygdx.controllers.hitboxes;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;

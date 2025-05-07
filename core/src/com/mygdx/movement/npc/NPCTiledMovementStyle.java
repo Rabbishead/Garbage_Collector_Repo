@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.mygdx.controllers.camera.CameraController;
-import com.mygdx.delay.DelayManager;
+import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
 

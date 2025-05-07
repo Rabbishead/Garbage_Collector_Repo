@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.mygdx.Utils;
-import com.mygdx.delay.DelayManager;
+import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.resources.ResourceEnum;
 
 public class MapComponentAnimationManager {

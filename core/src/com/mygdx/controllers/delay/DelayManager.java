@@ -1,4 +1,4 @@
-package com.mygdx.delay;
+package com.mygdx.controllers.delay;
 
 import java.util.HashMap;
 

@@ -11,6 +11,7 @@ import com.mygdx.entities.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.messages.MsgManager;
 import com.mygdx.messages.MsgManager.MSG;
+import com.mygdx.resources.ResourceEnum;
 
 import java.util.Random;
 
