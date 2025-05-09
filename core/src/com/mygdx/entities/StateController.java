@@ -1,7 +1,7 @@
 package com.mygdx.entities;
 
 public class StateController {
-    public enum StateEnum {
+    public enum MovementState {
         FOLLOW_PLAYER,
         FLEE,
         CIRLE_AROUND,
@@ -9,20 +9,42 @@ public class StateController {
         STILL
     }
 
-    private StateEnum state;
-    private StateEnum prevState;
-
-    public StateEnum getState() {
-        return state;
+    public enum CombatState{
+        SHOOTING,
+        STILL
     }
 
-    public StateEnum getPrevState() {
-        return prevState;
+    private MovementState movementState;
+    private MovementState prevMovementState;
+
+    private CombatState combatState;
+    private CombatState prevCombatState;
+
+
+    public MovementState getMovState() {
+        return movementState;
     }
 
-    public void setState(StateEnum state) {
-        this.prevState = this.state;
-        this.state = state;
-        System.out.println(state);
+    public MovementState getPrevMovState() {
+        return prevMovementState;
+    }
+
+    public CombatState getCombatState() {
+        return combatState;
+    }
+    public CombatState getPrevCombatState() {
+        return prevCombatState;
+    }
+
+    public void setMovementState(MovementState movState) {
+        this.prevMovementState = this.movementState;
+        this.movementState = movState;
+        System.out.println(movState);
+    }
+
+    public void setCombatState(CombatState combatState) {
+        this.prevCombatState = this.combatState;
+        this.combatState = combatState;
+        System.out.println(combatState);
     }
 }

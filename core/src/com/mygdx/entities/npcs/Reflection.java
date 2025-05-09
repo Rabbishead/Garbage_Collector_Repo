@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
 
@@ -21,7 +20,7 @@ public class Reflection extends NPC {
     public Reflection(ReflectionBuilder npcBuilder) {
         super(npcBuilder);
         stateController = new StateController();
-        stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
+        stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
         Utils.subscribeToStageMsg(this, MSG.SHOT);
     }
 
@@ -40,7 +39,7 @@ public class Reflection extends NPC {
             getActions().clear();
             return;
         }
-        switch (stateController.getState()) {
+        switch (stateController.getMovState()) {
             case STILL -> {
                 getActions().clear();
             }
@@ -50,7 +49,7 @@ public class Reflection extends NPC {
                     addAction(movement);
                 }
                 if (Utils.getPlayer().getCoords().dst(getCoords()) < 100) {
-                    stateController.setState(StateController.StateEnum.FLEE);
+                    stateController.setMovementState(StateController.MovementState.FLEE);
                     getActions().clear();
                 }
             }
@@ -72,7 +71,7 @@ public class Reflection extends NPC {
                 }
 
                 if (Utils.getPlayer().getCoords().dst(getCoords()) > 500) {
-                    stateController.setState(StateController.StateEnum.FOLLOW_PLAYER);
+                    stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
                     getActions().clear();
                 }
             }
@@ -92,7 +91,7 @@ public class Reflection extends NPC {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(msg.message == MsgManager.codes.get(MSG.SHOT)){
+        if(msg.message == MSG.SHOT.code){
             System.out.println("HEY");
         }
         return true;
