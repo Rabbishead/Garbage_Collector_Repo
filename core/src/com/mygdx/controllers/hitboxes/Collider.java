@@ -23,19 +23,17 @@ public class Collider extends Polygon {
      * spaces.
      * 
      * @param center     the colliders' center coordinates.
-     * @param width      as large as the sea!
-     * @param height     as tall as the sky!
      * @param degrees    specifies the colliders' rotation.
      * @param tags       colliders' tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
      * @param vertices   an array whose elements in pairs represent the x and y of
      *                   the polygon's vertices.
      */
-    public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags,
-            float[] vertices) {
+    public Collider(Vector2 center, float degrees, String tags, String searchTags, float[] vertices) {
         super(vertices);
         this.center = center;
-        setOrigin(width / 2, height / 2);
+        Vector2 centroid = getCentroid(new Vector2());
+        setOrigin(centroid.x, centroid.y);
         setPosition();
         setRotation(degrees);
         this.tags = tags.split(",");
@@ -59,7 +57,7 @@ public class Collider extends Polygon {
      * @param searchTags specifies what hiboxes can the collider collide with.
      */
     public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags) {
-        this(center, width, height, degrees, tags, searchTags,
+        this(center, degrees, tags, searchTags,
                 new float[] { 0, 0, width, 0, width, height, 0, height });
     }
 
