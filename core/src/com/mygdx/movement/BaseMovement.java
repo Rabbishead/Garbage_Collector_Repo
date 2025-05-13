@@ -30,19 +30,17 @@ public class BaseMovement {
     }
 
     public void center() {
-        position.sub(origin);
+        position.sub(center);
     }
 
     public Vector2 move() {
         movement.setAngleDeg(angle.angleDeg());
-
         return position.add(movement);
     }
 
     public Vector2 mutiply(float delta) {
         movement.setAngleDeg(angle.angleDeg());
         movement.scl(distance).scl(delta);
-
         return position.add(movement);
     }
 
@@ -57,11 +55,11 @@ public class BaseMovement {
     }
 
     public Vector2 getCenterWorldCoords() {
-        return new Vector2(position.x + origin.x, position.y + origin.y);
+        return new Vector2(anchor.x + position.x + center.x, anchor.y + position.y + center.y);
     }
 
     public Vector2 getWorldCoords() {
-        return new Vector2(position.x + origin.x, position.y + origin.y);
+        return getCenterWorldCoords().sub(center);
     }
 
     /**
@@ -75,8 +73,8 @@ public class BaseMovement {
     }
 
     public void recalcOrigin() {
-        Vector2 worldPos = getCenterWorldCoords();
-        origin.set(anchor.x - worldPos.x, anchor.y - worldPos.y);
+        Vector2 cenWorldPos = getCenterWorldCoords();
+        origin.set(anchor.x - cenWorldPos.x, anchor.y - cenWorldPos.y);
     }
 
     public void unAnchor(Vector2 origin) {
