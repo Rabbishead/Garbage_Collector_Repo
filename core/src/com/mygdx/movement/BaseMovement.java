@@ -11,51 +11,15 @@ public class BaseMovement {
             position = new Vector2();
     public float distance = 0;
 
-    public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 position, float distance, float angle) {
+    public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 center, Vector2 position, float distance, float angle) {
         this.origin = origin;
+        this.center = center;
         this.distance = distance;
         this.position = position;
         anchor(anchor);
         this.angle.setAngleDeg(angle);
 
         movement.set(distance, 0).setAngleDeg(angle);
-    }
-
-    public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 position, float distance) {
-        this.origin = origin;
-        this.distance = distance;
-        this.position = position;
-        anchor(anchor);
-
-        movement.set(distance, 0);
-    }
-
-    public BaseMovement(Vector2 anchor, Vector2 origin, float distance, float angle) {
-        this.origin = origin;
-        this.distance = distance;
-        anchor(anchor);
-        this.angle.setAngleDeg(angle);
-
-        movement.set(distance, 0).setAngleDeg(angle);
-    }
-
-    public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 position) {
-        this.origin = origin;
-        this.position = position;
-        anchor(anchor);
-    }
-
-    public BaseMovement(Vector2 anchor, Vector2 origin, float distance) {
-        this.origin = origin;
-        this.distance = distance;
-        anchor(anchor);
-
-        movement.set(distance, 0);
-    }
-
-    public BaseMovement(Vector2 anchor, Vector2 origin) {
-        this.origin = origin;
-        anchor(anchor);
     }
 
     public BaseMovement() {

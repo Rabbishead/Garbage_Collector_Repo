@@ -13,7 +13,7 @@ import com.mygdx.movement.BaseMovement;
 
 public class BaseGun extends Actor {
     protected Sprite s;
-    protected BaseMovement movement;
+    protected BaseMovement movement = new BaseMovement();
     protected Vector2 pos, origin;
     protected float angleOffset;
     protected boolean flipped, stop = false;
@@ -22,8 +22,8 @@ public class BaseGun extends Actor {
         s = new Sprite(t);
         flipped = true;
         setSize(s.getWidth(), s.getHeight());
-        movement = new BaseMovement(origin, new Vector2(getWidth()/2, getHeight()/2));
-        movement.center();
+        //movement = new BaseMovement(origin, new Vector2(getWidth()/2, getHeight()/2));
+        //movement.center();
         s.setOrigin(movement.origin.x, movement.origin.y);
 
         this.origin = origin;
