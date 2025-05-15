@@ -8,12 +8,14 @@ public class Door {
     private String orientation;
     private Vector2 center;
     private Vector2 exitPoint;
+    private boolean isCenterDoor;
 
-    public Door(String name, String destination, String orientation, Vector2 center) {
+    public Door(String name, String destination, String orientation, Vector2 center, boolean isCenterDoor) {
         this.name = name;
         this.destination = destination;
         this.orientation = orientation;
         this.center = center;
+        this.isCenterDoor = isCenterDoor;
 
         switch (orientation) {
             case "w" -> {
@@ -53,6 +55,9 @@ public class Door {
     public Vector2 getExitPoint() {
         return exitPoint;
     }
+    public boolean isCenterDoor() {
+        return isCenterDoor;
+    }
 
     public void print() {
         System.out.println(
@@ -60,6 +65,8 @@ public class Door {
                         "Destination: " + destination + "\n" +
                         "Orientation: " + orientation + "\n" +
                         "Center: " + center.toString() + "\n" +
-                        "ExitPoint: " + exitPoint.toString() + "\n");
+                        "ExitPoint: " + exitPoint.toString() + "\n" + 
+                        "Is Center Door: " + isCenterDoor + "\n"
+                        );
     }
 }
