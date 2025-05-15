@@ -46,6 +46,16 @@ public class Player extends GameActor {
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         autoMovementManager = new AutoMovementManager();
 
+        Vector2 test = new Vector2(1,0);
+        Vector2 test2 = new Vector2(2,0);
+        System.out.println(test);
+        System.out.println(test2);
+
+        test.setAngleDeg(90);
+        test2.setAngleDeg(90);
+        System.out.println(test);
+        System.out.println(test2);
+
         debug();
     }
 
@@ -94,7 +104,6 @@ public class Player extends GameActor {
         super.act(delta);
 
         CameraController.calculateMouseAngle(center);
-
 
         animationManager.setCurrentAnimation(
                 autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());

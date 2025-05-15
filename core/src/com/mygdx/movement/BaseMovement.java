@@ -3,13 +3,22 @@ package com.mygdx.movement;
 import com.badlogic.gdx.math.Vector2;
 
 public class BaseMovement {
-    public Vector2 anchor = new Vector2(),
-            origin = new Vector2(),
-            center = new Vector2(),
+    public Vector2 position = new Vector2(),
             angle = new Vector2(1, 0),
             movement = new Vector2(),
-            position = new Vector2();
+            origin = new Vector2(),
+            center = new Vector2(),
+            anchor = new Vector2();
+    
+    /**
+     * Used for movement each frame.
+     */
     public float distance = 0;
+
+    /**
+     * Used when un-anchored.
+     */
+    public float x = 0, y = 0;
 
     public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 center, Vector2 position, float distance, float angle) {
         this.origin = origin;
@@ -25,14 +34,25 @@ public class BaseMovement {
     public BaseMovement() {
     }
 
+    /**
+     * Scales the movement by delta, to do once.
+     * @param delta
+     */
     public void scaleByDelta(float delta) {
         movement.scl(delta);
     }
 
-    public void center() {
+    /**
+     * Align the position to be centered
+     */
+    public void align() {
         position.sub(center);
     }
 
+    /**
+     * Move
+     * @return
+     */
     public Vector2 move() {
         movement.setAngleDeg(angle.angleDeg());
         return position.add(movement);
