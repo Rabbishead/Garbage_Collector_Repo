@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
@@ -56,12 +57,15 @@ public class TileSetManager implements Telegraph {
                                 prop.get("name").toString(),
                                 prop.get("destination").toString(),
                                 prop.get("orientation").toString(),
-                                new Vector2((w) * 32, (h) * 32)));
+                                new Vector2((w) * 32, (h) * 32),
+                                prop.get("side") == null));
             }
         }
     }
 
-    public void replaceAllWallables() {
+    public void blockAllTiles() {
+        TiledMapTile blocker = null;
+        ArrayList<Cell> cellsToReplace = new ArrayList<>();
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
@@ -71,11 +75,18 @@ public class TileSetManager implements Telegraph {
                     continue;
 
                 MapProperties properties = cell.getTile().getProperties();
-                if (properties.get("blockable") == null)
-                    continue;
 
-                cell.setTile(map.getTileSets().getTile(7));
+                if (properties.get("blockable") != null){
+                    cellsToReplace.add(cell);
+                }
+                if(properties.get("blocker") != null){
+                    blocker = cell.getTile();
+                }
             }
+        }
+
+        for (Cell cell : cellsToReplace) {
+            cell.setTile(blocker);
         }
     }
 
@@ -100,6 +111,8 @@ public class TileSetManager implements Telegraph {
         if (intersectingDoor == null)
             return;
 
+        getCenterDoor(intersectingDoor);
+
         if (!StateManager.getBoolState(StateEnum.IS_ENTERING) && !StateManager.getBoolState(StateEnum.IS_EXITING)) {
             Utils.getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
             StateManager.updateBoolState(StateEnum.IS_ENTERING, true);
@@ -117,7 +130,7 @@ public class TileSetManager implements Telegraph {
 
     public Vector2 getCoord() {
         for (Door door : doors) {
-            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION))) {
+            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION)) && door.isCenterDoor()) {
                 return door.getCenter();
             }
         }
@@ -126,11 +139,18 @@ public class TileSetManager implements Telegraph {
 
     public Vector2 getExitPoint() {
         for (Door door : doors) {
-            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION))) {
+            if (door.getName().equals(StateManager.getStringState(StateEnum.DESTINATION)) && door.isCenterDoor()) {
                 return door.getExitPoint();
             }
         }
         return new Vector2();
+    }
+
+    public Door getCenterDoor(Door side){
+        for (Door door : doors) {
+            if(door.getName().equals(side.getName()) && door.isCenterDoor()) return side;
+        }
+        return side;
     }
 
     public void debug() {
@@ -140,8 +160,9 @@ public class TileSetManager implements Telegraph {
     @Override
     public boolean handleMessage(Telegram msg) {
         if (2 == msg.message) {
-            replaceAllWallables();
+            //blockAllTiles();
         }
         return true;
     }
+
 }
