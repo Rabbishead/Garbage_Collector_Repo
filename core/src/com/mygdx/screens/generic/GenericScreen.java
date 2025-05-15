@@ -64,6 +64,6 @@ public abstract class GenericScreen extends ScreenAdapter{
     }
 
     public void subscribe(GameActor a, MSG msg){
-        stageMsg.addListener(a, MsgManager.codes.get(msg));
+        stageMsg.addListener(a, msg.code);
     }
 }

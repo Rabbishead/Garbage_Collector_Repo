@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Data;
+import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.Reflection;
@@ -35,6 +36,19 @@ public class RichDistrict extends PlayableScreen {
                         .path(new String[] { "DWW--ASS", "WWDSS-A" })
                         .story(ResourceEnum.ADEPTUS_1)
                         .build());
+
+
+        Collections.addAll(mapComponents,
+                new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 60, Data.TILE * 26))
+                        .texture(ResourceEnum.MARMOT_PIZZA)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(3)
+                        .animationRate(0.2f)
+                        .delay(1000)
+                        .build()
+                        
+            );
 
 
         updateStage();

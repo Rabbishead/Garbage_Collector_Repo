@@ -9,21 +9,22 @@ import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.messages.MsgManager;
+import com.mygdx.movement.BaseMovement;
 
 public class BaseGun extends Actor {
     protected Sprite s;
+    protected BaseMovement movement = new BaseMovement();
     protected Vector2 pos, origin;
-    protected int angleOffset;
+    protected float angleOffset;
     protected boolean flipped, stop = false;
 
-    public BaseGun(Texture t, Vector2 origin, int angleOffset) {
+    public BaseGun(Texture t, Vector2 origin, float angleOffset) {
         s = new Sprite(t);
         flipped = true;
-        setWidth(s.getWidth());
-        setHeight(s.getHeight());
-        pos = new Vector2(0, 0);
-        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
-        s.setOrigin(-pos.x, -pos.y);
+        setSize(s.getWidth(), s.getHeight());
+        //movement = new BaseMovement(origin, new Vector2(getWidth()/2, getHeight()/2));
+        //movement.center();
+        s.setOrigin(movement.origin.x, movement.origin.y);
 
         this.origin = origin;
         this.angleOffset = angleOffset;
@@ -111,9 +112,8 @@ public class BaseGun extends Actor {
     }
 
     public void setOffset(float x, float y) {
-        pos = new Vector2(x, y);
-        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
-        s.setOrigin(-pos.x, -pos.y);
+        movement.offset(new Vector2(x, y));
+        s.setOrigin(movement.origin.x, movement.origin.y);
     }
 
     public void destroy() {
