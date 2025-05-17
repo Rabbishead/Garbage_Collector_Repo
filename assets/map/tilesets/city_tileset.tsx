@@ -6,6 +6,11 @@
    <property name="transition" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="6">
+  <properties>
+   <property name="blocker" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="7">
   <properties>
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
@@ -27,6 +32,11 @@
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="orientation" value="s"/>
    <property name="side" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="16">
+  <properties>
+   <property name="blockable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="17">

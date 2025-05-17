@@ -10,6 +10,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSets;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
@@ -24,12 +26,14 @@ public class TileSetManager implements Telegraph {
     private final TiledMapRenderer tiledMapRenderer;
     private final TiledMap map;
     private ArrayList<Door> doors;
+    private int blockerTileID = -1;
 
     public TileSetManager(ResourceEnum e) {
         map = Utils.getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
+        loadBlockerTile();
     }
 
     public void render(OrthographicCamera camera) {
@@ -64,8 +68,6 @@ public class TileSetManager implements Telegraph {
     }
 
     public void blockAllTiles() {
-        TiledMapTile blocker = null;
-        ArrayList<Cell> cellsToReplace = new ArrayList<>();
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
@@ -77,16 +79,19 @@ public class TileSetManager implements Telegraph {
                 MapProperties properties = cell.getTile().getProperties();
 
                 if (properties.get("blockable") != null){
-                    cellsToReplace.add(cell);
-                }
-                if(properties.get("blocker") != null){
-                    blocker = cell.getTile();
+                    cell.setTile(map.getTileSets().getTile(blockerTileID));
                 }
             }
         }
 
-        for (Cell cell : cellsToReplace) {
-            cell.setTile(blocker);
+    }
+
+    private void loadBlockerTile(){
+        TiledMapTileSet set = map.getTileSets().getTileSet(0);
+        for (TiledMapTile tiledMapTile : set) {
+            if(tiledMapTile.getProperties().containsKey("blocker")){
+                blockerTileID = tiledMapTile.getId();
+            }
         }
     }
 
@@ -160,7 +165,7 @@ public class TileSetManager implements Telegraph {
     @Override
     public boolean handleMessage(Telegram msg) {
         if (2 == msg.message) {
-            //blockAllTiles();
+            blockAllTiles();
         }
         return true;
     }
