@@ -23,7 +23,6 @@ public abstract class GenericScreen extends ScreenAdapter{
     protected Stage stage;
     protected Viewport viewport;
     protected OrthographicCamera camera;
-    protected String name;
 
     protected MessageDispatcher stageMsg;
     
@@ -58,9 +57,6 @@ public abstract class GenericScreen extends ScreenAdapter{
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height); 
-    }
-    public String getName() {
-        return name;
     }
 
     public void subscribe(GameActor a, MSG msg){

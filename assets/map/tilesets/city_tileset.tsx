@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.10.2" name="city_tileset" tilewidth="32" tileheight="32" spacing="8" margin="4" tilecount="100" columns="10">
  <image source="../images/citytiles.png" width="400" height="400"/>
+ <tile id="5">
+  <properties>
+   <property name="transition" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="7">
   <properties>
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>

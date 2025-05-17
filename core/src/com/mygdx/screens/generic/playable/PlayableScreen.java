@@ -40,6 +40,8 @@ public abstract class PlayableScreen extends GenericScreen {
     protected ArrayList<ForegroundMapComponent> mapComponents;
     protected ArrayList<NPC> npcs;
 
+    private ResourceEnum name;
+
     protected PlayableScreen(ResourceEnum map) {
         super();
         tileSetManager = new TileSetManager(map);
@@ -63,6 +65,8 @@ public abstract class PlayableScreen extends GenericScreen {
 
         mapComponents = new ArrayList<>();
         npcs = new ArrayList<>();
+
+        this.name = map;
     }
 
     @Override
@@ -130,5 +134,9 @@ public abstract class PlayableScreen extends GenericScreen {
     public void updateStage(){
         mapComponents.forEach(comp -> stage.addActor(comp));
         npcs.forEach(npc -> stage.addActor(npc));
+    }
+
+    public String getName(){
+        return this.name.name();
     }
 }

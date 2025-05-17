@@ -1,7 +1,7 @@
 package com.mygdx.screens;
 
 import java.util.HashMap;
-import com.mygdx.screens.game.arenas.SandstoneArena;
+import com.mygdx.screens.game.arenas.ReflectionArena;
 import com.mygdx.screens.game.overworld.Slums;
 import com.mygdx.screens.game.overworld.Park;
 import com.mygdx.screens.game.overworld.RichDistrict;
@@ -25,7 +25,7 @@ public class ScreensManager {
                     map.put("PAUSE_SCREEN", new PauseScreen());
                 }
                 case "REFLECTION_ARENA" -> {
-                    map.put("REFLECTION_ARENA", new SandstoneArena());
+                    map.put("REFLECTION_ARENA", new ReflectionArena());
                 }
                 case "SLUMS" -> {
                     map.put("SLUMS", new Slums());

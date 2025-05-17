@@ -3,7 +3,6 @@ package com.mygdx.savings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.Utils;
 import com.mygdx.screens.ScreensManager;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
@@ -13,7 +12,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
     private boolean[] flags;
 
     public void updateData() {
-        lastRoom = Utils.getActiveScreen().getName();
+        lastRoom = ScreensManager.getLastPlayableActiveScreen();
         lastRoomCoordinates = ScreensManager.getPlayableScreen(ScreensManager.getLastPlayableActiveScreen())
                 .getPlayerCoordinates();
         flags = new boolean[] { true, true, false };

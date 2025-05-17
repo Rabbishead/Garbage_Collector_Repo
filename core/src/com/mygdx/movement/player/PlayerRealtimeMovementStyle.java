@@ -60,6 +60,9 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         if (TileMapCollisionsManager.getCurrentTileProprieties() == null)
             return "";
 
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            finalPosition.scl(10);
+
         finalPosition.scl(Gdx.graphics.getDeltaTime());
         if (TileMapCollisionsManager.canMove(player.getX() + finalPosition.x, player.getY() + finalPosition.y)) {
             player.setX(player.getX() + finalPosition.x);

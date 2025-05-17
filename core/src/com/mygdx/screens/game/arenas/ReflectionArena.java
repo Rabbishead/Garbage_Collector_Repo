@@ -11,9 +11,9 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 
-public class SandstoneArena extends PlayableScreen {
+public class ReflectionArena extends PlayableScreen {
 
-    public SandstoneArena() {
+    public ReflectionArena() {
         super(ResourceEnum.REFLECTION_ARENA);
 
         stage.getCamera().translate(player.getX(), player.getY(), 0);
