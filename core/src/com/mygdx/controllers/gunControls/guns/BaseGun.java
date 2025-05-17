@@ -22,7 +22,7 @@ public class BaseGun extends Actor {
         setSize(s.getWidth(), s.getHeight());
         movement.center = new Vector2(getWidth() / 2, getHeight() / 2);
         movement.anchor(origin);
-        //movement.align();
+        movement.align();
         s.setOrigin(movement.origin.x, movement.origin.y);
         System.out.println("Origin: " + movement.origin);
         System.out.println("Player center" + origin);
