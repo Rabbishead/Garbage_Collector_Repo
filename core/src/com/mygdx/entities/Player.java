@@ -22,7 +22,7 @@ public class Player extends GameActor {
     private final ActorAnimationManager animationManager;
     private MovementStyle movementStyle;
     private Collider collider = new Collider();
-    public Vector2 center = new Vector2();
+    public static Vector2 center = new Vector2();
     private final AutoMovementManager autoMovementManager;
 
     public enum Styles {

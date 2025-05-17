@@ -5,13 +5,14 @@ import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.gunControls.projectiles.Projectile;
+import com.mygdx.entities.Player;
 import com.mygdx.resources.ResourceEnum;
 
 public class Sniper extends BaseGun {
     private int bullets = 100;
 
     public Sniper() {
-        super(Utils.getTexture(ResourceEnum.SNIPER), Utils.getPlayer().center, 0);
+        super(Utils.getTexture(ResourceEnum.SNIPER), Player.center, 0);
         setOffset(30, 0);
         flip(true, false);
         DelayManager.registerObject(this, 90f);
@@ -33,7 +34,7 @@ public class Sniper extends BaseGun {
         if (bullets > 0) {
             super.leftTrigger();
             Utils.getStage().addActor(
-                    new Projectile(Utils.getPlayer().center, getWidth(),
+                    new Projectile(Player.center, getWidth(),
                             CameraController.getMouseAngle() + angleOffset));
             bullets -= 1;
 
@@ -50,7 +51,7 @@ public class Sniper extends BaseGun {
     public int rightTrigger() {
         super.rightTrigger();
         Utils.getStage().addActor(
-                new Projectile(Utils.getPlayer().center, getWidth(), CameraController.getMouseAngle() + angleOffset));
+                new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset));
         return 2;
     }
 

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.messages.MsgManager;
@@ -14,7 +13,6 @@ import com.mygdx.movement.BaseMovement;
 public class BaseGun extends Actor {
     protected Sprite s;
     protected BaseMovement movement = new BaseMovement();
-    protected Vector2 pos, origin;
     protected float angleOffset;
     protected boolean flipped, stop = false;
 
@@ -22,11 +20,13 @@ public class BaseGun extends Actor {
         s = new Sprite(t);
         flipped = true;
         setSize(s.getWidth(), s.getHeight());
-        //movement = new BaseMovement(origin, new Vector2(getWidth()/2, getHeight()/2));
-        //movement.center();
+        movement.center = new Vector2(getWidth() / 2, getHeight() / 2);
+        movement.anchor(origin);
+        //movement.align();
         s.setOrigin(movement.origin.x, movement.origin.y);
+        System.out.println("Origin: " + movement.origin);
+        System.out.println("Player center" + origin);
 
-        this.origin = origin;
         this.angleOffset = angleOffset;
     }
 
@@ -40,8 +40,9 @@ public class BaseGun extends Actor {
 
     @Override
     public void act(float delta) {
-        origin = Utils.getPlayer().center;
-        setPosition(origin.x + pos.x, origin.y + pos.y);
+        Vector2 tmp = movement.getCenterWorldCoords();
+        setPosition(tmp.x, tmp.y);
+
         float angle = CameraController.getMouseAngle();
 
         boolean left = angle > 90 && angle <= 270;
@@ -76,6 +77,8 @@ public class BaseGun extends Actor {
     @Override
     protected void positionChanged() {
         s.setPosition(getX(), getY());
+        movement.x = getX();
+        movement.y = getY();
     }
 
     public void onSwitched() {
