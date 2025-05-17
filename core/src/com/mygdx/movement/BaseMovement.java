@@ -8,7 +8,7 @@ public class BaseMovement {
             movement = new Vector2(),
             origin = new Vector2(),
             center = new Vector2(),
-            anchor = new Vector2();
+            anchor = null;
     
     /**
      * Used for movement each frame.
@@ -43,7 +43,7 @@ public class BaseMovement {
     }
 
     /**
-     * Align the position to be centered
+     * Align the position to be centered.
      */
     public void align() {
         position.sub(center);
@@ -99,6 +99,6 @@ public class BaseMovement {
 
     public void unAnchor(Vector2 origin) {
         this.origin = origin;
-        this.anchor = getCenterWorldCoords().add(origin);
+        this.anchor = null;
     }
 }
