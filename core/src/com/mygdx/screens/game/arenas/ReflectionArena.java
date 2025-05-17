@@ -5,6 +5,8 @@ import java.util.Collections;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Data;
 import com.mygdx.Utils;
+import com.mygdx.controllers.messages.MSG;
+import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
@@ -41,7 +43,9 @@ public class ReflectionArena extends PlayableScreen {
     public void render(float delta) {
         super.render(delta);
 
-        if (TileMapCollisionsManager.changeMovementStyle())
+        if (TileMapCollisionsManager.changeMovementStyle()){
             player.swapMovementStyle();
+            MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
+        }
     }
 }

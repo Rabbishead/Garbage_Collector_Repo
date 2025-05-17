@@ -10,6 +10,7 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
+import com.mygdx.controllers.messages.MSG;
 import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.NPC;
@@ -73,6 +74,7 @@ public abstract class PlayableScreen extends GenericScreen {
     public void show() {
         super.show();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
+        subscribe(tileSetManager, MSG.BLOCK_WALLS);
 
         // tileSetManager.debug();
 

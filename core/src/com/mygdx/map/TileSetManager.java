@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.controllers.messages.MSG;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
@@ -75,11 +76,13 @@ public class TileSetManager implements Telegraph {
 
                 if (cell == null)
                     continue;
+                if(cell.getTile() == null)
+                    continue;
 
                 MapProperties properties = cell.getTile().getProperties();
 
                 if (properties.get("blockable") != null){
-                    cell.setTile(map.getTileSets().getTile(blockerTileID));
+                    cell.setTile(map.getTileSets().getTile(6));
                 }
             }
         }
@@ -89,8 +92,11 @@ public class TileSetManager implements Telegraph {
     private void loadBlockerTile(){
         TiledMapTileSet set = map.getTileSets().getTileSet(0);
         for (TiledMapTile tiledMapTile : set) {
+            tiledMapTile.getProperties().getKeys().forEachRemaining(System.out::println);
             if(tiledMapTile.getProperties().containsKey("blocker")){
+                
                 blockerTileID = tiledMapTile.getId();
+                System.out.println(blockerTileID);
             }
         }
     }
@@ -164,7 +170,7 @@ public class TileSetManager implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if (2 == msg.message) {
+        if (MSG.BLOCK_WALLS.code == msg.message) {
             blockAllTiles();
         }
         return true;

@@ -3,6 +3,7 @@ package com.mygdx.screens.generic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -59,7 +60,7 @@ public abstract class GenericScreen extends ScreenAdapter{
         stage.getViewport().update(width, height); 
     }
 
-    public void subscribe(GameActor a, MSG msg){
+    public void subscribe(Telegraph a, MSG msg){
         stageMsg.addListener(a, msg.code);
     }
 }
