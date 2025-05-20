@@ -12,7 +12,7 @@ import com.mygdx.movement.BaseMovement;
 
 public class BaseGun extends Actor {
     protected Sprite s;
-    protected BaseMovement movement = new BaseMovement();
+    protected BaseMovement movement;
     protected float angleOffset;
     protected boolean flipped, stop = false;
 
@@ -20,12 +20,9 @@ public class BaseGun extends Actor {
         s = new Sprite(t);
         flipped = true;
         setSize(s.getWidth(), s.getHeight());
-        movement.center = new Vector2(getWidth() / 2, getHeight() / 2);
+        movement = new BaseMovement(getWidth() / 2, getHeight() / 2);
         movement.anchor(origin);
-        movement.align();
         s.setOrigin(movement.origin.x, movement.origin.y);
-        System.out.println("Origin: " + movement.origin);
-        System.out.println("Player center" + origin);
 
         this.angleOffset = angleOffset;
     }
@@ -40,8 +37,8 @@ public class BaseGun extends Actor {
 
     @Override
     public void act(float delta) {
-        Vector2 tmp = movement.getCenterWorldCoords();
-        setPosition(tmp.x, tmp.y);
+        Vector2 worldCoords = movement.getWorldCoords();
+        setPosition(worldCoords.x, worldCoords.y);
 
         float angle = CameraController.getMouseAngle();
 

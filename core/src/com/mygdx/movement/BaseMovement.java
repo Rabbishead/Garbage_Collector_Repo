@@ -20,15 +20,10 @@ public class BaseMovement {
      */
     public float x = 0, y = 0;
 
-    public BaseMovement(Vector2 anchor, Vector2 origin, Vector2 center, Vector2 position, float distance, float angle) {
-        this.origin = origin;
-        this.center = center;
-        this.distance = distance;
-        this.position = position;
-        anchor(anchor);
-        this.angle.setAngleDeg(angle);
-
-        movement.set(distance, 0).setAngleDeg(angle);
+    public BaseMovement(float centerX, float centerY) {
+        center.x = centerX;
+        center.y = centerY;
+        align();
     }
 
     public BaseMovement() {
@@ -93,12 +88,12 @@ public class BaseMovement {
     }
 
     public void recalcOrigin() {
-        Vector2 cenWorldPos = getCenterWorldCoords();
-        origin.set(anchor.x - cenWorldPos.x, anchor.y - cenWorldPos.y);
+        Vector2 worldPos = getWorldCoords();
+        origin.set(anchor.x - worldPos.x, anchor.y - worldPos.y);
     }
 
-    public void unAnchor(Vector2 origin) {
-        this.origin = origin;
+    public void unAnchor() {
+        this.origin.set(center);
         this.anchor = null;
     }
 }
