@@ -10,7 +10,7 @@ import com.mygdx.resources.ResourceEnum;
 public class Usblade extends BaseGun {
     public Usblade() {
         super(Utils.getTexture(ResourceEnum.USBLADE), Player.center, 45);
-        setOffset(30, 0);
+        setOffset(35, 0);
         // flip(true, false);
     }
 
