@@ -1,12 +1,12 @@
 {
-"LAST_ROOM": "REFLECTION_ARENA",
-"PLAYER": {
-	"x": 1269.7002,
-	"y": 1366.6185
-},
-"FLAGS": [
-	true,
-	true,
-	false
-]
+	"LAST_ROOM": "REFLECTION_ARENA",
+	"PLAYER": {
+		"x": 1269.7002,
+		"y": 1366.6185
+	},
+	"FLAGS": [
+		true,
+		true,
+		false
+	]
 }

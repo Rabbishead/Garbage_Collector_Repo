@@ -102,6 +102,9 @@ public abstract class PlayableScreen extends GenericScreen {
         if (Gdx.input.isKeyPressed(Keys.R)) {
             stageMsg.dispatchMessage(0);
         }
+        if(Gdx.input.isKeyJustPressed(Keys.H)){
+            stageMsg.dispatchMessage(MSG.BLOCK_WALLS.code);
+        }
 
         if (Utils.getActiveScreen() != this)
             return;
