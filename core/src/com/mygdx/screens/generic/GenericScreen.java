@@ -14,7 +14,6 @@ import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.messages.MsgManager;
-import com.mygdx.entities.GameActor;
 
 /**
  * generic abstract class for every screen
