@@ -13,12 +13,14 @@ public class GarbageCollection extends Game {
 	@Override
 	public void create() {
 		Utils.setGame(this);
+		SavingsManager.loadDefaultIfNeeded();
 		SavingsManager.load();
 		StateManager.updateBoolState(StateEnum.IS_ENTERING, false);
 		StateManager.updateBoolState(StateEnum.IS_EXITING, false);
 		StateManager.updateStringState(StateEnum.DESTINATION, "");
 		StateManager.updateBoolState(StateEnum.PAUSE, false);
 		Logger.init();
+		
 		setScreen(ScreensManager.getScreen("MENU_SCREEN"));
 	}
 

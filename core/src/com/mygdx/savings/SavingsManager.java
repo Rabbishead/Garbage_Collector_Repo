@@ -1,7 +1,11 @@
 package com.mygdx.savings;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -54,5 +58,18 @@ public class SavingsManager {
 
     public static boolean getFlag(int index){
         return s.getFlag(index);
+    }
+
+    public static void loadDefaultIfNeeded(){
+        File f = new File("savings/savings.json");
+        if(!f.exists() && !f.isDirectory()) { 
+            try {
+                Files.copy(Path.of("savings/default.json"), Path.of("savings/savings.json"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
