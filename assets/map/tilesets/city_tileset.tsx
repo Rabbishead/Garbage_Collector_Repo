@@ -8,6 +8,7 @@
  </tile>
  <tile id="6">
   <properties>
+   <property name="blocked" type="bool" value="true"/>
    <property name="blocker" type="bool" value="true"/>
   </properties>
  </tile>

@@ -114,7 +114,6 @@ public class NPC extends GameActor {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        System.out.println("Handled!!");
         return true;
     }
 
