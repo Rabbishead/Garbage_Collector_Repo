@@ -59,6 +59,10 @@ public class SavingsManager {
     }
 
     public static void loadDefaultIfNeeded(){
+        File dir = new File("savings");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
         File f = new File("savings/savings.json");
         if(!f.exists() && !f.isDirectory()) { 
             try {

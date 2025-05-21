@@ -8,6 +8,6 @@
 *.class
 *.jar
 *.bin
-/savings
+/savings/savings.json
 *.ini
 log.txt
