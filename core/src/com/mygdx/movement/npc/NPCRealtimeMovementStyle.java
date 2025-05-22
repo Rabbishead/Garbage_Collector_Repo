@@ -19,7 +19,7 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     private int outerIndex;
     private final Vector2 startingCoordinates;
 
-    public NPCRealtimeMovementStyle(Actor npc, String[] path) {
+    public NPCRealtimeMovementStyle(Actor npc, String... path) {
         this.npc = npc;
         this.path = path;
         lastDirection = '-';

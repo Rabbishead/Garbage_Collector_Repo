@@ -1,6 +1,8 @@
 package com.mygdx.map;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
@@ -24,17 +26,16 @@ import com.mygdx.states.StateManager;
 public class TileSetManager implements Telegraph {
     private final TiledMapRenderer tiledMapRenderer;
     private final TiledMap map;
+    
     private ArrayList<Door> doors;
-    private TiledMapTile blockerTile = null;
-    private TiledMapTile blockableTile = null;
-    private boolean isBlocked = false;
+
+    private ArrayList<TileReplacementManager> tileReplace;
 
     public TileSetManager(ResourceEnum e) {
         map = Utils.getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
-        loadBlockerTile();
     }
 
     public void render(OrthographicCamera camera) {
@@ -68,54 +69,14 @@ public class TileSetManager implements Telegraph {
         }
     }
 
-    public void blockTiles() {
+    public void loadReplacers(){
+        var found = new ArrayList<TileReplacementEnum>();
+        for (TiledMapTile tile : map.getTileSets().getTileSet(0)) {
+            if(tile.getProperties().get("category") != null){
+                String category = tile.getProperties().get("category").toString();
+                if(found.contains(category)) continue;
 
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-
-                if (cell == null)
-                    continue;
-                if(cell.getTile() == null)
-                    continue;
-
-                MapProperties properties = cell.getTile().getProperties();
-
-                if (properties.get("blockable") != null){
-                    blockableTile = cell.getTile();
-                    cell.setTile(blockerTile);
-                    
-                }
-            }
-        }
-    }
-    public void unBlockTiles() {
-
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
-        for (int x = 0; x < layer.getWidth(); x++) {
-            for (int y = 0; y < layer.getHeight(); y++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-
-                if (cell == null)
-                    continue;
-                if(cell.getTile() == null)
-                    continue;
-
-                MapProperties properties = cell.getTile().getProperties();
-
-                if (properties.get("blocker") != null){
-                    cell.setTile(blockableTile);
-                }
-            }
-        }
-    }
-
-    private void loadBlockerTile(){
-        TiledMapTileSet set = map.getTileSets().getTileSet(0);
-        for (TiledMapTile tiledMapTile : set) {
-            if(tiledMapTile.getProperties().get("blocker") != null){
-                blockerTile = tiledMapTile;
+                
             }
         }
     }

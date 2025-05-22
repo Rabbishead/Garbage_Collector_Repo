@@ -10,6 +10,7 @@
   <properties>
    <property name="blocked" type="bool" value="true"/>
    <property name="blocker" type="bool" value="true"/>
+   <property name="category" value="WALL"/>
   </properties>
  </tile>
  <tile id="7">
@@ -38,6 +39,7 @@
  <tile id="16">
   <properties>
    <property name="blockable" type="bool" value="true"/>
+   <property name="category" value="WALL"/>
   </properties>
  </tile>
  <tile id="17">

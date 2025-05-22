@@ -28,7 +28,7 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
         return getThis();
     }
 
-    public T path(String[] path) {
+    public T path(String... path) {
         this.path = path;
         return getThis();
     }

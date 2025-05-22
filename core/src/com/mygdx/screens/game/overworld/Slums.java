@@ -68,19 +68,19 @@ public class Slums extends PlayableScreen {
                 new Reflection.ReflectionBuilder()
                         .coordinates(new Vector2(200, 1200))
                         .texture(ResourceEnum.BLACKMARKETEER)
-                        .path(new String[] { "-" })
+                        .path("-" )
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
                 new NPC.NPCBuilder()
                         .coordinates(new Vector2(160, 1000))
                         .texture(ResourceEnum.JERKINS)
-                        .path(new String[] { "DWW--ASS", "WWDSS-A" })
+                        .path("DWW--ASS", "WWDSS-A" )
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
                 new NPC.NPCBuilder()
                         .coordinates(new Vector2(300, 700))
                         .texture(ResourceEnum.JERKINS)
-                        .path(new String[] { "DWW--ASS", "WWDSS-A" })
+                        .path("DWW--ASS", "WWDSS-A" )
                         .story(ResourceEnum.ADEPTUS_1)
                         .build());
 

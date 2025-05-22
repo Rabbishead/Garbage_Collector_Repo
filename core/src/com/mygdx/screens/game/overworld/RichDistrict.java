@@ -21,19 +21,19 @@ public class RichDistrict extends PlayableScreen {
                 new Reflection.ReflectionBuilder()
                         .coordinates(new Vector2(Data.TILE * 30, Data.TILE * 15))
                         .texture(ResourceEnum.BLACKMARKETEER)
-                        .path(new String[] { "-" })
+                        .path("-")
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
                 new NPC.NPCBuilder()
                         .coordinates(new Vector2(Data.TILE * 50, Data.TILE * 15))
                         .texture(ResourceEnum.JERKINS)
-                        .path(new String[] { "DWW--ASS", "WWDSS-A" })
+                        .path("DWW--ASS", "WWDSS-A")
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
                 new NPC.NPCBuilder()
                         .coordinates(new Vector2(300, 700))
                         .texture(ResourceEnum.JERKINS)
-                        .path(new String[] { "DWW--ASS", "WWDSS-A" })
+                        .path("DWW--ASS", "WWDSS-A")
                         .story(ResourceEnum.ADEPTUS_1)
                         .build());
 
