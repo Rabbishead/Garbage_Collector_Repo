@@ -1,9 +1,6 @@
 package com.mygdx.map;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,12 +9,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
-import com.mygdx.controllers.messages.MSG;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
@@ -29,13 +24,14 @@ public class TileSetManager implements Telegraph {
     
     private ArrayList<Door> doors;
 
-    private ArrayList<TileReplacementManager> tileReplace;
+    private ArrayList<TileReplacementManager> tileReplace = new ArrayList<>();
 
     public TileSetManager(ResourceEnum e) {
         map = Utils.getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
+        loadReplacers();
     }
 
     public void render(OrthographicCamera camera) {
@@ -70,14 +66,15 @@ public class TileSetManager implements Telegraph {
     }
 
     public void loadReplacers(){
-        var found = new ArrayList<TileReplacementEnum>();
+        
         for (TiledMapTile tile : map.getTileSets().getTileSet(0)) {
-            if(tile.getProperties().get("category") != null){
-                String category = tile.getProperties().get("category").toString();
-                if(found.contains(category)) continue;
 
-                
-            }
+            var prop = tile.getProperties();
+
+            if(prop.get("category") == null) continue;
+            if(prop.get("blocker") == null) continue;
+
+            tileReplace.add(new TileReplacementManager(map, TileReplacementEnum.valueOf(prop.get("category").toString()), tile));
         }
     }
 
@@ -149,15 +146,13 @@ public class TileSetManager implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if (MSG.BLOCK_WALLS.code == msg.message) {
-            if(isBlocked){
-                blockTiles();
+        for (TileReplacementManager m : tileReplace) {
+            if(msg.message == m.getCategory().getMsg().code){
+                m.handle();
+                System.out.println("handled");
             }
-            else{
-                unBlockTiles();
-            }
-            isBlocked = !isBlocked;
         }
+        
         return true;
     }
 

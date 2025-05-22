@@ -3,6 +3,8 @@
  <image source="../images/citytiles.png" width="400" height="400"/>
  <tile id="5">
   <properties>
+   <property name="blockable" type="bool" value="true"/>
+   <property name="category" value="CHANGE_MOV_STYLE"/>
    <property name="transition" type="bool" value="true"/>
   </properties>
  </tile>
@@ -34,6 +36,12 @@
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="orientation" value="s"/>
    <property name="side" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="15">
+  <properties>
+   <property name="blocker" type="bool" value="true"/>
+   <property name="category" value="CHANGE_MOV_STYLE"/>
   </properties>
  </tile>
  <tile id="16">

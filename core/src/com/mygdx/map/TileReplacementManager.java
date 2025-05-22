@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 
 public class TileReplacementManager {
     private TiledMapTile blockerTile = null;
@@ -13,9 +12,10 @@ public class TileReplacementManager {
     private TileReplacementEnum category; 
     private TiledMap map;
 
-    private TileReplacementManager(TiledMap map, TileReplacementEnum category){
+    public TileReplacementManager(TiledMap map, TileReplacementEnum category, TiledMapTile blocker){
         this.map = map;
-        this.category = category;    
+        this.category = category;   
+        this.blockerTile = blocker; 
     }
 
     public void blockTiles() {
@@ -32,11 +32,14 @@ public class TileReplacementManager {
 
                 MapProperties properties = cell.getTile().getProperties();
 
-                if (properties.get("blockable") != null){
-                    blockableTile = cell.getTile();
-                    cell.setTile(blockerTile);
+                if (properties.get("blockable") == null || properties.get("category") == null) continue;
+
+                if(!properties.get("category").equals(category.toString())) continue;
+
+                blockableTile = cell.getTile();
+                cell.setTile(blockerTile);
                     
-                }
+                
             }
         }
     }
@@ -54,19 +57,25 @@ public class TileReplacementManager {
 
                 MapProperties properties = cell.getTile().getProperties();
 
-                if (properties.get("blocker") != null){
-                    cell.setTile(blockableTile);
-                }
+                if (properties.get("blocker") == null || properties.get("category") == null) continue;
+
+                if(!properties.get("category").equals(category.toString())) continue;
+                
+                cell.setTile(blockableTile);
             }
         }
     }
 
-    private void loadBlockerTile(){
-        TiledMapTileSet set = map.getTileSets().getTileSet(0);
-        for (TiledMapTile tiledMapTile : set) {
-            if(tiledMapTile.getProperties().get("blocker") != null){
-                blockerTile = tiledMapTile;
-            }
-        }
+    public void handle(){
+        if(isBlocked)
+            unBlockTiles();
+        else
+            blockTiles();
+
+        isBlocked = !isBlocked;
+    }
+
+    public TileReplacementEnum getCategory() {
+        return category;
     }
 }

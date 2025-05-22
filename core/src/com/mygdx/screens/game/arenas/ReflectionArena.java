@@ -44,8 +44,9 @@ public class ReflectionArena extends PlayableScreen {
         super.render(delta);
 
         if (TileMapCollisionsManager.changeMovementStyle()){
-            player.swapMovementStyle();
             MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
+            MsgManager.sendStageMsg(MSG.CHANGE_MOV_STYLE);
+
         }
     }
-}
+} 

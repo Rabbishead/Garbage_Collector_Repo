@@ -74,9 +74,8 @@ public abstract class PlayableScreen extends GenericScreen {
     public void show() {
         super.show();
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
-        subscribe(tileSetManager, MSG.BLOCK_WALLS);
-
-        // tileSetManager.debug();
+        subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.CHANGE_MOV_STYLE);
+        subscribe(player, MSG.CHANGE_MOV_STYLE);
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
@@ -104,6 +103,9 @@ public abstract class PlayableScreen extends GenericScreen {
         }
         if(Gdx.input.isKeyJustPressed(Keys.H)){
             stageMsg.dispatchMessage(MSG.BLOCK_WALLS.code);
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.J)){
+            stageMsg.dispatchMessage(MSG.CHANGE_MOV_STYLE.code);
         }
 
         if (Utils.getActiveScreen() != this)

@@ -1,5 +1,6 @@
 package com.mygdx.entities;
 
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +12,6 @@ import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
-import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
@@ -72,7 +72,6 @@ public class Player extends GameActor {
             movementStyle = new PlayerTiledMovementStyle();
             Utils.getStage().addActor(GunController.get());
             moveTo(new Vector2(((int) (getCoords().x / 32) * 32) + 8, ((int) (getCoords().y / 32) * 32) + 8));
-            MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
         } else {
             movementStyle = new PlayerRealtimeMovementStyle();
             GunController.get().remove();
@@ -128,5 +127,11 @@ public class Player extends GameActor {
 
     public boolean isTiledWalking() {
         return movementStyle instanceof PlayerTiledMovementStyle;
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        if(msg.message == MSG.CHANGE_MOV_STYLE.code) swapMovementStyle();
+        return true;
     }
 }

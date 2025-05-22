@@ -59,7 +59,10 @@ public abstract class GenericScreen extends ScreenAdapter{
         stage.getViewport().update(width, height); 
     }
 
-    public void subscribe(Telegraph a, MSG msg){
-        stageMsg.addListener(a, msg.code);
+    public void subscribe(Telegraph a, MSG... msgs){
+        for (MSG msg : msgs) {
+            stageMsg.addListener(a, msg.code);    
+        }
+        
     }
 }
