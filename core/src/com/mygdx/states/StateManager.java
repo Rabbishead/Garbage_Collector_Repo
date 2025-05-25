@@ -2,6 +2,9 @@ package com.mygdx.states;
 
 import java.util.EnumMap;
 
+/**
+ * global states of the game
+ */
 public class StateManager {
     private static final EnumMap<StateEnum, Boolean> boolStates = new EnumMap<>(StateEnum.class);
     private static final EnumMap<StateEnum, String> stringStates = new EnumMap<>(StateEnum.class);

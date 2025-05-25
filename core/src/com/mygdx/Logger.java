@@ -15,6 +15,10 @@ public class Logger {
         }
     }
 
+    /**
+     * Logs s into a log file
+     * @param s
+     */
     public static void log(String s) {
         try {
             bw.write(s);

@@ -49,7 +49,6 @@ public class ScreensManager {
 
     public static boolean isNull(String screenName) {
         return map.get(screenName) == null;
-
     }
 
     public static String getLastPlayableActiveScreen() {

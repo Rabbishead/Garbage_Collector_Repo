@@ -132,6 +132,7 @@ public class Player extends GameActor {
     @Override
     public boolean handleMessage(Telegram msg) {
         if(msg.message == MSG.CHANGE_MOV_STYLE.code) swapMovementStyle();
+        
         return true;
     }
 }

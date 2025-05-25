@@ -18,7 +18,11 @@ public enum ResourceEnum {
     //MENU
     ITAFLAG("dialogues/images/itaFlag.png", TypeEnum.TEXTURE),
     ENGFLAG("dialogues/images/engFlag.jpg", TypeEnum.TEXTURE),
-    PLAYBUTTON("menu/play.png", TypeEnum.TEXTURE),
+    PLAY_BUTTON("menu/play.png", TypeEnum.TEXTURE),
+    SETTINGS_BUTTON("menu/settings.png", TypeEnum.TEXTURE),
+    QUIT_BUTTON("menu/quit.png", TypeEnum.TEXTURE),
+    BACKGROUND_1("menu/background.jpg", TypeEnum.TEXTURE),
+    BACKGROUND_2("menu/background-2.jpg", TypeEnum.TEXTURE),
 
     //HUD
     HEALTH_BAR("hud/health.png", TypeEnum.TEXTURE),

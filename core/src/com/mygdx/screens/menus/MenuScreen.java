@@ -1,10 +1,10 @@
 package com.mygdx.screens.menus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.Data;
@@ -16,6 +16,9 @@ import com.mygdx.screens.generic.gui.GuiScreen;
 
 public class MenuScreen extends GuiScreen {
 
+    private final int row_height = Data.VIEWPORT_X / 24;
+    private final int col_width = Data.VIEWPORT_Y / 24;
+
     public MenuScreen() {
         super();
         Utils.setActiveLanguage(LangEnum.ITA);
@@ -24,45 +27,19 @@ public class MenuScreen extends GuiScreen {
     @Override
     public void show() {
         super.show();
-        ImageButton engButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
 
-        ImageButton itaButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ITAFLAG))));
+        Image bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
+        stage.addActor(bg);
+
 
         ImageButton playButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAYBUTTON))));
+                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
+        ImageButton settingsButton = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.SETTINGS_BUTTON))));
+        ImageButton quitButton = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
 
-        ImageButton fullScreenButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.ENGFLAG))));
-
-        int row_height = Data.VIEWPORT_X / 24;
-        int col_width = Data.VIEWPORT_Y / 24;
-
-        engButton.setSize(col_width * 4, row_height);
-        engButton.setPosition(col_width * 2, row_height);
-        engButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setActiveLanguage(LangEnum.ENG);
-                return true;
-            }
-        });
-        stage.addActor(engButton);
-
-        itaButton.setSize(col_width * 4, row_height);
-        itaButton.setPosition(col_width * 6, row_height);
-        itaButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setActiveLanguage(LangEnum.ITA);
-                return true;
-            }
-        });
-        stage.addActor(itaButton);
-
-        playButton.setSize(col_width * 6, row_height);
-        playButton.setPosition(col_width * 24 - playButton.getWidth(), row_height * 12 - playButton.getHeight());
+        playButton.setPosition(Data.VIEWPORT_X - col_width * 2 -  playButton.getWidth(), row_height * 7);
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -71,34 +48,32 @@ public class MenuScreen extends GuiScreen {
             }
         });
         stage.addActor(playButton);
-        Gdx.input.setInputProcessor(stage);
 
-        fullScreenButton.setSize(col_width * 4, row_height);
-        fullScreenButton.setPosition(col_width * 32, row_height);
-        fullScreenButton.addListener(new InputListener() {
+        settingsButton.setPosition(Data.VIEWPORT_X - col_width * 2 - settingsButton.getWidth(), row_height * 4);
+        settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                toggleFullScreen();
+                Utils.setScreen(SavingsManager.getLastRoom());
                 return true;
             }
         });
-        stage.addActor(fullScreenButton);
+        stage.addActor(settingsButton);
 
+        quitButton.setPosition(Data.VIEWPORT_X - col_width * 2 - quitButton.getWidth(), row_height);
+        quitButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.exit();
+                return true;
+            }
+        });
+        stage.addActor(quitButton);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-    }
-
-    private void toggleFullScreen() {
-        Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-        if (Gdx.graphics.getHeight() == displayMode.height) {
-            Gdx.graphics.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);
-            Gdx.graphics.setUndecorated(false);
-            return;
-        }
-        Gdx.graphics.setUndecorated(true);
-        Gdx.graphics.setWindowedMode(displayMode.width, displayMode.height);
     }
 }
