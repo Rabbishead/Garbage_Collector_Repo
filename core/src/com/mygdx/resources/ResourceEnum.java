@@ -40,7 +40,10 @@ public enum ResourceEnum {
     ENERGYPLANT_BUILDING("map/city/building_energyplant_animated.png", TypeEnum.TEXTURE),
     SPARK_BUILDING_1("map/city/building_skyscraper_electro_spark_animation_flow.png", TypeEnum.TEXTURE),
     SPARK_BUILDING_2("map/city/building_skyscraper_electro_spark_animation_turning_on.png", TypeEnum.TEXTURE),
-    SKYSCRAPER("map/city/building_skyscraper_high.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_HIGH("map/city/building_skyscraper_high.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_MEDIUM("map/city/building_skyscraper_medium.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_SMALL("map/city/building_skyscraper_small.png", TypeEnum.TEXTURE),
+    SYNTH("map/city/building_synth_animated.png", TypeEnum.TEXTURE),
     MARMOT_PIZZA("map/city/pizza_marmot.png", TypeEnum.TEXTURE),
 
     //DIALOGUES

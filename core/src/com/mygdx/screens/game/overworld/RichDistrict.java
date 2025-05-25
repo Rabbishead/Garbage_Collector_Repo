@@ -46,6 +46,15 @@ public class RichDistrict extends PlayableScreen {
                         .singlePieceHeight(3)
                         .animationRate(0.2f)
                         .delay(1000)
+                        .build(),
+
+                new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 65, Data.TILE * 26))
+                        .texture(ResourceEnum.ABANDONED_BUILDING)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(2)
+                        .animationRate(0.2f)
+                        .delay(1000)
                         .build()
                         
             );
