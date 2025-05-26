@@ -40,7 +40,7 @@ public class RichDistrict extends PlayableScreen {
 
         Collections.addAll(mapComponents,
                 new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 60, Data.TILE * 26))
+                        .coordinates(new Vector2(Data.TILE * 59, Data.TILE * 25))
                         .texture(ResourceEnum.MARMOT_PIZZA)
                         .singlePieceWidth(3)
                         .singlePieceHeight(3)
@@ -49,7 +49,41 @@ public class RichDistrict extends PlayableScreen {
                         .build(),
 
                 new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 65, Data.TILE * 26))
+                        .coordinates(new Vector2(Data.TILE * 62, Data.TILE * 25))
+                        .texture(ResourceEnum.ABANDONED_BUILDING)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(2)
+                        .animationRate(4f)
+                        .delay(500)
+                        .build(),
+                
+                        new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 65, Data.TILE * 25))
+                        .texture(ResourceEnum.ENERGYPLANT_BUILDING)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(2)
+                        .animationRate(0.4f)
+                        .delay(500)
+                        .build(),
+
+                new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 68, Data.TILE * 25))
+                        .texture(ResourceEnum.SPARK_BUILDING_1)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(4)
+                        .animationRate(0.2f)
+                        .delay(1000)
+                        .build(),
+                new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 71, Data.TILE * 25))
+                        .texture(ResourceEnum.SYNTH)
+                        .singlePieceWidth(3)
+                        .singlePieceHeight(2)
+                        .animationRate(1f)
+                        .delay(500)
+                        .build(),
+                new ForegroundMapComponent.ForegroundMapComponentBuilder()
+                        .coordinates(new Vector2(Data.TILE * 62, Data.TILE * 25))
                         .texture(ResourceEnum.ABANDONED_BUILDING)
                         .singlePieceWidth(3)
                         .singlePieceHeight(2)
