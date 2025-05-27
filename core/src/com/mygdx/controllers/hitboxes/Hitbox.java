@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Hitbox extends Polygon {
@@ -14,6 +15,7 @@ public class Hitbox extends Polygon {
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
     private BaseMovement movement;
+    private ObjectInfo extraInfo;
     public final boolean isNull;
 
     /**
