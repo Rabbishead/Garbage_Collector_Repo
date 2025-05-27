@@ -18,12 +18,10 @@ public class ForegroundMapComponent extends GameActor {
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
 
-        // this.debug();
-
-        float animationRate = builder.animationRate == 0 ? 4f : builder.animationRate;
-
         animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth,
-                builder.singlePieceHeight, animationRate, builder.delay);
+                builder.singlePieceHeight, builder.animationRate, builder.delay);
+
+        animationManager.setCurrentAnimation(builder.startingAnimationCode);
 
         // hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true,
         // "enemy,npc");
@@ -46,7 +44,6 @@ public class ForegroundMapComponent extends GameActor {
     public void act(float delta) {
         super.act(delta);
 
-        animationManager.setCurrentAnimation(0);
         animationManager.updateAnimation(delta);
     }
 
@@ -61,8 +58,9 @@ public class ForegroundMapComponent extends GameActor {
         protected ResourceEnum textureEnum;
         protected int singlePieceWidth;
         protected int singlePieceHeight;
-        protected float animationRate;
-        protected float delay;
+        protected float animationRate = 1;
+        protected float delay = 0;
+        protected int startingAnimationCode = 0;
 
         public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
@@ -91,6 +89,11 @@ public class ForegroundMapComponent extends GameActor {
 
         public ForegroundMapComponentBuilder delay(float delay){
             this.delay = delay;
+            return this;
+        }
+
+        public ForegroundMapComponentBuilder startingAnimationCode(int startingAnimationCode){
+            this.startingAnimationCode = startingAnimationCode;
             return this;
         }
 

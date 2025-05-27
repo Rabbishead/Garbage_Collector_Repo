@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Data;
-import com.mygdx.entities.ForegroundMapComponent;
+import com.mygdx.entities.ForegroundMapComponentEnum;
 import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.Reflection;
@@ -39,59 +39,32 @@ public class RichDistrict extends PlayableScreen {
 
 
         Collections.addAll(mapComponents,
-                new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 59, Data.TILE * 25))
-                        .texture(ResourceEnum.MARMOT_PIZZA)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(3)
-                        .animationRate(0.2f)
-                        .delay(1000)
+                ForegroundMapComponentEnum.MARMOT_PIZZA
+                        .coord(Data.TILE * 59, Data.TILE * 25)
                         .build(),
 
-                new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 62, Data.TILE * 25))
-                        .texture(ResourceEnum.ABANDONED_BUILDING)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(2)
-                        .animationRate(4f)
-                        .delay(500)
+                ForegroundMapComponentEnum.ABANDONED_BUILDING
+                        .coord(Data.TILE * 62, Data.TILE * 25)
                         .build(),
                 
-                        new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 65, Data.TILE * 25))
-                        .texture(ResourceEnum.ENERGYPLANT_BUILDING)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(2)
-                        .animationRate(0.4f)
-                        .delay(500)
+                ForegroundMapComponentEnum.ABANDONED_BUILDING
+                        .coord(Data.TILE * 65, Data.TILE * 25)
                         .build(),
 
-                new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 68, Data.TILE * 25))
-                        .texture(ResourceEnum.SPARK_BUILDING_1)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(4)
-                        .animationRate(0.2f)
-                        .delay(1000)
+
+                ForegroundMapComponentEnum.SKYSCRAPER_MEDIUM
+                        .coord(Data.TILE * 68, Data.TILE * 25)
                         .build(),
-                new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 71, Data.TILE * 25))
-                        .texture(ResourceEnum.SYNTH)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(2)
-                        .animationRate(1f)
-                        .delay(500)
+
+
+                ForegroundMapComponentEnum.SYNTH
+                        .coord(Data.TILE * 71, Data.TILE * 25)
                         .build(),
-                new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                        .coordinates(new Vector2(Data.TILE * 62, Data.TILE * 25))
-                        .texture(ResourceEnum.ABANDONED_BUILDING)
-                        .singlePieceWidth(3)
-                        .singlePieceHeight(2)
-                        .animationRate(0.2f)
-                        .delay(1000)
+                
+                ForegroundMapComponentEnum.SYNTH
+                        .coord(Data.TILE * 81, Data.TILE * 28)
                         .build()
-                        
-            );
+                );
 
 
         updateStage();
