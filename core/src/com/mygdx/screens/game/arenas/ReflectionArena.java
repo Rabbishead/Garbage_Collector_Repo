@@ -22,7 +22,6 @@ public class ReflectionArena extends PlayableScreen {
         Collections.addAll(npcs,
                 new Reflection.ReflectionBuilder()
                         .coordinates(new Vector2(Data.TILE * 5, Data.TILE * 5))
-                        .size(new Vector2(16, 32))
                         .texture(ResourceEnum.BLACKMARKETEER)
                         .build());
 

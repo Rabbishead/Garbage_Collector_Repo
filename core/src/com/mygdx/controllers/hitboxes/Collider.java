@@ -5,16 +5,17 @@ import java.util.function.BiConsumer;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.movement.BaseMovement;
 
 public class Collider extends Polygon {
     private String[] tags;
     private String stringTags;
     private String[] searchTags;
     private boolean collided;
-    private Vector2 center;
     private BiConsumer<Collider, Hitbox> onHit;
     private BiConsumer<Collider, Hitbox> onLeave;
     private ArrayList<String> keys;
+    private BaseMovement movement;
     public final boolean isNull;
 
     /**
@@ -22,18 +23,18 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center     the colliders' center coordinates.
+     * @param anchor     the colliders' anchor coordinates.
      * @param degrees    specifies the colliders' rotation.
      * @param tags       colliders' tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
      * @param vertices   an array whose elements in pairs represent the x and y of
      *                   the polygon's vertices.
      */
-    public Collider(Vector2 center, float degrees, String tags, String searchTags, float[] vertices) {
+    public Collider(Vector2 anchor, float degrees, String tags, String searchTags, float[] vertices) {
         super(vertices);
-        this.center = center;
-        Vector2 centroid = getCentroid(new Vector2());
-        setOrigin(centroid.x, centroid.y);
+        movement = new BaseMovement(getCentroid(new Vector2()));
+        setOrigin(movement.center.x, movement.center.y);
+        movement.anchor(anchor);
         setPosition();
         setRotation(degrees);
         this.tags = tags.split(",");
@@ -49,15 +50,13 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center     the colliders' center coordinates.
-     * @param width      as large as the sea!
-     * @param height     as tall as the sky!
+     * @param anchor     the colliders' anchor coordinates.
      * @param degrees    specifies the colliders' rotation.
      * @param tags       colliders' tags to differentiate what to do on collision.
      * @param searchTags specifies what hiboxes can the collider collide with.
      */
-    public Collider(Vector2 center, float width, float height, float degrees, String tags, String searchTags) {
-        this(center, degrees, tags, searchTags,
+    public Collider(Vector2 anchor, float width, float height, float degrees, String tags, String searchTags) {
+        this(anchor, degrees, tags, searchTags,
                 new float[] { 0, 0, width, 0, width, height, 0, height });
     }
 
@@ -66,14 +65,14 @@ public class Collider extends Polygon {
      * Tags are a list of names separated by a comma, the String should contain no
      * spaces.
      * 
-     * @param center  the colliders' center coordinates.
+     * @param anchor  the colliders' anchor coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the colliders' rotation.
      * @param tags    colliders' tags to differentiate what to do on collision.
      */
-    public Collider(Vector2 center, float width, float height, float degrees, String tags) {
-        this(center, width, height, degrees, tags, "all");
+    public Collider(Vector2 anchor, float width, float height, float degrees, String tags) {
+        this(anchor, width, height, degrees, tags, "all");
     }
 
     /**
@@ -91,12 +90,12 @@ public class Collider extends Polygon {
     /**
      * Creates a box Collider with specified position and size.
      * 
-     * @param center the colliders' center coordinates.
+     * @param anchor the colliders' anchor coordinates.
      * @param width  as large as the sea!
      * @param height as tall as the sky!
      */
-    public Collider(Vector2 center, float width, float height) {
-        this(center, width, height, 0);
+    public Collider(Vector2 anchor, float width, float height) {
+        this(anchor, width, height, 0);
     }
 
     /**
@@ -109,25 +108,14 @@ public class Collider extends Polygon {
     }
 
     public void setPosition() {
-        super.setPosition(center.x - getOriginX(), center.y - getOriginY());
-    }
-
-    public void setPosition(Vector2 center) {
-        this.center = center;
-        setPosition();
-    }
-
-    @Override
-    public void setPosition(float x, float y) {
-        this.center = new Vector2(x, y);
-        setPosition();
+        Vector2 worldCoords = movement.getWorldCoords();
+        super.setPosition(worldCoords.x, worldCoords.y);
     }
 
     public void setOffset(float x, float y) {
-        Vector2 pos = new Vector2(x, y);
-        pos.set(pos.x - getOriginX(), pos.y - getOriginY());
-        setPosition(center.x + pos.x, center.y + pos.y);
-        setOrigin(-pos.x, -pos.y);
+        movement.offset(new Vector2(x, y));
+        setOrigin(movement.origin.x, movement.origin.y);
+        setPosition();
     }
 
     public void onHit(Hitbox h) {
