@@ -45,8 +45,6 @@ public class Player extends GameActor {
 
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         autoMovementManager = new AutoMovementManager();
-
-        debug();
     }
 
     /**

@@ -5,11 +5,11 @@ import com.badlogic.gdx.math.Vector2;
 public class BaseMovement {
     public Vector2 position = new Vector2(),
             angle = new Vector2(1, 0),
-            movement = new Vector2(),
+            speed = new Vector2(),
             origin = new Vector2(),
             center = new Vector2(),
             anchor = null;
-    
+
     /**
      * Used for movement each frame.
      */
@@ -19,6 +19,10 @@ public class BaseMovement {
      * Used when un-anchored.
      */
     public float x = 0, y = 0;
+
+    public BaseMovement(Vector2 center) {
+        this(center.x, center.y);
+    }
 
     public BaseMovement(float centerX, float centerY) {
         center.x = centerX;
@@ -30,14 +34,6 @@ public class BaseMovement {
     }
 
     /**
-     * Scales the movement by delta, to do once.
-     * @param delta
-     */
-    public void scaleByDelta(float delta) {
-        movement.scl(delta);
-    }
-
-    /**
      * Align the position to be centered.
      */
     public void align() {
@@ -46,21 +42,27 @@ public class BaseMovement {
 
     /**
      * Move
+     * 
      * @return
      */
-    public Vector2 move() {
-        movement.setAngleDeg(angle.angleDeg());
-        return position.add(movement);
+    public Vector2 move(float delta) {
+        speed.setAngleDeg(angle.angleDeg());
+        Vector2 movement = speed.cpy().scl(delta);
+        position.add(movement);
+        recalcOrigin();
+        return position;
     }
 
     public Vector2 mutiply(float delta) {
-        movement.setAngleDeg(angle.angleDeg());
-        movement.scl(distance).scl(delta);
-        return position.add(movement);
+        speed.setAngleDeg(angle.angleDeg());
+        Vector2 movement = speed.scl(distance).cpy().scl(delta);
+        position.add(movement);
+        recalcOrigin();
+        return position;
     }
 
     public void offset() {
-        position.add(movement);
+        position.add(speed);
         recalcOrigin();
     }
 
@@ -74,7 +76,7 @@ public class BaseMovement {
     }
 
     public Vector2 getWorldCoords() {
-        return getCenterWorldCoords().sub(center);
+        return new Vector2(anchor.x + position.x, anchor.y + position.y);
     }
 
     /**
@@ -88,8 +90,10 @@ public class BaseMovement {
     }
 
     public void recalcOrigin() {
-        Vector2 worldPos = getWorldCoords();
-        origin.set(anchor.x - worldPos.x, anchor.y - worldPos.y);
+        if (anchor == null)
+            return;
+
+        origin.set(-position.x, -position.y);
     }
 
     public void unAnchor() {

@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.hitboxes.Collider;
+import com.mygdx.movement.BaseMovement;
 
 public class BaseMelee extends Actor {
     protected Sprite s;
-    protected Vector2 pos, origin;
-    protected float angle, arc, speed, end;
+    protected BaseMovement movement;
+    protected float angle, speed, end;
     private boolean flipped;
     public Vector2 center = new Vector2();
     protected Collider collider = new Collider();
@@ -19,13 +20,12 @@ public class BaseMelee extends Actor {
     public BaseMelee(Texture t, Vector2 origin, float angle, float arc, float speed, boolean flipped) {
         s = new Sprite(t);
 
-        this.origin = origin;
         this.angle = angle;
-        this.arc = arc;
         this.speed = speed;
         this.flipped = flipped;
 
         if (flipped) {
+            s.flip(false, true);
             arc = arc * -1;
             this.speed = speed * -1;
         }
@@ -34,14 +34,12 @@ public class BaseMelee extends Actor {
         setSize(s.getWidth(), s.getHeight());
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        pos = new Vector2(0, 0);
-        s.setOrigin(-pos.x, -pos.y);
+        movement = new BaseMovement(getOriginX(), getOriginY());
+        movement.anchor(origin);
+        s.setOrigin(movement.origin.x, movement.origin.y);
 
         collider = new Collider(origin, getWidth(), getHeight(), angle, "projectile");
         collider.register();
-
-        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
-        this.debug();
     }
 
     @Override
@@ -55,7 +53,8 @@ public class BaseMelee extends Actor {
 
     @Override
     public void act(float delta) {
-        setPosition(origin.x + pos.x, origin.y + pos.y);
+        Vector2 worldCoords = movement.getWorldCoords();
+        setPosition(worldCoords.x, worldCoords.y);
 
         angle += speed * delta;
 
@@ -76,8 +75,8 @@ public class BaseMelee extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         s.setPosition(getX(), getY());
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
+        movement.x = getX();
+        movement.y = getY();
         collider.setPosition();
     }
 
@@ -91,9 +90,8 @@ public class BaseMelee extends Actor {
     }
 
     public void setOffset(float x, float y) {
-        pos = new Vector2(x, y);
-        pos.set(pos.x - getWidth() / 2, pos.y - getHeight() / 2);
-        s.setOrigin(-pos.x, -pos.y);
+        movement.offset(new Vector2(x, y));
+        s.setOrigin(movement.origin.x, movement.origin.y);
         collider.setOffset(x, y);
     }
 }
