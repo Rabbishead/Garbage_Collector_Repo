@@ -56,6 +56,10 @@ public enum ForegroundMapComponentEnum {
         this.coord = coord;
         return this;
     }
+    public ForegroundMapComponentEnum coord(float x, float y) {
+        this.coord = new Vector2(x, y);
+        return this;
+    }
 
     public Vector2 getCoord() {
         return coord;

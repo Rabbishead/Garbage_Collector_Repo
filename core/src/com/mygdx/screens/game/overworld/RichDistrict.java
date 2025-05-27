@@ -40,25 +40,29 @@ public class RichDistrict extends PlayableScreen {
 
         Collections.addAll(mapComponents,
                 ForegroundMapComponentEnum.MARMOT_PIZZA
-                        .coord(new Vector2(Data.TILE * 59, Data.TILE * 25))
+                        .coord(Data.TILE * 59, Data.TILE * 25)
                         .build(),
 
                 ForegroundMapComponentEnum.ABANDONED_BUILDING
-                        .coord(new Vector2(Data.TILE * 62, Data.TILE * 25))
+                        .coord(Data.TILE * 62, Data.TILE * 25)
                         .build(),
                 
                 ForegroundMapComponentEnum.ABANDONED_BUILDING
-                        .coord(new Vector2(Data.TILE * 65, Data.TILE * 25))
+                        .coord(Data.TILE * 65, Data.TILE * 25)
                         .build(),
 
 
                 ForegroundMapComponentEnum.SKYSCRAPER_MEDIUM
-                        .coord(new Vector2(Data.TILE * 68, Data.TILE * 25))
+                        .coord(Data.TILE * 68, Data.TILE * 25)
                         .build(),
 
 
                 ForegroundMapComponentEnum.SYNTH
-                        .coord(new Vector2(Data.TILE * 71, Data.TILE * 25))
+                        .coord(Data.TILE * 71, Data.TILE * 25)
+                        .build(),
+                
+                ForegroundMapComponentEnum.SYNTH
+                        .coord(Data.TILE * 81, Data.TILE * 28)
                         .build()
                 );
 
