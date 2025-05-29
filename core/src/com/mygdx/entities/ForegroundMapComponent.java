@@ -10,6 +10,7 @@ import com.mygdx.resources.ResourceEnum;
 public class ForegroundMapComponent extends GameActor {
 
     private Hitbox hitbox = new Hitbox();
+    private float fade = 1;
 
     private final MapComponentAnimationManager animationManager;
 
@@ -23,17 +24,29 @@ public class ForegroundMapComponent extends GameActor {
 
         animationManager.setCurrentAnimation(builder.startingAnimationCode);
 
-        // hitbox = new Hitbox(getX() + getWidth() * 0.4f, getY(), 8, 24, 0, true,
-        // "enemy,npc");
-        // hitbox.setOnHit((hitbox, collider) -> {});
-
-        hitbox.register();
+        if (builder.fade) {
+            
+            hitbox = new Hitbox(
+                    new Vector2(getX() + builder.singlePieceWidth * 16, getY() + builder.singlePieceHeight * 16),
+                    builder.singlePieceWidth * 32, builder.singlePieceHeight * 32, 0, "building", true);
+            hitbox.setOnHit((hitbox, collider) -> {
+                fade = 0.2f;
+            });
+            hitbox.setOnLeave((hitbox, collider) -> {
+                fade = 1;
+            });
+            hitbox.register();
+            this.debug();
+        }
+        
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        batch.setColor(1, 1, 1, fade);
         batch.draw(animationManager.getCurrentFrame(), getX(), getY());
+        batch.setColor(1, 1, 1, 1);
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -61,6 +74,7 @@ public class ForegroundMapComponent extends GameActor {
         protected float animationRate = 1;
         protected float delay = 0;
         protected int startingAnimationCode = 0;
+        protected boolean fade = false;
 
         public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
@@ -82,18 +96,23 @@ public class ForegroundMapComponent extends GameActor {
             return this;
         }
 
-        public ForegroundMapComponentBuilder animationRate(float animationRate){
+        public ForegroundMapComponentBuilder animationRate(float animationRate) {
             this.animationRate = animationRate;
             return this;
         }
 
-        public ForegroundMapComponentBuilder delay(float delay){
+        public ForegroundMapComponentBuilder delay(float delay) {
             this.delay = delay;
             return this;
         }
 
-        public ForegroundMapComponentBuilder startingAnimationCode(int startingAnimationCode){
+        public ForegroundMapComponentBuilder startingAnimationCode(int startingAnimationCode) {
             this.startingAnimationCode = startingAnimationCode;
+            return this;
+        }
+
+        public ForegroundMapComponentBuilder fade() {
+            this.fade = true;
             return this;
         }
 

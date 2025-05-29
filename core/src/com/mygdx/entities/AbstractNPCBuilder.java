@@ -18,6 +18,11 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
         return getThis();
     }
 
+    public T coordinates(float x, float y) {
+        this.coordinates = new Vector2(x, y);
+        return getThis();
+    }
+
     public T size(Vector2 size) {
         this.size = size;
         return getThis();

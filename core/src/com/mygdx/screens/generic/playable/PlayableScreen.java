@@ -1,6 +1,5 @@
 package com.mygdx.screens.generic.playable;
 
-import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -11,9 +10,7 @@ import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.entities.ForegroundMapComponent;
 import com.mygdx.entities.Player;
-import com.mygdx.entities.npcs.NPC;
 import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
@@ -38,9 +35,6 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected Player player;
 
-    protected ArrayList<ForegroundMapComponent> mapComponents;
-    protected ArrayList<NPC> npcs;
-
     private ResourceEnum name;
 
     protected PlayableScreen(ResourceEnum map) {
@@ -64,9 +58,6 @@ public abstract class PlayableScreen extends GenericScreen {
         hud = new Hud();
         Utils.setCurrentHud(hud);
 
-        mapComponents = new ArrayList<>();
-        npcs = new ArrayList<>();
-
         this.name = map;
     }
 
@@ -86,6 +77,8 @@ public abstract class PlayableScreen extends GenericScreen {
         Utils.setHitboxHandler(hitboxHandler);
 
         stage.getCamera().position.set(getPlayerCoordinates(), 0);
+
+        player.setMovementStyle(Player.Styles.REALTIME);
     }
 
     @Override
@@ -136,11 +129,6 @@ public abstract class PlayableScreen extends GenericScreen {
 
     public Vector2 getPlayerCoordinates() {
         return new Vector2(player.getX(), player.getY());
-    }
-
-    public void updateStage(){
-        mapComponents.forEach(comp -> stage.addActor(comp));
-        npcs.forEach(npc -> stage.addActor(npc));
     }
 
     public String getName(){

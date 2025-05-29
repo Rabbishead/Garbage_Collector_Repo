@@ -33,18 +33,33 @@ public enum ResourceEnum {
     PARK("map/park/park.tmx", TypeEnum.MAP),
     REFLECTION_ARENA("map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
 
-    LAMP("map/city/lamp.png", TypeEnum.TEXTURE),
-    LONG_LAMP("map/city/long_lamp.png", TypeEnum.TEXTURE),
-    PALACE("map/city/palace.png", TypeEnum.TEXTURE),
+    //SMALL BUILDINGS
     ABANDONED_BUILDING("map/city/building_abandoned_tileset.png", TypeEnum.TEXTURE),
+    SYNTH("map/city/building_synth_animated.png", TypeEnum.TEXTURE),
+    MARMOT_PIZZA("map/city/pizza_marmot.png", TypeEnum.TEXTURE),
     ENERGYPLANT_BUILDING("map/city/building_energyplant_animated.png", TypeEnum.TEXTURE),
+
+    //MEDIUM BUILDINGS
+    SKYSCRAPER_MEDIUM("map/city/building_skyscraper_medium.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1("map/city/skyscraper_1.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1_BACK("map/city/skyscraper_1_back.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1_SIDE("map/city/skyscraper_1_side.png", TypeEnum.TEXTURE),
+
+    //BIG BUILDINGS
     SPARK_BUILDING_1("map/city/building_skyscraper_electro_spark_animation_flow.png", TypeEnum.TEXTURE),
     SPARK_BUILDING_2("map/city/building_skyscraper_electro_spark_animation_turning_on.png", TypeEnum.TEXTURE),
     SKYSCRAPER_HIGH("map/city/building_skyscraper_high.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_MEDIUM("map/city/building_skyscraper_medium.png", TypeEnum.TEXTURE),
     SKYSCRAPER_SMALL("map/city/building_skyscraper_small.png", TypeEnum.TEXTURE),
-    SYNTH("map/city/building_synth_animated.png", TypeEnum.TEXTURE),
-    MARMOT_PIZZA("map/city/pizza_marmot.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_2("map/city/skyscraper_2.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_2_BACK("map/city/skyscraper_2_back.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_3("map/city/skyscraper_3.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_L("map/city/SKYSCRAPER_L.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_U("map/city/SKYSCRAPER_U.png", TypeEnum.TEXTURE),
+
+    //OTHERS
+    LAMP("map/city/lamp.png", TypeEnum.TEXTURE),
+    LONG_LAMP("map/city/long_lamp.png", TypeEnum.TEXTURE),
+
 
     //DIALOGUES
     COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),

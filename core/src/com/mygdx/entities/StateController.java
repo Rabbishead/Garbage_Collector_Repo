@@ -39,12 +39,10 @@ public class StateController {
     public void setMovementState(MovementState movState) {
         this.prevMovementState = this.movementState;
         this.movementState = movState;
-        System.out.println(movState);
     }
 
     public void setCombatState(CombatState combatState) {
         this.prevCombatState = this.combatState;
         this.combatState = combatState;
-        System.out.println(combatState);
     }
 }

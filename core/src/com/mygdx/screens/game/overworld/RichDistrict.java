@@ -1,8 +1,5 @@
 package com.mygdx.screens.game.overworld;
 
-import java.util.Collections;
-
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Data;
 import com.mygdx.entities.ForegroundMapComponentEnum;
 import com.mygdx.entities.Player;
@@ -15,61 +12,58 @@ public class RichDistrict extends PlayableScreen {
 
     public RichDistrict() {
         super(ResourceEnum.RICH_DISTRICT);
-        
 
-        Collections.addAll(npcs,
+        addAll(
                 new Reflection.ReflectionBuilder()
-                        .coordinates(new Vector2(Data.TILE * 30, Data.TILE * 15))
+                        .coordinates(Data.TILE * 30, Data.TILE * 15)
                         .texture(ResourceEnum.BLACKMARKETEER)
-                        .path("-")
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
+
                 new NPC.NPCBuilder()
-                        .coordinates(new Vector2(Data.TILE * 50, Data.TILE * 15))
+                        .coordinates(Data.TILE * 50, Data.TILE * 15)
                         .texture(ResourceEnum.JERKINS)
                         .path("DWW--ASS", "WWDSS-A")
                         .story(ResourceEnum.ADEPTUS_1)
                         .build(),
-                new NPC.NPCBuilder()
-                        .coordinates(new Vector2(300, 700))
-                        .texture(ResourceEnum.JERKINS)
-                        .path("DWW--ASS", "WWDSS-A")
-                        .story(ResourceEnum.ADEPTUS_1)
-                        .build());
 
-
-        Collections.addAll(mapComponents,
+               
                 ForegroundMapComponentEnum.MARMOT_PIZZA
                         .coord(Data.TILE * 59, Data.TILE * 25)
                         .build(),
 
-                ForegroundMapComponentEnum.ABANDONED_BUILDING
+                ForegroundMapComponentEnum.ENERGYPLANT_BUILDING
                         .coord(Data.TILE * 62, Data.TILE * 25)
                         .build(),
                 
                 ForegroundMapComponentEnum.ABANDONED_BUILDING
                         .coord(Data.TILE * 65, Data.TILE * 25)
                         .build(),
-
+                ForegroundMapComponentEnum.ABANDONED_BUILDING
+                        .coord(Data.TILE * 65, Data.TILE * 27)
+                        .build(),
 
                 ForegroundMapComponentEnum.SKYSCRAPER_MEDIUM
                         .coord(Data.TILE * 68, Data.TILE * 25)
                         .build(),
 
-
                 ForegroundMapComponentEnum.SYNTH
                         .coord(Data.TILE * 71, Data.TILE * 25)
                         .build(),
                 
-                ForegroundMapComponentEnum.SYNTH
+                ForegroundMapComponentEnum.LAMP
                         .coord(Data.TILE * 81, Data.TILE * 28)
+                        .build(),
+                ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
+                        .coord(Data.TILE * 80, Data.TILE * 21)
+                        .build(),
+                ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
+                        .coord(Data.TILE * 75, Data.TILE * 21)
+                        .build(),
+                ForegroundMapComponentEnum.SKYSCRAPER_1_SIDE
+                        .coord(Data.TILE * 65, Data.TILE * 20)
                         .build()
-                );
-
-
-        updateStage();
-
-        stage.getCamera().translate(player.getX(), player.getY(), 0);
+        );
     }
 
     @Override

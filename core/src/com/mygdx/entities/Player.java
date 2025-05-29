@@ -36,7 +36,7 @@ public class Player extends GameActor {
         setSize(16, 32);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        collider = new Collider(center, getWidth(), getHeight(), 0, "player", "npc");
+        collider = new Collider(center, getWidth(), getHeight(), 0, "player", "npc,building");
         collider.register();
         setPosition(coordinates.x, coordinates.y);
 

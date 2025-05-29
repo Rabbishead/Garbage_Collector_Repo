@@ -92,6 +92,5 @@ public class MapComponentAnimationManager {
 
     public void setCurrentAnimation(int animationCode) {
         currentAnimation = animationCode;
-        System.out.println(currentAnimation);
     }
 }
