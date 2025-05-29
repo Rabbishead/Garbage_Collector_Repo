@@ -2,7 +2,6 @@ package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
 import com.mygdx.entities.ForegroundMapComponentEnum;
-import com.mygdx.entities.Player;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.resources.ResourceEnum;
@@ -39,6 +38,7 @@ public class RichDistrict extends PlayableScreen {
                 ForegroundMapComponentEnum.ABANDONED_BUILDING
                         .coord(Data.TILE * 65, Data.TILE * 25)
                         .build(),
+
                 ForegroundMapComponentEnum.ABANDONED_BUILDING
                         .coord(Data.TILE * 65, Data.TILE * 27)
                         .build(),
@@ -54,12 +54,15 @@ public class RichDistrict extends PlayableScreen {
                 ForegroundMapComponentEnum.LAMP
                         .coord(Data.TILE * 81, Data.TILE * 28)
                         .build(),
+
                 ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
                         .coord(Data.TILE * 80, Data.TILE * 21)
                         .build(),
+
                 ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
                         .coord(Data.TILE * 75, Data.TILE * 21)
                         .build(),
+
                 ForegroundMapComponentEnum.SKYSCRAPER_1_SIDE
                         .coord(Data.TILE * 65, Data.TILE * 20)
                         .build()
@@ -69,7 +72,6 @@ public class RichDistrict extends PlayableScreen {
     @Override
     public void show() {
         super.show();
-        player.setMovementStyle(Player.Styles.REALTIME);
     }
 
     @Override

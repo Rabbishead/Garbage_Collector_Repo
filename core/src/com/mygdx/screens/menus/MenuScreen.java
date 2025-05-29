@@ -12,6 +12,7 @@ import com.mygdx.Utils;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.gui.GuiScreen;
 
 public class MenuScreen extends GuiScreen {
@@ -53,7 +54,7 @@ public class MenuScreen extends GuiScreen {
         settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setScreen(SavingsManager.getLastRoom());
+                Utils.setScreen(ScreensManager.getScreen("SETTINGS"));
                 return true;
             }
         });

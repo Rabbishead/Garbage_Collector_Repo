@@ -29,18 +29,12 @@ public class SettingsScreen extends GuiScreen {
         Image bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
         stage.addActor(bg);
 
-
-        
-
-
         ImageButton playButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
-        ImageButton settingsButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.SETTINGS_BUTTON))));
         ImageButton quitButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
 
-        playButton.setPosition(Data.VIEWPORT_X - col_width * 2 -  playButton.getWidth(), row_height * 7);
+        playButton.setPosition(Data.VIEWPORT_X - col_width * 2 -  playButton.getWidth(), row_height * 4);
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -49,16 +43,6 @@ public class SettingsScreen extends GuiScreen {
             }
         });
         stage.addActor(playButton);
-
-        settingsButton.setPosition(Data.VIEWPORT_X - col_width * 2 - settingsButton.getWidth(), row_height * 4);
-        settingsButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setScreen(SavingsManager.getLastRoom());
-                return true;
-            }
-        });
-        stage.addActor(settingsButton);
 
         quitButton.setPosition(Data.VIEWPORT_X - col_width * 2 - quitButton.getWidth(), row_height);
         quitButton.addListener(new InputListener() {

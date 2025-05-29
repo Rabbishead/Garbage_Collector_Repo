@@ -9,6 +9,7 @@ import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.screens.generic.playable.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
+import com.mygdx.screens.menus.SettingsScreen;
 
 public class ScreensManager {
 
@@ -23,6 +24,9 @@ public class ScreensManager {
                 }
                 case "PAUSE_SCREEN" -> {
                     map.put("PAUSE_SCREEN", new PauseScreen());
+                }
+                case "SETTINGS" -> {
+                    map.put("SETTINGS", new SettingsScreen());
                 }
                 case "REFLECTION_ARENA" -> {
                     map.put("REFLECTION_ARENA", new ReflectionArena());
