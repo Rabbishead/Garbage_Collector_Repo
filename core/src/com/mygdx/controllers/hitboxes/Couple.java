@@ -27,8 +27,16 @@ public class Couple {
     
     @Override
     public boolean equals(Object obj) {
-        if (!obj.getClass().equals(getClass())) return false;
+        if (this == obj) return true;
+        if (!(obj instanceof Couple)) return false;
         Couple c = (Couple) obj;
         return h.equals(c.h) && r.equals(c.r);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = h.hashCode();
+        result = 31 * result + r.hashCode();
+        return result;
     }
 }
