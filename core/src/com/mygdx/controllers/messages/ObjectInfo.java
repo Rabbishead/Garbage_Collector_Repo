@@ -38,7 +38,4 @@ public class ObjectInfo {
             }
         }
     }
-
-    public void copy(ObjectInfo extraInfo) {
-    }
 }
