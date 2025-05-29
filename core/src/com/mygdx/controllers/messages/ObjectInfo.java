@@ -9,9 +9,17 @@ public class ObjectInfo {
     public HashMap<String, String> stringInfo;
 
     /**
-     * Create message info specifying maps to initialize.
+     * Creates an additional info object instance with the specified maps to
+     * initialize.
      * 
-     * @param selector array of 4 booleans.
+     * <pre>
+     *1: Boolean Map.
+     *2: Integer Map.
+     *3: Float Map.
+     *4: String Map.
+     * </pre>
+     * 
+     * @param selector array of numbers.
      */
     public ObjectInfo(int... selector) {
         for (int i : selector) {

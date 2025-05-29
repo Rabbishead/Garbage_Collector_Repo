@@ -96,6 +96,19 @@ public class BaseMelee extends Actor {
         collider.setOffset(x, y);
     }
 
+    /**
+     * Creates the additional info object instance with the specified maps to
+     * initialize, then, attaches it to the collider.
+     * 
+     * <pre>
+     *1: Boolean Map.
+     *2: Integer Map.
+     *3: Float Map.
+     *4: String Map.
+     * </pre>
+     * 
+     * @param selector array of numbers.
+     */
     protected void attachInfo(int... selector) {
         info = new ObjectInfo(selector);
         collider.setExtraInfo(info);
