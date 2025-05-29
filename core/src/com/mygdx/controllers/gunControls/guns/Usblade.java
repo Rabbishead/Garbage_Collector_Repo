@@ -11,7 +11,6 @@ public class Usblade extends BaseGun {
     public Usblade() {
         super(Utils.getTexture(ResourceEnum.USBLADE), Player.center, 45);
         setOffset(35, 0);
-        // flip(true, false);
     }
 
     public int leftTrigger() {

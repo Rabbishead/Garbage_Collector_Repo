@@ -22,7 +22,7 @@ import com.mygdx.states.StateManager;
 
 public class NPC extends GameActor {
 
-    protected int lf = 1;
+    protected int lf = 2;
 
     protected ActorAnimationManager animationManager;
     protected MovementStyle movementStyle;
@@ -42,7 +42,6 @@ public class NPC extends GameActor {
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0f);
         DelayManager.registerObject(this, 0f);
-        
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
@@ -51,7 +50,8 @@ public class NPC extends GameActor {
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, 0, "enemy,npc", true);
         hitbox.setOnHit((hitbox, collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
-                    && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this) && npcBuilder.story != null) {
+                    && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)
+                    && npcBuilder.story != null) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
@@ -71,11 +71,16 @@ public class NPC extends GameActor {
                  * });
                  */
             } else if (collider.containsTag("projectile")) {
+                Integer dmg = collider.getExtraInfo().getIntegerInfo("damage");
+                if (dmg != null)
+                    lf -= dmg;
+                else
+                    System.out.println("no damage value");
+
                 if (lf <= 0) {
                     this.remove();
                     hitbox.unregister();
-                } else
-                    lf--;
+                }
             }
         });
         hitbox.register();
@@ -121,7 +126,7 @@ public class NPC extends GameActor {
         return new Vector2(getX(), getY());
     }
 
-    public static class NPCBuilder extends AbstractNPCBuilder<NPCBuilder>{    
+    public static class NPCBuilder extends AbstractNPCBuilder<NPCBuilder> {
 
         public NPC build() {
             return new NPC(this);
@@ -133,5 +138,4 @@ public class NPC extends GameActor {
         }
     }
 
-    
 }

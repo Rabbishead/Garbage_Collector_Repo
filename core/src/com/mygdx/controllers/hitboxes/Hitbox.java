@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
+import com.mygdx.controllers.messages.LockedInfo;
+import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Hitbox extends Polygon {
@@ -14,6 +16,7 @@ public class Hitbox extends Polygon {
     private BiConsumer<Hitbox, Collider> onHit;
     private BiConsumer<Hitbox, Collider> onLeave;
     private BaseMovement movement;
+    private LockedInfo extraInfo;
     public final boolean isNull;
 
     /**
@@ -144,6 +147,17 @@ public class Hitbox extends Polygon {
 
     public void setTags(String tags) {
         this.tags = tags.split(",");
+    }
+
+    public LockedInfo getExtraInfo() {
+        return extraInfo;
+    }
+
+    public void setExtraInfo(ObjectInfo extraInfo) {
+        if (this.extraInfo != null)
+            return;
+
+        this.extraInfo = new LockedInfo(extraInfo);
     }
 
     public void setOnHit(BiConsumer<Hitbox, Collider> onHit) {
