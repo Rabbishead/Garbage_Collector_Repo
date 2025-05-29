@@ -48,7 +48,7 @@ public class NPC extends GameActor {
         smallDialogueGoing = false;
 
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, 0, "enemy,npc", true);
-        hitbox.setOnHit((hitbox, collider) -> {
+        hitbox.setOnHit((collider) -> {
             if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)
                     && npcBuilder.story != null) {

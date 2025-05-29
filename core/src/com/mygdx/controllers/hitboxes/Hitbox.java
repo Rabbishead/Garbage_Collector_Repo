@@ -1,6 +1,7 @@
 package com.mygdx.controllers.hitboxes;
 
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -13,8 +14,8 @@ public class Hitbox extends Polygon {
     private boolean active;
     private String[] tags;
     private String stringTags;
-    private BiConsumer<Hitbox, Collider> onHit;
-    private BiConsumer<Hitbox, Collider> onLeave;
+    private Consumer<Collider> onHit;
+    private Consumer<Collider> onLeave;
     private BaseMovement movement;
     private LockedInfo extraInfo;
     public final boolean isNull;
@@ -121,12 +122,12 @@ public class Hitbox extends Polygon {
 
     public void onHit(Collider r) {
         if (onHit != null)
-            onHit.accept(this, r);
+            onHit.accept(r);
     }
 
     public void onLeave(Collider r) {
         if (onLeave != null)
-            onLeave.accept(this, r);
+            onLeave.accept(r);
     }
 
     public boolean isActive() {
@@ -160,11 +161,11 @@ public class Hitbox extends Polygon {
         this.extraInfo = new LockedInfo(extraInfo);
     }
 
-    public void setOnHit(BiConsumer<Hitbox, Collider> onHit) {
+    public void setOnHit(Consumer<Collider> onHit) {
         this.onHit = onHit;
     }
 
-    public void setOnLeave(BiConsumer<Hitbox, Collider> onLeave) {
+    public void setOnLeave(Consumer<Collider> onLeave) {
         this.onLeave = onLeave;
     }
 

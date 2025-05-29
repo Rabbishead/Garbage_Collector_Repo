@@ -8,7 +8,7 @@ import com.mygdx.Utils;
 public class HitboxHandler {
     private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
     private final ConcurrentHashMap<String, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, Boolean> contacts = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Couple, Boolean> contacts = new ConcurrentHashMap<>();
 
     public HitboxHandler() {
         Utils.setHitboxHandler(this);
@@ -32,24 +32,31 @@ public class HitboxHandler {
                 list.remove(h);
             }
         }
+
+        for (Couple couple : contacts.keySet()) {
+            if (!couple.contains(h))
+                continue;
+            //couple.getCollider().onLeave(h);
+            contacts.remove(couple);
+        }
     }
 
     public void unRegisterCollider(Collider r) {
         colliders.remove(r);
-        for (String hitboxKey : r.getKeys()) {
-            String key = r + hitboxKey;
-            if (!contacts.containsKey(key))
+        for (Couple couple : contacts.keySet()) {
+            if (!couple.contains(r))
                 continue;
-            contacts.remove(key);
+            //couple.getHitbox().onLeave(r);
+            contacts.remove(couple);
         }
     }
 
     public void storeContact(Collider r, Hitbox h) {
-        contacts.put(r.toString() + h.toString(), true);
+        contacts.put(new Couple(h, r), true);
     }
 
     public void removeContact(Collider r, Hitbox h) {
-        String key = r.toString() + h.toString();
+        Couple key = new Couple(h, r);
         if (!contacts.containsKey(key))
             return;
         contacts.remove(key);

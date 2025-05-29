@@ -29,10 +29,10 @@ public class ForegroundMapComponent extends GameActor {
             hitbox = new Hitbox(
                     new Vector2(getX() + builder.singlePieceWidth * 16, getY() + builder.singlePieceHeight * 16),
                     builder.singlePieceWidth * 32, builder.singlePieceHeight * 32, 0, "building", true);
-            hitbox.setOnHit((hitbox, collider) -> {
+            hitbox.setOnHit((collider) -> {
                 fade = 0.2f;
             });
-            hitbox.setOnLeave((hitbox, collider) -> {
+            hitbox.setOnLeave((collider) -> {
                 fade = 1;
             });
             hitbox.register();
