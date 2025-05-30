@@ -1,5 +1,6 @@
 package com.mygdx.controllers.hitboxes;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Polygon;
@@ -10,10 +11,9 @@ import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Collider extends Polygon {
-    private String[] tags;
-    private String stringTags;
-    private String[] searchTags;
-    private boolean collided;
+    private ArrayList<Tags> tags;
+    private ArrayList<Tags> searchTags;
+    private boolean collided, registered = false;
     private Consumer<Hitbox> onHit;
     private Consumer<Hitbox> onLeave;
     private BaseMovement movement;
@@ -21,71 +21,36 @@ public class Collider extends Polygon {
     public final boolean isNull;
 
     /**
-     * Creates a Collider with specified position, size, rotation, tags, and form.
-     * Tags are a list of names separated by a comma, the String should contain no
-     * spaces.
+     * Creates a Collider with specified position, size, rotation, and form.
      * 
-     * @param anchor     the colliders' anchor coordinates.
-     * @param degrees    specifies the colliders' rotation.
-     * @param tags       colliders' tags to differentiate what to do on collision.
-     * @param searchTags specifies what hiboxes can the collider collide with.
-     * @param vertices   an array whose elements in pairs represent the x and y of
-     *                   the polygon's vertices.
+     * @param anchor   the colliders' anchor coordinates.
+     * @param degrees  specifies the colliders' rotation.
+     * @param vertices an array whose elements in pairs represent the x and y of
+     *                 the polygon's vertices.
      */
-    public Collider(Vector2 anchor, float degrees, String tags, String searchTags, float[] vertices) {
+    public Collider(Vector2 anchor, float degrees, float[] vertices) {
         super(vertices);
         movement = new BaseMovement(getCentroid(new Vector2()));
         setOrigin(movement.center.x, movement.center.y);
         movement.anchor(anchor);
         setPosition();
         setRotation(degrees);
-        this.tags = tags.split(",");
-        this.searchTags = searchTags.split(",");
-        stringTags = tags;
+        this.tags = new ArrayList<>();
+        this.searchTags = new ArrayList<>();
         collided = false;
         isNull = false;
     }
 
     /**
-     * Creates a box Collider with specified position, size, rotation, and tags.
-     * Tags are a list of names separated by a comma, the String should contain no
-     * spaces.
-     * 
-     * @param anchor     the colliders' anchor coordinates.
-     * @param degrees    specifies the colliders' rotation.
-     * @param tags       colliders' tags to differentiate what to do on collision.
-     * @param searchTags specifies what hiboxes can the collider collide with.
-     */
-    public Collider(Vector2 anchor, float width, float height, float degrees, String tags, String searchTags) {
-        this(anchor, degrees, tags, searchTags,
-                new float[] { 0, 0, width, 0, width, height, 0, height });
-    }
-
-    /**
-     * Creates a box Collider with specified position, size, rotation, and tags.
-     * Tags are a list of names separated by a comma, the String should contain no
-     * spaces.
+     * Creates a box Collider with specified position, size, and rotation.
      * 
      * @param anchor  the colliders' anchor coordinates.
      * @param width   as large as the sea!
      * @param height  as tall as the sky!
      * @param degrees specifies the colliders' rotation.
-     * @param tags    colliders' tags to differentiate what to do on collision.
      */
-    public Collider(Vector2 anchor, float width, float height, float degrees, String tags) {
-        this(anchor, width, height, degrees, tags, "all");
-    }
-
-    /**
-     * Creates a box Collider with specified position, size, and rotation.
-     * 
-     * @param center  the colliders' center coordinates.
-     * @param width   as large as the sea!
-     * @param height  as tall as the sky!
-     * @param degrees specifies the colliders' rotation.
-     */
-    public Collider(Vector2 center, float width, float height, float degrees) {
-        this(center, width, height, degrees, "none");
+    public Collider(Vector2 anchor, float width, float height, float degrees) {
+        this(anchor, degrees, new float[] { 0, 0, width, 0, width, height, 0, height });
     }
 
     /**
@@ -129,25 +94,34 @@ public class Collider extends Polygon {
             onLeave.accept(h);
     }
 
-    public boolean containsTag(String tag) {
-        return stringTags.contains(tag);
+    public boolean containsTag(Tags tag) {
+        return tags.contains(tag);
     }
 
-    public String[] getTags() {
+    public ArrayList<Tags> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags.split(",");
-        this.stringTags = tags;
+    public void setTags(Tags... tags) {
+        this.tags.clear();
+        for (Tags tag : tags) {
+            this.tags.add(tag);
+        }
     }
 
-    public String[] getSearchTags() {
+    public boolean containsSearchTag(Tags tag) {
+        return searchTags.contains(tag);
+    }
+
+    public ArrayList<Tags> getSearchTags() {
         return searchTags;
     }
 
-    public void setSearchTags(String searchTags) {
-        this.searchTags = searchTags.split(",");
+    public void setSearchTags(Tags... searchTags) {
+        this.searchTags.clear();
+        for (Tags tag : tags) {
+            this.searchTags.add(tag);
+        }
     }
 
     public LockedInfo getExtraInfo() {
@@ -183,9 +157,14 @@ public class Collider extends Polygon {
      * @return {@code true} if the Collider has been added.
      */
     public boolean register() {
-        if (isNull)
+        if (isNull || registered)
             return false;
+        if (tags.isEmpty())
+            tags.add(Tags.NONE);
+        if (searchTags.isEmpty())
+            tags.add(Tags.ALL);
         Utils.getHitboxHandler().registerCollider(this);
+        registered = true;
         return true;
     }
 
@@ -195,9 +174,10 @@ public class Collider extends Polygon {
      * @return {@code true} if the Collider has been removed.
      */
     public boolean unregister() {
-        if (isNull)
+        if (isNull || !registered)
             return false;
         Utils.getHitboxHandler().unRegisterCollider(this);
+        registered = false;
         return true;
     }
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.hitboxes.Collider;
+import com.mygdx.controllers.hitboxes.Tags;
 
 public class BaseBullet extends Actor {
     protected Vector2 pos;
@@ -37,7 +38,9 @@ public class BaseBullet extends Actor {
         s.setOrigin(getOriginX(), getOriginY());
         s.setRotation(rotation);
 
-        collider = new Collider(center, getWidth(), getHeight(), rotation, "projectile");
+        collider = new Collider(center, getWidth(), getHeight(), rotation);
+        collider.setTags(Tags.PROJECTILE);
+        collider.setSearchTags(Tags.NPC);
         collider.register();
         setPosition(pos.x, pos.y);
     }

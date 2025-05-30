@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.hitboxes.Collider;
+import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
@@ -39,7 +40,9 @@ public class BaseMelee extends Actor {
         movement.anchor(origin);
         s.setOrigin(movement.origin.x, movement.origin.y);
 
-        collider = new Collider(origin, getWidth(), getHeight(), angle, "projectile");
+        collider = new Collider(origin, getWidth(), getHeight(), angle);
+        collider.setTags(Tags.PROJECTILE);
+        collider.setSearchTags(Tags.NPC);
         collider.register();
     }
 

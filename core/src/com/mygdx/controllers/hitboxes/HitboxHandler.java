@@ -7,16 +7,17 @@ import com.mygdx.Utils;
 
 public class HitboxHandler {
     private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
-    private final ConcurrentHashMap<String, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Tags, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<Couple, Boolean> contacts = new ConcurrentHashMap<>();
 
+    // USA SETS
     public HitboxHandler() {
         Utils.setHitboxHandler(this);
     }
 
     public void registerHitbox(Hitbox h) {
-        for (String string : h.getTags()) {
-            CopyOnWriteArrayList<Hitbox> list = hitboxes.computeIfAbsent(string, k -> new CopyOnWriteArrayList<>());
+        for (Tags tag : h.getTags()) {
+            CopyOnWriteArrayList<Hitbox> list = hitboxes.computeIfAbsent(tag, k -> new CopyOnWriteArrayList<>());
             list.add(h);
         }
     }
@@ -26,8 +27,8 @@ public class HitboxHandler {
     }
 
     public void unRegisterHitbox(Hitbox h) {
-        for (String string : h.getTags()) {
-            CopyOnWriteArrayList<Hitbox> list = hitboxes.get(string);
+        for (Tags tag : h.getTags()) {
+            CopyOnWriteArrayList<Hitbox> list = hitboxes.get(tag);
             if (list != null) {
                 list.remove(h);
             }
@@ -36,7 +37,7 @@ public class HitboxHandler {
         for (Couple couple : contacts.keySet()) {
             if (!couple.contains(h))
                 continue;
-            //couple.getCollider().onLeave(h);
+            // couple.getCollider().onLeave(h);
             contacts.remove(couple);
         }
     }
@@ -46,7 +47,7 @@ public class HitboxHandler {
         for (Couple couple : contacts.keySet()) {
             if (!couple.contains(r))
                 continue;
-            //couple.getHitbox().onLeave(r);
+            // couple.getHitbox().onLeave(r);
             contacts.remove(couple);
         }
     }
@@ -84,13 +85,9 @@ public class HitboxHandler {
         return hit;
     }
 
-    public boolean checkWith(Collider c, boolean activate, String searchTags) {
-        return checkWith(c, activate, searchTags.split(","));
-    }
-
-    public boolean checkWith(Collider c, boolean activate, String[] searchTags) {
+    public boolean checkWith(Collider c, boolean activate, Tags... searchTags) {
         boolean hit = false;
-        for (String tag : searchTags) {
+        for (Tags tag : searchTags) {
             CopyOnWriteArrayList<Hitbox> list = hitboxes.get(tag);
             if (list == null)
                 continue;
@@ -102,16 +99,18 @@ public class HitboxHandler {
     }
 
     public boolean checkDefault(Collider c, boolean activate) {
-        if (c.getSearchTags()[0].equals("all")) {
+        if (c.containsSearchTag(Tags.ALL)) {
             return checkAll(c, activate);
         }
-        return checkWith(c, activate, c.getSearchTags());
+        Tags[] tagsArr = new Tags[c.getSearchTags().size()];
+        c.getSearchTags().toArray(tagsArr);
+        return checkWith(c, activate, tagsArr);
     }
 
-    public boolean checkWithOffset(Collider c, boolean activate, float x, float y, String searchTags) {
+    public boolean checkWithOffset(Collider c, boolean activate, float x, float y, Tags... searchTags) {
         boolean hit;
         c.translate(x, y);
-        if (searchTags.contains("all")) {
+        if (searchTags[0].equals(Tags.ALL)) {
             hit = checkAll(c, activate);
         } else
             hit = checkWith(c, activate, searchTags);

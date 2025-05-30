@@ -1,5 +1,6 @@
 package com.mygdx.controllers.hitboxes;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Intersector;
@@ -11,9 +12,8 @@ import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Hitbox extends Polygon {
-    private boolean active;
-    private String[] tags;
-    private String stringTags;
+    private boolean active, registered = false;
+    private ArrayList<Tags> tags = new ArrayList<>();
     private Consumer<Collider> onHit;
     private Consumer<Collider> onLeave;
     private BaseMovement movement;
@@ -21,42 +21,23 @@ public class Hitbox extends Polygon {
     public final boolean isNull;
 
     /**
-     * Creates a Hitbox with specified position, size, rotation, tags, and form.
-     * Tags are a list of names separated by a comma, the String should contain no
-     * spaces.
+     * Creates a Hitbox with specified position, size, rotation, and form.
      * 
      * @param anchor   the hitbox's anchor coordinates.
      * @param degrees  specifies the hitbox's rotation.
-     * @param tags     hitbox's tags to get differentiated in groups.
      * @param vertices an array whose elements in pairs represent the x and y of the
      *                 polygon's vertices.
      */
-    public Hitbox(Vector2 anchor, int degrees, String tags, float[] vertices, boolean active) {
+    public Hitbox(Vector2 anchor, int degrees, float[] vertices, boolean active) {
         super(vertices);
         movement = new BaseMovement(getCentroid(new Vector2()));
         setOrigin(movement.center.x, movement.center.y);
         movement.anchor(anchor);
         setPosition();
         setRotation(degrees);
+        this.tags = new ArrayList<>();
         this.active = active;
-        this.tags = tags.split(",");
-        stringTags = tags;
         isNull = false;
-    }
-
-    /**
-     * Creates a box Hitbox with specified position, size, rotation, and tags.
-     * Tags are a list of names separated by a comma, the String should contain no
-     * spaces.
-     * 
-     * @param anchor  the hitbox's anchor coordinates.
-     * @param width   as large as the sea!
-     * @param height  as tall as the sky!
-     * @param degrees specifies the hitbox's rotation.
-     * @param tags    hitbox's tags to get differentiated in groups.
-     */
-    public Hitbox(Vector2 anchor, float width, float height, int degrees, String tags, boolean active) {
-        this(anchor, degrees, tags, new float[] { 0, 0, width, 0, width, height, 0, height }, active);
     }
 
     /**
@@ -68,15 +49,16 @@ public class Hitbox extends Polygon {
      * @param degrees specifies the hitbox's rotation.
      */
     public Hitbox(Vector2 anchor, float width, float height, int degrees, boolean active) {
-        this(anchor, width, height, degrees, "all", active);
+        this(anchor, degrees, new float[] { 0, 0, width, 0, width, height, 0, height }, active);
     }
 
     /**
      * Creates a box Hitbox with specified position and size.
      * 
-     * @param anchor the hitbox's anchor coordinates.
-     * @param width  as large as the sea!
-     * @param height as tall as the sky!
+     * @param anchor  the hitbox's anchor coordinates.
+     * @param width   as large as the sea!
+     * @param height  as tall as the sky!
+     * @param degrees specifies the hitbox's rotation.
      */
     public Hitbox(Vector2 anchor, float width, float height, boolean active) {
         this(anchor, width, height, 0, active);
@@ -137,16 +119,19 @@ public class Hitbox extends Polygon {
         this.active = active;
     }
 
-    public boolean containsTag(String tag) {
-        return stringTags.contains(tag);
+    public boolean containsTag(Tags tag) {
+        return tags.contains(tag);
     }
 
-    public String[] getTags() {
+    public ArrayList<Tags> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags.split(",");
+    public void setTags(Tags... tags) {
+        this.tags.clear();
+        for (Tags tag : tags) {
+            this.tags.add(tag);
+        }
     }
 
     public LockedInfo getExtraInfo() {
@@ -174,9 +159,12 @@ public class Hitbox extends Polygon {
      * @return {@code true} if the HitBox has been added.
      */
     public boolean register() {
-        if (isNull)
+        if (isNull || registered)
             return false;
+        if (tags.isEmpty())
+            tags.add(Tags.ALL);
         Utils.getHitboxHandler().registerHitbox(this);
+        registered = true;
         return true;
     }
 
@@ -186,9 +174,10 @@ public class Hitbox extends Polygon {
      * @return {@code true} if the HitBox has been removed.
      */
     public boolean unregister() {
-        if (isNull)
+        if (isNull || !registered)
             return false;
         Utils.getHitboxHandler().unRegisterHitbox(this);
+        registered = false;
         return true;
     }
 }
