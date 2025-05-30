@@ -22,18 +22,17 @@ import com.mygdx.controllers.messages.MsgManager;
 
 public abstract class GenericScreen extends ScreenAdapter{
     protected Stage stage;
-    protected Viewport viewport;
     protected OrthographicCamera camera;
+    protected Viewport viewport;
 
     protected MessageDispatcher stageMsg;
     
 
     protected GenericScreen(){
-        stage = new Stage();
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        stage.setViewport(viewport);
-
+        viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y);
+        stage = new Stage(viewport);
+        
         stageMsg = new MessageDispatcher();
         MsgManager.setCurrentStageMsg(stageMsg);
 

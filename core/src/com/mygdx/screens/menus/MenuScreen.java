@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
@@ -17,12 +16,10 @@ import com.mygdx.screens.generic.gui.GuiScreen;
 
 public class MenuScreen extends GuiScreen {
 
-    private final int row_height = Data.VIEWPORT_X / 24;
-    private final int col_width = Data.VIEWPORT_Y / 24;
-
     public MenuScreen() {
         super();
         Utils.setActiveLanguage(LangEnum.ITA);
+        
     }
 
     @Override
@@ -30,8 +27,9 @@ public class MenuScreen extends GuiScreen {
         super.show();
 
         Image bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
-        stage.addActor(bg);
+        stage.getActors().insert(0, bg);
 
+        table.right().bottom().padRight(100).padBottom(100);
 
         ImageButton playButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
@@ -40,7 +38,8 @@ public class MenuScreen extends GuiScreen {
         ImageButton quitButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
 
-        playButton.setPosition(Data.VIEWPORT_X - col_width * 2 -  playButton.getWidth(), row_height * 7);
+        table.add(playButton).padBottom(20);
+        table.row();
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -48,9 +47,9 @@ public class MenuScreen extends GuiScreen {
                 return true;
             }
         });
-        stage.addActor(playButton);
 
-        settingsButton.setPosition(Data.VIEWPORT_X - col_width * 2 - settingsButton.getWidth(), row_height * 4);
+        table.add(settingsButton).padBottom(20);
+        table.row();
         settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -58,9 +57,9 @@ public class MenuScreen extends GuiScreen {
                 return true;
             }
         });
-        stage.addActor(settingsButton);
 
-        quitButton.setPosition(Data.VIEWPORT_X - col_width * 2 - quitButton.getWidth(), row_height);
+        table.add(quitButton).padBottom(20);
+        table.row();
         quitButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -68,7 +67,6 @@ public class MenuScreen extends GuiScreen {
                 return true;
             }
         });
-        stage.addActor(quitButton);
 
         Gdx.input.setInputProcessor(stage);
     }

@@ -1,6 +1,8 @@
 package com.mygdx.screens.generic.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.Data;
 import com.mygdx.screens.generic.GenericScreen;
 
@@ -9,9 +11,16 @@ import com.mygdx.screens.generic.GenericScreen;
  */
 public abstract class GuiScreen extends GenericScreen {
 
+    protected Table table;
+
     public GuiScreen() {
         super();
-        camera.translate((float) Data.VIEWPORT_X / 2, (float) Data.VIEWPORT_Y / 2, 0);
+
+        table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+
+        table.setDebug(true);
     }
 
     @Override
