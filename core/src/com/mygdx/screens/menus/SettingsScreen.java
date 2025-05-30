@@ -11,12 +11,10 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.gui.GuiScreen;
 
 public class SettingsScreen extends GuiScreen {
-
-    private final int row_height = Data.VIEWPORT_X / 24;
-    private final int col_width = Data.VIEWPORT_Y / 24;
 
     public SettingsScreen() {
         super();
@@ -27,14 +25,17 @@ public class SettingsScreen extends GuiScreen {
         super.show();
 
         Image bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
-        stage.addActor(bg);
+        stage.getActors().insert(0, bg);
+
+        table.right().bottom().padRight(100).padBottom(100);
 
         ImageButton playButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
         ImageButton quitButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
 
-        playButton.setPosition(Data.VIEWPORT_X - col_width * 2 -  playButton.getWidth(), row_height * 4);
+        table.add(playButton).padBottom(20);
+        table.row();
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -42,9 +43,9 @@ public class SettingsScreen extends GuiScreen {
                 return true;
             }
         });
-        stage.addActor(playButton);
 
-        quitButton.setPosition(Data.VIEWPORT_X - col_width * 2 - quitButton.getWidth(), row_height);
+        table.add(quitButton).padBottom(20);
+        table.row();
         quitButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -52,7 +53,6 @@ public class SettingsScreen extends GuiScreen {
                 return true;
             }
         });
-        stage.addActor(quitButton);
 
         Gdx.input.setInputProcessor(stage);
     }

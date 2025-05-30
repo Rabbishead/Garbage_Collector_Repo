@@ -25,6 +25,7 @@ import com.mygdx.states.StateManager;
  * generic abstract class for every playable screen
  */
 public abstract class PlayableScreen extends GenericScreen {
+
     protected boolean stopGame = false;
 
     protected Hud hud;
@@ -39,6 +40,8 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected PlayableScreen(ResourceEnum map) {
         super();
+        
+
         tileSetManager = new TileSetManager(map);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
@@ -64,6 +67,9 @@ public abstract class PlayableScreen extends GenericScreen {
     @Override
     public void show() {
         super.show();
+
+        CameraController.initCamera();
+
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
         subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.CHANGE_MOV_STYLE);
         subscribe(player, MSG.CHANGE_MOV_STYLE);
