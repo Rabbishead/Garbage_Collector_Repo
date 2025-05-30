@@ -27,8 +27,8 @@ public class ForegroundMapComponent extends GameActor {
         if (builder.fade) {
             
             hitbox = new Hitbox(
-                    new Vector2(getX() + builder.singlePieceWidth * 16, getY() + builder.singlePieceHeight * 16),
-                    builder.singlePieceWidth * 32, builder.singlePieceHeight * 32, 0, "building", true);
+                    new Vector2(getX() + builder.singlePieceWidth * 16, getY() + 16 + builder.singlePieceHeight * 16),
+                    builder.singlePieceWidth * 32, (builder.singlePieceHeight - 1) * 32, 0, "building", true);
             hitbox.setOnHit((collider) -> {
                 fade = 0.2f;
             });
@@ -38,7 +38,6 @@ public class ForegroundMapComponent extends GameActor {
             hitbox.register();
             this.debug();
         }
-        
     }
 
     @Override

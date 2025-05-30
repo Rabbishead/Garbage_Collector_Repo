@@ -1,6 +1,5 @@
 package com.mygdx.controllers.hitboxes;
 
-import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Polygon;
@@ -17,7 +16,6 @@ public class Collider extends Polygon {
     private boolean collided;
     private Consumer<Hitbox> onHit;
     private Consumer<Hitbox> onLeave;
-    private ArrayList<String> keys;
     private BaseMovement movement;
     private LockedInfo extraInfo;
     public final boolean isNull;
@@ -45,7 +43,6 @@ public class Collider extends Polygon {
         this.searchTags = searchTags.split(",");
         stringTags = tags;
         collided = false;
-        keys = new ArrayList<>();
         isNull = false;
     }
 
@@ -130,18 +127,6 @@ public class Collider extends Polygon {
     public void onLeave(Hitbox h) {
         if (onLeave != null)
             onLeave.accept(h);
-    }
-
-    public void register(Hitbox h) {
-        keys.add(h.toString());
-    }
-
-    public ArrayList<String> getKeys() {
-        return keys;
-    }
-
-    public void clearKeys() {
-        keys.clear();
     }
 
     public boolean containsTag(String tag) {

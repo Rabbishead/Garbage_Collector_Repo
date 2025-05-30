@@ -78,7 +78,7 @@ public class HitboxHandler {
         boolean hit = false;
         for (CopyOnWriteArrayList<Hitbox> list : hitboxes.values()) {
             for (Hitbox h : list) {
-                hit = hit || h.isHit(c, activate);
+                hit = h.isHit(c, activate) || hit;
             }
         }
         return hit;
@@ -95,7 +95,7 @@ public class HitboxHandler {
             if (list == null)
                 continue;
             for (Hitbox h : list) {
-                hit = hit || h.isHit(c, activate);
+                hit = h.isHit(c, activate) || hit;
             }
         }
         return hit;
@@ -121,8 +121,5 @@ public class HitboxHandler {
 
     public void clearContacts() {
         contacts.clear();
-        for (Collider r : colliders) {
-            r.clearKeys();
-        }
     }
 }

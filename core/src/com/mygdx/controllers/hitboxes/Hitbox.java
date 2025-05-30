@@ -113,7 +113,6 @@ public class Hitbox extends Polygon {
         }
         if (activate) {
             Utils.getHitboxHandler().storeContact(r, this);
-            r.register(this);
             onHit(r);
             r.onHit(this);
         }
