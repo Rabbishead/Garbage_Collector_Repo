@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.animations.MapComponentAnimationManager;
 import com.mygdx.controllers.hitboxes.Hitbox;
+import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
 
 public class ForegroundMapComponent extends GameActor {
@@ -25,10 +26,11 @@ public class ForegroundMapComponent extends GameActor {
         animationManager.setCurrentAnimation(builder.startingAnimationCode);
 
         if (builder.fade) {
-            
+
             hitbox = new Hitbox(
                     new Vector2(getX() + builder.singlePieceWidth * 16, getY() + 16 + builder.singlePieceHeight * 16),
-                    builder.singlePieceWidth * 32, (builder.singlePieceHeight - 1) * 32, 0, "building", true);
+                    builder.singlePieceWidth * 32, (builder.singlePieceHeight - 1) * 32, true);
+            hitbox.setTags(Tags.BUILDING);
             hitbox.setOnHit((collider) -> {
                 fade = 0.2f;
             });

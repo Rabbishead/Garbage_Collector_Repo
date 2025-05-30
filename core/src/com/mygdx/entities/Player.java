@@ -12,6 +12,7 @@ import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
+import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
@@ -36,7 +37,9 @@ public class Player extends GameActor {
         setSize(16, 32);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        collider = new Collider(center, getWidth(), getHeight(), 0, "player", "npc,building");
+        collider = new Collider(center, getWidth(), getHeight());
+        collider.setTags(Tags.PLAYER);
+        collider.setSearchTags(Tags.NPC, Tags.BUILDING);
         collider.register();
         setPosition(coordinates.x, coordinates.y);
 

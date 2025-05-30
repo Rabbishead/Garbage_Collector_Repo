@@ -119,7 +119,7 @@ public class Collider extends Polygon {
 
     public void setSearchTags(Tags... searchTags) {
         this.searchTags.clear();
-        for (Tags tag : tags) {
+        for (Tags tag : searchTags) {
             this.searchTags.add(tag);
         }
     }

@@ -6,5 +6,6 @@ public enum Tags {
     PROJECTILE,
     PLAYER,
     BUILDING,
-    NPC
+    NPC,
+    ENEMY
 }

@@ -13,6 +13,7 @@ import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.dialogues.ComplexDialogue;
 import com.mygdx.controllers.dialogues.NPCDialogue;
 import com.mygdx.controllers.hitboxes.Hitbox;
+import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.entities.AbstractNPCBuilder;
 import com.mygdx.entities.GameActor;
 import com.mygdx.movement.MovementStyle;
@@ -47,16 +48,17 @@ public class NPC extends GameActor {
         movementStyle = new NPCRealtimeMovementStyle(this, path);
         smallDialogueGoing = false;
 
-        hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, 0, "enemy,npc", true);
+        hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
+        hitbox.setTags(Tags.NPC, Tags.ENEMY);
         hitbox.setOnHit((collider) -> {
-            if (collider.containsTag("player") && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
+            if (collider.containsTag(Tags.PLAYER) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)
                     && npcBuilder.story != null) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
             }
-            if (collider.containsTag("player") && !smallDialogueGoing) {
+            if (collider.containsTag(Tags.PLAYER) && !smallDialogueGoing) {
 
                 /*
                  * npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
@@ -70,7 +72,7 @@ public class NPC extends GameActor {
                  * 
                  * });
                  */
-            } else if (collider.containsTag("projectile")) {
+            } else if (collider.containsTag(Tags.PROJECTILE)) {
                 Integer dmg = collider.getExtraInfo().getIntegerInfo("damage");
                 if (dmg != null)
                     lf -= dmg;
