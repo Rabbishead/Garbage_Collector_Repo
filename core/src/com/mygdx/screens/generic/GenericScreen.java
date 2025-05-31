@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
@@ -23,17 +22,17 @@ import com.mygdx.controllers.messages.MsgManager;
 public abstract class GenericScreen extends ScreenAdapter {
     protected Stage stage;
     protected OrthographicCamera camera;
-    protected Viewport viewport;
 
     protected MessageDispatcher stageMsg;
 
     protected GenericScreen() {
         camera = new OrthographicCamera();
-        viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y);
-        stage = new Stage(viewport);
+        stage = new Stage(new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera));
 
         stageMsg = new MessageDispatcher();
         MsgManager.setCurrentStageMsg(stageMsg);
+
+        
 
         Utils.setActiveScreen(this);
     }
@@ -42,13 +41,14 @@ public abstract class GenericScreen extends ScreenAdapter {
     public void show() {
         Utils.setStage(stage);
         CameraController.initCamera();
+
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, .25f, 0, 1);
-        ScreenUtils.clear(1, 1, 1, 0);
+        ScreenUtils.clear(0, 0, 0, 0);
+
         stageMsg.update();
     }
 
@@ -69,8 +69,6 @@ public abstract class GenericScreen extends ScreenAdapter {
     }
 
     public void addAll(Actor... actors) {
-        for (Actor actor : actors) {
-            stage.addActor(actor);
-        }
+        stage.getActors().addAll(actors);
     }
 }
