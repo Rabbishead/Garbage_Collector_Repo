@@ -30,7 +30,7 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
     }
 
     public NPCRealtimeMovementStyle(Actor npc) {
-        this(npc, new String[] { "-" });
+        this(npc, "-" );
     }
 
     /**

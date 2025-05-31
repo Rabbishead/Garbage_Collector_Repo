@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
@@ -40,14 +38,12 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected PlayableScreen(ResourceEnum map) {
         super();
-        
 
         tileSetManager = new TileSetManager(map);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
         hitboxHandler = new HitboxHandler();
-        viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera);
-        stage.setViewport(viewport);
+        
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING)) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
@@ -119,8 +115,9 @@ public abstract class PlayableScreen extends GenericScreen {
         hitboxHandler.checkRegistered();
 
         tileSetManager.render(camera);
+        
         stage.draw();
-
+        
         hud.update();
         hud.draw();
     }
