@@ -12,12 +12,11 @@ import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Hitbox extends Polygon {
-    private boolean active, registered = false;
     private ArrayList<Tags> tags = new ArrayList<>();
-    private Consumer<Collider> onHit;
-    private Consumer<Collider> onLeave;
+    private Consumer<Collider> onHit, onLeave, onFrame;
     private BaseMovement movement;
     private LockedInfo extraInfo;
+    private boolean active, registered = false;
     public final boolean isNull;
 
     /**
@@ -85,20 +84,23 @@ public class Hitbox extends Polygon {
     }
 
     public boolean isHit(Collider r, boolean activate) {
-        if (!active)
+        if (!active) {
+            Utils.getHitboxHandler().setContact(r, this, false);
             return false;
-        boolean collision = Intersector.overlapConvexPolygons(this, r);
-        r.setCollided(collision);
-        if (!collision) {
+        }
+        boolean collision = Intersector.overlapConvexPolygons(r, this);
+        if (!activate)
+            return collision;
+        if (!collision)
             Utils.getHitboxHandler().removeContact(r, this);
-            return false;
-        }
-        if (activate) {
+        else {
             Utils.getHitboxHandler().storeContact(r, this);
-            onHit(r);
-            r.onHit(this);
+            Utils.getHitboxHandler().setContact(r, this, true);
         }
-        return true;
+        
+        onFrame(r);
+        r.onFrame(this);
+        return collision;
     }
 
     public void onHit(Collider r) {
@@ -109,6 +111,15 @@ public class Hitbox extends Polygon {
     public void onLeave(Collider r) {
         if (onLeave != null)
             onLeave.accept(r);
+    }
+
+    public void onFrame(Collider r) {
+        if (onFrame != null)
+            onFrame.accept(r);
+    }
+
+    public boolean touching(Collider r) {
+        return Utils.getHitboxHandler().getContact(r, this);
     }
 
     public boolean isActive() {
@@ -151,6 +162,10 @@ public class Hitbox extends Polygon {
 
     public void setOnLeave(Consumer<Collider> onLeave) {
         this.onLeave = onLeave;
+    }
+
+    public void setOnFrame(Consumer<Collider> onFrame) {
+        this.onFrame = onFrame;
     }
 
     /***

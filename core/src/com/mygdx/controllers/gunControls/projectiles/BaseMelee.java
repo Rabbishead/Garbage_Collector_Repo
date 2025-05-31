@@ -43,6 +43,9 @@ public class BaseMelee extends Actor {
         collider = new Collider(origin, getWidth(), getHeight(), angle);
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(Tags.NPC);
+        collider.setOnHit(hitbox -> {
+            delete();
+        });
         collider.register();
     }
 
@@ -64,9 +67,6 @@ public class BaseMelee extends Actor {
 
         s.setRotation(angle);
         collider.setRotation(angle);
-
-        if (collider.isCollided())
-            delete();
 
         if (flipped) {
             if (angle < end)

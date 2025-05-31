@@ -11,13 +11,11 @@ import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
 
 public class Collider extends Polygon {
-    private ArrayList<Tags> tags;
-    private ArrayList<Tags> searchTags;
-    private boolean collided, registered = false;
-    private Consumer<Hitbox> onHit;
-    private Consumer<Hitbox> onLeave;
+    private ArrayList<Tags> tags, searchTags;
+    private Consumer<Hitbox> onHit, onLeave, onFrame;
     private BaseMovement movement;
     private LockedInfo extraInfo;
+    private boolean registered = false;
     public final boolean isNull;
 
     /**
@@ -37,7 +35,6 @@ public class Collider extends Polygon {
         setRotation(degrees);
         this.tags = new ArrayList<>();
         this.searchTags = new ArrayList<>();
-        collided = false;
         isNull = false;
     }
 
@@ -94,6 +91,15 @@ public class Collider extends Polygon {
             onLeave.accept(h);
     }
 
+    public void onFrame(Hitbox h) {
+        if (onFrame != null)
+            onFrame.accept(h);
+    }
+
+    public boolean touching(Hitbox h) {
+        return Utils.getHitboxHandler().getContact(this, h);
+    }
+
     public boolean containsTag(Tags tag) {
         return tags.contains(tag);
     }
@@ -135,20 +141,16 @@ public class Collider extends Polygon {
         this.extraInfo = new LockedInfo(extraInfo);
     }
 
-    public boolean isCollided() {
-        return collided;
-    }
-
-    public void setCollided(boolean collided) {
-        this.collided = collided;
-    }
-
     public void setOnHit(Consumer<Hitbox> onHit) {
         this.onHit = onHit;
     }
 
     public void setOnLeave(Consumer<Hitbox> onLeave) {
         this.onLeave = onLeave;
+    }
+
+    public void setOnFrame(Consumer<Hitbox> onFrame) {
+        this.onFrame = onFrame;
     }
 
     /***

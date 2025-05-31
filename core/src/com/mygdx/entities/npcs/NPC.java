@@ -50,7 +50,10 @@ public class NPC extends GameActor {
 
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
         hitbox.setTags(Tags.NPC, Tags.ENEMY);
-        hitbox.setOnHit((collider) -> {
+        hitbox.setOnFrame(collider -> {
+            if (!hitbox.touching(collider))
+                return;
+
             if (collider.containsTag(Tags.PLAYER) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
                     && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)
                     && npcBuilder.story != null) {
@@ -72,7 +75,10 @@ public class NPC extends GameActor {
                  * 
                  * });
                  */
-            } else if (collider.containsTag(Tags.PROJECTILE)) {
+            }
+        });
+        hitbox.setOnHit(collider -> {
+            if (collider.containsTag(Tags.PROJECTILE)) {
                 Integer dmg = collider.getExtraInfo().getIntegerInfo("damage");
                 if (dmg != null)
                     lf -= dmg;

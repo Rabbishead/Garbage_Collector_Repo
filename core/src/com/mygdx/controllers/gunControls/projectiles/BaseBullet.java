@@ -41,6 +41,9 @@ public class BaseBullet extends Actor {
         collider = new Collider(center, getWidth(), getHeight(), rotation);
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(Tags.NPC);
+        collider.setOnHit(hitbox -> {
+            delete();
+        });
         collider.register();
         setPosition(pos.x, pos.y);
     }
@@ -63,8 +66,6 @@ public class BaseBullet extends Actor {
         setX(pos.x);
         setY(pos.y);
 
-        if (collider.isCollided())
-            delete();
         if (origin.dst(pos) > distance)
             delete();
     }

@@ -37,8 +37,8 @@ public class HitboxHandler {
         for (Couple couple : contacts.keySet()) {
             if (!couple.contains(h))
                 continue;
-            // couple.getCollider().onLeave(h);
             contacts.remove(couple);
+            couple.getCollider().onLeave(h);
         }
     }
 
@@ -47,39 +47,55 @@ public class HitboxHandler {
         for (Couple couple : contacts.keySet()) {
             if (!couple.contains(r))
                 continue;
-            // couple.getHitbox().onLeave(r);
             contacts.remove(couple);
+            couple.getHitbox().onLeave(r);
         }
     }
 
-    public void storeContact(Collider r, Hitbox h) {
-        contacts.put(new Couple(h, r), true);
+    public Boolean storeContact(Collider r, Hitbox h) {
+        return contacts.putIfAbsent(new Couple(h, r), false);
+    }
+
+    public boolean getContact(Collider r, Hitbox h) {
+        return contacts.getOrDefault(new Couple(h, r), false);
+    }
+
+    public void setContact(Collider r, Hitbox h, boolean value) {
+        if (contacts.replace(new Couple(h, r), !value, value) == false)
+            return;
+
+        if (value) {
+            r.onHit(h);
+            h.onHit(r);
+        } else {
+            r.onLeave(h);
+            h.onLeave(r);
+        }
     }
 
     public void removeContact(Collider r, Hitbox h) {
-        Couple key = new Couple(h, r);
-        if (!contacts.containsKey(key))
+        if (contacts.remove(new Couple(h, r)) == null)
             return;
-        contacts.remove(key);
+        
         r.onLeave(h);
         h.onLeave(r);
     }
 
-    public boolean checkHitbox(Collider c, Hitbox h, boolean activate) {
-        return h.isHit(c, activate);
+    public boolean checkHitbox(Collider r, Hitbox h, boolean activate) {
+        return h.isHit(r, activate);
     }
 
     public void checkRegistered() {
-        for (Collider c : colliders) {
-            checkDefault(c, true);
+        for (Collider r : colliders) {
+            checkDefault(r, true);
         }
     }
 
-    public boolean checkAll(Collider c, boolean activate) {
+    public boolean checkAll(Collider r, boolean activate) {
         boolean hit = false;
         for (CopyOnWriteArrayList<Hitbox> list : hitboxes.values()) {
             for (Hitbox h : list) {
-                hit = h.isHit(c, activate) || hit;
+                hit = h.isHit(r, activate) || hit;
             }
         }
         return hit;
@@ -98,23 +114,23 @@ public class HitboxHandler {
         return hit;
     }
 
-    public boolean checkDefault(Collider c, boolean activate) {
-        if (c.containsSearchTag(Tags.ALL)) {
-            return checkAll(c, activate);
+    public boolean checkDefault(Collider r, boolean activate) {
+        if (r.containsSearchTag(Tags.ALL)) {
+            return checkAll(r, activate);
         }
-        Tags[] tagsArr = new Tags[c.getSearchTags().size()];
-        c.getSearchTags().toArray(tagsArr);
-        return checkWith(c, activate, tagsArr);
+        Tags[] tagsArr = new Tags[r.getSearchTags().size()];
+        r.getSearchTags().toArray(tagsArr);
+        return checkWith(r, activate, tagsArr);
     }
 
-    public boolean checkWithOffset(Collider c, boolean activate, float x, float y, Tags... searchTags) {
+    public boolean checkWithOffset(Collider r, boolean activate, float x, float y, Tags... searchTags) {
         boolean hit;
-        c.translate(x, y);
+        r.translate(x, y);
         if (searchTags[0].equals(Tags.ALL)) {
-            hit = checkAll(c, activate);
+            hit = checkAll(r, activate);
         } else
-            hit = checkWith(c, activate, searchTags);
-        c.translate(-x, -y);
+            hit = checkWith(r, activate, searchTags);
+        r.translate(-x, -y);
         return hit;
     }
 

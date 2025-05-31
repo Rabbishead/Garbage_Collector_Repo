@@ -20,52 +20,57 @@ import com.mygdx.controllers.messages.MsgManager;
  * generic abstract class for every screen
  */
 
-public abstract class GenericScreen extends ScreenAdapter{
+public abstract class GenericScreen extends ScreenAdapter {
     protected Stage stage;
     protected OrthographicCamera camera;
     protected Viewport viewport;
 
     protected MessageDispatcher stageMsg;
-    
 
-    protected GenericScreen(){
+    protected GenericScreen() {
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y);
         stage = new Stage(viewport);
-        
+
         stageMsg = new MessageDispatcher();
         MsgManager.setCurrentStageMsg(stageMsg);
 
         Utils.setActiveScreen(this);
     }
+
     @Override
     public void show() {
         Utils.setStage(stage);
         CameraController.initCamera();
         Gdx.input.setInputProcessor(stage);
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, .25f, 0, 1);
-        ScreenUtils.clear(1,1,1,0);
+        ScreenUtils.clear(1, 1, 1, 0);
         stageMsg.update();
     }
+
     @Override
     public void dispose() {
         stage.dispose();
     }
+
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height); 
+        stage.getViewport().update(width, height);
     }
 
-    public void subscribe(Telegraph a, MSG... msgs){
+    public void subscribe(Telegraph a, MSG... msgs) {
         for (MSG msg : msgs) {
-            stageMsg.addListener(a, msg.code);    
+            stageMsg.addListener(a, msg.code);
         }
     }
 
-    public void addAll(Actor ... actors){
-        stage.getActors().addAll(actors);
+    public void addAll(Actor... actors) {
+        for (Actor actor : actors) {
+            stage.addActor(actor);
         }
+    }
 }
