@@ -3,11 +3,12 @@ package com.mygdx.savings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.screens.ScreensEnum;
 import com.mygdx.screens.ScreensManager;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
-    private String lastRoom;
+    private ScreensEnum lastRoom;
     private Vector2 lastRoomCoordinates = new Vector2();
     private boolean[] flags;
 
@@ -27,7 +28,8 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
     @Override
     public void read(Json json, JsonValue jsonData) {
-        lastRoom = jsonData.getString("LAST_ROOM");
+        lastRoom = ScreensEnum.valueOf(jsonData.getString("LAST_ROOM"));
+        System.out.println(lastRoom);
 
         lastRoomCoordinates.x = jsonData.get("PLAYER").getFloat("x");
         lastRoomCoordinates.y = jsonData.get("PLAYER").getFloat("y");
@@ -39,7 +41,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
         return lastRoomCoordinates;
     }
 
-    public String getLastRoom() {
+    public ScreensEnum getLastRoom() {
         return lastRoom;
     }
 

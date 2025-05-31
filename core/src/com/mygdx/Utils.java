@@ -16,6 +16,8 @@ import com.mygdx.hud.Hud;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.ResourceManager;
+import com.mygdx.screens.ScreensEnum;
+import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
 
 public class Utils {
@@ -27,7 +29,7 @@ public class Utils {
     private static ResourceManager manager;
     private static HitboxHandler hitboxHandler;
     private static Player player;
-    private static GenericScreen activeScreen; // Current Screen
+    
     private static Hud currentHud; // Current HUD
 
     private static LangEnum activeLanguage = LangEnum.ITA;
@@ -103,20 +105,6 @@ public class Utils {
         Utils.player = player;
     }
 
-    /**
-     * sets active screen
-     * 
-     * @param newScreen
-     */
-    public static void setScreen(GenericScreen newScreen) {
-        stopAllAudio();
-        Utils.setActiveScreen(newScreen);
-        game.setScreen(newScreen);
-    }
-
-    public static void setActiveScreen(GenericScreen screen){
-        activeScreen = screen;
-    }
 
     /**
      * sets game object
@@ -125,13 +113,6 @@ public class Utils {
      */
     public static void setGame(Game game) {
         Utils.game = game;
-    }
-
-    /**
-     * @return active screen
-     */
-    public static GenericScreen getActiveScreen() {
-        return activeScreen;
     }
 
     /**
@@ -172,7 +153,7 @@ public class Utils {
     }
 
     public static void subscribeToStageMsg(GameActor a, MSG msg){
-        getActiveScreen().subscribe(a, msg);
+        ScreensManager.getActiveScreen().subscribe(a, msg);
     }
 
     public static void toggleFullScreen() {

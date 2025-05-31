@@ -14,6 +14,7 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.ScreensEnum;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.states.StateEnum;
@@ -43,7 +44,6 @@ public abstract class PlayableScreen extends GenericScreen {
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
         hitboxHandler = new HitboxHandler();
-        
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING)) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
@@ -87,7 +87,7 @@ public abstract class PlayableScreen extends GenericScreen {
     public void render(float delta) {
         super.render(delta);
         if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-            Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
+            Utils.setScreen(ScreensEnum.PAUSE_SCREEN);
             return;
         }
         if (Gdx.input.isKeyPressed(Keys.M)) {

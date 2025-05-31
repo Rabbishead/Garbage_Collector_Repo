@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.mygdx.Logger;
 import com.mygdx.Utils;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.ScreensEnum;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
@@ -21,7 +22,7 @@ public class GarbageCollection extends Game {
 		StateManager.updateBoolState(StateEnum.PAUSE, false);
 		Logger.init();
 		
-		setScreen(ScreensManager.getScreen("MENU_SCREEN"));
+		setScreen(ScreensManager.getScreen(ScreensEnum.MENU_SCREEN));
 	}
 
 	@Override
