@@ -7,10 +7,13 @@ import com.mygdx.resources.ResourceEnum;
 public class Projectile extends BaseBullet {
 
     public Projectile(Vector2 origin, float barrel, float angle) {
-        super(Utils.getTexture(ResourceEnum.BULLET), origin, barrel, 1000f, 1500f, angle);
-        s.rotate90(true);
-        collider.rotate(-90);
+        super(Utils.getTexture(ResourceEnum.BULLET), origin, 1000f, 1500f, angle);
+        setOffset(barrel, 0);
+        //s.rotate90(true);
+        //collider.rotate(-90);
         flip(false, true);
+        attachInfo(2);
+        info.integerInfo.put("damage", 1);
         this.debug();
     }
 }

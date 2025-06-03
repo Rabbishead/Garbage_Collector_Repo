@@ -53,16 +53,19 @@ public class NPC extends GameActor {
         hitbox.setOnFrame(collider -> {
             if (!hitbox.touching(collider))
                 return;
+            if (!collider.containsTag(Tags.PLAYER))
+                return;
 
-            if (collider.containsTag(Tags.PLAYER) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
-                    && !StateManager.getBoolState(StateEnum.PAUSE) && DelayManager.isDelayOver(this)
-                    && npcBuilder.story != null) {
+            boolean leftPressed = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
+            boolean inPause = StateManager.getBoolState(StateEnum.PAUSE);
+            boolean delayOver = DelayManager.isDelayOver(this);
+            
+            if (leftPressed && !inPause && delayOver && npcBuilder.story != null) {
                 Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
             }
-            if (collider.containsTag(Tags.PLAYER) && !smallDialogueGoing) {
-
+            if (!smallDialogueGoing) {
                 /*
                  * npcDialogue = new NPCDialogue(getX() + 40, getY() + 50,
                  * DialogueLoader.getLine("testNPCDialogue1"));

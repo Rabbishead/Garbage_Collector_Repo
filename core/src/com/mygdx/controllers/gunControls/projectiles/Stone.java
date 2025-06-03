@@ -8,7 +8,8 @@ import com.mygdx.resources.ResourceEnum;
 public class Stone extends BaseBullet {
 
     public Stone(Vector2 origin, float barrel) {
-        super(Utils.getTexture(ResourceEnum.STONE), origin, barrel, 500f, 150f, 0f);
+        super(Utils.getTexture(ResourceEnum.STONE), origin, 500f, 150f, 0f);
+        setOffset(barrel, 0);
     }
 
     @Override

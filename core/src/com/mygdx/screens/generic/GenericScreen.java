@@ -69,6 +69,8 @@ public abstract class GenericScreen extends ScreenAdapter {
     }
 
     public void addAll(Actor... actors) {
-        stage.getActors().addAll(actors);
+        for (Actor actor : actors) {
+            stage.addActor(actor);
+        }
     }
 }

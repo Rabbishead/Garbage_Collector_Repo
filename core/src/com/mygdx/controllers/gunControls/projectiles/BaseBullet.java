@@ -1,6 +1,5 @@
 package com.mygdx.controllers.gunControls.projectiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,43 +8,39 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
+import com.mygdx.controllers.messages.ObjectInfo;
+import com.mygdx.movement.BaseMovement;
 
 public class BaseBullet extends Actor {
-    protected Vector2 pos;
-    protected Vector2 movement;
-    protected Vector2 origin;
-    public Vector2 center = new Vector2();
-    protected float distance, angle;
     protected Sprite s;
+    protected BaseMovement movement;
+    protected float distance;
     protected Collider collider = new Collider();
+    protected ObjectInfo info;
 
-    public BaseBullet(Texture t, Vector2 origin, float barrel, float speed, float distance, float rotation) {
+    public BaseBullet(Texture t, Vector2 origin, float speed, float distance, float rotation) {
         s = new Sprite(t);
         this.distance = distance;
-        this.angle = rotation;
-        this.origin = origin;
 
         setSize(s.getWidth(), s.getHeight());
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        pos = new Vector2(barrel, 0).setAngleDeg(rotation);
-        pos.set(origin.x + pos.x - getOriginX(), origin.y + pos.y - getOriginY());
-
-        Vector2 velocity = new Vector2(speed, 0).setAngleDeg(rotation);
-        movement = new Vector2(velocity).scl(Gdx.graphics.getDeltaTime());
-
-        s.setCenter(origin.x, origin.y);
-        s.setOrigin(getOriginX(), getOriginY());
+        movement = new BaseMovement(getOriginX(), getOriginY());
+        movement.anchor(origin);
+        movement.init(speed, rotation);
+        s.setOrigin(movement.origin.x, movement.origin.y);
         s.setRotation(rotation);
 
-        collider = new Collider(center, getWidth(), getHeight(), rotation);
+        collider = new Collider(movement.centerCoords, getWidth(), getHeight(), rotation);
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(Tags.NPC);
         collider.setOnHit(hitbox -> {
             delete();
         });
         collider.register();
-        setPosition(pos.x, pos.y);
+
+        Vector2 worldCoords = movement.getWorldCoords();
+        setPosition(worldCoords.x, worldCoords.y);
     }
 
     @Override
@@ -62,11 +57,11 @@ public class BaseBullet extends Actor {
     public void act(float delta) {
         super.act(delta);
 
-        pos.add(movement);
-        setX(pos.x);
-        setY(pos.y);
+        movement.move(delta);
+        Vector2 worldCoords = movement.getWorldCoords();
+        setPosition(worldCoords.x, worldCoords.y);
 
-        if (origin.dst(pos) > distance)
+        if (movement.anchor.dst(worldCoords) > distance)
             delete();
     }
 
@@ -74,8 +69,9 @@ public class BaseBullet extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         s.setPosition(getX(), getY());
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
+        movement.x = getX();
+        movement.y = getY();
+        movement.getCenterWorldCoords();
         collider.setPosition();
     }
 
@@ -93,8 +89,26 @@ public class BaseBullet extends Actor {
     }
 
     public void setOffset(float x, float y) {
-        Vector2 tmp = new Vector2(1, 0).setAngleDeg(angle).scl(x, y);
-        pos.add(tmp);
-        setPosition(pos.x, pos.y);
+        movement.offset(new Vector2(x, y));
+        s.setOrigin(movement.origin.x, movement.origin.y);
+        collider.setOffset(x, y);
+    }
+
+    /**
+     * Creates the additional info object instance with the specified maps to
+     * initialize, then, attaches it to the collider.
+     * 
+     * <pre>
+     *1: Boolean Map.
+     *2: Integer Map.
+     *3: Float Map.
+     *4: String Map.
+     * </pre>
+     * 
+     * @param selector array of numbers.
+     */
+    protected void attachInfo(int... selector) {
+        info = new ObjectInfo(selector);
+        collider.setExtraInfo(info);
     }
 }
