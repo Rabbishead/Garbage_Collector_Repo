@@ -32,6 +32,8 @@ public abstract class GenericScreen extends ScreenAdapter {
         stageMsg = new MessageDispatcher();
         MsgManager.setCurrentStageMsg(stageMsg);
 
+        
+
         Utils.setActiveScreen(this);
     }
 
