@@ -19,23 +19,17 @@ public class MenuScreen extends GuiScreen {
     public MenuScreen() {
         super();
         Utils.setActiveLanguage(LangEnum.ITA);
-        
-    }
 
-    @Override
-    public void show() {
-        super.show();
-
-        Image bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
+        var bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
         stage.getActors().insert(0, bg);
 
         table.right().bottom().padRight(100).padBottom(100);
 
-        ImageButton playButton = new ImageButton(
+        var playButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
-        ImageButton settingsButton = new ImageButton(
+        var settingsButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.SETTINGS_BUTTON))));
-        ImageButton quitButton = new ImageButton(
+                var quitButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
 
         table.add(playButton).padBottom(20);
@@ -67,8 +61,12 @@ public class MenuScreen extends GuiScreen {
                 return true;
             }
         });
+        
+    }
 
-        Gdx.input.setInputProcessor(stage);
+    @Override
+    public void show() {
+        super.show();
     }
 
     @Override
