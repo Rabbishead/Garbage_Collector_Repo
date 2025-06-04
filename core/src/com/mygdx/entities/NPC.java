@@ -1,4 +1,4 @@
-package com.mygdx.entities.npcs;
+package com.mygdx.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -14,8 +14,6 @@ import com.mygdx.controllers.dialogues.ComplexDialogue;
 import com.mygdx.controllers.dialogues.NPCDialogue;
 import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
-import com.mygdx.entities.AbstractNPCBuilder;
-import com.mygdx.entities.GameActor;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.states.StateEnum;

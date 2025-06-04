@@ -1,4 +1,4 @@
-package com.mygdx.entities.npcs;
+package com.mygdx.entities;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.entities.StateController;
+import com.mygdx.controllers.states.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
 
 import java.util.Random;

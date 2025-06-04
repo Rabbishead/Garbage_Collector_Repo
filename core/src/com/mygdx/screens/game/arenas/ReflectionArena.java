@@ -4,10 +4,10 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.messages.MsgManager;
-import com.mygdx.entities.npcs.Reflection;
+import com.mygdx.entities.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
-import com.mygdx.screens.generic.playable.PlayableScreen;
+import com.mygdx.screens.generic.PlayableScreen;
 
 public class ReflectionArena extends PlayableScreen {
 

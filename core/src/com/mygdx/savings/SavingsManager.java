@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.generic.playable.PlayableScreen;
+import com.mygdx.screens.generic.PlayableScreen;
 
 public class SavingsManager {
     private static Json json;

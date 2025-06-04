@@ -6,7 +6,7 @@ import com.mygdx.screens.game.overworld.Slums;
 import com.mygdx.screens.game.overworld.Park;
 import com.mygdx.screens.game.overworld.RichDistrict;
 import com.mygdx.screens.generic.GenericScreen;
-import com.mygdx.screens.generic.playable.PlayableScreen;
+import com.mygdx.screens.generic.PlayableScreen;
 import com.mygdx.screens.menus.MenuScreen;
 import com.mygdx.screens.menus.PauseScreen;
 import com.mygdx.screens.menus.SettingsScreen;

@@ -1,7 +1,7 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.resources.ResourceEnum;
-import com.mygdx.screens.generic.playable.PlayableScreen;
+import com.mygdx.screens.generic.PlayableScreen;
 
 public class Park extends PlayableScreen {
 

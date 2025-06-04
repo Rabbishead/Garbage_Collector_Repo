@@ -7,12 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
-import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.generic.gui.GuiScreen;
+import com.mygdx.screens.generic.GuiScreen;
 
 public class SettingsScreen extends GuiScreen {
 
