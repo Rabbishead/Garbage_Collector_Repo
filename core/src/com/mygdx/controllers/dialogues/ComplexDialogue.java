@@ -2,14 +2,20 @@ package com.mygdx.controllers.dialogues;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.controllers.delay.DelayManager;
+import com.mygdx.hud.Hud;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
@@ -29,16 +35,45 @@ public class ComplexDialogue extends Actor {
 
     private final int CHOICE_WIDTH = 410, CHOICE_HEIGHT = 128;
 
+    Label dialogueLabel;
+    TypewriterEffect typer;
+
     public ComplexDialogue(Story story) {
         setX(0);
         setY(0);
+        Utils.getCurrentHud().addComponent(this);
         questionString = "";
         choice1String = "";
         choice2String = "";
         questionTexture = Utils.getTexture(ResourceEnum.COMPLEX_DIALOGUE);
         choiceTexture = Utils.getTexture(ResourceEnum.CHOICE);
         this.story = story;
+
+        
         font = new BitmapFont();
+
+        dialogueLabel = new Label("", Data.skin);
+        dialogueLabel.setWrap(true);
+        dialogueLabel.setWidth(400);
+        dialogueLabel.setPosition(32, 32);
+
+        Utils.getCurrentHud().addComponent(dialogueLabel);
+
+
+        typer = new TypewriterEffect(dialogueLabel);        
+
+        // Optionally skip on key press
+        /*Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.SPACE) {
+                    typer.skip(); // Instantly show full text
+                    return true;
+                }
+                return false;
+            }
+        });*/
+
         continueStory();
     }
 
@@ -53,14 +88,15 @@ public class ComplexDialogue extends Actor {
             batch.draw(choiceTexture, Data.VIEWPORT_X - CHOICE_WIDTH - 32, 64, CHOICE_WIDTH, CHOICE_HEIGHT);
             font.draw(batch, choice2String, Data.VIEWPORT_X - CHOICE_WIDTH, 96);
         }
-        batch.draw(questionTexture, 32, Data.VIEWPORT_Y - 256, Data.VIEWPORT_X - 64, CHOICE_HEIGHT);
-        font.draw(batch, questionString, 64, Data.VIEWPORT_Y - 160);
+        //batch.draw(questionTexture, 32, Data.VIEWPORT_Y - 256, Data.VIEWPORT_X - 64, CHOICE_HEIGHT);
+        //font.draw(batch, questionString, 64, Data.VIEWPORT_Y - 160);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
         questionString = getQuestion();
+        
         ArrayList<String> choices = getResponses();
         if (choices.isEmpty()) {
             choice1String = "";
@@ -71,7 +107,7 @@ public class ComplexDialogue extends Actor {
             choice1String = choices.get(0);
             choice2String = choices.get(1);
         }
-
+        
     }
 
     public String getChoice1Text() {
@@ -84,6 +120,9 @@ public class ComplexDialogue extends Actor {
 
     public String getQuestion() {
         try {
+            typer.start(story.getCurrentText(), 0.0005f, () -> {
+                System.out.println("Typing done!");
+            });
             return story.getCurrentText();
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +199,7 @@ public class ComplexDialogue extends Actor {
         return story.getCurrentChoices().size();
     }
 
-    private void removeDialogue(){
+    private void removeDialogue() {
         StateManager.updateBoolState(StateEnum.PAUSE, false);
         DelayManager.resetDelay(this);
         remove();

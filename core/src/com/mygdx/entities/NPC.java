@@ -59,7 +59,7 @@ public class NPC extends GameActor {
             boolean delayOver = DelayManager.isDelayOver(this);
             
             if (leftPressed && !inPause && delayOver && npcBuilder.story != null) {
-                Utils.getCurrentHud().addComponent(new ComplexDialogue(npcBuilder.story));
+                var dial = new ComplexDialogue(npcBuilder.story);
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
             }

@@ -25,19 +25,19 @@ public class SettingsScreen extends GuiScreen {
         table.columnDefaults(1).width(150);
         
 
-        var langLabel = new Label("Language", skin);
+        var langLabel = new Label("Language", Data.skin);
         table.add(langLabel).right().pad(20);
 
-        var lang = new SelectBox<String>(skin);
+        var lang = new SelectBox<String>(Data.skin);
         lang.setItems("ITA", "ENG");
         table.add(lang).left().pad(20);
         
         table.row();
 
-        var fullScreenLabel = new Label("Fullscreen", skin);
+        var fullScreenLabel = new Label("Fullscreen", Data.skin);
         table.add(fullScreenLabel).right().pad(20);
 
-        var fullScreenButton = new TextButton(Gdx.graphics.isFullscreen() ? "ON" : "OFF", skin);
+        var fullScreenButton = new TextButton(Gdx.graphics.isFullscreen() ? "ON" : "OFF", Data.skin);
         table.add(fullScreenButton).left().pad(20);
         fullScreenButton.addListener(new InputListener() {
             @Override
@@ -56,7 +56,7 @@ public class SettingsScreen extends GuiScreen {
         table.row();
         
 
-        var back = new TextButton("BACK", skin);
+        var back = new TextButton("BACK", Data.skin);
                 
         table.add(back).center().bottom().pad(20).colspan(2);
         

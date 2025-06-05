@@ -1,5 +1,8 @@
 package com.mygdx;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 public class Data {
 
     public static final int RATIO_X = 16;
@@ -8,4 +11,6 @@ public class Data {
     public static final int VIEWPORT_Y = 64 * RATIO_Y;
 
     public static int TILE = 32;
+
+    public static Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 }

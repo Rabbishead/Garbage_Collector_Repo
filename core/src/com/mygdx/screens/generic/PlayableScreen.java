@@ -15,7 +15,6 @@ import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.screens.generic.GenericScreen;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
