@@ -13,7 +13,7 @@ public class Sniper extends BaseGun {
 
     public Sniper() {
         super(Utils.getTexture(ResourceEnum.SNIPER), Player.center, 0);
-        setOffset(30, 0);
+        setOffset(30, 0, 0);
         flip(true, false);
         DelayManager.registerObject(this, 90f);
     }
@@ -33,9 +33,8 @@ public class Sniper extends BaseGun {
     public int leftTrigger() {
         if (bullets > 0) {
             super.leftTrigger();
-            Utils.getStage().addActor(
-                    new Projectile(Player.center, getWidth(),
-                            CameraController.getMouseAngle() + angleOffset));
+            Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset);
+            Utils.getStage().addActor(proj);
             bullets -= 1;
 
             CameraController.applyShakeEffect();
@@ -50,8 +49,8 @@ public class Sniper extends BaseGun {
 
     public int rightTrigger() {
         super.rightTrigger();
-        Utils.getStage().addActor(
-                new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset));
+        Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset);
+        Utils.getStage().addActor(proj);
         return 2;
     }
 

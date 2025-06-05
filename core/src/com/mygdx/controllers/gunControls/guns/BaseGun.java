@@ -74,8 +74,6 @@ public class BaseGun extends Actor {
     @Override
     protected void positionChanged() {
         s.setPosition(getX(), getY());
-        movement.x = getX();
-        movement.y = getY();
     }
 
     public void onSwitched() {
@@ -107,12 +105,12 @@ public class BaseGun extends Actor {
         s.flip(x, y);
     }
 
-    public void setOffset(Vector2 offset) {
-        setOffset(offset.x, offset.y);
+    public void setOffset(float x, float y, float angle) {
+        setOffset(new Vector2(x, y), angle);
     }
 
-    public void setOffset(float x, float y) {
-        movement.offset(new Vector2(x, y));
+    public void setOffset(Vector2 offset, float angle) {
+        movement.offset(offset, angle);
         s.setOrigin(movement.origin.x, movement.origin.y);
     }
 

@@ -14,6 +14,7 @@ import com.mygdx.movement.BaseMovement;
 public class BaseBullet extends Actor {
     protected Sprite s;
     protected BaseMovement movement;
+    protected Vector2 origin;
     protected float distance;
     protected Collider collider = new Collider();
     protected ObjectInfo info;
@@ -21,12 +22,13 @@ public class BaseBullet extends Actor {
     public BaseBullet(Texture t, Vector2 origin, float speed, float distance, float rotation) {
         s = new Sprite(t);
         this.distance = distance;
+        this.origin = new Vector2(origin);
 
         setSize(s.getWidth(), s.getHeight());
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         movement = new BaseMovement(getOriginX(), getOriginY());
-        movement.anchor(origin);
+        movement.offset(origin, 0);
         movement.init(speed, rotation);
         s.setOrigin(movement.origin.x, movement.origin.y);
         s.setRotation(rotation);
@@ -61,7 +63,7 @@ public class BaseBullet extends Actor {
         Vector2 worldCoords = movement.getWorldCoords();
         setPosition(worldCoords.x, worldCoords.y);
 
-        if (movement.anchor.dst(worldCoords) > distance)
+        if (origin.dst(worldCoords) > distance)
             delete();
     }
 
@@ -69,9 +71,6 @@ public class BaseBullet extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         s.setPosition(getX(), getY());
-        movement.x = getX();
-        movement.y = getY();
-        movement.getCenterWorldCoords();
         collider.setPosition();
     }
 
@@ -84,14 +83,17 @@ public class BaseBullet extends Actor {
         s.flip(x, y);
     }
 
-    public void setOffset(Vector2 offset) {
-        setOffset(offset.x, offset.y);
+    public void setOffset(float x, float y, float angle) {
+        setOffset(new Vector2(x, y), angle);
     }
 
-    public void setOffset(float x, float y) {
-        movement.offset(new Vector2(x, y));
+    public void setOffset(Vector2 offset, float angle) {
+        movement.offset(offset, angle);
         s.setOrigin(movement.origin.x, movement.origin.y);
-        collider.setOffset(x, y);
+        
+        Vector2 worldCoords = movement.getWorldCoords();
+        setPosition(worldCoords.x, worldCoords.y);
+        //collider.setOffset(offset, angle);
     }
 
     /**

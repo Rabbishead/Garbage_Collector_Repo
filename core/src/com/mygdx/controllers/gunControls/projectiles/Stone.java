@@ -9,7 +9,7 @@ public class Stone extends BaseBullet {
 
     public Stone(Vector2 origin, float barrel) {
         super(Utils.getTexture(ResourceEnum.STONE), origin, 500f, 150f, 0f);
-        setOffset(barrel, 0);
+        setOffset(barrel, 0, 0);
     }
 
     @Override

@@ -8,12 +8,9 @@ public class Projectile extends BaseBullet {
 
     public Projectile(Vector2 origin, float barrel, float angle) {
         super(Utils.getTexture(ResourceEnum.BULLET), origin, 1000f, 1500f, angle);
-        setOffset(barrel, 0);
-        //s.rotate90(true);
-        //collider.rotate(-90);
+        setOffset(barrel, 0, angle);
         flip(false, true);
         attachInfo(2);
         info.integerInfo.put("damage", 1);
-        this.debug();
     }
 }

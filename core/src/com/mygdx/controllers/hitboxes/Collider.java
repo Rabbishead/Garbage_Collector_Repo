@@ -75,8 +75,24 @@ public class Collider extends Polygon {
         super.setPosition(worldCoords.x, worldCoords.y);
     }
 
-    public void setOffset(float x, float y) {
-        movement.offset(new Vector2(x, y));
+    @Override
+    public void setRotation(float degrees) {
+        super.setRotation(degrees);
+        movement.angle.setAngleDeg(degrees);
+    }
+
+    @Override
+    public void rotate(float degrees) {
+        super.rotate(degrees);
+        movement.angle.rotateDeg(degrees);
+    }
+
+    public void setOffset(float x, float y, float angle) {
+        setOffset(new Vector2(x, y), angle);
+    }
+
+    public void setOffset(Vector2 offset, float angle) {
+        movement.offset(offset, angle);
         setOrigin(movement.origin.x, movement.origin.y);
         setPosition();
     }
