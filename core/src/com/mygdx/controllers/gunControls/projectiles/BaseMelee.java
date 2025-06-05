@@ -79,8 +79,6 @@ public class BaseMelee extends Actor {
     protected void positionChanged() {
         super.positionChanged();
         s.setPosition(getX(), getY());
-        movement.x = getX();
-        movement.y = getY();
         collider.setPosition();
     }
 
@@ -89,14 +87,14 @@ public class BaseMelee extends Actor {
         collider.unregister();
     }
 
-    public void setOffset(Vector2 offset) {
-        setOffset(offset.x, offset.y);
+    public void setOffset(float x, float y, float angle) {
+        setOffset(new Vector2(x, y), angle);
     }
 
-    public void setOffset(float x, float y) {
-        movement.offset(new Vector2(x, y));
+    public void setOffset(Vector2 offset, float angle) {
+        movement.offset(offset, angle);
         s.setOrigin(movement.origin.x, movement.origin.y);
-        collider.setOffset(x, y);
+        collider.setOffset(offset, angle);
     }
 
     /**

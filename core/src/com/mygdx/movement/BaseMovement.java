@@ -10,17 +10,14 @@ public class BaseMovement {
             center = new Vector2(),
             coords = new Vector2(),
             centerCoords = new Vector2(),
-            anchor = null;
+            anchor = new Vector2();
 
     /**
      * Used for movement each frame.
      */
-    public Float speed = 0f;
+    public float speed = 0f;
 
-    /**
-     * Used when un-anchored.
-     */
-    public Float x = 0f, y = 0f;
+    private boolean anchored = false;
 
     public BaseMovement(Vector2 center) {
         this(center.x, center.y);
@@ -56,6 +53,8 @@ public class BaseMovement {
      */
     public void align() {
         position.sub(center);
+        recalcOrigin();
+        updateCoords();
     }
 
     /**
@@ -63,30 +62,39 @@ public class BaseMovement {
      * 
      * @return The modified position.
      */
-    public Vector2 move(float delta) {
+    public void move(float delta) {
         velocity.setAngleDeg(angle.angleDeg());
         Vector2 movement = velocity.cpy().scl(delta);
         position.add(movement);
         recalcOrigin();
-        return getWorldCoords();
+        updateCoords();
     }
 
-    public Vector2 mutiply(float delta) {
+    public void mutiply(float delta) {
         velocity.setAngleDeg(angle.angleDeg());
         Vector2 movement = velocity.scl(speed).cpy().scl(delta);
         position.add(movement);
         recalcOrigin();
-        return getWorldCoords();
+        updateCoords();
     }
 
-    public void offset(Vector2 offset) {
-        position.add(offset);
+    public void offset(Vector2 offset, float angle) {
+        /*Vector2 angledOff = new Vector2(offset.x, 0).setAngleDeg(angle);
+        position.add(angledOff);*/
+        Vector2 angledX = new Vector2(offset.x, 0).setAngleDeg(angle);
+        Vector2 angledY = new Vector2(offset.y, 0).setAngleDeg(angle + 90);
+        position.add(angledX).add(angledY);
         recalcOrigin();
+        updateCoords();
+    }
+
+    private void updateCoords() {
+        getCenterWorldCoords();
+        getWorldCoords();
     }
 
     public Vector2 getCenterWorldCoords() {
-        Vector2 wc = getWorldCoords();
-        centerCoords.set(wc.x + center.x, wc.y + center.y);
+        centerCoords.set(anchor.x + position.x + center.x, anchor.y + position.y + center.y);
         return centerCoords;
     }
 
@@ -102,18 +110,22 @@ public class BaseMovement {
      */
     public void anchor(Vector2 anchor) {
         this.anchor = anchor;
+        anchored = true;
         recalcOrigin();
+        updateCoords();
     }
 
     public void recalcOrigin() {
-        if (anchor == null)
+        if (!anchored)
             return;
 
         origin.set(-position.x, -position.y);
     }
 
     public void unAnchor() {
-        this.origin.set(center);
-        this.anchor = null;
+        origin.set(center);
+        anchor = new Vector2(0, 0);
+        anchored = false;
+        updateCoords();
     }
 }
