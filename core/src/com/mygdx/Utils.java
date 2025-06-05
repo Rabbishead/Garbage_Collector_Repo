@@ -1,8 +1,6 @@
 package com.mygdx;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -173,14 +171,5 @@ public class Utils {
 
     public static void subscribeToStageMsg(GameActor a, MSG msg){
         getActiveScreen().subscribe(a, msg);
-    }
-
-    public static void toggleFullScreen() {
-        Graphics.DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-        if (Gdx.graphics.getHeight() == displayMode.height)
-            Gdx.graphics.setWindowedMode(Data.VIEWPORT_X, Data.VIEWPORT_Y);
-        else
-            Gdx.graphics.setFullscreenMode(displayMode);
-
     }
 }
