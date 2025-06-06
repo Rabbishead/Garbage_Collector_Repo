@@ -76,10 +76,10 @@ public class BaseGun extends Actor {
         s.setPosition(getX(), getY());
     }
 
-    public void onSwitched() {
-    }
-
     public void onCurrent() {
+    }
+    
+    public void onSwitched() {
     }
 
     public int leftTrigger() {
@@ -115,9 +115,5 @@ public class BaseGun extends Actor {
     }
 
     public void destroy() {
-    }
-
-    public void discard() {
-        // TODO DISCARD
     }
 }

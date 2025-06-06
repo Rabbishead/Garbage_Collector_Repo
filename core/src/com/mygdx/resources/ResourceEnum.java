@@ -12,7 +12,7 @@ public enum ResourceEnum {
     STONE("bullets/stone.png", TypeEnum.TEXTURE),
     BULLET("bullets/bullet.png", TypeEnum.TEXTURE),
     DEFAULT("weapons/default.png", TypeEnum.TEXTURE),
-    SNIPER("weapons/sniper.png", TypeEnum.TEXTURE),
+    CHAINGUN("weapons/sniper.png", TypeEnum.TEXTURE),
     USBLADE("weapons/usblade.png", TypeEnum.TEXTURE),
 
     //MENU

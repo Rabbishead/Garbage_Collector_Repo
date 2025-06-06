@@ -23,7 +23,7 @@ public class Usblade extends BaseGun {
         Utils.getStage().addActor(proj);
 
         GunController.get().setCooldown(50);
-        return 0;
+        return 1;
     }
 
 }
