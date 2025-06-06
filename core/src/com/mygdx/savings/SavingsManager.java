@@ -54,17 +54,21 @@ public class SavingsManager {
         return ScreensManager.getPlayableScreen(s.getLastRoom());
     }
 
-    public static boolean getFlag(int index){
+    public static boolean getFlag(int index) {
         return s.getFlag(index);
     }
 
-    public static void loadDefaultIfNeeded(){
+    public static boolean getSelectedGun(int index) {
+        return s.getSelectedGun(index);
+    }
+
+    public static void loadDefaultIfNeeded() {
         File dir = new File("savings");
         if (!dir.exists()) {
             dir.mkdir();
         }
         File f = new File("savings/savings.json");
-        if(!f.exists() && !f.isDirectory()) { 
+        if (!f.exists() && !f.isDirectory()) {
             try {
                 Files.copy(Path.of("savings/default.json"), Path.of("savings/savings.json"));
 
