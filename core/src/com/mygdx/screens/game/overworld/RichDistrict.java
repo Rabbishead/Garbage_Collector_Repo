@@ -20,10 +20,14 @@ public class RichDistrict extends PlayableScreen {
                         .build(),
 
                 new NPC.NPCBuilder()
+                        .coordinates(Data.TILE * 60, Data.TILE * 15)
+                        .texture(ResourceEnum.JERKINS)
+                        .story(ResourceEnum.ADEPTUS_4)
+                        .build(),
+                new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 50, Data.TILE * 15)
                         .texture(ResourceEnum.JERKINS)
-                        .path("DWW--ASS", "WWDSS-A")
-                        .story(ResourceEnum.ADEPTUS_1)
+                        .story(ResourceEnum.ADEPTUS_2)
                         .build(),
 
                

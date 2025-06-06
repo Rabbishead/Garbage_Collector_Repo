@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.dialogues.ComplexDialogue;
@@ -40,7 +39,7 @@ public class NPC extends GameActor {
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0f);
-        DelayManager.registerObject(this, 0f);
+        
 
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
@@ -56,10 +55,9 @@ public class NPC extends GameActor {
 
             boolean leftPressed = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
             boolean inPause = StateManager.getBoolState(StateEnum.PAUSE);
-            boolean delayOver = DelayManager.isDelayOver(this);
             
-            if (leftPressed && !inPause && delayOver && npcBuilder.story != null) {
-                var dial = new ComplexDialogue(npcBuilder.story);
+            if (leftPressed && !inPause && npcBuilder.story != null) {
+                new ComplexDialogue(npcBuilder.story);
                 StateManager.updateBoolState(StateEnum.PAUSE, true);
                 return;
             }
@@ -110,7 +108,6 @@ public class NPC extends GameActor {
         animationManager.setCurrentAnimation(movementStyle.move());
         animationManager.updateAnimation(delta);
         npcDialogue.setPosition(getX() + 40, getY() + 50);
-        DelayManager.updateDelay(this);
         DelayManager.updateDelay(npcDialogue);
     }
 

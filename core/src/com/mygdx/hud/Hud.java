@@ -1,5 +1,6 @@
 package com.mygdx.hud;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -37,12 +38,9 @@ public class Hud implements Disposable {
     }
 
     public void update() {
-        stage.act();
+        stage.act(Gdx.graphics.getDeltaTime());
 
         DelayManager.updateDelay(complexDialogue);
-
-        if (complexDialogue != null)
-            complexDialogue.manage();
     }
 
     @Override
@@ -69,5 +67,9 @@ public class Hud implements Disposable {
 
     public void setDebugSting(String debugSting) {
         debugData.setText(debugSting);
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

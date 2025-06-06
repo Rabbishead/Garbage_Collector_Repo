@@ -4,7 +4,7 @@ import com.mygdx.controllers.gunControls.guns.*;
 
 public enum GunsEnum {
     SNIPER(new Sniper(), true),
-    USBLADE(new Usblade(), false);
+    USBLADE(new Usblade(), true);
 
     private final BaseGun gun;
     private boolean active;
