@@ -1,10 +1,11 @@
 package com.mygdx.controllers.gunControls;
 
 import com.mygdx.controllers.gunControls.guns.*;
+import com.mygdx.savings.SavingsManager;
 
 public enum GunsEnum {
-    SNIPER(new Sniper(), true),
-    USBLADE(new Usblade(), true);
+    CHAINGUN(new ChainGun(), SavingsManager.getSelectedGun(0)),
+    USBLADE(new Usblade(), SavingsManager.getSelectedGun(1));
 
     private final BaseGun gun;
     private boolean active;

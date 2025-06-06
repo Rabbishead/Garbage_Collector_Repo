@@ -25,12 +25,13 @@ public class GunController extends Actor {
     private GunController() {
         gunlist = new ArrayList<>();
         dummyGun = new DummyGun();
-        gunlist.add(dummyGun);
         DelayManager.registerObject(this, 10f);
         init();
     }
 
     private void init() {
+        if (gunlist.isEmpty())
+            gunlist.add(dummyGun);
         gunIndex = 0;
         currentGun = gunlist.get(0);
         currentGun.onCurrent();
@@ -63,15 +64,12 @@ public class GunController extends Actor {
     public void removeGun(BaseGun gun) {
         gunlist.remove(gun);
 
-        if (gunlist.isEmpty())
-            gunlist.add(dummyGun);
-
         init();
     }
 
     public void setCooldown(float cooldown) {
         DelayManager.registerObject(this, cooldown);
-        DelayManager.resetDelay(this);
+        resetCooldown();
     }
 
     public void resetCooldown() {
