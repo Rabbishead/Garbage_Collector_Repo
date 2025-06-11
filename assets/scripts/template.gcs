@@ -1,0 +1,26 @@
+HERE IS THE TEMPLATE FOR Garbage Collection Scrips
+There are several commands you can give to an actor and each one of them will be executed in sequence
+It's important to write commands exactly as said in docs
+
+MOV 10,20
+MOV [x],[y]
+The first command is MOV, it moves the actor to given coordinates, pretty simple
+
+
+ANI [ANIMATION]
+Ani stands for Animate and it changes the current animation of the actor.
+The parameter is the ResourceEnum of the animation to play
+
+
+WAIT [AMOUNT]
+Just waits, nothing else
+
+
+SND [MSG],...
+Sends any number of MSGs to the current stage MSG dispatcher.
+If you have to send many messages just list them all
+
+
+DO [SCRIPT]
+Immediately plays another script, the parameter is the ResourceEnum of the script to play
+Usually do it at the end if you have another script to play
