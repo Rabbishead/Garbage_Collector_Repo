@@ -2,7 +2,7 @@ HERE IS THE TEMPLATE FOR Garbage Collection Scrips
 There are several commands you can give to an actor and each one of them will be executed in sequence
 It's important to write commands exactly as said in docs
 
-MOV 10,20
+
 MOV [x],[y]
 The first command is MOV, it moves the actor to given coordinates, pretty simple
 
@@ -19,6 +19,10 @@ Just waits, nothing else
 SND [MSG],...
 Sends any number of MSGs to the current stage MSG dispatcher.
 If you have to send many messages just list them all
+
+
+LISTEN [MSG],...
+Blocks the script waiting to receive the given msg, once received, the script can proceed.
 
 
 DO [SCRIPT]
