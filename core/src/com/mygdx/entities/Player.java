@@ -137,4 +137,19 @@ public class Player extends GameActor {
         
         return true;
     }
+
+    @Override
+    public void move(float x, float y) {
+
+    }
+
+    @Override
+    public void changeAnimation(ResourceEnum e) {
+
+    }
+
+    @Override
+    public void wait(float time) {
+
+    }
 }

@@ -15,6 +15,7 @@ import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
+import com.mygdx.resources.ResourceEnum;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
@@ -126,6 +127,21 @@ public class NPC extends GameActor {
     @Override
     public boolean handleMessage(Telegram msg) {
         return true;
+    }
+
+    @Override
+    public void move(float x, float y) {
+
+    }
+
+    @Override
+    public void changeAnimation(ResourceEnum e) {
+
+    }
+
+    @Override
+    public void wait(float time) {
+
     }
 
     public Vector2 getCoords() {

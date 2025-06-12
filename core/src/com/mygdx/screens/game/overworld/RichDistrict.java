@@ -28,6 +28,7 @@ public class RichDistrict extends PlayableScreen {
                         .coordinates(Data.TILE * 50, Data.TILE * 15)
                         .texture(ResourceEnum.JERKINS)
                         .story(ResourceEnum.ADEPTUS_2)
+                        .scripts(ResourceEnum.TEST_SCRIPT)
                         .build(),
 
                

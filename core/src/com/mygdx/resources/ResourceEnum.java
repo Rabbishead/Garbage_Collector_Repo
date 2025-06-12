@@ -78,7 +78,11 @@ public enum ResourceEnum {
     REFLECTION_2("audio/reflection_2.mp3", TypeEnum.AUDIO),
     REFLECTION_3("audio/reflection_3.mp3", TypeEnum.AUDIO),
     REFLECTION_4("audio/reflection_4.mp3", TypeEnum.AUDIO),
-    REFLECTION_5("audio/reflection_5.mp3", TypeEnum.AUDIO);
+    REFLECTION_5("audio/reflection_5.mp3", TypeEnum.AUDIO),
+
+
+    //SCRIPTS
+    TEST_SCRIPT("scripts/npcs/reflection/test.gcs", TypeEnum.SCRIPT);
 
 
 
