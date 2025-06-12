@@ -1,8 +1,9 @@
 package com.mygdx.scripts;
 
+import com.mygdx.entities.ScriptableActor;
 import com.mygdx.resources.ResourceEnum;
 
-public class AniAction extends ScriptAction{
+public class AniAction implements ScriptAction{
     ResourceEnum e;
 
 
@@ -10,9 +11,9 @@ public class AniAction extends ScriptAction{
         this.e = e;
     }
 
-    @Override
-    public void doAction() {
 
+    @Override
+    public void perform(ScriptableActor actor) {
+        actor.changeAnimation(e);
     }
-    
 }

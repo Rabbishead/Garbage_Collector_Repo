@@ -1,8 +1,8 @@
 package com.mygdx.scripts;
 
-import com.mygdx.entities.GameActor;
+import com.mygdx.entities.ScriptableActor;
 
-public class WaitAction extends ScriptAction{
+public class WaitAction implements ScriptAction{
 
     private int time;
 
@@ -10,10 +10,9 @@ public class WaitAction extends ScriptAction{
         this.time = time;
     }
 
-    
 
     @Override
-    public void doAction() {
-        
+    public void perform(ScriptableActor actor) {
+        System.out.println("Waiting " + time);
     }
 }

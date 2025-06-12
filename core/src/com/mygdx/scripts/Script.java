@@ -3,13 +3,13 @@ package com.mygdx.scripts;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-
 import com.mygdx.controllers.messages.MSG;
+import com.mygdx.entities.ScriptableActor;
 import com.mygdx.resources.ResourceEnum;
 
 public class Script {
 
-    private ArrayList<ScriptAction> actions;
+    private ArrayList<ScriptAction> actions = new ArrayList<>();
     
     public Script(ResourceEnum e){
         try(var br = new BufferedReader(new FileReader(e.label))){
@@ -30,7 +30,13 @@ public class Script {
                 );
             }
             );
-
         } catch(Exception ignored){ignored.printStackTrace();}
+    }
+
+    public void proceed(ScriptableActor a){
+        if(actions.isEmpty()) return;
+
+        actions.get(0).perform(a);
+        actions.remove(0);
     }
 }

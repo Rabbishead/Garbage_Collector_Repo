@@ -1,6 +1,8 @@
 package com.mygdx.scripts;
 
-public abstract class ScriptAction {
+import com.mygdx.entities.ScriptableActor;
 
-    public abstract void doAction();
+public interface ScriptAction {
+
+    public void perform(ScriptableActor actor);
 }

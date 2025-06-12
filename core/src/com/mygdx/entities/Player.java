@@ -18,7 +18,7 @@ import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
-public class Player extends GameActor {
+public class Player extends GameActor implements ScriptableActor{
 
     private final ActorAnimationManager animationManager;
     private MovementStyle movementStyle;

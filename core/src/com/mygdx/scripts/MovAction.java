@@ -1,6 +1,8 @@
 package com.mygdx.scripts;
 
-public class MovAction extends ScriptAction{
+import com.mygdx.entities.ScriptableActor;
+
+public class MovAction implements ScriptAction{
     private float x, y;
 
     public MovAction(float x, float y){
@@ -8,8 +10,9 @@ public class MovAction extends ScriptAction{
         this.y = y;
     }
 
+
     @Override
-    public void doAction() {
-        
+    public void perform(ScriptableActor actor) {
+        actor.move(x, y);
     }
 }

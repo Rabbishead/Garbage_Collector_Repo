@@ -67,21 +67,6 @@ public class ForegroundMapComponent extends GameActor {
         hitbox.setPosition(getX(), getY());
     }
 
-    @Override
-    public void move(float x, float y) {
-
-    }
-
-    @Override
-    public void changeAnimation(ResourceEnum e) {
-
-    }
-
-    @Override
-    public void wait(float time) {
-
-    }
-
     public static class ForegroundMapComponentBuilder {
         protected Vector2 coordinates;
         protected ResourceEnum textureEnum;

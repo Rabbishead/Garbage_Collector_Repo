@@ -1,5 +1,7 @@
 package com.mygdx.entities;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.msg.Telegram;
@@ -16,10 +18,11 @@ import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.movement.MovementStyle;
 import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.scripts.Script;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
-public class NPC extends GameActor {
+public class NPC extends GameActor implements ScriptableActor{
 
     protected int lf = 2;
 
@@ -29,6 +32,7 @@ public class NPC extends GameActor {
     protected Hitbox hitbox = new Hitbox();
     protected boolean smallDialogueGoing;
     public Vector2 center = new Vector2();
+    public ArrayList<Script> scripts;
 
     public NPC(NPCBuilder npcBuilder) {
         super();
@@ -41,7 +45,7 @@ public class NPC extends GameActor {
         npcDialogue = new NPCDialogue(0, 0, "");
         DelayManager.registerObject(npcDialogue, 0f);
         
-
+        scripts = npcBuilder.scripts;
         String[] path = npcBuilder.path;
         movementStyle = new NPCRealtimeMovementStyle(this, path);
         smallDialogueGoing = false;
@@ -107,6 +111,7 @@ public class NPC extends GameActor {
     public void act(float delta) {
         super.act(delta);
         animationManager.setCurrentAnimation(movementStyle.move());
+        scripts.forEach(script -> script.proceed(this));
         animationManager.updateAnimation(delta);
         npcDialogue.setPosition(getX() + 40, getY() + 50);
         DelayManager.updateDelay(npcDialogue);

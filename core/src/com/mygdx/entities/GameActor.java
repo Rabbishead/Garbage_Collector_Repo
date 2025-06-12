@@ -5,8 +5,6 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.controllers.messages.MsgManager;
-import com.mygdx.resources.ResourceEnum;
 
 public abstract class GameActor extends Actor implements Telegraph {
 
@@ -24,13 +22,4 @@ public abstract class GameActor extends Actor implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         return true;
     }
-
-    public abstract void move(float x, float y);
-    public abstract void changeAnimation(ResourceEnum e);
-    public void send(MSG... msgs){
-        for (MSG msg : msgs) {
-            MsgManager.sendStageMsg(msg);
-        }
-    }
-    public abstract void wait(float time);
 }
