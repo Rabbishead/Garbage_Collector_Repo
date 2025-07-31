@@ -136,17 +136,17 @@ public class NPC extends GameActor implements ScriptableActor{
 
     @Override
     public void move(float x, float y) {
-
+        //LOGICA DI MOVIMENTO
     }
 
     @Override
     public void changeAnimation(ResourceEnum e) {
-
+        //CAMBIO ANIMAZIONE
     }
 
     @Override
     public void wait(float time) {
-
+        //ASPETTARE
     }
 
     public Vector2 getCoords() {

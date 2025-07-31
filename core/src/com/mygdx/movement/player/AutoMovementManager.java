@@ -50,13 +50,13 @@ public class AutoMovementManager {
         movement.set(velocity).scl(Gdx.graphics.getDeltaTime());
 
         if (direction.x > 0 && direction.x >= direction.y)
-            orientation = "wD";
+            orientation = "wR";
         if (direction.x < 0 && direction.x <= direction.y)
-            orientation = "wA";
+            orientation = "wL";
         if (direction.y > 0 && direction.y > direction.x)
-            orientation = "wW";
+            orientation = "wU";
         if (direction.y < 0 && direction.y < direction.x)
-            orientation = "wS";
+            orientation = "wD";
     }
 
     public String getOrientation() {

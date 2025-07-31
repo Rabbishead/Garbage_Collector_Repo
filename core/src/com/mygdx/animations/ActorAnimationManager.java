@@ -44,6 +44,7 @@ public class ActorAnimationManager {
         TextureRegion[] walkUpFrames = new TextureRegion[FRAME_ROWS];
         TextureRegion[] walkRightFrames = new TextureRegion[FRAME_ROWS];
         TextureRegion[] walkLeftFrames = new TextureRegion[FRAME_ROWS];
+        
 
         idleUpFrames[0] = tmp[0][4];
         for (int i = 0; i < FRAME_ROWS; i++) {
@@ -87,19 +88,20 @@ public class ActorAnimationManager {
     }
 
     /**
-     * @param direction iS: idleDown, iD:idleRight, iA: idleLeft, iW: idleUp, wS:
-     *                  walkDown, wW: walkUp, wA: walkLeft, wD: walkRight
+     * @param direction iD: idleDown, iR:idleRight, iL: idleLeft, iU: idleUp, wD:
+     *                  walkDown, wU: walkUp, wR: walkRight, wL: walkLeft
      */
     public void setCurrentAnimation(String direction) {
-        switch (direction) {
-            case "iS" -> currentAnimation = idleDown;
-            case "iD" -> currentAnimation = idleRight;
-            case "iA" -> currentAnimation = idleLeft;
-            case "iW" -> currentAnimation = idleUp;
-            case "wS" -> currentAnimation = walkDownAnimation;
-            case "wW" -> currentAnimation = walkUpAnimation;
-            case "wA" -> currentAnimation = walkLeftAnimation;
-            case "wD" -> currentAnimation = walkRightAnimation;
-        }
+        currentAnimation = switch (direction) {
+            case "iD" -> idleDown;
+            case "iR" -> idleRight;
+            case "iL" -> idleLeft;
+            case "iU" -> idleUp;
+            case "wD" -> walkDownAnimation;
+            case "wU" -> walkUpAnimation;
+            case "wR" -> walkRightAnimation;
+            case "wL" -> walkLeftAnimation;
+            default -> idleDown;
+        };
     }
 }

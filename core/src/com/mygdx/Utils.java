@@ -149,6 +149,7 @@ public class Utils {
 
     public static void playAudio(ResourceEnum e) {
         if (!manager.getAudio(e).isPlaying()) {
+            manager.getAudio(e).setVolume(0.05f);
             manager.getAudio(e).play();
             manager.getAudio(e).setLooping(true);
         }

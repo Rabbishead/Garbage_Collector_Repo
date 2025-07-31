@@ -18,16 +18,16 @@ public class Door {
         this.isCenterDoor = isCenterDoor;
 
         switch (orientation) {
-            case "w" -> {
+            case "u" -> {
                 exitPoint = center.cpy().add(0, -32);
             }
-            case "s" -> {
+            case "d" -> {
                 exitPoint = center.cpy().add(0, 32);
             }
-            case "a" -> {
+            case "l" -> {
                 exitPoint = center.cpy().add(32, 0);
             }
-            case "d" -> {
+            case "r" -> {
                 exitPoint = center.cpy().add(-32, 0);
             }
 

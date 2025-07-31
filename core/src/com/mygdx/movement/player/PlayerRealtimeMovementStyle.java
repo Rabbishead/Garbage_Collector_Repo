@@ -30,26 +30,26 @@ public class PlayerRealtimeMovementStyle extends MovementStyle {
         Vector2 finalPosition = new Vector2(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             finalPosition.x += 100;
-            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
-                direction = "wD";
+            if (!Objects.equals(lastDirection, "wU") && !Objects.equals(lastDirection, "wD")) {
+                direction = "wR";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             finalPosition.x -= 100;
-            if (!Objects.equals(lastDirection, "wW") && !Objects.equals(lastDirection, "wS")) {
-                direction = "wA";
+            if (!Objects.equals(lastDirection, "wU") && !Objects.equals(lastDirection, "wD")) {
+                direction = "wL";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             finalPosition.y += 100;
-            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
-                direction = "wW";
+            if (!Objects.equals(lastDirection, "wR") && !Objects.equals(lastDirection, "wL")) {
+                direction = "wU";
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             finalPosition.y -= 100;
-            if (!Objects.equals(lastDirection, "wD") && !Objects.equals(lastDirection, "wA")) {
-                direction = "wS";
+            if (!Objects.equals(lastDirection, "wR") && !Objects.equals(lastDirection, "wL")) {
+                direction = "wD";
             }
         }
         if (finalPosition.x == 0 && finalPosition.y == 0)

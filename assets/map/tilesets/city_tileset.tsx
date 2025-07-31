@@ -19,7 +19,7 @@
   <properties>
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
-   <property name="orientation" value="s"/>
+   <property name="orientation" value="d"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -27,14 +27,14 @@
   <properties>
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
-   <property name="orientation" value="s"/>
+   <property name="orientation" value="d"/>
   </properties>
  </tile>
  <tile id="9">
   <properties>
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
-   <property name="orientation" value="s"/>
+   <property name="orientation" value="d"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -54,7 +54,7 @@
   <properties>
    <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
-   <property name="orientation" value="w"/>
+   <property name="orientation" value="u"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -62,14 +62,14 @@
   <properties>
    <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
-   <property name="orientation" value="w"/>
+   <property name="orientation" value="u"/>
   </properties>
  </tile>
  <tile id="19">
   <properties>
    <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
-   <property name="orientation" value="w"/>
+   <property name="orientation" value="u"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -91,7 +91,7 @@
   <properties>
    <property name="destination" value="PARK-SLUMS"/>
    <property name="name" value="SLUMS-PARK"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -99,7 +99,7 @@
   <properties>
    <property name="destination" value="SLUMS-PARK"/>
    <property name="name" value="PARK-SLUMS"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -107,7 +107,7 @@
   <properties>
    <property name="destination" value="RICH_DISTRICT-PARK"/>
    <property name="name" value="PARK-RICH_DISTRICT"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -115,7 +115,23 @@
   <properties>
    <property name="destination" value="PARK-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-PARK"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
+   <property name="side" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="74">
+  <properties>
+   <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
+   <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
+   <property name="orientation" value="s"/>
+   <property name="side" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="75">
+  <properties>
+   <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
+   <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
+   <property name="orientation" value="w"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -123,28 +139,28 @@
   <properties>
    <property name="destination" value="PARK-SLUMS"/>
    <property name="name" value="SLUMS-PARK"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
   </properties>
  </tile>
  <tile id="81">
   <properties>
    <property name="destination" value="SLUMS-PARK"/>
    <property name="name" value="PARK-SLUMS"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
   </properties>
  </tile>
  <tile id="82">
   <properties>
    <property name="destination" value="RICH_DISTRICT-PARK"/>
    <property name="name" value="PARK-RICH_DISTRICT"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
   </properties>
  </tile>
  <tile id="83">
   <properties>
    <property name="destination" value="PARK-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-PARK"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
   </properties>
  </tile>
  <tile id="84">
@@ -165,7 +181,7 @@
   <properties>
    <property name="destination" value="PARK-SLUMS"/>
    <property name="name" value="SLUMS-PARK"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -173,7 +189,7 @@
   <properties>
    <property name="destination" value="SLUMS-PARK"/>
    <property name="name" value="PARK-SLUMS"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -181,7 +197,7 @@
   <properties>
    <property name="destination" value="RICH_DISTRICT-PARK"/>
    <property name="name" value="PARK-RICH_DISTRICT"/>
-   <property name="orientation" value="d"/>
+   <property name="orientation" value="r"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -189,7 +205,7 @@
   <properties>
    <property name="destination" value="PARK-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-PARK"/>
-   <property name="orientation" value="a"/>
+   <property name="orientation" value="l"/>
    <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
@@ -198,6 +214,7 @@
    <property name="destination" value="REFLECTION_ARENA-RICH_DISTRICT"/>
    <property name="name" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="orientation" value="s"/>
+   <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="95">
@@ -205,6 +222,7 @@
    <property name="destination" value="RICH_DISTRICT-REFLECTION_ARENA"/>
    <property name="name" value="REFLECTION_ARENA-RICH_DISTRICT"/>
    <property name="orientation" value="w"/>
+   <property name="side" type="bool" value="true"/>
   </properties>
  </tile>
 </tileset>

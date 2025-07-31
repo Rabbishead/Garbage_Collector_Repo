@@ -26,7 +26,7 @@ public class NPCTiledMovementStyle extends MovementStyle {
     }
 
     public String move() {
-        DelayManager.updateDelay(this);
+        /*DelayManager.updateDelay(this);
 
         if (Gdx.input.isKeyPressed(Input.Keys.W))
             inputs.add('W');
@@ -79,7 +79,7 @@ public class NPCTiledMovementStyle extends MovementStyle {
             }
             return movingDir;
         }
-
-        return "";
+*/
+        return "-";
     }
 }

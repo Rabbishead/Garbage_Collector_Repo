@@ -43,16 +43,16 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
         DelayManager.updateDelay(this);
 
         switch (currentDirection) {
-            case 'D' -> {
+            case 'R' -> {
                 finalPosition.x += 60;
             }
-            case 'A' -> {
+            case 'L' -> {
                 finalPosition.x -= 60;
             }
-            case 'W' -> {
+            case 'U' -> {
                 finalPosition.y += 60;
             }
-            case 'S' -> {
+            case 'D' -> {
                 finalPosition.y -= 60;
             }
             case '-' -> {

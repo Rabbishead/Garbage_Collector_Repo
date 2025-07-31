@@ -27,7 +27,7 @@ public class PlayerTiledMovementStyle extends MovementStyle {
     }
 
     public String move() {
-        DelayManager.updateDelay(this);
+        /*DelayManager.updateDelay(this);
 
         float angle = CameraController.getMouseAngle();
         String idleDir = "-";
@@ -82,6 +82,8 @@ public class PlayerTiledMovementStyle extends MovementStyle {
 
         }
 
-        return movingDir;
+        return movingDir;/* */
+
+        return "-";
     }
 }
