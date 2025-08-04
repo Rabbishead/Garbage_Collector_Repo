@@ -16,7 +16,8 @@ import com.mygdx.controllers.dialogues.NPCDialogue;
 import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.movement.MovementStyle;
-import com.mygdx.movement.npc.NPCRealtimeMovementStyle;
+import com.mygdx.movement.npc.NPCRoamingMovementStyle;
+import com.mygdx.movement.npc.NPCScriptMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.scripts.Script;
 import com.mygdx.states.StateEnum;
@@ -47,7 +48,7 @@ public class NPC extends GameActor implements ScriptableActor{
         
         scripts = npcBuilder.scripts;
         String[] path = npcBuilder.path;
-        movementStyle = new NPCRealtimeMovementStyle(this, path);
+        movementStyle = new NPCRoamingMovementStyle(this, path);
         smallDialogueGoing = false;
 
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
@@ -110,10 +111,17 @@ public class NPC extends GameActor implements ScriptableActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        animationManager.setCurrentAnimation(movementStyle.move());
-        scripts.forEach(script -> script.proceed(this));
+
+        autoMovementManager.update();
+        animationManager.setCurrentAnimation(autoMovementManager.getOrientation());
+        //animationManager.setCurrentAnimation(
+        //        autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
         animationManager.updateAnimation(delta);
-        npcDialogue.setPosition(getX() + 40, getY() + 50);
+        scripts.forEach(script -> script.proceed(this));
+        
+
+
+        //npcDialogue.setPosition(getX() + 40, getY() + 50);
         DelayManager.updateDelay(npcDialogue);
     }
 
@@ -136,7 +144,8 @@ public class NPC extends GameActor implements ScriptableActor{
 
     @Override
     public void move(float x, float y) {
-        //LOGICA DI MOVIMENTO
+        System.out.println(x + " " + y);
+        moveTo(x, y);
     }
 
     @Override

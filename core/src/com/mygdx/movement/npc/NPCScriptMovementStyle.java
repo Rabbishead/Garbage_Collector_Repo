@@ -3,42 +3,46 @@ package com.mygdx.movement.npc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.movement.MovementStyle;
 
-/**
- * RealtimeMovement for the overworld
- */
-public class NPCRealtimeMovementStyle extends MovementStyle {
-
+public class NPCScriptMovementStyle extends MovementStyle{
     private final Actor npc;
     private char lastDirection;
-    private final String[] path;
-    private int innerIndex;
-    private int outerIndex;
-    private final Vector2 startingCoordinates;
+    private String path = "";
+    private Vector2 finalCoordinates;
 
-    public NPCRealtimeMovementStyle(Actor npc, String... path) {
+    public NPCScriptMovementStyle(Actor npc) {
         this.npc = npc;
-        this.path = path;
-        lastDirection = '-';
         DelayManager.registerObject(this, 200f);
-        innerIndex = 0;
-        outerIndex = (int) (path.length * Math.random());
-        startingCoordinates = new Vector2(npc.getX(), npc.getY());
     }
 
-    public NPCRealtimeMovementStyle(Actor npc) {
-        this(npc, "-" );
+    public String move(){
+        if(finalCoordinates != null){
+            return coordsMove();
+        }
+        if(path != ""){
+            return pathMove();
+        }
+        return "-";
+    }
+
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    public void setFinalCoordinates(Vector2 finalCoordinates) {
+        this.finalCoordinates = finalCoordinates;
     }
 
     /**
      * moves the npc and returns the correct direction of the body
      */
-    public String move() {
+    public String pathMove() {
         Vector2 finalPosition = new Vector2(0, 0);
-        char currentDirection = path[outerIndex].charAt(innerIndex);
+        char currentDirection = path.charAt(0);
         boolean isWalking = true;
         DelayManager.updateDelay(this);
 
@@ -72,15 +76,20 @@ public class NPCRealtimeMovementStyle extends MovementStyle {
 
         lastDirection = currentDirection;
 
-        innerIndex++;
-
-        if (innerIndex >= path[outerIndex].length())
-            innerIndex = 0;
         DelayManager.resetDelay(this);
 
-        if (npc.getX() == startingCoordinates.x && npc.getY() == startingCoordinates.y) {
-            outerIndex = (int) (path.length * Math.random());
-        }
         return isWalking ? "w" + currentDirection : "i" + lastDirection;
+    }
+
+    /**
+     * moves the npc and returns the correct direction of the body
+     */
+    public String coordsMove() {
+        boolean isWalking = true;
+        DelayManager.updateDelay(this);
+
+        npc.addAction(Actions.moveTo(finalCoordinates.x, finalCoordinates.y, 50));
+
+        return "-";
     }
 }
