@@ -9,10 +9,17 @@ import com.mygdx.screens.generic.PlayableScreen;
 
 public class RichDistrict extends PlayableScreen {
 
+        private NPC particularNPC = new NPC.NPCBuilder()
+                .coordinates(Data.TILE * 60, Data.TILE * 20)
+                .texture(ResourceEnum.BLACKMARKETEER)
+                .build();
+
     public RichDistrict() {
         super(ResourceEnum.RICH_DISTRICT);
 
         addAll(
+                particularNPC,
+
                 new Reflection.ReflectionBuilder()
                         .coordinates(Data.TILE * 30, Data.TILE * 15)
                         .texture(ResourceEnum.BLACKMARKETEER)
@@ -28,7 +35,6 @@ public class RichDistrict extends PlayableScreen {
                         .coordinates(Data.TILE * 50, Data.TILE * 15)
                         .texture(ResourceEnum.JERKINS)
                         .story(ResourceEnum.ADEPTUS_2)
-                        .scripts(ResourceEnum.TEST_SCRIPT)
                         .build(),
 
                
@@ -77,6 +83,7 @@ public class RichDistrict extends PlayableScreen {
     @Override
     public void show() {
         super.show();
+        particularNPC.doScript(ResourceEnum.TEST_SCRIPT);
     }
 
     @Override

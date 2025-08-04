@@ -3,6 +3,7 @@ package com.mygdx.movement.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entities.GameActor;
+import com.mygdx.entities.ScriptableActor;
 import com.mygdx.map.TileMapCollisionsManager;
 
 public class AutoMovementManager {
@@ -26,15 +27,13 @@ public class AutoMovementManager {
 
         if (!TileMapCollisionsManager.canMove(actor.getX() + movement.x, actor.getY() + movement.y)
                 || actor.getCoords().dst(destination) < 1) {
-            animationInProgress = false;
-            destination = null;
+            reset();
             return false;
         }
 
         if (movement.len() > actor.getCoords().dst(destination)) {
             actor.setCoords(destination);
-            animationInProgress = false;
-            destination = null;
+            reset();
             return false;
         }
 
@@ -68,5 +67,14 @@ public class AutoMovementManager {
 
     public String getOrientation() {
         return orientation;
+    }
+
+    public void reset(){
+        animationInProgress = false;
+        destination = null;
+
+        if(actor instanceof ScriptableActor sc){
+            sc.proceed();
+        }
     }
 }
