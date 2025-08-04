@@ -1,7 +1,5 @@
 package com.mygdx.entities;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.msg.Telegram;
@@ -22,7 +20,7 @@ import com.mygdx.scripts.Script;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
-public class NPC extends GameActor implements ScriptableActor{
+public class NPC extends ScriptableActor{
 
     protected int lf = 2;
 
@@ -138,12 +136,6 @@ public class NPC extends GameActor implements ScriptableActor{
     }
 
     @Override
-    public void move(float x, float y) {
-        System.out.println(x + " " + y);
-        moveTo(x, y);
-    }
-
-    @Override
     public void changeAnimation(ResourceEnum e) {
         //CAMBIO ANIMAZIONE
     }
@@ -167,17 +159,6 @@ public class NPC extends GameActor implements ScriptableActor{
         public NPCBuilder getThis() {
             return this;
         }
-    }
-
-    @Override
-    public void doScript(ResourceEnum s) {
-        script = new Script(s);
-        script.proceed(this);
-    }
-
-    @Override
-    public void proceed() {
-        script.proceed(this);
     }
 
 }

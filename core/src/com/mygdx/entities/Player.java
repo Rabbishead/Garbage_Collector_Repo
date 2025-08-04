@@ -13,13 +13,11 @@ import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
-import com.mygdx.movement.player.AutoMovementManager;
 import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
 import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.resources.ResourceEnum;
-import com.mygdx.scripts.Script;
 
-public class Player extends GameActor implements ScriptableActor{
+public class Player extends ScriptableActor{
 
     private final ActorAnimationManager animationManager;
     private MovementStyle movementStyle;
@@ -130,11 +128,6 @@ public class Player extends GameActor implements ScriptableActor{
     }
 
     @Override
-    public void move(float x, float y) {
-
-    }
-
-    @Override
     public void changeAnimation(ResourceEnum e) {
 
     }
@@ -142,15 +135,5 @@ public class Player extends GameActor implements ScriptableActor{
     @Override
     public void wait(float time) {
 
-    }
-
-    @Override
-    public void doScript(ResourceEnum s) {
-        System.out.println("doing script");
-    }
-
-    @Override
-    public void proceed() {
-        System.out.println("proceeding");
     }
 }
