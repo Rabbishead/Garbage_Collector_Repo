@@ -21,10 +21,10 @@ public class Script {
                     switch (func){
                         case "MOV" -> new MovAction(Float.parseFloat(args[0]), Float.parseFloat(args[1]));
                         case "ANI" -> new AniAction(ResourceEnum.valueOf(args[0]));
-                        case "WAIT" -> new WaitAction(Integer.parseInt(args[0]));
-                        case "SND" -> new SndAction(MSG.BLOCK_WALLS);
-                        case "LISTEN" -> new ListenAction();
-                        case "DO" -> new DoAction(ResourceEnum.TEST_SCRIPT);
+                        case "WAIT" -> new WaitAction(Float.parseFloat(args[0]));
+                        case "SND" -> new SndAction(MSG.valueOf(args[0]));
+                        case "LISTEN" -> new ListenAction(MSG.valueOf(args[0]));
+                        case "DO" -> new DoAction(ResourceEnum.valueOf(args[0]));
                         default -> null;
                     }
                 );

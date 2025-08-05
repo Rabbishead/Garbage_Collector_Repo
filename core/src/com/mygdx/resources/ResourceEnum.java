@@ -83,6 +83,8 @@ public enum ResourceEnum {
 
     //SCRIPTS
     TEST_SCRIPT("assets/scripts/npcs/reflection/test.gcs", TypeEnum.SCRIPT),
+    TEST_2("assets/scripts/npcs/reflection/test2.gcs", TypeEnum.SCRIPT),
+    TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
 
     //ANIMATIONS
     TEST_ANIMATION("", TypeEnum.TEXTURE);

@@ -5,17 +5,18 @@ import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.ScriptableActor;
 
 public class SndAction implements ScriptAction{
-    private MSG[] msgs;
+    private MSG msg;
 
-    public SndAction(MSG... msgs) {
-        this.msgs = msgs;
+    public SndAction(MSG m){
+        msg = m;
     }
+
 
 
     @Override
     public void perform(ScriptableActor actor) {
-        for (MSG msg : msgs) {
-            MsgManager.sendStageMsg(msg);
-        }
+        System.out.println("sended");
+        MsgManager.sendStageMsg(msg);
+        
     }
 }

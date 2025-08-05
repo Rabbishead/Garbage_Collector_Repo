@@ -108,9 +108,8 @@ public class NPC extends ScriptableActor{
     public void act(float delta) {
         super.act(delta);
 
-
-        animationManager.setCurrentAnimation(
-                autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
+        autoMovementManager.update();
+        animationManager.setCurrentAnimation(autoMovementManager.getOrientation());
                 
         animationManager.updateAnimation(delta);
         
@@ -132,17 +131,13 @@ public class NPC extends ScriptableActor{
 
     @Override
     public boolean handleMessage(Telegram msg) {
+        super.handleMessage(msg);
         return true;
     }
 
     @Override
     public void changeAnimation(ResourceEnum e) {
         //CAMBIO ANIMAZIONE
-    }
-
-    @Override
-    public void wait(float time) {
-        //ASPETTARE
     }
 
     public Vector2 getCoords() {

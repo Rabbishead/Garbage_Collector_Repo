@@ -6,7 +6,8 @@ public enum MSG {
     BLOCK_WALLS(2),
     UNBLOCK_WALLS(3),
     SHOT(4),
-    CHANGE_MOV_STYLE(5);
+    CHANGE_MOV_STYLE(5),
+    ACT_YOU_IDIOT(6);
 
     public int code;
 

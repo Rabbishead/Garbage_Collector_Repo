@@ -13,6 +13,6 @@ public class DoAction implements ScriptAction{
 
     @Override
     public void perform(ScriptableActor actor) {
-        System.out.println("Doing Action");
+        actor.doScript(script);
     }
 }

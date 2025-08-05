@@ -47,12 +47,20 @@ public class AutoMovementManager {
     }
 
     public void goTo(Vector2 coordinates) {
-        if (isAnimationInProgress())
+        if (isAnimationInProgress()){
+            
             return;
+        }
+            
         animationInProgress = true;
         destination = coordinates.cpy();
 
         Vector2 direction = new Vector2(destination).sub(actor.getCoords()).nor();
+
+        float EPSILON = 1e-1f;
+
+        if (Math.abs(direction.x) < EPSILON) direction.x = 0f; //round up values too small
+        if (Math.abs(direction.y) < EPSILON) direction.y = 0f;
 
         if (direction.x > 0 && direction.x >= direction.y)
             orientation = "wR";
@@ -62,7 +70,7 @@ public class AutoMovementManager {
             orientation = "wU";
         if (direction.y < 0 && direction.y < direction.x)
             orientation = "wD";
-
+        System.out.println(direction + " " + orientation);
     }
 
     public String getOrientation() {
@@ -72,6 +80,7 @@ public class AutoMovementManager {
     public void reset(){
         animationInProgress = false;
         destination = null;
+        orientation = "i" + orientation.substring(1);
 
         if(actor instanceof ScriptableActor sc){
             sc.proceed();

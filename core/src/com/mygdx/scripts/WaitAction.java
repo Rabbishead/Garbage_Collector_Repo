@@ -1,18 +1,25 @@
 package com.mygdx.scripts;
 
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.entities.ScriptableActor;
 
-public class WaitAction implements ScriptAction{
+public class WaitAction implements ScriptAction {
 
-    private int time;
+    private float time;
 
-    public WaitAction(int time) {
+    public WaitAction(Float time) {
         this.time = time;
     }
 
-
     @Override
     public void perform(ScriptableActor actor) {
-        System.out.println("Waiting " + time);
+        actor.addAction(
+                Actions.sequence(
+                        Actions.delay(time),
+                        Actions.run(() -> {
+                            System.out.println("proceeded");
+                            actor.proceed();
+                        })));
+
     }
 }

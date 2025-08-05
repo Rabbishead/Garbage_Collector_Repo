@@ -131,9 +131,4 @@ public class Player extends ScriptableActor{
     public void changeAnimation(ResourceEnum e) {
 
     }
-
-    @Override
-    public void wait(float time) {
-
-    }
 }
