@@ -28,6 +28,11 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
         return getThis();
     }
 
+    public T size(float x, float y) {
+        this.size = new Vector2(x, y);
+        return getThis();
+    }
+
     public T texture(ResourceEnum texture) {
         this.textureEnum = texture;
         return getThis();

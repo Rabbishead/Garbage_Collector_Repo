@@ -24,7 +24,7 @@ public class NPC extends ScriptableActor{
 
     protected int lf = 2;
 
-    protected ActorAnimationManager animationManager;
+    
     protected MovementStyle movementStyle;
     protected NPCDialogue npcDialogue;
     protected Hitbox hitbox = new Hitbox();
@@ -108,8 +108,8 @@ public class NPC extends ScriptableActor{
     public void act(float delta) {
         super.act(delta);
 
-        autoMovementManager.update();
-        animationManager.setCurrentAnimation(autoMovementManager.getOrientation());
+        if(autoMovementManager.update())
+            animationManager.setWalkingAnimation(autoMovementManager.getOrientation());
                 
         animationManager.updateAnimation(delta);
         
@@ -133,15 +133,6 @@ public class NPC extends ScriptableActor{
     public boolean handleMessage(Telegram msg) {
         super.handleMessage(msg);
         return true;
-    }
-
-    @Override
-    public void changeAnimation(ResourceEnum e) {
-        //CAMBIO ANIMAZIONE
-    }
-
-    public Vector2 getCoords() {
-        return new Vector2(getX(), getY());
     }
 
     public static class NPCBuilder extends AbstractNPCBuilder<NPCBuilder> {

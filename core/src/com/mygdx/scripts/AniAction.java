@@ -14,7 +14,6 @@ public class AniAction implements ScriptAction{
 
     @Override
     public void perform(ScriptableActor actor) {
-        actor.changeAnimation(e);
-        System.out.println("Changing animation");
+        actor.changeAnimation(e, 0.3f);
     }
 }

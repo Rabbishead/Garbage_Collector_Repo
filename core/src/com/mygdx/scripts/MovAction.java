@@ -14,6 +14,5 @@ public class MovAction implements ScriptAction{
     @Override
     public void perform(ScriptableActor actor) {
         actor.move(x, y);
-        System.out.println("Moving");
     }
 }

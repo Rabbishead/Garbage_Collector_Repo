@@ -70,7 +70,6 @@ public class AutoMovementManager {
             orientation = "wU";
         if (direction.y < 0 && direction.y < direction.x)
             orientation = "wD";
-        System.out.println(direction + " " + orientation);
     }
 
     public String getOrientation() {

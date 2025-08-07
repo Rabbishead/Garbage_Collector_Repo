@@ -94,7 +94,7 @@ public class Player extends ScriptableActor{
 
         CameraController.calculateMouseAngle(center);
 
-        animationManager.setCurrentAnimation(
+        animationManager.setWalkingAnimation(
                 autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
 
         animationManager.updateAnimation(delta);
@@ -125,10 +125,5 @@ public class Player extends ScriptableActor{
         if(msg.message == MSG.CHANGE_MOV_STYLE.code) swapMovementStyle();
         
         return true;
-    }
-
-    @Override
-    public void changeAnimation(ResourceEnum e) {
-
     }
 }

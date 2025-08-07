@@ -11,6 +11,7 @@ public class RichDistrict extends PlayableScreen {
 
         private NPC particularNPC = new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 60, Data.TILE * 20)
+                        .size(16, 28)
                         .texture(ResourceEnum.BLACKMARKETEER)
                         .build();
 

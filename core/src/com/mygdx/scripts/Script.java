@@ -36,7 +36,9 @@ public class Script {
     public void proceed(ScriptableActor a){
         if(actions.isEmpty()) return;
 
-        actions.get(0).perform(a);
+        ScriptAction action = actions.get(0);
         actions.remove(0);
+        action.perform(a);
+        
     }
 }

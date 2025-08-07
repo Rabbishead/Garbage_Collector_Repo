@@ -3,6 +3,7 @@ package com.mygdx.animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.Logger;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 
@@ -18,6 +19,9 @@ public class ActorAnimationManager {
     private final Animation<TextureRegion> walkUpAnimation;
     private final Animation<TextureRegion> walkRightAnimation;
     private final Animation<TextureRegion> walkLeftAnimation;
+
+    private Animation<TextureRegion> otherAnimation;
+    private boolean hasOtherAnimation;
 
     private Animation<TextureRegion> currentAnimation;
 
@@ -44,7 +48,6 @@ public class ActorAnimationManager {
         TextureRegion[] walkUpFrames = new TextureRegion[FRAME_ROWS];
         TextureRegion[] walkRightFrames = new TextureRegion[FRAME_ROWS];
         TextureRegion[] walkLeftFrames = new TextureRegion[FRAME_ROWS];
-        
 
         idleUpFrames[0] = tmp[0][4];
         for (int i = 0; i < FRAME_ROWS; i++) {
@@ -91,7 +94,9 @@ public class ActorAnimationManager {
      * @param direction iD: idleDown, iR:idleRight, iL: idleLeft, iU: idleUp, wD:
      *                  walkDown, wU: walkUp, wR: walkRight, wL: walkLeft
      */
-    public void setCurrentAnimation(String direction) {
+    public void setWalkingAnimation(String direction) {
+        otherAnimation = null;
+        hasOtherAnimation = false;
         currentAnimation = switch (direction) {
             case "iD" -> idleDown;
             case "iR" -> idleRight;
@@ -103,5 +108,29 @@ public class ActorAnimationManager {
             case "wL" -> walkLeftAnimation;
             default -> idleDown;
         };
+    }
+
+    public void setOtherAnimation(ResourceEnum ani, float duration, int width, int height) {
+        Texture aniSheet = Utils.getTexture(ani);
+
+        System.out.println(aniSheet.getWidth() + " " + width);
+
+        int FRAME_COLS = aniSheet.getWidth() / width;
+        int FRAME_ROWS = aniSheet.getHeight() / height;
+
+        
+
+        TextureRegion[][] tmp = TextureRegion.split(aniSheet,
+                aniSheet.getWidth() / FRAME_COLS,
+                aniSheet.getHeight() / FRAME_ROWS);
+
+        otherAnimation = new Animation<>(duration, tmp[0]);
+        currentAnimation = otherAnimation;
+
+        hasOtherAnimation = true;
+    }
+
+    public void setOtherAnimation(ResourceEnum ani, int width, int height) {
+        setOtherAnimation(ani, 0.3f, width, height);
     }
 }

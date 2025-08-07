@@ -87,7 +87,7 @@ public enum ResourceEnum {
     TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
 
     //ANIMATIONS
-    TEST_ANIMATION("", TypeEnum.TEXTURE);
+    BLACKMARKETEER_SLEEPING("npcs/blackmarketeer_sleeping.png", TypeEnum.TEXTURE);
 
 
 

@@ -13,6 +13,5 @@ public class ListenAction implements ScriptAction{
     @Override
     public void perform(ScriptableActor actor) {
         actor.listen(msg);
-        System.out.println("Listening");
     }
 }
