@@ -13,12 +13,14 @@ public class RichDistrict extends PlayableScreen {
                         .coordinates(Data.TILE * 60, Data.TILE * 20)
                         .size(16, 28)
                         .texture(ResourceEnum.BLACKMARKETEER)
+                        .autoStartedScript(ResourceEnum.TEST_SCRIPT)
                         .build();
 
         private NPC particularNPC2 = new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 55, Data.TILE * 25)
                         .texture(ResourceEnum.JERKINS)
                         .story(ResourceEnum.ADEPTUS_2)
+                        .autoStartedScript(ResourceEnum.TEST_3)
                         .build();
 
         public RichDistrict() {
@@ -78,8 +80,6 @@ public class RichDistrict extends PlayableScreen {
         @Override
         public void show() {
                 super.show();
-                particularNPC.doScript(ResourceEnum.TEST_SCRIPT);
-                particularNPC2.doScript(ResourceEnum.TEST_3);
         }
 
         @Override

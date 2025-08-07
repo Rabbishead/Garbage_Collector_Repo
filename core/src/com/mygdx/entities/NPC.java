@@ -31,6 +31,8 @@ public class NPC extends ScriptableActor{
 
         animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
 
+        
+
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
         hitbox.setTags(Tags.NPC, Tags.ENEMY);
         hitbox.setOnFrame(collider -> {
@@ -65,6 +67,9 @@ public class NPC extends ScriptableActor{
         hitbox.register();
         setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
 
+
+        if(npcBuilder.autoStartedScript != null) doScript(npcBuilder.autoStartedScript);
+        
         debug();
     }
 

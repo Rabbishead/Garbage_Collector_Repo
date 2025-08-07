@@ -9,6 +9,7 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected Vector2 coordinates, size = new Vector2(16, 32);
     protected ResourceEnum textureEnum;
     protected Story story;
+    protected ResourceEnum autoStartedScript;
 
     public abstract T getThis();
 
@@ -39,6 +40,11 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
 
     public T story(ResourceEnum e) {
         this.story = Utils.getStory(e);
+        return getThis();
+    }
+
+    public T autoStartedScript(ResourceEnum e){
+        this.autoStartedScript = e;
         return getThis();
     }
 }
