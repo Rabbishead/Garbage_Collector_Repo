@@ -30,9 +30,9 @@ public class ReflectionArena extends PlayableScreen {
     public void render(float delta) {
         super.render(delta);
 
-        if (TileMapCollisionsManager.changeMovementStyle()) {
+        if (TileMapCollisionsManager.changeFightingState()) {
             MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
-            MsgManager.sendStageMsg(MSG.CHANGE_MOV_STYLE);
+            MsgManager.sendStageMsg(MSG.SWAP_FIGHT_STATE);
 
         }
     }

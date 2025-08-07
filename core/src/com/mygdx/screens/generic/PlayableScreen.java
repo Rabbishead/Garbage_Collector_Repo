@@ -66,8 +66,8 @@ public abstract class PlayableScreen extends GenericScreen {
         CameraController.initCamera();
 
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
-        subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.CHANGE_MOV_STYLE);
-        subscribe(player, MSG.CHANGE_MOV_STYLE);
+        subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.SWAP_FIGHT_STATE);
+        subscribe(player, MSG.SWAP_FIGHT_STATE);
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
@@ -79,7 +79,6 @@ public abstract class PlayableScreen extends GenericScreen {
 
         stage.getCamera().position.set(getPlayerCoordinates(), 0);
 
-        player.setMovementStyle(Player.Styles.REALTIME);
     }
 
     @Override
@@ -99,7 +98,7 @@ public abstract class PlayableScreen extends GenericScreen {
             stageMsg.dispatchMessage(MSG.BLOCK_WALLS.code);
         }
         if(Gdx.input.isKeyJustPressed(Keys.J)){
-            stageMsg.dispatchMessage(MSG.CHANGE_MOV_STYLE.code);
+            stageMsg.dispatchMessage(MSG.SWAP_FIGHT_STATE.code);
         }
 
         if (Utils.getActiveScreen() != this)

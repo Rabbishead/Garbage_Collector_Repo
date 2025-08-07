@@ -1,4 +1,4 @@
-package com.mygdx.movement.player;
+package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,7 +8,6 @@ import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.entities.Player;
 import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.movement.MovementStyle;
 
 import java.util.HashSet;
 import java.util.Set;

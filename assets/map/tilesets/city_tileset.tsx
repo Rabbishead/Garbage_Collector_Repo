@@ -4,7 +4,7 @@
  <tile id="5">
   <properties>
    <property name="blockable" type="bool" value="true"/>
-   <property name="category" value="CHANGE_MOV_STYLE"/>
+   <property name="category" value="SWAP_FIGHT_STATE"/>
    <property name="transition" type="bool" value="true"/>
   </properties>
  </tile>
@@ -41,7 +41,7 @@
  <tile id="15">
   <properties>
    <property name="blocker" type="bool" value="true"/>
-   <property name="category" value="CHANGE_MOV_STYLE"/>
+   <property name="category" value="SWAP_FIGHT_STATE"/>
   </properties>
  </tile>
  <tile id="16">

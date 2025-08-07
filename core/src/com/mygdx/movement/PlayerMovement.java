@@ -1,4 +1,4 @@
-package com.mygdx.movement.player;
+package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,18 +6,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.movement.MovementStyle;
+
 import java.util.Objects;
 
 /**
  * RealtimeMovement for the overworld
  */
-public class PlayerRealtimeMovementStyle extends MovementStyle {
+public class PlayerMovement {
 
     private final Actor player;
     private String lastDirection;
 
-    public PlayerRealtimeMovementStyle() {
+    public PlayerMovement() {
         this.player = Utils.getPlayer();
         lastDirection = "-";
     }

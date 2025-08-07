@@ -1,4 +1,4 @@
-package com.mygdx.movement.player;
+package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -82,7 +82,8 @@ public class AutoMovementManager {
         orientation = "i" + orientation.substring(1);
 
         if(actor instanceof ScriptableActor sc){
-            sc.proceed();
+            if(sc.hasScript())
+                sc.proceed();
         }
     }
 }

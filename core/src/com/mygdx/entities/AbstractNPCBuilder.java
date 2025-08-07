@@ -8,7 +8,6 @@ import com.mygdx.resources.ResourceEnum;
 public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected Vector2 coordinates, size = new Vector2(16, 32);
     protected ResourceEnum textureEnum;
-    protected String[] path = new String[] { "-" };
     protected Story story;
 
     public abstract T getThis();
@@ -35,11 +34,6 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
 
     public T texture(ResourceEnum texture) {
         this.textureEnum = texture;
-        return getThis();
-    }
-
-    public T path(String... path) {
-        this.path = path;
         return getThis();
     }
 

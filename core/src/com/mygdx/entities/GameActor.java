@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.Utils;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.movement.player.AutoMovementManager;
+import com.mygdx.movement.AutoMovementManager;
 
 public abstract class GameActor extends Actor implements Telegraph {
 

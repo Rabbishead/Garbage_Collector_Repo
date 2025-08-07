@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.controllers.delay.DelayManager;
-import com.mygdx.controllers.dialogues.ComplexDialogue;
+import com.mygdx.controllers.dialogues.Dialogue;
 import com.mygdx.hud.actors.DebugData;
 import com.mygdx.hud.actors.Fps;
 import com.mygdx.hud.actors.HealthBar;
@@ -16,7 +16,7 @@ import com.mygdx.hud.actors.HealthBar;
 public class Hud implements Disposable {
     private final Stage stage;
     private final Fps fps;
-    private ComplexDialogue complexDialogue;
+    private Dialogue complexDialogue;
 
     private DebugData debugData;
 
@@ -51,15 +51,15 @@ public class Hud implements Disposable {
 
     public void addComponent(Actor actor) {
         stage.addActor(actor);
-        if (actor instanceof ComplexDialogue) {
-            complexDialogue = (ComplexDialogue) actor;
+        if (actor instanceof Dialogue d) {
+            complexDialogue = d;
             DelayManager.registerObject(complexDialogue, 100f);
         }
     }
 
     public void removeDialogue() {
         stage.getActors().forEach(actor -> {
-            if (actor instanceof ComplexDialogue) {
+            if (actor instanceof Dialogue) {
                 actor.remove();
             }
         });

@@ -35,7 +35,7 @@ public class Reflection extends NPC {
 
         Vector2 playerPos = Utils.getPlayer().getCoords();
 
-        if (!Utils.getPlayer().isTiledWalking()) {
+        if (!Utils.getPlayer().isFighting()) {
             getActions().clear();
             return;
         }

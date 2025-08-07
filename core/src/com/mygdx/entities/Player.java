@@ -6,28 +6,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.movement.MovementStyle;
+import com.mygdx.movement.PlayerMovement;
 import com.mygdx.Utils;
 import com.mygdx.animations.ActorAnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
-import com.mygdx.movement.player.PlayerRealtimeMovementStyle;
-import com.mygdx.movement.player.PlayerTiledMovementStyle;
 import com.mygdx.resources.ResourceEnum;
 
 public class Player extends ScriptableActor{
 
+    private final PlayerMovement movement;
     private final ActorAnimationManager animationManager;
-    private MovementStyle movementStyle;
     private Collider collider = new Collider();
     public static Vector2 center = new Vector2();
-    
+    private boolean fighting;
 
-    public enum Styles {
-        REALTIME, TILED
-    }
 
     public Player(Vector2 coordinates) {
         Utils.setPlayer(this);
@@ -47,35 +42,8 @@ public class Player extends ScriptableActor{
 
         animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
         this.debug();
-    }
 
-    /**
-     * sets player's movement style between REALTIME and TILED
-     */
-    public void setMovementStyle(Styles s) {
-        switch (s) {
-            case REALTIME: {
-                movementStyle = new PlayerRealtimeMovementStyle();
-                GunController.get().remove();
-                break;
-            }
-            case TILED: {
-                movementStyle = new PlayerTiledMovementStyle();
-                Utils.getStage().addActor(GunController.get());
-                break;
-            }
-        }
-    }
-
-    public void swapMovementStyle() {
-        if (movementStyle instanceof PlayerRealtimeMovementStyle) {
-            movementStyle = new PlayerTiledMovementStyle();
-            Utils.getStage().addActor(GunController.get());
-            moveTo(new Vector2(((int) (getCoords().x / 32) * 32) + 8, ((int) (getCoords().y / 32) * 32) + 8));
-        } else {
-            movementStyle = new PlayerRealtimeMovementStyle();
-            GunController.get().remove();
-        }
+        movement = new PlayerMovement();
     }
 
     @Override
@@ -95,7 +63,7 @@ public class Player extends ScriptableActor{
         CameraController.calculateMouseAngle(center);
 
         animationManager.setWalkingAnimation(
-                autoMovementManager.update() ? autoMovementManager.getOrientation() : movementStyle.move());
+                autoMovementManager.update() ? autoMovementManager.getOrientation() : movement.move());
 
         animationManager.updateAnimation(delta);
     }
@@ -108,22 +76,22 @@ public class Player extends ScriptableActor{
         collider.setPosition();
     }
 
-    
-
-    
-
-    
-
-    
-
-    public boolean isTiledWalking() {
-        return movementStyle instanceof PlayerTiledMovementStyle;
-    }
-
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(msg.message == MSG.CHANGE_MOV_STYLE.code) swapMovementStyle();
+        if(msg.message == MSG.SWAP_FIGHT_STATE.code) swapFightingState();
         
         return true;
+    }
+
+    public boolean isFighting() {
+        return fighting;
+    }
+    
+    public void swapFightingState(){
+        if(fighting) GunController.get().remove();
+        else Utils.getStage().addActor(GunController.get());
+
+
+        fighting = !fighting;
     }
 }

@@ -17,7 +17,6 @@ public class WaitAction implements ScriptAction {
                 Actions.sequence(
                         Actions.delay(time),
                         Actions.run(() -> {
-                            System.out.println("proceeded");
                             actor.proceed();
                         })));
 

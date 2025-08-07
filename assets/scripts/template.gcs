@@ -1,28 +1,33 @@
 HERE IS THE TEMPLATE FOR Garbage Collection Scrips
 There are several commands you can give to an actor and each one of them will be executed in sequence
 It's important to write commands exactly as said in docs
+NO SPACES EXCEPT THE ONE BETWEEN THE COMMAND AND THE PARAMETERS!!!!!
 
 
 MOV [x],[y]
-The first command is MOV, it moves the actor to given coordinates, pretty simple
+The first command is MOV, it moves the actor to given absolute coordinates, pretty simple
 
+MOVREL [x],[y]
+Similar to MOV but moves the actor by relative coordinates
+It will add passed values to the current actor's coordinates
 
 ANI [ANIMATION]
 Ani stands for Animate and it changes the current animation of the actor.
 The parameter is the ResourceEnum of the animation to play
-
+The animation will then loop
+IMPORTANT: if you call MOV or MOVREL the animation will be interrupted in order to walk
 
 WAIT [AMOUNT]
-Just waits, nothing else
+Just waits, nothing else, when the time expires the script can proceed
 
 
-SND [MSG],...
-Sends any number of MSGs to the current stage MSG dispatcher.
-If you have to send many messages just list them all
+SND [MSG]
+Sends a MSG to the current stage MSG dispatcher.
 
 
-LISTEN [MSG],...
+LISTEN [MSG]
 Blocks the script waiting to receive the given msg, once received, the script can proceed.
+Try to use SND and LISTEN in combo togeather to link different actor's scripts togeather
 
 
 DO [SCRIPT]

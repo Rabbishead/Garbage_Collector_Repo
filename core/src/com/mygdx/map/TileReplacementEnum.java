@@ -2,9 +2,12 @@ package com.mygdx.map;
 
 import com.mygdx.controllers.messages.MSG;
 
+/**
+ * links tiles properties with MSG
+ */
 public enum TileReplacementEnum {
     WALL(MSG.BLOCK_WALLS),
-    CHANGE_MOV_STYLE(MSG.CHANGE_MOV_STYLE);
+    SWAP_FIGHT_STATE(MSG.SWAP_FIGHT_STATE);
 
     private MSG msg;
 

@@ -24,14 +24,14 @@ import com.mygdx.states.StateManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComplexDialogue extends Actor {
+public class Dialogue extends Actor {
     private Story story;
 
     private Table table;
 
     private TypewriterEffect typer;
 
-    public ComplexDialogue(Story story) {
+    public Dialogue(Story story) {
         setX(0);
         setY(0);
         Utils.getCurrentHud().addComponent(this);

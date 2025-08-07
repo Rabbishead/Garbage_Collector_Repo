@@ -19,7 +19,8 @@ public class Script {
                 String[] args = splitted[1].split(",");
                 actions.add(
                     switch (func){
-                        case "MOV" -> new MovAction(Float.parseFloat(args[0]), Float.parseFloat(args[1]));
+                        case "MOV" -> new MovAction(Float.parseFloat(args[0]), Float.parseFloat(args[1]), false);
+                        case "MOVREL" -> new MovAction(Float.parseFloat(args[0]), Float.parseFloat(args[1]), true);
                         case "ANI" -> new AniAction(ResourceEnum.valueOf(args[0]));
                         case "WAIT" -> new WaitAction(Float.parseFloat(args[0]));
                         case "SND" -> new SndAction(MSG.valueOf(args[0]));

@@ -3,12 +3,11 @@ package com.mygdx.animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.Logger;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
 
 /**
- * Class useful to manage player's animations
+ * Class useful to manage actors' animations
  */
 public class ActorAnimationManager {
     private final Animation<TextureRegion> idleDown;
@@ -21,8 +20,6 @@ public class ActorAnimationManager {
     private final Animation<TextureRegion> walkLeftAnimation;
 
     private Animation<TextureRegion> otherAnimation;
-    private boolean hasOtherAnimation;
-
     private Animation<TextureRegion> currentAnimation;
 
     private TextureRegion currentFrame;
@@ -96,7 +93,6 @@ public class ActorAnimationManager {
      */
     public void setWalkingAnimation(String direction) {
         otherAnimation = null;
-        hasOtherAnimation = false;
         currentAnimation = switch (direction) {
             case "iD" -> idleDown;
             case "iR" -> idleRight;
@@ -110,15 +106,18 @@ public class ActorAnimationManager {
         };
     }
 
+    /**
+     * sets an animation for the actor different from idle and walk
+     * @param ani RESOURCE ENUM of the animation to play
+     * @param duration interval between frames, adapt as needed
+     * @param width of the actor as int
+     * @param height of the actor as int 
+     */
     public void setOtherAnimation(ResourceEnum ani, float duration, int width, int height) {
         Texture aniSheet = Utils.getTexture(ani);
 
-        System.out.println(aniSheet.getWidth() + " " + width);
-
         int FRAME_COLS = aniSheet.getWidth() / width;
         int FRAME_ROWS = aniSheet.getHeight() / height;
-
-        
 
         TextureRegion[][] tmp = TextureRegion.split(aniSheet,
                 aniSheet.getWidth() / FRAME_COLS,
@@ -126,10 +125,14 @@ public class ActorAnimationManager {
 
         otherAnimation = new Animation<>(duration, tmp[0]);
         currentAnimation = otherAnimation;
-
-        hasOtherAnimation = true;
     }
 
+    /**
+     * Just as the other with a default duration
+     * @param ani
+     * @param width
+     * @param height
+     */
     public void setOtherAnimation(ResourceEnum ani, int width, int height) {
         setOtherAnimation(ani, 0.3f, width, height);
     }

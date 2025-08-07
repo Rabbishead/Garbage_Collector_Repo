@@ -46,7 +46,7 @@ public class TileMapCollisionsManager {
         return tile.getProperties();
     }
 
-    public static boolean changeMovementStyle() {
+    public static boolean changeFightingState() {
         if (!transitionInCooldown && getCurrentTileProprieties().containsKey("transition")) {
             transitionInCooldown = true;
             return true;
