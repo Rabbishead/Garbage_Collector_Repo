@@ -6,8 +6,8 @@ import com.mygdx.resources.ResourceEnum;
 
 public class Projectile extends BaseBullet {
 
-    public Projectile(Vector2 origin, float barrel, float angle) {
-        super(Utils.getTexture(ResourceEnum.BULLET), origin, 1000f, 1500f, angle);
+    public Projectile(Vector2 origin, float barrel, float angle, boolean ally) {
+        super(Utils.getTexture(ResourceEnum.BULLET), origin, 1000f, 1500f, angle, ally);
         setOffset(barrel, 0, angle);
         flip(false, true);
         attachInfo(2);

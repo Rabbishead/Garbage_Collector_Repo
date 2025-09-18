@@ -49,6 +49,10 @@ public class ResourceManager {
         });
     }
 
+    public void update(){
+        manager.update();
+    }
+
     public Texture getTexture(ResourceEnum e) {
         manager.finishLoadingAsset(e.label);
         return manager.get(e.label);

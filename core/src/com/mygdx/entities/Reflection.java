@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.controllers.delay.DelayManager;
+import com.mygdx.controllers.gunControls.projectiles.Projectile;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.states.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
@@ -14,6 +16,7 @@ import com.mygdx.map.TileMapCollisionsManager;
 import java.util.Random;
 
 public class Reflection extends NPC {
+    private Scope scope;
 
     private StateController stateController;
 
@@ -22,23 +25,28 @@ public class Reflection extends NPC {
         stateController = new StateController();
         stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
         Utils.subscribeToStageMsg(this, MSG.SHOT);
+        scope = new Scope(getCoords());
+        DelayManager.registerObject(scope, 100f);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        scope.draw(batch, parentAlpha);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        scope.act(delta);
+        DelayManager.updateDelay(scope);
         Vector2 playerPos = Utils.getPlayer().getCoords();
 
         if (!Utils.getPlayer().isFighting()) {
             getActions().clear();
             return;
         }
+
         switch (stateController.getMovState()) {
             case STILL -> {
                 getActions().clear();
@@ -82,6 +90,11 @@ public class Reflection extends NPC {
                 System.out.println("NOT IN A STATE");
             }
         }
+        if(scope.getCoords().dst(playerPos) < 20 && DelayManager.isDelayOver(scope)){
+            System.out.println("HEYHEYHEY");
+            getStage().addActor(new Projectile(center, 0, CameraController.getAngle(getCoords(), scope.getCoords()), false));
+            DelayManager.resetDelay(scope);
+        } 
     }
 
     @Override

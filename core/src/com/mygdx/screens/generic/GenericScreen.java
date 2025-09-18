@@ -46,7 +46,7 @@ public abstract class GenericScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 0);
-
+        Utils.updateResourceManager();
         stageMsg.update();
     }
 

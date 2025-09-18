@@ -59,6 +59,11 @@ public class CameraController {
         xAngle = dir.angleDeg();
     }
 
+    public static float getAngle(Vector2 position1, Vector2 position2){
+        calculateThowardsPos(position1, position2);
+        return getXAngle();
+    }
+
     public static Vector2 getMouseDirection() {
         return mouseDirection;
     }

@@ -19,7 +19,7 @@ public class BaseBullet extends Actor {
     protected Collider collider = new Collider();
     protected ObjectInfo info;
 
-    public BaseBullet(Texture t, Vector2 origin, float speed, float distance, float rotation) {
+    public BaseBullet(Texture t, Vector2 origin, float speed, float distance, float rotation, boolean ally) {
         s = new Sprite(t);
         this.distance = distance;
         this.origin = new Vector2(origin);
@@ -35,7 +35,7 @@ public class BaseBullet extends Actor {
 
         collider = new Collider(movement.centerCoords, getWidth(), getHeight(), rotation);
         collider.setTags(Tags.PROJECTILE);
-        collider.setSearchTags(Tags.ENEMY);
+        collider.setSearchTags(ally ? Tags.ENEMY : Tags.PLAYER);
         collider.setOnHit(hitbox -> {
             delete();
         });

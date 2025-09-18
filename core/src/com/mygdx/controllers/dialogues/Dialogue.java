@@ -31,6 +31,8 @@ public class Dialogue extends Actor {
 
     private TypewriterEffect typer;
 
+    private boolean justRan = false;
+
     public Dialogue(Story story) {
         setX(0);
         setY(0);
@@ -56,7 +58,6 @@ public class Dialogue extends Actor {
         var dialogueLabel = new Label("", labelStyle);
         dialogueLabel.setWrap(true);
         dialogueLabel.getStyle().background = new Image(new Texture(labelColor)).getDrawable();
-
         typer = new TypewriterEffect(dialogueLabel);
 
         table = new Table();
@@ -75,6 +76,8 @@ public class Dialogue extends Actor {
 
         Utils.getCurrentHud().addComponent(table);
 
+        justRan = true;
+
         continueStory();
     }
 
@@ -88,9 +91,11 @@ public class Dialogue extends Actor {
     public void act(float delta) {
         super.act(delta);
 
-        if (typer.isRunning() && Gdx.input.isButtonJustPressed(Buttons.LEFT)) {
+        if (typer.isRunning() && Gdx.input.isButtonJustPressed(Buttons.LEFT) && !justRan) {
             typer.skip();
         }
+
+        justRan = false;
     }
 
     public String getQuestion() {
@@ -115,7 +120,8 @@ public class Dialogue extends Actor {
         }
         try {
             story.Continue();
-            typer.start(getQuestion(), 0.0005f, () -> {
+            String s = getQuestion();
+            typer.start(s = s.replaceAll("\\n+$", ""), 0.0005f, () -> {
                 if (story.getCurrentChoices().size() == 0)
                     waitForClickToContinue();
             });

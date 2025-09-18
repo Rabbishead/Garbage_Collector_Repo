@@ -39,6 +39,10 @@ public class Utils {
         manager.updateLang();
     }
 
+    public static void updateResourceManager(){
+        manager.update();
+    }
+
     /**
      * @Texture already loaded
      */

@@ -43,11 +43,12 @@ public class TypewriterEffect {
         actions.add(Actions.run(() -> {
             isRunning = false;
             if (onFinished != null) onFinished.run();
+            System.out.println(fullText);
+
         }));
 
         label.clearActions();
         label.addAction(Actions.sequence(actions.toArray(Action.class)));
-
     }
 
     public void skip() {

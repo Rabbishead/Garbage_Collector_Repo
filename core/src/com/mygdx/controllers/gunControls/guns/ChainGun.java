@@ -62,7 +62,7 @@ public class ChainGun extends BaseGun {
 
     public int leftTrigger() {
         super.leftTrigger();
-        Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset);
+        Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset, true);
         Utils.getStage().addActor(proj);
         bullets -= 1;
 
@@ -77,7 +77,7 @@ public class ChainGun extends BaseGun {
 
     public int rightTrigger() {
         super.rightTrigger();
-        Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset);
+        Projectile proj = new Projectile(Player.center, getWidth(), CameraController.getMouseAngle() + angleOffset, true);
         Utils.getStage().addActor(proj);
 
         GunController.get().setCooldown(50);

@@ -60,6 +60,7 @@ public enum ResourceEnum {
     LAMP("map/city/lamp.png", TypeEnum.TEXTURE),
     LONG_LAMP("map/city/long_lamp.png", TypeEnum.TEXTURE),
     MARKER("player/marker.png", TypeEnum.TEXTURE),
+    SCOPE("assets/npcs/scope.png", TypeEnum.TEXTURE),
 
 
     //DIALOGUES

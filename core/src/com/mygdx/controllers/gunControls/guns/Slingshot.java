@@ -14,14 +14,14 @@ public class Slingshot extends BaseGun {
     }
 
     public int leftTrigger() {
-        Utils.getStage().addActor(new Stone(Player.center, getWidth()));
+        Utils.getStage().addActor(new Stone(Player.center, getWidth(), true));
         GunController.get().setCooldown(10);
         GunController.get().resetCooldown();
         return 1;
     }
 
     public int rightTrigger() {
-        Utils.getStage().addActor(new Stone(Player.center, getWidth()));
+        Utils.getStage().addActor(new Stone(Player.center, getWidth(), true));
         GunController.get().setCooldown(20);
         return 2;
     }
