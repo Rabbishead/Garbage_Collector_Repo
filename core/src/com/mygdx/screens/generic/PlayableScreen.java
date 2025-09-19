@@ -8,6 +8,7 @@ import com.mygdx.Utils;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
+import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.Player;
 import com.mygdx.hud.Hud;
 import com.mygdx.map.TileMapCollisionsManager;
@@ -68,6 +69,7 @@ public abstract class PlayableScreen extends GenericScreen {
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
         subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.SWAP_FIGHT_STATE);
         subscribe(player, MSG.SWAP_FIGHT_STATE);
+        if(SavingsManager.isPlayerFighting()) MsgManager.sendStageMsg(MSG.SWAP_FIGHT_STATE, MSG.BLOCK_WALLS); //turns on combat mode
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
@@ -104,7 +106,7 @@ public abstract class PlayableScreen extends GenericScreen {
         if (Utils.getActiveScreen() != this)
             return;
 
-        stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY()));
+        stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY())); //solves z index problem
 
         if (!StateManager.getBoolState(StateEnum.PAUSE))
             stage.act(Gdx.graphics.getDeltaTime());

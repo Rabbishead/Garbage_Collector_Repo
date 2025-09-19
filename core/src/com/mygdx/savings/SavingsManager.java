@@ -50,6 +50,10 @@ public class SavingsManager {
         return s.getPlayerCoordinates();
     }
 
+    public static boolean isPlayerFighting(){
+        return s.isFightging();
+    }
+
     public static PlayableScreen getLastRoom() {
         return ScreensManager.getPlayableScreen(s.getLastRoom());
     }

@@ -11,8 +11,14 @@ public class MsgManager {
         systemMsg.dispatchMessage(msg.code);
     }
 
-    public static void sendStageMsg(MSG msg) {
-        currentStageMsg.dispatchMessage(msg.code);
+    /**
+     * sends msgs to the stage message dispatcher
+     * @param msgs
+     */
+    public static void sendStageMsg(MSG... msgs) {
+        for (MSG msg : msgs) {
+            currentStageMsg.dispatchMessage(msg.code);
+        }
     }
 
     public static void setCurrentStageMsg(MessageDispatcher currentStageMsg) {
