@@ -15,7 +15,9 @@ public class SndAction implements ScriptAction{
 
     @Override
     public void perform(ScriptableActor actor) {
+        System.out.println("Sending: " + msg);
         MsgManager.sendStageMsg(msg);
+        actor.proceed();
         
     }
 }

@@ -8,7 +8,8 @@ public enum MSG {
     SHOT(4),
     SWAP_FIGHT_STATE(5),
     ACT_YOU_IDIOT(6),
-    OK_MOV_BOTH(7),
+    
+    ACK_MOV_BOTH(7),
     MOV_BOTH(8);
 
     public int code;

@@ -12,7 +12,7 @@ public class Park extends PlayableScreen {
 
         addAll(
                 new NPC.NPCBuilder()
-                        .coordinates(Data.TILE * 55, Data.TILE * 25)
+                        .coordinates(Data.TILE * 40, Data.TILE * 20)
                         .texture(ResourceEnum.JERKINS)
                         .story(ResourceEnum.ADEPTUS_2)
                         .autoStartedScript(ResourceEnum.MEET_1)
