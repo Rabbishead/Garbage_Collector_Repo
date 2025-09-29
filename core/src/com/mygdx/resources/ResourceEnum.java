@@ -86,6 +86,9 @@ public enum ResourceEnum {
     TEST_SCRIPT("assets/scripts/npcs/reflection/test.gcs", TypeEnum.SCRIPT),
     TEST_2("assets/scripts/npcs/reflection/test2.gcs", TypeEnum.SCRIPT),
     TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
+    MEET_1("assets/scripts/npcs/reflection/meet1.gcs", TypeEnum.SCRIPT),
+    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT),
+
 
     //ANIMATIONS
     BLACKMARKETEER_SLEEPING("npcs/blackmarketeer_sleeping.png", TypeEnum.TEXTURE);
