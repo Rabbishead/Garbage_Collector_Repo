@@ -10,7 +10,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
     private String lastRoom;
     private boolean fightging;
     private Vector2 lastRoomCoordinates = new Vector2();
-    private boolean[] flags, selectedGuns;
+    private boolean[] flags, selectedGuns = new boolean[] { true, true };
 
     public void updateData() {
         lastRoom = ScreensManager.getLastPlayableActiveScreen();
@@ -39,8 +39,8 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
         fightging = jsonData.getBoolean("FIGHTING");
 
-        flags = jsonData.get("FLAGS").asBooleanArray();
-        selectedGuns = jsonData.get("SELECTED_GUNS").asBooleanArray();
+        //flags = jsonData.get("FLAGS").asBooleanArray();
+        //selectedGuns = jsonData.get("SELECTED_GUNS").asBooleanArray();
     }
 
     public Vector2 getPlayerCoordinates() {

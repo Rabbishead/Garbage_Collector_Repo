@@ -32,13 +32,13 @@ public class Reflection extends NPC {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        scope.draw(batch, parentAlpha);
+        if(Utils.getPlayer().isFighting()) scope.draw(batch, parentAlpha);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        scope.act(delta);
+        if(Utils.getPlayer().isFighting())  scope.act(delta);
         DelayManager.updateDelay(scope);
         Vector2 playerPos = Utils.getPlayer().getCoords();
 

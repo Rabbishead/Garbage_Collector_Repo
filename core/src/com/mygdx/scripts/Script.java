@@ -16,6 +16,11 @@ public class Script {
             br.lines().forEach( line -> {
                 String[] splitted = line.split(" ");
                 String func = splitted[0];
+                if(func.equals("SKIP")){ //has no params
+                    actions.add(new SkipAction());
+                    return;
+
+                }
                 String[] args = splitted[1].split(",");
                 actions.add(
                     switch (func){
