@@ -25,7 +25,7 @@ public class Script {
                         case "ANI" -> new AniAction(ResourceEnum.valueOf(args[0]));
                         case "WAIT" -> new WaitAction(Float.parseFloat(args[0]));
                         case "SND" -> new SndAction(MSG.valueOf(args[0]));
-                        case "LISTEN" -> new ListenAction(MSG.valueOf(args[0]));
+                        case "LISTEN" -> args.length == 1 ? new ListenAction(MSG.valueOf(args[0])) : new ListenAction(MSG.valueOf(args[0]), Integer.parseInt(args[1]));
                         case "DO" -> new DoAction(ResourceEnum.valueOf(args[0]));
                         case "SKIP" -> new SkipAction();
                         default -> null;

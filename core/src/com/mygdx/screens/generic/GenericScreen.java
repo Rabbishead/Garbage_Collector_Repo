@@ -65,6 +65,11 @@ public abstract class GenericScreen extends ScreenAdapter {
             stageMsg.addListener(a, msg.code);
         }
     }
+    public void unSubscribe(Telegraph a, MSG... msgs){
+        for (MSG msg : msgs) {
+            stageMsg.removeListener(a, msg.code);
+        }
+    }
 
     public void addAll(Actor... actors) {
         for (Actor actor : actors) {

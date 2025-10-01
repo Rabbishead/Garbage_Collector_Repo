@@ -11,7 +11,7 @@ import com.mygdx.scripts.Script;
 
 public abstract class ScriptableActor extends GameActor{
     protected Script script;
-    protected MSG listeningMSG;
+    public MSG listeningMSG;
     protected ActorAnimationManager animationManager;
 
     public void doScript(ResourceEnum s){
@@ -43,11 +43,16 @@ public abstract class ScriptableActor extends GameActor{
         super.handleMessage(msg);
         if(listeningMSG != null)
             if(listeningMSG.code == msg.message){
-                
-                proceed();
+                resetListen();
             } 
         
         return true;
+    }
+
+    public void resetListen(){
+        Utils.getActiveScreen().unSubscribe(this, listeningMSG);
+        listeningMSG = null;
+        proceed();
     }
     
     public boolean hasScript(){
