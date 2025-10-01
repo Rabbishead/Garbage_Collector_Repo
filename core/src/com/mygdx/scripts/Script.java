@@ -14,14 +14,10 @@ public class Script {
     public Script(ResourceEnum e){
         try(var br = new BufferedReader(new FileReader(e.label))){
             br.lines().forEach( line -> {
-                String[] splitted = line.split(" ");
-                String func = splitted[0];
-                if(func.equals("SKIP")){ //has no params
-                    actions.add(new SkipAction());
-                    return;
+                int firstSpaceIndex = line.contains(" ") ? line.indexOf(" ") : line.length();
+                String func = line.substring(0, firstSpaceIndex);
+                String[] args = line.length() != firstSpaceIndex ? line.substring(firstSpaceIndex+1, line.length()).replaceAll(" ", "").split(",") : new String[]{};
 
-                }
-                String[] args = splitted[1].split(",");
                 actions.add(
                     switch (func){
                         case "MOV" -> new MovAction(Float.parseFloat(args[0]), Float.parseFloat(args[1]), false);
@@ -31,6 +27,7 @@ public class Script {
                         case "SND" -> new SndAction(MSG.valueOf(args[0]));
                         case "LISTEN" -> new ListenAction(MSG.valueOf(args[0]));
                         case "DO" -> new DoAction(ResourceEnum.valueOf(args[0]));
+                        case "SKIP" -> new SkipAction();
                         default -> null;
                     }
                 );
