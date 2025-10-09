@@ -33,6 +33,11 @@ public class Utils {
     public static LangEnum getActiveLanguage() {
         return activeLanguage;
     }
+
+    /**
+     * sets the active lang
+     * @param activeLanguage
+     */
     public static void setActiveLanguage(LangEnum activeLanguage) {
         if(manager == null) manager = new ResourceManager();
         Utils.activeLanguage = activeLanguage;
