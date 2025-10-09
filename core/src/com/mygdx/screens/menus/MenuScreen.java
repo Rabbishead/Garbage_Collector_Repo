@@ -6,11 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GuiScreen;
 
@@ -23,7 +26,9 @@ public class MenuScreen extends GuiScreen {
         var bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
         stage.getActors().insert(0, bg);
 
-        table.right().bottom().padRight(100).padBottom(100);
+        var titleLabel = new Label("Garbage Collection", Data.skin);
+        table.add(titleLabel).top().row();
+
 
         var playButton = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
@@ -47,7 +52,7 @@ public class MenuScreen extends GuiScreen {
         settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setScreen(ScreensManager.getScreen("SETTINGS"));
+                Utils.setScreen(ScreensManager.getScreen(Screens.SETTINGS));
                 return true;
             }
         });

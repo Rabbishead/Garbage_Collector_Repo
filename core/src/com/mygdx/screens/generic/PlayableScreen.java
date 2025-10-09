@@ -15,6 +15,7 @@ import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
+import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
@@ -86,14 +87,14 @@ public abstract class PlayableScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-            Utils.setScreen(ScreensManager.getScreen("PAUSE_SCREEN"));
+        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+            Utils.setScreen(ScreensManager.getScreen(Screens.PAUSE_SCREEN));
             return;
         }
-        if (Gdx.input.isKeyPressed(Keys.M)) {
+        if (Gdx.input.isKeyJustPressed(Keys.M)) {
             SavingsManager.save();
         }
-        if (Gdx.input.isKeyPressed(Keys.R)) {
+        if (Gdx.input.isKeyJustPressed(Keys.R)) {
             stageMsg.dispatchMessage(0);
         }
         if(Gdx.input.isKeyJustPressed(Keys.H)){

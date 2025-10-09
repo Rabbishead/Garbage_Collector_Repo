@@ -11,6 +11,7 @@ import com.mygdx.Data;
 import com.mygdx.Utils;
 import com.mygdx.resources.LangEnum;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.screens.generic.GuiScreen;
 
@@ -64,7 +65,7 @@ public class SettingsScreen extends GuiScreen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Utils.setActiveLanguage(LangEnum.valueOf(lang.getSelected()));
-                Utils.setScreen(ScreensManager.getScreen("MENU_SCREEN"));
+                Utils.setScreen(ScreensManager.getScreen(Screens.MENU_SCREEN));
                 
                 return true;
             }

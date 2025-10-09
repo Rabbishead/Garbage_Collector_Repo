@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
@@ -111,7 +112,7 @@ public class TileSetManager implements Telegraph {
             StateManager.updateBoolState(StateEnum.IS_EXITING, true);
             String[] temp = intersectingDoor.getDestination().split("-");
             StateManager.updateStringState(StateEnum.DESTINATION, intersectingDoor.getDestination());
-            Utils.setScreen(ScreensManager.getPlayableScreen(temp[0]));
+            Utils.setScreen(ScreensManager.getPlayableScreen(Screens.valueOf(temp[0])));
         }
     }
 

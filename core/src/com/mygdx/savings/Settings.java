@@ -4,10 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.Utils;
+import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
-    private String lastRoom;
+    private Screens lastRoom;
     private boolean fightging;
     private Vector2 lastRoomCoordinates = new Vector2();
     private boolean[] flags, selectedGuns = new boolean[] { true, true };
@@ -32,7 +33,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
     @Override
     public void read(Json json, JsonValue jsonData) {
-        lastRoom = jsonData.getString("LAST_ROOM");
+        lastRoom = Screens.valueOf(jsonData.getString("LAST_ROOM"));
 
         lastRoomCoordinates.x = jsonData.get("PLAYER").getFloat("x");
         lastRoomCoordinates.y = jsonData.get("PLAYER").getFloat("y");
@@ -47,7 +48,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
         return lastRoomCoordinates;
     }
 
-    public String getLastRoom() {
+    public Screens getLastRoom() {
         return lastRoom;
     }
 
