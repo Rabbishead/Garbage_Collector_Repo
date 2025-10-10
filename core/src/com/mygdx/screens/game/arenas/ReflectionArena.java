@@ -7,6 +7,7 @@ import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.TextureEnum;
 import com.mygdx.screens.generic.PlayableScreen;
 
 public class ReflectionArena extends PlayableScreen {
@@ -14,7 +15,7 @@ public class ReflectionArena extends PlayableScreen {
     public ReflectionArena() {
         super(ResourceEnum.REFLECTION_ARENA);
         addAll(new Reflection.ReflectionBuilder().coordinates(Data.TILE * 10, Data.TILE * 10)
-                .texture(ResourceEnum.BLACKMARKETEER).build());
+                .texture(TextureEnum.BLACKMARKETEER).build());
     }
 
     @Override

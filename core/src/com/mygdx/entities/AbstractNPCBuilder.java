@@ -4,10 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Utils;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.TextureEnum;
 
 public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected Vector2 coordinates, size = new Vector2(16, 32);
-    protected ResourceEnum textureEnum;
+    protected TextureEnum textureEnum;
     protected Story story;
     protected ResourceEnum autoStartedScript;
 
@@ -33,7 +34,7 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
         return getThis();
     }
 
-    public T texture(ResourceEnum texture) {
+    public T texture(TextureEnum texture) {
         this.textureEnum = texture;
         return getThis();
     }

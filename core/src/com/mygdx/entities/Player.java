@@ -8,17 +8,18 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.movement.PlayerMovement;
 import com.mygdx.Utils;
-import com.mygdx.animations.ActorAnimationManager;
+import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.TextureEnum;
 
 public class Player extends ScriptableActor{
 
     private final PlayerMovement movement;
-    private final ActorAnimationManager animationManager;
+    private final AnimationManager animationManager;
     private Collider collider = new Collider();
     public static Vector2 center = new Vector2();
     private boolean fighting;
@@ -40,7 +41,8 @@ public class Player extends ScriptableActor{
         GunController.get().loadGuns();
         CameraController.calculateMouseAngle(center);
 
-        animationManager = new ActorAnimationManager(ResourceEnum.PLAYER);
+        animationManager = new AnimationManager(16, 0.2f, 0, TextureEnum.PLAYER);
+            
         this.debug();
 
         movement = new PlayerMovement();
@@ -62,8 +64,10 @@ public class Player extends ScriptableActor{
 
         CameraController.calculateMouseAngle(center);
 
-        animationManager.setWalkingAnimation(
-                autoMovementManager.update() ? autoMovementManager.getOrientation() : movement.move());
+        animationManager.setCurrentAnimation(
+                autoMovementManager.update() ? 
+                    ResourceEnum.valueOf("PLAYER_" + autoMovementManager.getOrientation()) : 
+                    ResourceEnum.valueOf("PLAYER_" + movement.move()));
 
         animationManager.updateAnimation(delta);
     }

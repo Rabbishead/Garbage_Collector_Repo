@@ -6,13 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.mygdx.animations.ActorAnimationManager;
+import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.dialogues.Dialogue;
 import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.scripts.Script;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
+import com.mygdx.resources.ResourceEnum;
 
 public class NPC extends ScriptableActor{
 
@@ -21,6 +22,7 @@ public class NPC extends ScriptableActor{
     protected Hitbox hitbox = new Hitbox();
     public Vector2 center = new Vector2();
     public Script script;
+    private String name;
 
     public NPC(NPCBuilder npcBuilder) {
         super();
@@ -29,8 +31,9 @@ public class NPC extends ScriptableActor{
         setSize(npcBuilder.size.x, npcBuilder.size.y);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        animationManager = new ActorAnimationManager(npcBuilder.textureEnum);
+        animationManager = new AnimationManager(16, 0.2f, 0f, npcBuilder.textureEnum);
 
+        name = npcBuilder.textureEnum.toString();
         
 
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
@@ -83,8 +86,8 @@ public class NPC extends ScriptableActor{
     public void act(float delta) {
         super.act(delta);
 
-        if(autoMovementManager.update())
-            animationManager.setWalkingAnimation(autoMovementManager.getOrientation());
+        autoMovementManager.update();
+        if(!autoMovementManager.hasFinished()) animationManager.setCurrentAnimation(ResourceEnum.valueOf(name + "_" + autoMovementManager.getOrientation()));
                 
         animationManager.updateAnimation(delta);
     }

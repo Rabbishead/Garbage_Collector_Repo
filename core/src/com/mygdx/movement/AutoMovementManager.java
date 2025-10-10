@@ -12,6 +12,7 @@ public class AutoMovementManager {
     private boolean animationInProgress;
     private Vector2 destination;
     private String orientation = "-";
+    private boolean finished = false;
 
     public AutoMovementManager(GameActor a) {
         this.actor = a;
@@ -19,8 +20,11 @@ public class AutoMovementManager {
 
     public boolean update() {
 
-        if (destination == null)
+        if (destination == null){
+            finished = true;
             return false;
+        }
+            
 
         Vector2 direction = new Vector2(destination).sub(actor.getCoords()).nor();
         Vector2 movement = new Vector2(direction).scl(100 * Gdx.graphics.getDeltaTime());
@@ -51,6 +55,8 @@ public class AutoMovementManager {
             
             return;
         }
+
+        finished = false;
             
         animationInProgress = true;
         destination = coordinates.cpy();
@@ -63,13 +69,13 @@ public class AutoMovementManager {
         if (Math.abs(direction.y) < EPSILON) direction.y = 0f;
 
         if (direction.x > 0 && direction.x >= direction.y)
-            orientation = "wR";
+            orientation = "WALK_RIGHT";
         if (direction.x < 0 && direction.x <= direction.y)
-            orientation = "wL";
+            orientation = "WALK_LEFT";
         if (direction.y > 0 && direction.y > direction.x)
-            orientation = "wU";
+            orientation = "WALK_UP";
         if (direction.y < 0 && direction.y < direction.x)
-            orientation = "wD";
+            orientation = "WALK_DOWN";
     }
 
     public String getOrientation() {
@@ -79,11 +85,15 @@ public class AutoMovementManager {
     public void reset(){
         animationInProgress = false;
         destination = null;
-        orientation = "i" + orientation.substring(1);
+        orientation = "IDLE_" + orientation.split("_")[1];
 
         if(actor instanceof ScriptableActor sc){
             if(sc.hasScript())
                 sc.proceed();
         }
+    }
+
+    public boolean hasFinished(){
+        return finished;
     }
 }

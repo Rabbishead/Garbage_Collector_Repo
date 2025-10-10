@@ -6,100 +6,99 @@ import com.mygdx.resources.ResourceEnum;
 public enum ForegroundMapComponentEnum {
 
     // SMALL BUILDINGS
-    ABANDONED_BUILDING(
+    ABANDONED(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.ABANDONED_BUILDING)
-                    .singlePieceWidth(3)
-                    .singlePieceHeight(2)
+                    .texture(ResourceEnum.ABANDONED_TURNED_ON)
+                    .width(3)
+                    .height(2)
                     .animationRate(0.5f)
-                    .startingAnimationCode(1)
                     .fade()),
 
     SYNTH(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.SYNTH)
-                    .singlePieceWidth(3)
-                    .singlePieceHeight(2)
+                    .texture(ResourceEnum.SYNTH_TURNED_ON, ResourceEnum.SYNTH_TURNED_OFF)
+                    .width(3)
+                    .height(2)
                     .animationRate(0.5f)
-                    .startingAnimationCode(1)
+                    .startingAnimation(ResourceEnum.SYNTH_TURNED_ON)
                     .fade()),
 
     MARMOT_PIZZA(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.MARMOT_PIZZA)
-                    .singlePieceWidth(3)
-                    .singlePieceHeight(3)
+                    .width(3)
+                    .height(3)
                     .animationRate(0.2f)
                     .delay(1000)
                     .fade()),
 
-    ENERGYPLANT_BUILDING(
+    ENERGYPLANT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.ENERGYPLANT_BUILDING)
-                    .singlePieceWidth(3)
-                    .singlePieceHeight(2)
+                    .texture(ResourceEnum.ENERGYPLANT_TURNED_ON, ResourceEnum.ENERGYPLANT_TURNED_OFF)
+                    .width(3)
+                    .height(2)
                     .animationRate(0.5f)
-                    .startingAnimationCode(1)
+                    .startingAnimation(ResourceEnum.ENERGYPLANT_TURNED_ON)
                     .fade()),
 
     // MEDIUM BUILDNGS
     SKYSCRAPER_MEDIUM(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_MEDIUM)
-                    .singlePieceWidth(3)
-                    .singlePieceHeight(7)
+                    .width(3)
+                    .height(7)
                     .fade()),
 
-    SKYSCRAPER_1(
+    SKYSCRAPER_1_FRONT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.SKYSCRAPER_1)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(4)
+                    .texture(ResourceEnum.SKYSCRAPER_1_FRONT)
+                    .width(5)
+                    .height(4)
                     .fade()),
 
     SKYSCRAPER_1_BACK(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_BACK)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(4)
+                    .width(5)
+                    .height(4)
                     .fade()),
     SKYSCRAPER_1_SIDE(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_SIDE)
-                    .singlePieceWidth(4)
-                    .singlePieceHeight(4)
+                    .width(4)
+                    .height(4)
                     .fade()),
 
     // BIG BUILDINGS
-    SKYSCRAPER_2(
+    SKYSCRAPER_2_FRONT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.SKYSCRAPER_2)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(7)
+                    .texture(ResourceEnum.SKYSCRAPER_2_FRONT)
+                    .width(5)
+                    .height(7)
                     .fade()),
     SKYSCRAPER_2_BACK(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_2_BACK)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(7)
+                    .width(5)
+                    .height(7)
                     .fade()),
-    SKYSCRAPER_3(
+    SKYSCRAPER_3_FRONT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
-                    .texture(ResourceEnum.SKYSCRAPER_3)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(7)
+                    .texture(ResourceEnum.SKYSCRAPER_3_FRONT)
+                    .width(5)
+                    .height(7)
                     .fade()),
     SKYSCRAPER_L(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_L)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(7)
+                    .width(5)
+                    .height(7)
                     .fade()),
     SKYSCRAPER_U(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_U)
-                    .singlePieceWidth(5)
-                    .singlePieceHeight(7)
+                    .width(5)
+                    .height(7)
                     .fade()),
     // TODO
     // SPARK_BUILDING_1
@@ -111,15 +110,15 @@ public enum ForegroundMapComponentEnum {
     LAMP(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.LAMP)
-                    .singlePieceWidth(1)
-                    .singlePieceHeight(2)
+                    .width(1)
+                    .height(2)
                     .animationRate(1f)
                     .delay(1000)),
     LONG_LAMP(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.LONG_LAMP)
-                    .singlePieceWidth(2)
-                    .singlePieceHeight(2));
+                    .width(2)
+                    .height(2));
 
     private Vector2 coord;
     private ForegroundMapComponent.ForegroundMapComponentBuilder builder;

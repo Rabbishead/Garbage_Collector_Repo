@@ -4,7 +4,7 @@ package com.mygdx.entities;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Utils;
-import com.mygdx.animations.ActorAnimationManager;
+import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.scripts.Script;
@@ -12,7 +12,7 @@ import com.mygdx.scripts.Script;
 public abstract class ScriptableActor extends GameActor{
     protected Script script;
     public MSG listeningMSG;
-    protected ActorAnimationManager animationManager;
+    protected AnimationManager animationManager;
 
     public void doScript(ResourceEnum s){
         script = new Script(s);
@@ -29,7 +29,7 @@ public abstract class ScriptableActor extends GameActor{
     }
 
     public void changeAnimation(ResourceEnum e, float time){
-        animationManager.setOtherAnimation(e, time, (int)getWidth(), (int)getHeight());
+        animationManager.setCurrentAnimation(e);
         script.proceed(this);
     }
 

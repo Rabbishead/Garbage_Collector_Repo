@@ -3,6 +3,7 @@ package com.mygdx.screens.game.overworld;
 import com.mygdx.Data;
 import com.mygdx.entities.NPC;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.TextureEnum;
 import com.mygdx.screens.generic.PlayableScreen;
 
 public class Park extends PlayableScreen {
@@ -13,13 +14,13 @@ public class Park extends PlayableScreen {
         addAll(
                 new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 40, Data.TILE * 20)
-                        .texture(ResourceEnum.JERKINS)
+                        .texture(TextureEnum.JERKINS)
                         .story(ResourceEnum.ADEPTUS_2)
                         .autoStartedScript(ResourceEnum.MEET_1)
                         .build(),
                 new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 55, Data.TILE * 30)
-                        .texture(ResourceEnum.BLACKMARKETEER)
+                        .texture(TextureEnum.BLACKMARKETEER)
                         .story(ResourceEnum.ADEPTUS_1)
                         .autoStartedScript(ResourceEnum.MEET_2)
                         .build());

@@ -3,7 +3,7 @@ package com.mygdx.entities;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.animations.MapComponentAnimationManager;
+import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
@@ -13,23 +13,20 @@ public class ForegroundMapComponent extends GameActor {
     private Hitbox hitbox = new Hitbox();
     private float fade = 1;
 
-    private final MapComponentAnimationManager animationManager;
+    private final AnimationManager animationManager;
 
     public ForegroundMapComponent(ForegroundMapComponentBuilder builder) {
         super();
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
 
-        animationManager = new MapComponentAnimationManager(builder.textureEnum, builder.singlePieceWidth,
-                builder.singlePieceHeight, builder.animationRate, builder.delay);
-
-        animationManager.setCurrentAnimation(builder.startingAnimationCode);
+        animationManager = new AnimationManager(builder.width * 32, builder.animationRate, builder.delay, builder.textureEnum);
 
         if (builder.fade) {
 
             hitbox = new Hitbox(
-                    new Vector2(getX() + builder.singlePieceWidth * 16, getY() + 16 + builder.singlePieceHeight * 16),
-                    builder.singlePieceWidth * 32, (builder.singlePieceHeight - 1) * 32, true);
+                    new Vector2(getX() + builder.width * 16, getY() + 16 + builder.height * 16),
+                    builder.width * 32, (builder.height - 1) * 32, true);
             hitbox.setTags(Tags.BUILDING);
             hitbox.setOnHit((collider) -> {
                 fade = 0.2f;
@@ -69,12 +66,12 @@ public class ForegroundMapComponent extends GameActor {
 
     public static class ForegroundMapComponentBuilder {
         protected Vector2 coordinates;
-        protected ResourceEnum textureEnum;
-        protected int singlePieceWidth;
-        protected int singlePieceHeight;
-        protected float animationRate = 1;
+        protected ResourceEnum[] textureEnum;
+        protected int width;
+        protected int height;
+        protected float animationRate = 0.1f;
         protected float delay = 0;
-        protected int startingAnimationCode = 0;
+        protected ResourceEnum startingAnimation;
         protected boolean fade = false;
 
         public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
@@ -82,18 +79,17 @@ public class ForegroundMapComponent extends GameActor {
             return this;
         }
 
-        public ForegroundMapComponentBuilder texture(ResourceEnum texture) {
+        public ForegroundMapComponentBuilder texture(ResourceEnum... texture) {
             this.textureEnum = texture;
             return this;
         }
 
-        public ForegroundMapComponentBuilder singlePieceWidth(int singlePieceWidth) {
-            this.singlePieceWidth = singlePieceWidth;
+        public ForegroundMapComponentBuilder width(int width) {
+            this.width = width;
             return this;
         }
-
-        public ForegroundMapComponentBuilder singlePieceHeight(int singlePieceHeight) {
-            this.singlePieceHeight = singlePieceHeight;
+        public ForegroundMapComponentBuilder height(int height) {
+            this.height = height;
             return this;
         }
 
@@ -107,8 +103,8 @@ public class ForegroundMapComponent extends GameActor {
             return this;
         }
 
-        public ForegroundMapComponentBuilder startingAnimationCode(int startingAnimationCode) {
-            this.startingAnimationCode = startingAnimationCode;
+        public ForegroundMapComponentBuilder startingAnimation(ResourceEnum startingAnimation) {
+            this.startingAnimation = startingAnimation;
             return this;
         }
 
