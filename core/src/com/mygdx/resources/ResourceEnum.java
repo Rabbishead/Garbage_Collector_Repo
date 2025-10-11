@@ -31,7 +31,7 @@ public enum ResourceEnum {
     BLACKMARKETEER_WALK_UP("npcs/blackmarketeer/blackmarketeer_walk_up.png", TypeEnum.TEXTURE),
     BLACKMARKETEER_WALK_LEFT("npcs/blackmarketeer/blackmarketeer_walk_left.png", TypeEnum.TEXTURE),
     BLACKMARKETEER_WALK_RIGHT("npcs/blackmarketeer/blackmarketeer_walk_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_SLEEPING("npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_SLEEPING("npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 1),
 
     //PROJECTILES AND WEAPONS
     STONE("bullets/stone.png", TypeEnum.TEXTURE),
@@ -122,8 +122,8 @@ public enum ResourceEnum {
 
     public String label;
     public TypeEnum type;
-    public float animationRate;
-    public int delay;
+    public float animationRate = -1;
+    public float delay = -1;
 
     ResourceEnum(String label, TypeEnum type) {
         this.label = label;
@@ -131,7 +131,7 @@ public enum ResourceEnum {
         
     }
 
-    ResourceEnum(String label, TypeEnum type, float animationRate, int delay) {
+    ResourceEnum(String label, TypeEnum type, float animationRate, float delay) {
         this(label, type);
         this.animationRate = animationRate;
         this.delay = delay;

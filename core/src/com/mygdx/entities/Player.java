@@ -41,7 +41,7 @@ public class Player extends ScriptableActor{
         GunController.get().loadGuns();
         CameraController.calculateMouseAngle(center);
 
-        animationManager = new AnimationManager(16, 0.2f, 0, TextureEnum.PLAYER);
+        animationManager = new AnimationManager(16, TextureEnum.PLAYER.getAnimationRate(), TextureEnum.PLAYER.getDelay(), TextureEnum.PLAYER);
             
         this.debug();
 

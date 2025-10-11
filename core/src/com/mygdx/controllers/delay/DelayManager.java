@@ -91,4 +91,9 @@ public class DelayManager {
     public static boolean isDelayOver(Object o) {
         return currentDelays.get(o) <= 0;
     }
+
+    public static void changeDelay(Object o, float newDelay){
+        originalDelays.put(o, newDelay);
+        currentDelays.put(o, newDelay);
+    }
 }

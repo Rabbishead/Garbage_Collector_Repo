@@ -70,7 +70,7 @@ public class ForegroundMapComponent extends GameActor {
         protected int width;
         protected int height;
         protected float animationRate = 0.1f;
-        protected float delay = 0;
+        protected int delay = 0;
         protected ResourceEnum startingAnimation;
         protected boolean fade = false;
 
@@ -88,17 +88,13 @@ public class ForegroundMapComponent extends GameActor {
             this.width = width;
             return this;
         }
-        public ForegroundMapComponentBuilder height(int height) {
-            this.height = height;
-            return this;
-        }
 
         public ForegroundMapComponentBuilder animationRate(float animationRate) {
             this.animationRate = animationRate;
             return this;
         }
 
-        public ForegroundMapComponentBuilder delay(float delay) {
+        public ForegroundMapComponentBuilder delay(int delay) {
             this.delay = delay;
             return this;
         }

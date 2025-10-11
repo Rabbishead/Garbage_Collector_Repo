@@ -10,7 +10,6 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.ABANDONED_TURNED_ON)
                     .width(3)
-                    .height(2)
                     .animationRate(0.5f)
                     .fade()),
 
@@ -18,8 +17,8 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SYNTH_TURNED_ON, ResourceEnum.SYNTH_TURNED_OFF)
                     .width(3)
-                    .height(2)
                     .animationRate(0.5f)
+                    .delay(0)
                     .startingAnimation(ResourceEnum.SYNTH_TURNED_ON)
                     .fade()),
 
@@ -27,7 +26,6 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.MARMOT_PIZZA)
                     .width(3)
-                    .height(3)
                     .animationRate(0.2f)
                     .delay(1000)
                     .fade()),
@@ -36,7 +34,6 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.ENERGYPLANT_TURNED_ON, ResourceEnum.ENERGYPLANT_TURNED_OFF)
                     .width(3)
-                    .height(2)
                     .animationRate(0.5f)
                     .startingAnimation(ResourceEnum.ENERGYPLANT_TURNED_ON)
                     .fade()),
@@ -46,27 +43,23 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_MEDIUM)
                     .width(3)
-                    .height(7)
                     .fade()),
 
     SKYSCRAPER_1_FRONT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_FRONT)
                     .width(5)
-                    .height(4)
                     .fade()),
 
     SKYSCRAPER_1_BACK(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_BACK)
                     .width(5)
-                    .height(4)
                     .fade()),
     SKYSCRAPER_1_SIDE(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_SIDE)
                     .width(4)
-                    .height(4)
                     .fade()),
 
     // BIG BUILDINGS
@@ -74,31 +67,26 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_2_FRONT)
                     .width(5)
-                    .height(7)
                     .fade()),
     SKYSCRAPER_2_BACK(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_2_BACK)
                     .width(5)
-                    .height(7)
                     .fade()),
     SKYSCRAPER_3_FRONT(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_3_FRONT)
                     .width(5)
-                    .height(7)
                     .fade()),
     SKYSCRAPER_L(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_L)
                     .width(5)
-                    .height(7)
                     .fade()),
     SKYSCRAPER_U(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_U)
                     .width(5)
-                    .height(7)
                     .fade()),
     // TODO
     // SPARK_BUILDING_1
@@ -111,14 +99,12 @@ public enum ForegroundMapComponentEnum {
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.LAMP)
                     .width(1)
-                    .height(2)
                     .animationRate(1f)
                     .delay(1000)),
     LONG_LAMP(
             new ForegroundMapComponent.ForegroundMapComponentBuilder()
                     .texture(ResourceEnum.LONG_LAMP)
-                    .width(2)
-                    .height(2));
+                    .width(2));
 
     private Vector2 coord;
     private ForegroundMapComponent.ForegroundMapComponentBuilder builder;

@@ -31,7 +31,7 @@ public class NPC extends ScriptableActor{
         setSize(npcBuilder.size.x, npcBuilder.size.y);
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-        animationManager = new AnimationManager(16, 0.2f, 0f, npcBuilder.textureEnum);
+        animationManager = new AnimationManager(16, npcBuilder.textureEnum.getAnimationRate(), npcBuilder.textureEnum.getDelay(), npcBuilder.textureEnum);
 
         name = npcBuilder.textureEnum.toString();
         

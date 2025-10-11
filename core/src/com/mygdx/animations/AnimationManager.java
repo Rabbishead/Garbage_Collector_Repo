@@ -28,6 +28,8 @@ public class AnimationManager {
     private boolean paused;
     private boolean alreadyPausedOnce;
 
+    private float defaultDelay;
+
     public AnimationManager(int width, float animationRate, float delay, ResourceEnum... textures) {
         for (ResourceEnum e : textures) {
             Texture texture = Utils.getTexture(e);
@@ -36,8 +38,9 @@ public class AnimationManager {
             TextureRegion[][] matrix = TextureRegion.split(texture,
                     texture.getWidth() / FRAME_COLS,
                     texture.getHeight() / 1);
-
-            animationMap.put(e, new Animation<>(animationRate, matrix[0]));
+                System.out.println(e);
+                    System.out.println(animationRate + " " + e.animationRate);
+            animationMap.put(e, new Animation<>(e.animationRate != -1 ? e.animationRate : animationRate, matrix[0]));
             animationMap.get(e).setPlayMode(PlayMode.LOOP);
 
         }
@@ -47,7 +50,9 @@ public class AnimationManager {
 
         prevAnimation = 0;
 
-        DelayManager.registerObject(this, delay);
+        defaultDelay = delay;
+
+        DelayManager.registerObject(this, currentAnimation.delay != -1 ? currentAnimation.delay : defaultDelay);
 
         paused = false;
     }
@@ -100,5 +105,7 @@ public class AnimationManager {
 
     public void setCurrentAnimation(ResourceEnum ani) {
         currentAnimation = ani;
+        if(ani.delay != -1) DelayManager.changeDelay(this, ani.delay);
+        else DelayManager.changeDelay(this, defaultDelay);
     }
 }
