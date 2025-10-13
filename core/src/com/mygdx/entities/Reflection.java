@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.Utils;
+
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.gunControls.projectiles.Projectile;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.states.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.stage.GCStage;
 
 import java.util.Random;
 
@@ -24,7 +25,7 @@ public class Reflection extends NPC {
         super(npcBuilder);
         stateController = new StateController();
         stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
-        Utils.subscribeToStageMsg(this, MSG.SHOT);
+        GCStage.get().subscribe(this, MSG.SHOT);
         scope = new Scope(getCoords());
         DelayManager.registerObject(scope, 100f);
     }
@@ -32,17 +33,17 @@ public class Reflection extends NPC {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(Utils.getPlayer().isFighting()) scope.draw(batch, parentAlpha);
+        if(GCStage.get().getPlayer().isFighting()) scope.draw(batch, parentAlpha);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(Utils.getPlayer().isFighting())  scope.act(delta);
+        if(GCStage.get().getPlayer().isFighting())  scope.act(delta);
         DelayManager.updateDelay(scope);
-        Vector2 playerPos = Utils.getPlayer().getCoords();
+        Vector2 playerPos = GCStage.get().getPlayer().getCoords();
 
-        if (!Utils.getPlayer().isFighting()) {
+        if (!GCStage.get().getPlayer().isFighting()) {
             getActions().clear();
             return;
         }
@@ -56,7 +57,7 @@ public class Reflection extends NPC {
                     Action movement = Actions.moveTo(playerPos.x, playerPos.y, 5);
                     addAction(movement);
                 }
-                if (Utils.getPlayer().getCoords().dst(getCoords()) < 100) {
+                if (GCStage.get().getPlayer().getCoords().dst(getCoords()) < 100) {
                     stateController.setMovementState(StateController.MovementState.FLEE);
                     getActions().clear();
                 }
@@ -78,7 +79,7 @@ public class Reflection extends NPC {
                     setY(getY() + mov.y);
                 }
 
-                if (Utils.getPlayer().getCoords().dst(getCoords()) > 500) {
+                if (GCStage.get().getPlayer().getCoords().dst(getCoords()) > 500) {
                     stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
                     getActions().clear();
                 }

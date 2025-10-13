@@ -2,7 +2,8 @@ package com.mygdx.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.bladecoder.ink.runtime.Story;
-import com.mygdx.Utils;
+
+import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
 
@@ -41,7 +42,7 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     }
 
     public T story(ResourceEnum e) {
-        this.story = Utils.getStory(e);
+        this.story = RM.get().getStory(e);
         return getThis();
     }
 

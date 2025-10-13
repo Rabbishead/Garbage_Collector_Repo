@@ -4,11 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.Utils;
+import com.mygdx.stage.GCStage;
 
 public class CameraController {
-    private static Viewport currentViewport;
     private static CameraShaker cameraShaker;
     private static Vector2 mouseDirection;
     private static float mouseAngle;
@@ -17,8 +15,7 @@ public class CameraController {
     private static final float lerpFactor = 5;
 
     public static void initCamera() {
-        OrthographicCamera gameCamera = (OrthographicCamera) Utils.getStage().getCamera();
-        currentViewport = Utils.getStage().getViewport();
+        OrthographicCamera gameCamera = (OrthographicCamera) GCStage.get().getCamera();
         float shakeRadius = 15f;
         float minimumShakeRadius = 3f;
         float radiusFallOffFactor = 0.50f;
@@ -26,17 +23,17 @@ public class CameraController {
     }
 
     public static void updateCamera() {
-        Vector3 cameraPosition = Utils.getStage().getCamera().position;
+        Vector3 cameraPosition = GCStage.get().getCamera().position;
 
         cameraShaker.origPosition = cameraPosition.cpy();
         cameraShaker.update(Gdx.graphics.getDeltaTime());
 
-        cameraPosition.x += (Utils.getPlayer().getX() - cameraPosition.x) * lerpFactor * Gdx.graphics.getDeltaTime();
-        cameraPosition.y += (Utils.getPlayer().getY() - cameraPosition.y) * lerpFactor * Gdx.graphics.getDeltaTime();
+        cameraPosition.x += (GCStage.get().getPlayer().getX() - cameraPosition.x) * lerpFactor * Gdx.graphics.getDeltaTime();
+        cameraPosition.y += (GCStage.get().getPlayer().getY() - cameraPosition.y) * lerpFactor * Gdx.graphics.getDeltaTime();
 
         // Apply the changes
-        Utils.getStage().getCamera().position.set(cameraPosition);
-        Utils.getStage().getCamera().update();
+        GCStage.get().getCamera().position.set(cameraPosition);
+        GCStage.get().getCamera().update();
     }
 
     public static void applyShakeEffect() {
@@ -45,7 +42,7 @@ public class CameraController {
 
     public static void calculateMouseAngle(Vector2 position) {
         float mX = Gdx.input.getX(), mY = Gdx.input.getY();
-        Vector2 tmp = currentViewport.unproject(new Vector2(mX, mY));
+        Vector2 tmp = GCStage.get().getViewport().unproject(new Vector2(mX, mY));
         Vector2 dir = new Vector2();
         dir.set(tmp).sub(position.x, position.y).nor();
         mouseDirection = dir;

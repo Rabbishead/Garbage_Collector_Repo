@@ -43,8 +43,6 @@ public class TypewriterEffect {
         actions.add(Actions.run(() -> {
             isRunning = false;
             if (onFinished != null) onFinished.run();
-            System.out.println(fullText);
-
         }));
 
         label.clearActions();

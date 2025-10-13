@@ -4,19 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Utils;
+
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.Player;
-import com.mygdx.hud.Hud;
+import com.mygdx.HUD.HUD;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.stage.GCStage;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
@@ -27,7 +27,7 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected boolean stopGame = false;
 
-    protected Hud hud;
+    protected HUD hud;
 
     protected TileSetManager tileSetManager;
 
@@ -44,7 +44,7 @@ public abstract class PlayableScreen extends GenericScreen {
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
         hitboxHandler = new HitboxHandler();
-        
+        HitboxHandler.set(hitboxHandler);
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING)) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
@@ -55,9 +55,8 @@ public abstract class PlayableScreen extends GenericScreen {
         stage.addActor(player);
         stage.setKeyboardFocus(player);
 
-        hud = new Hud();
-        Utils.setCurrentHud(hud);
-
+        hud = new HUD();
+        HUD.set(hud);
         this.name = map;
     }
 
@@ -65,20 +64,23 @@ public abstract class PlayableScreen extends GenericScreen {
     public void show() {
         super.show();
 
+        HitboxHandler.set(hitboxHandler);
+        HUD.set(hud);
+
         CameraController.initCamera();
 
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
-        subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.SWAP_FIGHT_STATE);
-        subscribe(player, MSG.SWAP_FIGHT_STATE);
-        if(SavingsManager.isPlayerFighting()) MsgManager.sendStageMsg(MSG.SWAP_FIGHT_STATE, MSG.BLOCK_WALLS); //turns on combat mode
+        GCStage.get().subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.SWAP_FIGHT_STATE);
+        GCStage.get().subscribe(player, MSG.SWAP_FIGHT_STATE);
+        if(SavingsManager.isPlayerFighting()) GCStage.get().send(MSG.SWAP_FIGHT_STATE, MSG.BLOCK_WALLS); //turns on combat mode
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         }
 
-        Utils.setPlayer(player);
-        Utils.setHitboxHandler(hitboxHandler);
+        GCStage.get().setPlayer(player);
+        
 
         stage.getCamera().position.set(getPlayerCoordinates(), 0);
 
@@ -88,24 +90,21 @@ public abstract class PlayableScreen extends GenericScreen {
     public void render(float delta) {
         super.render(delta);
         if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-            Utils.setScreen(ScreensManager.getScreen(Screens.PAUSE_SCREEN));
+            ScreensManager.setScreen(Screens.PAUSE_SCREEN);
             return;
         }
         if (Gdx.input.isKeyJustPressed(Keys.M)) {
             SavingsManager.save();
         }
         if (Gdx.input.isKeyJustPressed(Keys.R)) {
-            stageMsg.dispatchMessage(0);
+            GCStage.get().send(MSG.DIALOGUE_TRIGGERED);
         }
         if(Gdx.input.isKeyJustPressed(Keys.H)){
-            stageMsg.dispatchMessage(MSG.BLOCK_WALLS.code);
+            GCStage.get().send(MSG.BLOCK_WALLS);
         }
         if(Gdx.input.isKeyJustPressed(Keys.J)){
-            stageMsg.dispatchMessage(MSG.SWAP_FIGHT_STATE.code);
+            GCStage.get().send(MSG.SWAP_FIGHT_STATE);
         }
-
-        if (Utils.getActiveScreen() != this)
-            return;
 
         stage.getActors().sort((a, b) -> Float.compare(b.getY(), a.getY())); //solves z index problem
 

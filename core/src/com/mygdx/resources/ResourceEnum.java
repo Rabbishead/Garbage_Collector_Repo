@@ -15,7 +15,7 @@ public enum ResourceEnum {
 
     JERKINS_IDLE_DOWN("assets/npcs/jerkins/jenkins_idle_down.png", TypeEnum.TEXTURE),
     JERKINS_IDLE_UP("assets/npcs/jerkins/jenkins_idle_up.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_LEFT("assets/npcs/jerkins/jenkins_idle_left.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_LEFT("assets/npcs/jerkins/jenkins_idle_left.png", TypeEnum.TEXTURE, 0.2f, 1),
     JERKINS_IDLE_RIGHT("assets/npcs/jerkins/jenkins_idle_right.png", TypeEnum.TEXTURE),
     JERKINS_WALK_DOWN("assets/npcs/jerkins/jenkins_walk_down.png", TypeEnum.TEXTURE),
     JERKINS_WALK_UP("assets/npcs/jerkins/jenkins_walk_up.png", TypeEnum.TEXTURE),
@@ -31,11 +31,8 @@ public enum ResourceEnum {
     BLACKMARKETEER_WALK_UP("assets/npcs/blackmarketeer/blackmarketeer_walk_up.png", TypeEnum.TEXTURE),
     BLACKMARKETEER_WALK_LEFT("assets/npcs/blackmarketeer/blackmarketeer_walk_left.png", TypeEnum.TEXTURE),
     BLACKMARKETEER_WALK_RIGHT("assets/npcs/blackmarketeer/blackmarketeer_walk_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_SLEEPING("assets/npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 1),
+    BLACKMARKETEER_SLEEPING("assets/npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 0),
 
-
-    TEST_BALL("assets/npcs/test/test_ball.png", TypeEnum.TEXTURE),
-    TEST_ARROW("assets/npcs/test/test_arrow.png", TypeEnum.TEXTURE),
 
     //PROJECTILES AND WEAPONS
     STONE("assets/bullets/stone.png", TypeEnum.TEXTURE),
@@ -54,7 +51,7 @@ public enum ResourceEnum {
     BACKGROUND_2("assets/menu/background-2.jpg", TypeEnum.TEXTURE),
 
     //HUD
-    HEALTH_BAR("assets/hud/health.png", TypeEnum.TEXTURE),
+    HEALTH_BAR("assets/HUD/health.png", TypeEnum.TEXTURE),
 
     //MAP
     SLUMS("assets/map/slums//slums.tmx", TypeEnum.MAP),
@@ -89,7 +86,6 @@ public enum ResourceEnum {
 
     //MAP COMPONENTS
     LAMP("assets/map/city/components/lamp.png", TypeEnum.TEXTURE),
-    TREE("assets/map/city/components/tree.png", TypeEnum.TEXTURE),
     LONG_LAMP("assets/map/city/components/long_lamp.png", TypeEnum.TEXTURE),
 
     //OTHERS
@@ -106,8 +102,6 @@ public enum ResourceEnum {
     ADEPTUS_2("adeptus2_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_3("adeptus3_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_4("adeptus4_JSON.json", TypeEnum.DIALOGUE),
-    GIGI_DIAL("gigi.json", TypeEnum.DIALOGUE),
-
     
     //MUSIC
     REFLECTION_1("assets/audio/reflection_1.mp3", TypeEnum.AUDIO),
@@ -122,9 +116,7 @@ public enum ResourceEnum {
     TEST_2("assets/scripts/npcs/reflection/test2.gcs", TypeEnum.SCRIPT),
     TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
     MEET_1("assets/scripts/npcs/reflection/meet1.gcs", TypeEnum.SCRIPT),
-    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT),
-    GIGI_SCRIPT("assets/scripts/npcs/reflection/gigi.gcs", TypeEnum.SCRIPT),
-    TEST_BALL_SCRIPT("assets/scripts/npcs/reflection/test_ball.gcs", TypeEnum.SCRIPT);
+    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT);
 
 
 

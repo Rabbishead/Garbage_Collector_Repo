@@ -1,7 +1,7 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
-import com.mygdx.entities.ForegroundMapComponentEnum;
+import com.mygdx.entities.MapComponentEnum;
 import com.mygdx.entities.NPC;
 import com.mygdx.entities.Reflection;
 import com.mygdx.resources.ResourceEnum;
@@ -37,43 +37,43 @@ public class RichDistrict extends PlayableScreen {
                                                 .story(ResourceEnum.ADEPTUS_1)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.MARMOT_PIZZA
+                                MapComponentEnum.MARMOT_PIZZA
                                                 .coord(Data.TILE * 59, Data.TILE * 25)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.ENERGYPLANT
+                                MapComponentEnum.ENERGYPLANT
                                                 .coord(Data.TILE * 62, Data.TILE * 25)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.ABANDONED
+                                MapComponentEnum.ABANDONED
                                                 .coord(Data.TILE * 65, Data.TILE * 25)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.ABANDONED
+                                MapComponentEnum.ABANDONED
                                                 .coord(Data.TILE * 65, Data.TILE * 27)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.SKYSCRAPER_MEDIUM
+                                MapComponentEnum.SKYSCRAPER_MEDIUM
                                                 .coord(Data.TILE * 68, Data.TILE * 25)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.SYNTH
+                                MapComponentEnum.SYNTH
                                                 .coord(Data.TILE * 71, Data.TILE * 25)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.LAMP
+                                MapComponentEnum.LAMP
                                                 .coord(Data.TILE * 81, Data.TILE * 28)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
+                                MapComponentEnum.SKYSCRAPER_1_BACK
                                                 .coord(Data.TILE * 80, Data.TILE * 21)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.SKYSCRAPER_1_BACK
+                                MapComponentEnum.SKYSCRAPER_1_BACK
                                                 .coord(Data.TILE * 75, Data.TILE * 21)
                                                 .build(),
 
-                                ForegroundMapComponentEnum.SKYSCRAPER_1_SIDE
+                                MapComponentEnum.SKYSCRAPER_1_SIDE
                                                 .coord(Data.TILE * 65, Data.TILE * 20)
                                                 .build());
         }

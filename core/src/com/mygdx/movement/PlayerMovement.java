@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.Utils;
+
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.stage.GCStage;
 
 /**
  * RealtimeMovement for the overworld
@@ -16,7 +17,7 @@ public class PlayerMovement {
     private String lastDirection;
 
     public PlayerMovement() {
-        this.player = Utils.getPlayer();
+        this.player = GCStage.get().getPlayer();
         lastDirection = "IDLE_DOWN";
     }
 

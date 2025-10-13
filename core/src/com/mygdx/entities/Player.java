@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.movement.PlayerMovement;
-import com.mygdx.Utils;
+
 import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
@@ -15,6 +15,7 @@ import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
+import com.mygdx.stage.GCStage;
 
 public class Player extends ScriptableActor{
 
@@ -26,7 +27,7 @@ public class Player extends ScriptableActor{
 
 
     public Player(Vector2 coordinates) {
-        Utils.setPlayer(this);
+        GCStage.get().setPlayer(this);
         setTouchable(Touchable.enabled);
 
         setSize(16, 32);
@@ -93,7 +94,7 @@ public class Player extends ScriptableActor{
     
     public void swapFightingState(){
         if(fighting) GunController.get().remove();
-        else Utils.getStage().addActor(GunController.get());
+        else GCStage.get().addActor(GunController.get());
 
 
         fighting = !fighting;

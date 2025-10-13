@@ -9,8 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.Data;
-import com.mygdx.Utils;
-import com.mygdx.resources.LangEnum;
+
+import com.mygdx.resources.Lang;
+import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.savings.SavingsManager;
 import com.mygdx.screens.Screens;
@@ -21,9 +22,9 @@ public class MenuScreen extends GuiScreen {
 
     public MenuScreen() {
         super();
-        Utils.setActiveLanguage(LangEnum.ITA);
+        Lang.setCurrent(Lang.ITA);
 
-        var bg = new Image(Utils.getTexture(ResourceEnum.BACKGROUND_2));
+        var bg = new Image(RM.get().getTexture(ResourceEnum.BACKGROUND_2));
         stage.getActors().insert(0, bg);
 
         var titleLabel = new Label("Garbage Collection", Data.skin);
@@ -31,18 +32,18 @@ public class MenuScreen extends GuiScreen {
 
 
         var playButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.PLAY_BUTTON))));
+                new TextureRegionDrawable(new TextureRegion(RM.get().getTexture(ResourceEnum.PLAY_BUTTON))));
         var settingsButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.SETTINGS_BUTTON))));
+                new TextureRegionDrawable(new TextureRegion(RM.get().getTexture(ResourceEnum.SETTINGS_BUTTON))));
                 var quitButton = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(Utils.getTexture(ResourceEnum.QUIT_BUTTON))));
+                new TextureRegionDrawable(new TextureRegion(RM.get().getTexture(ResourceEnum.QUIT_BUTTON))));
 
         table.add(playButton).padBottom(20);
         table.row();
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setScreen(SavingsManager.getLastRoom());
+                ScreensManager.setScreen(SavingsManager.getLastRoom());
                 return true;
             }
         });
@@ -52,7 +53,7 @@ public class MenuScreen extends GuiScreen {
         settingsButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Utils.setScreen(ScreensManager.getScreen(Screens.SETTINGS));
+                ScreensManager.setScreen(Screens.SETTINGS);
                 return true;
             }
         });

@@ -7,7 +7,7 @@ public enum MapComponentEnum {
 
     // SMALL BUILDINGS
     ABANDONED(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.ABANDONED_TURNED_ON)
                     .width(3)
                     .animationRate(0.5f)
@@ -15,7 +15,7 @@ public enum MapComponentEnum {
                     .fade()),
 
     SYNTH(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SYNTH_TURNED_ON, ResourceEnum.SYNTH_TURNED_OFF)
                     .width(3)
                     .animationRate(0.5f)
@@ -24,7 +24,7 @@ public enum MapComponentEnum {
                     .fade()),
 
     MARMOT_PIZZA(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.MARMOT_PIZZA)
                     .width(3)
                     .animationRate(0.2f)
@@ -32,7 +32,7 @@ public enum MapComponentEnum {
                     .fade()),
 
     ENERGYPLANT(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.ENERGYPLANT_TURNED_ON, ResourceEnum.ENERGYPLANT_TURNED_OFF)
                     .width(3)
                     .animationRate(0.5f)
@@ -41,51 +41,51 @@ public enum MapComponentEnum {
 
     // MEDIUM BUILDNGS
     SKYSCRAPER_MEDIUM(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_MEDIUM)
                     .width(3)
                     .fade()),
 
     SKYSCRAPER_1_FRONT(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_FRONT)
                     .width(5)
                     .fade()),
 
     SKYSCRAPER_1_BACK(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_BACK)
                     .width(5)
                     .fade()),
     SKYSCRAPER_1_SIDE(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_1_SIDE)
                     .width(4)
                     .fade()),
 
     // BIG BUILDINGS
     SKYSCRAPER_2_FRONT(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_2_FRONT)
                     .width(5)
                     .fade()),
     SKYSCRAPER_2_BACK(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_2_BACK)
                     .width(5)
                     .fade()),
     SKYSCRAPER_3_FRONT(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_3_FRONT)
                     .width(5)
                     .fade()),
     SKYSCRAPER_L(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_L)
                     .width(5)
                     .fade()),
     SKYSCRAPER_U(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.SKYSCRAPER_U)
                     .width(5)
                     .fade()),
@@ -97,30 +97,21 @@ public enum MapComponentEnum {
 
     // OTHERS
     LAMP(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.LAMP)
                     .width(1)
                     .animationRate(1f)
                     .delay(1000)),
-        TREE(
-                new MapComponent.MapComponentBuilder()
-                        .texture(ResourceEnum.TREE)
-                        .width(1)
-                        .height(2)
-                        .animationRate(0.2f)
-                        .delay(2)
-                        .fade()
-                
-        ),
+                    
     LONG_LAMP(
-            new MapComponent.MapComponentBuilder()
+            new MapComponentBuilder()
                     .texture(ResourceEnum.LONG_LAMP)
                     .width(2));
 
     private Vector2 coord;
-    private MapComponent.MapComponentBuilder builder;
+    private MapComponentBuilder builder;
 
-    MapComponentEnum(MapComponent.MapComponentBuilder builder) {
+    MapComponentEnum(MapComponentBuilder builder) {
         this.builder = builder;
     }
 

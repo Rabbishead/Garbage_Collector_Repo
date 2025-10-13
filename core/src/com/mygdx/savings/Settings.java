@@ -3,9 +3,10 @@ package com.mygdx.savings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.Utils;
+
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.stage.GCStage;
 
 public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
     private Screens lastRoom;
@@ -17,7 +18,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
         lastRoom = ScreensManager.getLastPlayableActiveScreen();
         lastRoomCoordinates = ScreensManager.getPlayableScreen(ScreensManager.getLastPlayableActiveScreen())
                 .getPlayerCoordinates();
-        fightging = Utils.getPlayer().isFighting();
+        fightging = GCStage.get().getPlayer().isFighting();
         flags = new boolean[] { true, true, false };
         selectedGuns = new boolean[] { true, true };
     }

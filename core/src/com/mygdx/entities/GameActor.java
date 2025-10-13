@@ -4,23 +4,11 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.Utils;
-import com.mygdx.controllers.messages.MSG;
 import com.mygdx.movement.AutoMovementManager;
 
-public abstract class GameActor extends Actor implements Telegraph {
+public class GameActor extends Actor implements Telegraph {
 
     protected final AutoMovementManager autoMovementManager = new AutoMovementManager(this);
-
-    public GameActor(){
-
-    }
-
-    public GameActor(MSG... msgs){
-        for (MSG msg : msgs) {
-            Utils.getActiveScreen().subscribe(this, msg);
-        }
-    }
 
     public void setCoords(Vector2 coords) {
         setX(coords.x);

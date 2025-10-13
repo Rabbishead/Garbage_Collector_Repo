@@ -3,17 +3,23 @@ package com.mygdx.controllers.hitboxes;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.mygdx.Utils;
-
 public class HitboxHandler {
+    private static HitboxHandler instance;
+
+    public static HitboxHandler get(){
+        return instance;
+    }
+
+    public static void set(HitboxHandler h){
+        instance = h;
+        instance.clearContacts();
+    }
+
+
     private final CopyOnWriteArrayList<Collider> colliders = new CopyOnWriteArrayList<>();
     private final ConcurrentHashMap<Tags, CopyOnWriteArrayList<Hitbox>> hitboxes = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<Couple, Boolean> contacts = new ConcurrentHashMap<>();
 
-    // USA SETS
-    public HitboxHandler() {
-        Utils.setHitboxHandler(this);
-    }
 
     public void registerHitbox(Hitbox h) {
         for (Tags tag : h.getTags()) {

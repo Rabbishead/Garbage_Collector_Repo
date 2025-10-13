@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Utils;
+
 import com.mygdx.controllers.messages.LockedInfo;
 import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
@@ -101,17 +101,17 @@ public class Hitbox extends Polygon {
 
     public boolean isHit(Collider r, boolean activate) {
         if (!active) {
-            Utils.getHitboxHandler().setContact(r, this, false);
+            HitboxHandler.get().setContact(r, this, false);
             return false;
         }
         boolean collision = Intersector.overlapConvexPolygons(r, this);
         if (!activate)
             return collision;
         if (!collision)
-            Utils.getHitboxHandler().removeContact(r, this);
+            HitboxHandler.get().removeContact(r, this);
         else {
-            Utils.getHitboxHandler().storeContact(r, this);
-            Utils.getHitboxHandler().setContact(r, this, true);
+            HitboxHandler.get().storeContact(r, this);
+            HitboxHandler.get().setContact(r, this, true);
         }
         
         onFrame(r);
@@ -135,7 +135,7 @@ public class Hitbox extends Polygon {
     }
 
     public boolean touching(Collider r) {
-        return Utils.getHitboxHandler().getContact(r, this);
+        return HitboxHandler.get().getContact(r, this);
     }
 
     public boolean isActive() {
@@ -194,7 +194,7 @@ public class Hitbox extends Polygon {
             return false;
         if (tags.isEmpty())
             tags.add(Tags.ALL);
-        Utils.getHitboxHandler().registerHitbox(this);
+        HitboxHandler.get().registerHitbox(this);
         registered = true;
         return true;
     }
@@ -207,7 +207,7 @@ public class Hitbox extends Polygon {
     public boolean unregister() {
         if (isNull || !registered)
             return false;
-        Utils.getHitboxHandler().unRegisterHitbox(this);
+        HitboxHandler.get().unRegisterHitbox(this);
         registered = false;
         return true;
     }

@@ -3630,7 +3630,7 @@
 											"top": 1960,
 											"width": 234.03515625,
 											"height": 13,
-											"text": "-hudCamera: OrthographicCamera",
+											"text": "-HUDCamera: OrthographicCamera",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8699,7 +8699,7 @@
 											"top": 1013,
 											"width": 193.5751953125,
 											"height": 13,
-											"text": "#hud: Hud",
+											"text": "#HUD: HUD",
 											"horizontalAlignment": 0
 										},
 										{
@@ -11223,7 +11223,7 @@
 											"top": 863,
 											"width": 118.787109375,
 											"height": 13,
-											"text": "Hud"
+											"text": "HUD"
 										},
 										{
 											"_type": "LabelView",
@@ -11341,7 +11341,7 @@
 											"top": 916,
 											"width": 118.787109375,
 											"height": 13,
-											"text": "-hudComponents: ...",
+											"text": "-HUDComponents: ...",
 											"horizontalAlignment": 0
 										}
 									],
@@ -21850,7 +21850,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGPta48ckHnxcs="
 							},
-							"name": "hudCamera",
+							"name": "HUDCamera",
 							"visibility": "private",
 							"type": "OrthographicCamera"
 						},
@@ -25378,9 +25378,9 @@
 							"_parent": {
 								"$ref": "AAAAAAGTZEkfxzmDzIo="
 							},
-							"name": "hud",
+							"name": "HUD",
 							"visibility": "protected",
-							"type": "Hud"
+							"type": "HUD"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -25628,7 +25628,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Hud",
+					"name": "HUD",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -25714,7 +25714,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGTaRxzFGD/Ifc="
 							},
-							"name": "hudComponents",
+							"name": "HUDComponents",
 							"visibility": "private",
 							"type": "..."
 						}

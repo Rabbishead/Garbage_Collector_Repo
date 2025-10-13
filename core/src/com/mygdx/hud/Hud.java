@@ -1,4 +1,4 @@
-package com.mygdx.hud;
+package com.mygdx.HUD;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,18 +9,28 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.dialogues.Dialogue;
-import com.mygdx.hud.actors.DebugData;
-import com.mygdx.hud.actors.Fps;
-import com.mygdx.hud.actors.HealthBar;
+import com.mygdx.HUD.actors.DebugData;
+import com.mygdx.HUD.actors.Fps;
+import com.mygdx.HUD.actors.HealthBar;
 
-public class Hud implements Disposable {
+public class HUD implements Disposable {
+    private static HUD instance;
+
+    public static HUD get(){
+        return instance;
+    }
+
+    public static void set(HUD h){
+        instance = h;
+    }
+
     private final Stage stage;
     private final Fps fps;
     private Dialogue complexDialogue;
 
     private DebugData debugData;
 
-    public Hud() {
+    public HUD() {
         FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
         stage = new Stage(viewport);
         fps = new Fps();

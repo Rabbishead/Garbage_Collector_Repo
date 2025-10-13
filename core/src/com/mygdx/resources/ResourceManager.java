@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.bladecoder.ink.runtime.Story;
-import com.mygdx.Utils;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,12 +53,11 @@ public class ResourceManager {
         manager.update();
     }
 
-    public Texture getTexture(ResourceEnum e) {
-        manager.finishLoadingAsset(e.label);
-        return manager.get(e.label);
+    public void dispose() {
+        manager.dispose();
     }
 
-    public Music getAudio(ResourceEnum e) {
+    public Texture getTexture(ResourceEnum e) {
         manager.finishLoadingAsset(e.label);
         return manager.get(e.label);
     }
@@ -67,8 +66,33 @@ public class ResourceManager {
         return maps.get(e);
     }
 
-    public Story getDialogueStory(ResourceEnum e) {
+    public Story getStory(ResourceEnum e) {
         return dialogueMap.get(e);
+    }
+
+    public Music getAudio(ResourceEnum e) {
+        manager.finishLoadingAsset(e.label);
+        return manager.get(e.label);
+    }
+
+
+    public void playAudio(ResourceEnum e) {
+        if (!getAudio(e).isPlaying()) {
+            getAudio(e).setVolume(0.05f);
+            getAudio(e).play();
+            getAudio(e).setLooping(true);
+        }
+    }
+
+    public void stopAudio(ResourceEnum e) {
+        if (getAudio(e).isPlaying())
+            getAudio(e).stop();
+    }
+
+    public void stopAllAudio() {
+        getAllAudio()
+            .filter(Music::isPlaying)
+            .forEach(Music::stop);
     }
 
     public Stream<Music> getAllAudio() {
@@ -77,14 +101,10 @@ public class ResourceManager {
                 .map(this::getAudio);
     }
 
-    public void dispose() {
-        manager.dispose();
-    }
-
     //helper for dialogue loading
     public void loadDialogue(ResourceEnum dialogue) {
 
-        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/entities/"+ Utils.getActiveLanguage() + "/" + dialogue.label);
+        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/entities/"+ Lang.getCurrent() + "/" + dialogue.label);
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(Objects.requireNonNull(systemResourceAsStream), StandardCharsets.UTF_8))) {

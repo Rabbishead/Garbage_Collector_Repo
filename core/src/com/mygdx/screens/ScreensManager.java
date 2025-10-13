@@ -1,6 +1,8 @@
 package com.mygdx.screens;
 
 import java.util.HashMap;
+
+import com.mygdx.game.GarbageCollection;
 import com.mygdx.screens.game.arenas.ReflectionArena;
 import com.mygdx.screens.game.overworld.Slums;
 import com.mygdx.screens.game.overworld.Park;
@@ -57,5 +59,9 @@ public class ScreensManager {
 
     public static Screens getLastPlayableActiveScreen() {
         return lastPlayableActiveScreen;
+    }
+
+    public static void setScreen(Screens s){
+        GarbageCollection.getInstance().setScreen(ScreensManager.getPlayableScreen(s));
     }
 }

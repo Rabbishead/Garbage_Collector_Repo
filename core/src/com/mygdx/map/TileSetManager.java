@@ -12,10 +12,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Utils;
+import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
+import com.mygdx.stage.GCStage;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 
@@ -28,7 +29,7 @@ public class TileSetManager implements Telegraph {
     private ArrayList<TileReplacementManager> tileReplace = new ArrayList<>();
 
     public TileSetManager(ResourceEnum e) {
-        map = Utils.getMap(e);
+        map = RM.get().getMap(e);
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
@@ -93,7 +94,7 @@ public class TileSetManager implements Telegraph {
         Door intersectingDoor = null;
 
         for (Door door : doors) {
-            if (door.getCenter().dst(Utils.getPlayer().getCoords()) < 32) {
+            if (door.getCenter().dst(GCStage.get().getPlayer().getCoords()) < 32) {
                 intersectingDoor = door;
             }
         }
@@ -103,16 +104,16 @@ public class TileSetManager implements Telegraph {
         getCenterDoor(intersectingDoor);
 
         if (!StateManager.getBoolState(StateEnum.IS_ENTERING) && !StateManager.getBoolState(StateEnum.IS_EXITING)) {
-            Utils.getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
+            GCStage.get().getPlayer().moveTo(intersectingDoor.getCenter().cpy().add(8, 8));
             StateManager.updateBoolState(StateEnum.IS_ENTERING, true);
             intersectingDoor.print();
         }
-        if (!Utils.getPlayer().isAutoWalking() && StateManager.getBoolState(StateEnum.IS_ENTERING)) {
+        if (!GCStage.get().getPlayer().isAutoWalking() && StateManager.getBoolState(StateEnum.IS_ENTERING)) {
             StateManager.updateBoolState(StateEnum.IS_ENTERING, false);
             StateManager.updateBoolState(StateEnum.IS_EXITING, true);
             String[] temp = intersectingDoor.getDestination().split("-");
             StateManager.updateStringState(StateEnum.DESTINATION, intersectingDoor.getDestination());
-            Utils.setScreen(ScreensManager.getPlayableScreen(Screens.valueOf(temp[0])));
+            ScreensManager.setScreen(Screens.valueOf(temp[0]));
         }
     }
 

@@ -1,19 +1,17 @@
 package com.mygdx.animations;
 
 import java.util.EnumMap;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.Utils;
-import com.mygdx.controllers.delay.DelayManager;
+import com.mygdx.entities.GameActor;
+import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
+import com.mygdx.stage.GCStage;
 
-/**
- * Class useful to manage actors' animations
- */
 public class AnimationManager {
     private EnumMap<ResourceEnum, Animation<TextureRegion>> animationMap = new EnumMap<>(ResourceEnum.class);
 
@@ -21,25 +19,27 @@ public class AnimationManager {
 
     private TextureRegion currentFrame;
 
-    private float stateTime = 0f; // changes with delta
-
-    private float prevAnimation;
+    // Incremented each frame by delta
+    // Allows you to pick the correct frame in an animation
+    private float stateTime = 0f;
 
     private boolean paused;
     private boolean alreadyPausedOnce;
 
     private float defaultDelay;
+    private float currentDelay;
+
+    private GameActor pauser = new GameActor();
 
     public AnimationManager(int width, float animationRate, float delay, ResourceEnum... textures) {
         for (ResourceEnum e : textures) {
-            Texture texture = Utils.getTexture(e);
+            Texture texture = RM.get().getTexture(e);
             int FRAME_COLS = texture.getWidth() / width;
 
             TextureRegion[][] matrix = TextureRegion.split(texture,
                     texture.getWidth() / FRAME_COLS,
                     texture.getHeight() / 1);
-                System.out.println(e);
-                    System.out.println(animationRate + " " + e.animationRate);
+
             animationMap.put(e, new Animation<>(e.animationRate != -1 ? e.animationRate : animationRate, matrix[0]));
             animationMap.get(e).setPlayMode(PlayMode.LOOP);
 
@@ -48,13 +48,13 @@ public class AnimationManager {
 
         stateTime = 0f;
 
-        prevAnimation = 0;
-
         defaultDelay = delay;
-
-        DelayManager.registerObject(this, currentAnimation.delay != -1 ? currentAnimation.delay : defaultDelay);
+        currentDelay = currentAnimation.delay != -1 ? currentAnimation.delay : defaultDelay;
 
         paused = false;
+        alreadyPausedOnce = false;
+
+        GCStage.get().addActor(pauser);
     }
 
     public AnimationManager(int width, float animationRate, float delay, TextureEnum textures) {
@@ -72,40 +72,39 @@ public class AnimationManager {
      * updates currentFrame state
      */
     public void updateAnimation(float delta) {
-        prevAnimation = animationMap.get(currentAnimation).getKeyFrameIndex(stateTime);
-        stateTime += delta;
-
-        if (paused) {
-            stateTime -= delta;
-            DelayManager.updateDelay(this);
-            alreadyPausedOnce = true;
-
-            if (DelayManager.isDelayOver(this)) {
-                paused = false;
-            }
+        pauser.act(delta);
+        
+        if (paused)
             return;
-        }
 
-        if (animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) == 0 && prevAnimation != 0
+        stateTime += delta; // Advances the animation
+        // Conditions to pause:
+        // currentDelay is not zero, the option to pause was selected
+        // frame index is zero, we are on the first frame of the animation
+        // we didn't already paused this animation
+        if (currentDelay != 0 && animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) == 0
                 && !alreadyPausedOnce) {
-            currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
-            DelayManager.resetDelay(this);
+            pauser.addAction(
+                    Actions.sequence(
+                            Actions.delay(currentDelay),
+                            Actions.run(() -> {
+                                paused = false;
+                                stateTime = 0;
+                            })));
+            alreadyPausedOnce = true;
             paused = true;
-            stateTime = 0;
-            return;
         }
 
-        if (animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) != 0) {
-            paused = false;
+        // when we move on from frame on
+        if (animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) != 0)
             alreadyPausedOnce = false;
-        }
 
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
     }
 
     public void setCurrentAnimation(ResourceEnum ani) {
         currentAnimation = ani;
-        if(ani.delay != -1) DelayManager.changeDelay(this, ani.delay);
-        else DelayManager.changeDelay(this, defaultDelay);
+        currentDelay = ani.delay != -1 ? ani.delay : defaultDelay;
+        pauser.clearActions();
     }
 }

@@ -3,13 +3,14 @@ package com.mygdx.entities;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Utils;
+
 import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.scripts.Script;
+import com.mygdx.stage.GCStage;
 
-public abstract class ScriptableActor extends GameActor{
+public class ScriptableActor extends GameActor{
     protected Script script;
     public MSG listeningMSG;
     protected AnimationManager animationManager;
@@ -34,7 +35,7 @@ public abstract class ScriptableActor extends GameActor{
     }
 
     public void listen(MSG msg){
-        Utils.subscribeToStageMsg(this, msg);
+        GCStage.get().subscribe(this, msg);
         this.listeningMSG = msg;
     }
 
@@ -50,7 +51,7 @@ public abstract class ScriptableActor extends GameActor{
     }
 
     public void resetListen(){
-        Utils.getActiveScreen().unSubscribe(this, listeningMSG);
+        GCStage.get().unSubscribe(this, listeningMSG);
         listeningMSG = null;
         proceed();
     }

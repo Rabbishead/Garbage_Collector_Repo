@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Utils;
+
 import com.mygdx.controllers.messages.LockedInfo;
 import com.mygdx.controllers.messages.ObjectInfo;
 import com.mygdx.movement.BaseMovement;
@@ -113,7 +113,7 @@ public class Collider extends Polygon {
     }
 
     public boolean touching(Hitbox h) {
-        return Utils.getHitboxHandler().getContact(this, h);
+        return HitboxHandler.get().getContact(this, h);
     }
 
     public boolean containsTag(Tags tag) {
@@ -181,7 +181,7 @@ public class Collider extends Polygon {
             tags.add(Tags.NONE);
         if (searchTags.isEmpty())
             tags.add(Tags.ALL);
-        Utils.getHitboxHandler().registerCollider(this);
+        HitboxHandler.get().registerCollider(this);
         registered = true;
         return true;
     }
@@ -194,7 +194,7 @@ public class Collider extends Polygon {
     public boolean unregister() {
         if (isNull || !registered)
             return false;
-        Utils.getHitboxHandler().unRegisterCollider(this);
+        HitboxHandler.get().unRegisterCollider(this);
         registered = false;
         return true;
     }

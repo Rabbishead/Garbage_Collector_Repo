@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.movement.BaseMovement;
+import com.mygdx.stage.GCStage;
 
 public class BaseGun extends Actor {
     protected Sprite s;
@@ -83,17 +83,17 @@ public class BaseGun extends Actor {
     }
 
     public int leftTrigger() {
-        MsgManager.sendStageMsg(MSG.SHOT);
+        GCStage.get().send(MSG.SHOT);
         return 0;
     }
 
     public int rightTrigger() {
-        MsgManager.sendStageMsg(MSG.SHOT);
+        GCStage.get().send(MSG.SHOT);
         return 0;
     }
 
     public int middleTrigger() {
-        MsgManager.sendStageMsg(MSG.SHOT);
+        GCStage.get().send(MSG.SHOT);
         return 0;
     }
 

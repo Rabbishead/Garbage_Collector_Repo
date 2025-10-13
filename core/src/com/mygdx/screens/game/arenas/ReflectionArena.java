@@ -1,14 +1,15 @@
 package com.mygdx.screens.game.arenas;
 
 import com.mygdx.Data;
-import com.mygdx.Utils;
+
 import com.mygdx.controllers.messages.MSG;
-import com.mygdx.controllers.messages.MsgManager;
 import com.mygdx.entities.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
 import com.mygdx.screens.generic.PlayableScreen;
+import com.mygdx.stage.GCStage;
 
 public class ReflectionArena extends PlayableScreen {
 
@@ -22,9 +23,9 @@ public class ReflectionArena extends PlayableScreen {
     public void show() {
         super.show();
         if (Math.random() < 0.5f)
-            Utils.playAudio(ResourceEnum.REFLECTION_1);
+            RM.get().playAudio(ResourceEnum.REFLECTION_1);
         else
-            Utils.playAudio(ResourceEnum.REFLECTION_3);
+            RM.get().playAudio(ResourceEnum.REFLECTION_3);
     }
 
     @Override
@@ -32,8 +33,8 @@ public class ReflectionArena extends PlayableScreen {
         super.render(delta);
 
         if (TileMapCollisionsManager.changeFightingState()) {
-            MsgManager.sendStageMsg(MSG.BLOCK_WALLS);
-            MsgManager.sendStageMsg(MSG.SWAP_FIGHT_STATE);
+            GCStage.get().send(MSG.BLOCK_WALLS);
+            GCStage.get().send(MSG.SWAP_FIGHT_STATE);
 
         }
     }

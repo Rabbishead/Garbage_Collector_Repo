@@ -1,6 +1,7 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
+import com.mygdx.entities.MapComponentEnum;
 import com.mygdx.entities.NPC;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
@@ -12,6 +13,10 @@ public class Park extends PlayableScreen {
         super(ResourceEnum.PARK);
 
         addAll(
+                MapComponentEnum.SKYSCRAPER_MEDIUM
+                        .coord(Data.TILE * 70, Data.TILE * 30)
+                        .build(),
+
                 new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 40, Data.TILE * 20)
                         .texture(TextureEnum.JERKINS)
