@@ -3,110 +3,118 @@ package com.mygdx.resources;
 public enum ResourceEnum {
 
     //ENTITIES
-    PLAYER_IDLE_DOWN("player/idle_down.png", TypeEnum.TEXTURE),
-    PLAYER_IDLE_UP("player/idle_up.png", TypeEnum.TEXTURE),
-    PLAYER_IDLE_LEFT("player/idle_left.png", TypeEnum.TEXTURE),
-    PLAYER_IDLE_RIGHT("player/idle_right.png", TypeEnum.TEXTURE),
-    PLAYER_WALK_DOWN("player/walk_down.png", TypeEnum.TEXTURE),
-    PLAYER_WALK_UP("player/walk_up.png", TypeEnum.TEXTURE),
-    PLAYER_WALK_LEFT("player/walk_left.png", TypeEnum.TEXTURE),
-    PLAYER_WALK_RIGHT("player/walk_right.png", TypeEnum.TEXTURE),
+    PLAYER_IDLE_DOWN("assets/player/idle_down.png", TypeEnum.TEXTURE),
+    PLAYER_IDLE_UP("assets/player/idle_up.png", TypeEnum.TEXTURE),
+    PLAYER_IDLE_LEFT("assets/player/idle_left.png", TypeEnum.TEXTURE),
+    PLAYER_IDLE_RIGHT("assets/player/idle_right.png", TypeEnum.TEXTURE),
+    PLAYER_WALK_DOWN("assets/player/walk_down.png", TypeEnum.TEXTURE),
+    PLAYER_WALK_UP("assets/player/walk_up.png", TypeEnum.TEXTURE),
+    PLAYER_WALK_LEFT("assets/player/walk_left.png", TypeEnum.TEXTURE),
+    PLAYER_WALK_RIGHT("assets/player/walk_right.png", TypeEnum.TEXTURE),
 
 
-    JERKINS_IDLE_DOWN("npcs/jerkins/jenkins_idle_down.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_UP("npcs/jerkins/jenkins_idle_up.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_LEFT("npcs/jerkins/jenkins_idle_left.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_RIGHT("npcs/jerkins/jenkins_idle_right.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_DOWN("npcs/jerkins/jenkins_walk_down.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_UP("npcs/jerkins/jenkins_walk_up.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_LEFT("npcs/jerkins/jenkins_walk_left.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_RIGHT("npcs/jerkins/jenkins_walk_right.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_DOWN("assets/npcs/jerkins/jenkins_idle_down.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_UP("assets/npcs/jerkins/jenkins_idle_up.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_LEFT("assets/npcs/jerkins/jenkins_idle_left.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_RIGHT("assets/npcs/jerkins/jenkins_idle_right.png", TypeEnum.TEXTURE),
+    JERKINS_WALK_DOWN("assets/npcs/jerkins/jenkins_walk_down.png", TypeEnum.TEXTURE),
+    JERKINS_WALK_UP("assets/npcs/jerkins/jenkins_walk_up.png", TypeEnum.TEXTURE),
+    JERKINS_WALK_LEFT("assets/npcs/jerkins/jenkins_walk_left.png", TypeEnum.TEXTURE),
+    JERKINS_WALK_RIGHT("assets/npcs/jerkins/jenkins_walk_right.png", TypeEnum.TEXTURE),
 
 
-    BLACKMARKETEER_IDLE_DOWN("npcs/blackmarketeer/blackmarketeer_idle_down.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_UP("npcs/blackmarketeer/blackmarketeer_idle_up.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_LEFT("npcs/blackmarketeer/blackmarketeer_idle_left.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_RIGHT("npcs/blackmarketeer/blackmarketeer_idle_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_DOWN("npcs/blackmarketeer/blackmarketeer_walk_down.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_UP("npcs/blackmarketeer/blackmarketeer_walk_up.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_LEFT("npcs/blackmarketeer/blackmarketeer_walk_left.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_RIGHT("npcs/blackmarketeer/blackmarketeer_walk_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_SLEEPING("npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 1),
+    BLACKMARKETEER_IDLE_DOWN("assets/npcs/blackmarketeer/blackmarketeer_idle_down.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_IDLE_UP("assets/npcs/blackmarketeer/blackmarketeer_idle_up.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_IDLE_LEFT("assets/npcs/blackmarketeer/blackmarketeer_idle_left.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_IDLE_RIGHT("assets/npcs/blackmarketeer/blackmarketeer_idle_right.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_WALK_DOWN("assets/npcs/blackmarketeer/blackmarketeer_walk_down.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_WALK_UP("assets/npcs/blackmarketeer/blackmarketeer_walk_up.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_WALK_LEFT("assets/npcs/blackmarketeer/blackmarketeer_walk_left.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_WALK_RIGHT("assets/npcs/blackmarketeer/blackmarketeer_walk_right.png", TypeEnum.TEXTURE),
+    BLACKMARKETEER_SLEEPING("assets/npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 1),
+
+
+    TEST_BALL("assets/npcs/test/test_ball.png", TypeEnum.TEXTURE),
+    TEST_ARROW("assets/npcs/test/test_arrow.png", TypeEnum.TEXTURE),
 
     //PROJECTILES AND WEAPONS
-    STONE("bullets/stone.png", TypeEnum.TEXTURE),
-    BULLET("bullets/bullet.png", TypeEnum.TEXTURE),
-    DEFAULT("weapons/default.png", TypeEnum.TEXTURE),
-    CHAINGUN("weapons/sniper.png", TypeEnum.TEXTURE),
-    USBLADE("weapons/usblade.png", TypeEnum.TEXTURE),
+    STONE("assets/bullets/stone.png", TypeEnum.TEXTURE),
+    BULLET("assets/bullets/bullet.png", TypeEnum.TEXTURE),
+    DEFAULT("assets/weapons/default.png", TypeEnum.TEXTURE),
+    CHAINGUN("assets/weapons/sniper.png", TypeEnum.TEXTURE),
+    USBLADE("assets/weapons/usblade.png", TypeEnum.TEXTURE),
 
     //MENU
-    ITAFLAG("dialogues/images/itaFlag.png", TypeEnum.TEXTURE),
-    ENGFLAG("dialogues/images/engFlag.jpg", TypeEnum.TEXTURE),
-    PLAY_BUTTON("menu/play.png", TypeEnum.TEXTURE),
-    SETTINGS_BUTTON("menu/settings.png", TypeEnum.TEXTURE),
-    QUIT_BUTTON("menu/quit.png", TypeEnum.TEXTURE),
-    BACKGROUND_1("menu/background.jpg", TypeEnum.TEXTURE),
-    BACKGROUND_2("menu/background-2.jpg", TypeEnum.TEXTURE),
+    ITAFLAG("assets/dialogues/images/itaFlag.png", TypeEnum.TEXTURE),
+    ENGFLAG("assets/dialogues/images/engFlag.jpg", TypeEnum.TEXTURE),
+    PLAY_BUTTON("assets/menu/play.png", TypeEnum.TEXTURE),
+    SETTINGS_BUTTON("assets/menu/settings.png", TypeEnum.TEXTURE),
+    QUIT_BUTTON("assets/menu/quit.png", TypeEnum.TEXTURE),
+    BACKGROUND_1("assets/menu/background.jpg", TypeEnum.TEXTURE),
+    BACKGROUND_2("assets/menu/background-2.jpg", TypeEnum.TEXTURE),
 
     //HUD
-    HEALTH_BAR("hud/health.png", TypeEnum.TEXTURE),
+    HEALTH_BAR("assets/hud/health.png", TypeEnum.TEXTURE),
 
     //MAP
-    SLUMS("map/slums//slums.tmx", TypeEnum.MAP),
-    RICH_DISTRICT("map/rich_disctirct/rich_district.tmx", TypeEnum.MAP),
-    PARK("map/park/park.tmx", TypeEnum.MAP),
-    REFLECTION_ARENA("map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
+    SLUMS("assets/map/slums//slums.tmx", TypeEnum.MAP),
+    RICH_DISTRICT("assets/map/rich_disctirct/rich_district.tmx", TypeEnum.MAP),
+    PARK("assets/map/park/park.tmx", TypeEnum.MAP),
+    REFLECTION_ARENA("assets/map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
 
     //SMALL BUILDINGS
-    ABANDONED_TURNED_ON("map/city/buildings/abandoned_turned_on.png", TypeEnum.TEXTURE),
-    ABANDONED_TURNED_OFF("map/city/buildings/abandoned_turned_off.png", TypeEnum.TEXTURE),
-    SYNTH_TURNED_ON("map/city/buildings/synth_turned_on.png", TypeEnum.TEXTURE),
-    SYNTH_TURNED_OFF("map/city/buildings/synth_turned_off.png", TypeEnum.TEXTURE),
-    ENERGYPLANT_TURNED_ON("map/city/buildings/energyplant_turned_on.png", TypeEnum.TEXTURE),
-    ENERGYPLANT_TURNED_OFF("map/city/buildings/energyplant_turned_off.png", TypeEnum.TEXTURE),
-    MARMOT_PIZZA("map/city/buildings/pizza_marmot.png", TypeEnum.TEXTURE),
+    ABANDONED_TURNED_ON("assets/map/city/buildings/abandoned_turned_on.png", TypeEnum.TEXTURE),
+    ABANDONED_TURNED_OFF("assets/map/city/buildings/abandoned_turned_off.png", TypeEnum.TEXTURE),
+    SYNTH_TURNED_ON("assets/map/city/buildings/synth_turned_on.png", TypeEnum.TEXTURE),
+    SYNTH_TURNED_OFF("assets/map/city/buildings/synth_turned_off.png", TypeEnum.TEXTURE),
+    ENERGYPLANT_TURNED_ON("assets/map/city/buildings/energyplant_turned_on.png", TypeEnum.TEXTURE),
+    ENERGYPLANT_TURNED_OFF("assets/map/city/buildings/energyplant_turned_off.png", TypeEnum.TEXTURE),
+    MARMOT_PIZZA("assets/map/city/buildings/pizza_marmot.png", TypeEnum.TEXTURE),
 
     //MEDIUM BUILDINGS
-    SKYSCRAPER_MEDIUM("map/city/buildings/skyscraper_medium.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_1_FRONT("map/city/buildings/skyscraper_1_front.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_1_BACK("map/city/buildings/skyscraper_1_back.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_1_SIDE("map/city/buildings/skyscraper_1_side.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_MEDIUM("assets/map/city/buildings/skyscraper_medium.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1_FRONT("assets/map/city/buildings/skyscraper_1_front.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1_BACK("assets/map/city/buildings/skyscraper_1_back.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_1_SIDE("assets/map/city/buildings/skyscraper_1_side.png", TypeEnum.TEXTURE),
 
     //BIG BUILDINGS
-    ELECTRO("map/city/buildings/electro.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_HIGH("map/city/buildings/skyscraper_high.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_SMALL("map/city/buildings/skyscraper_small.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_2_FRONT("map/city/buildings/skyscraper_2_front.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_2_BACK("map/city/buildings/skyscraper_2_back.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_3_FRONT("map/city/buildings/skyscraper_3_front.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_L("map/city/buildings/SKYSCRAPER_L.png", TypeEnum.TEXTURE),
-    SKYSCRAPER_U("map/city/buildings/SKYSCRAPER_U.png", TypeEnum.TEXTURE),
+    ELECTRO("assets/map/city/buildings/electro.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_HIGH("assets/map/city/buildings/skyscraper_high.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_SMALL("assets/map/city/buildings/skyscraper_small.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_2_FRONT("assets/map/city/buildings/skyscraper_2_front.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_2_BACK("assets/map/city/buildings/skyscraper_2_back.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_3_FRONT("assets/map/city/buildings/skyscraper_3_front.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_L("assets/map/city/buildings/SKYSCRAPER_L.png", TypeEnum.TEXTURE),
+    SKYSCRAPER_U("assets/map/city/buildings/SKYSCRAPER_U.png", TypeEnum.TEXTURE),
+
+    //MAP COMPONENTS
+    LAMP("assets/map/city/components/lamp.png", TypeEnum.TEXTURE),
+    TREE("assets/map/city/components/tree.png", TypeEnum.TEXTURE),
+    LONG_LAMP("assets/map/city/components/long_lamp.png", TypeEnum.TEXTURE),
 
     //OTHERS
-    LAMP("map/city/components/lamp.png", TypeEnum.TEXTURE),
-    LONG_LAMP("map/city/components/long_lamp.png", TypeEnum.TEXTURE),
-    MARKER("player/marker.png", TypeEnum.TEXTURE),
+    MARKER("assets/player/marker.png", TypeEnum.TEXTURE),
     SCOPE("assets/npcs/scope.png", TypeEnum.TEXTURE),
 
 
     //DIALOGUES
-    COMPLEX_DIALOGUE("dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),
-    SIMPLE_DIALOGUE("dialogues/images/dialogueBox.jpg", TypeEnum.TEXTURE),
-    CHOICE("dialogues/images/choice.png", TypeEnum.TEXTURE),
+    COMPLEX_DIALOGUE("assets/dialogues/images/bossDialogueBox.png", TypeEnum.TEXTURE),
+    SIMPLE_DIALOGUE("assets/dialogues/images/dialogueBox.jpg", TypeEnum.TEXTURE),
+    CHOICE("assets/dialogues/images/choice.png", TypeEnum.TEXTURE),
 
     ADEPTUS_1("adeptus1_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_2("adeptus2_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_3("adeptus3_JSON.json", TypeEnum.DIALOGUE),
     ADEPTUS_4("adeptus4_JSON.json", TypeEnum.DIALOGUE),
+    GIGI_DIAL("gigi.json", TypeEnum.DIALOGUE),
 
     
     //MUSIC
-    REFLECTION_1("audio/reflection_1.mp3", TypeEnum.AUDIO),
-    REFLECTION_2("audio/reflection_2.mp3", TypeEnum.AUDIO),
-    REFLECTION_3("audio/reflection_3.mp3", TypeEnum.AUDIO),
-    REFLECTION_4("audio/reflection_4.mp3", TypeEnum.AUDIO),
-    REFLECTION_5("audio/reflection_5.mp3", TypeEnum.AUDIO),
+    REFLECTION_1("assets/audio/reflection_1.mp3", TypeEnum.AUDIO),
+    REFLECTION_2("assets/audio/reflection_2.mp3", TypeEnum.AUDIO),
+    REFLECTION_3("assets/audio/reflection_3.mp3", TypeEnum.AUDIO),
+    REFLECTION_4("assets/audio/reflection_4.mp3", TypeEnum.AUDIO),
+    REFLECTION_5("assets/audio/reflection_5.mp3", TypeEnum.AUDIO),
 
 
     //SCRIPTS
@@ -114,7 +122,9 @@ public enum ResourceEnum {
     TEST_2("assets/scripts/npcs/reflection/test2.gcs", TypeEnum.SCRIPT),
     TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
     MEET_1("assets/scripts/npcs/reflection/meet1.gcs", TypeEnum.SCRIPT),
-    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT);
+    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT),
+    GIGI_SCRIPT("assets/scripts/npcs/reflection/gigi.gcs", TypeEnum.SCRIPT),
+    TEST_BALL_SCRIPT("assets/scripts/npcs/reflection/test_ball.gcs", TypeEnum.SCRIPT);
 
 
 

@@ -11,6 +11,7 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected TextureEnum textureEnum;
     protected Story story;
     protected ResourceEnum autoStartedScript;
+    protected ResourceEnum startingAnimation;
 
     public abstract T getThis();
 
@@ -46,6 +47,11 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
 
     public T autoStartedScript(ResourceEnum e){
         this.autoStartedScript = e;
+        return getThis();
+    }
+
+    public T startingAnimation(ResourceEnum e){
+        this.startingAnimation = e;
         return getThis();
     }
 }

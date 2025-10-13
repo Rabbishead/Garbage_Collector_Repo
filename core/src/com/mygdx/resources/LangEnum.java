@@ -1,8 +1,8 @@
 package com.mygdx.resources;
 
 public enum LangEnum {
-    ITA("dialogues/entities/ita"),
-    ENG("dialogues/entities/eng");
+    ITA("assets/dialogues/entities/ita"),
+    ENG("assets/dialogues/entities/eng");
 
     public String label;
 

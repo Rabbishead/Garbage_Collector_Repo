@@ -8,14 +8,14 @@ import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
 
-public class ForegroundMapComponent extends GameActor {
+public class MapComponent extends GameActor {
 
     private Hitbox hitbox = new Hitbox();
     private float fade = 1;
 
     private final AnimationManager animationManager;
 
-    public ForegroundMapComponent(ForegroundMapComponentBuilder builder) {
+    public MapComponent(MapComponentBuilder builder) {
         super();
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
@@ -64,7 +64,7 @@ public class ForegroundMapComponent extends GameActor {
         hitbox.setPosition(getX(), getY());
     }
 
-    public static class ForegroundMapComponentBuilder {
+    public static class MapComponentBuilder {
         protected Vector2 coordinates;
         protected ResourceEnum[] textureEnum;
         protected int width;
@@ -74,43 +74,48 @@ public class ForegroundMapComponent extends GameActor {
         protected ResourceEnum startingAnimation;
         protected boolean fade = false;
 
-        public ForegroundMapComponentBuilder coordinates(Vector2 coordinates) {
+        public MapComponentBuilder coordinates(Vector2 coordinates) {
             this.coordinates = coordinates;
             return this;
         }
 
-        public ForegroundMapComponentBuilder texture(ResourceEnum... texture) {
+        public MapComponentBuilder texture(ResourceEnum... texture) {
             this.textureEnum = texture;
             return this;
         }
 
-        public ForegroundMapComponentBuilder width(int width) {
+        public MapComponentBuilder width(int width) {
             this.width = width;
             return this;
         }
 
-        public ForegroundMapComponentBuilder animationRate(float animationRate) {
+        public MapComponentBuilder height(int height) {
+            this.height = height;
+            return this;
+        }
+
+        public MapComponentBuilder animationRate(float animationRate) {
             this.animationRate = animationRate;
             return this;
         }
 
-        public ForegroundMapComponentBuilder delay(int delay) {
+        public MapComponentBuilder delay(int delay) {
             this.delay = delay;
             return this;
         }
 
-        public ForegroundMapComponentBuilder startingAnimation(ResourceEnum startingAnimation) {
+        public MapComponentBuilder startingAnimation(ResourceEnum startingAnimation) {
             this.startingAnimation = startingAnimation;
             return this;
         }
 
-        public ForegroundMapComponentBuilder fade() {
+        public MapComponentBuilder fade() {
             this.fade = true;
             return this;
         }
 
-        public ForegroundMapComponent build() {
-            return new ForegroundMapComponent(this);
+        public MapComponent build() {
+            return new MapComponent(this);
         }
     }
 }
