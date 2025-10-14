@@ -1,12 +1,12 @@
 package com.mygdx.controllers.gunControls.guns;
 
 
+import com.mygdx.hud.Hud;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.gunControls.projectiles.Projectile;
 import com.mygdx.entities.Player;
-import com.mygdx.HUD.HUD;
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.stage.GCStage;
@@ -41,7 +41,7 @@ public class ChainGun extends BaseGun {
         super.act(delta);
         DelayManager.updateDelay(this);
         DelayManager.updateDelay(reload);
-        HUD.get().setDebugSting(bullets + "");
+        Hud.get().setDebugSting(bullets + "");
 
         if (!DelayManager.isDelayOver(this))
             return;

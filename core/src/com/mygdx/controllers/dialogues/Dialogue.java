@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.bladecoder.ink.runtime.Choice;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Data;
-import com.mygdx.HUD.HUD;
+import com.mygdx.hud.Hud;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class Dialogue extends Actor {
     public Dialogue(Story story) {
         setX(0);
         setY(0);
-        HUD.get().addComponent(this);
+        Hud.get().addComponent(this);
         this.story = story;
         try {
             story.resetState();
@@ -74,7 +74,7 @@ public class Dialogue extends Actor {
                 .colspan(100);
         table.row();
 
-        HUD.get().addComponent(table);
+        Hud.get().addComponent(table);
 
         justRan = true;
 
@@ -151,7 +151,7 @@ public class Dialogue extends Actor {
             }
         });
 
-        HUD.get().addComponent(clickCatcher);
+        Hud.get().addComponent(clickCatcher);
     }
 
     public void showChoices(List<Choice> choicesList) {

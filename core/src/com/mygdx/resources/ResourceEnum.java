@@ -50,8 +50,8 @@ public enum ResourceEnum {
     BACKGROUND_1("assets/menu/background.jpg", TypeEnum.TEXTURE),
     BACKGROUND_2("assets/menu/background-2.jpg", TypeEnum.TEXTURE),
 
-    //HUD
-    HEALTH_BAR("assets/HUD/health.png", TypeEnum.TEXTURE),
+    //hud
+    HEALTH_BAR("assets/hud/health.png", TypeEnum.TEXTURE),
 
     //MAP
     SLUMS("assets/map/slums//slums.tmx", TypeEnum.MAP),

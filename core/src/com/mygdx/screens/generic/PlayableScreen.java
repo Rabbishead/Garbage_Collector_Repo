@@ -4,12 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-
+import com.mygdx.hud.Hud;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.entities.Player;
-import com.mygdx.HUD.HUD;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
 import com.mygdx.resources.ResourceEnum;
@@ -27,7 +26,7 @@ public abstract class PlayableScreen extends GenericScreen {
 
     protected boolean stopGame = false;
 
-    protected HUD hud;
+    protected Hud hud;
 
     protected TileSetManager tileSetManager;
 
@@ -55,8 +54,8 @@ public abstract class PlayableScreen extends GenericScreen {
         stage.addActor(player);
         stage.setKeyboardFocus(player);
 
-        hud = new HUD();
-        HUD.set(hud);
+        hud = new Hud();
+        Hud.set(hud);
         this.name = map;
     }
 
@@ -65,7 +64,7 @@ public abstract class PlayableScreen extends GenericScreen {
         super.show();
 
         HitboxHandler.set(hitboxHandler);
-        HUD.set(hud);
+        Hud.set(hud);
 
         CameraController.initCamera();
 
