@@ -6,8 +6,8 @@ import com.mygdx.resources.ResourceEnum;
 public class MapComponentBuilder {
     protected Vector2 coordinates;
     protected ResourceEnum[] textureEnum;
-    protected int width;
-    protected int height;
+    protected int width = 1;
+    protected int height = 1;
     protected float animationRate = 0.1f;
     protected float delay = 0;
     protected ResourceEnum startingAnimation;
