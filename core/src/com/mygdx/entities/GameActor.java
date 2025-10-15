@@ -12,6 +12,15 @@ public class GameActor extends Actor implements Telegraph {
     protected final AutoMovementManager autoMovementManager = new AutoMovementManager(this);
     protected AnimationManager animationManager;
 
+    public Vector2 center = new Vector2();
+
+
+    @Override
+    protected void positionChanged() {
+        super.positionChanged();
+        center.x = getX() + getOriginX();
+        center.y = getY() + getOriginY();
+    }
 
     public void setCoords(Vector2 coords) {
         setX(coords.x);

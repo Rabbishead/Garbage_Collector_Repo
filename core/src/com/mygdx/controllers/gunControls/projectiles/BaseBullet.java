@@ -9,7 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.controllers.hitboxes.Collider;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.controllers.messages.ObjectInfo;
+import com.mygdx.effects.Effect;
 import com.mygdx.movement.BaseMovement;
+import com.mygdx.resources.ResourceEnum;
+import com.mygdx.stage.GCStage;
 
 public class BaseBullet extends Actor {
     protected Sprite s;
@@ -37,7 +40,7 @@ public class BaseBullet extends Actor {
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(ally ? Tags.ENEMY : Tags.PLAYER);
         collider.setOnHit(hitbox -> {
-            System.out.println("Shot");
+            GCStage.get().addActor(new Effect(ResourceEnum.EXPLOSION, GCStage.get().getPlayer().getX(), GCStage.get().getPlayer().getY()));
             delete();
         });
         collider.register();

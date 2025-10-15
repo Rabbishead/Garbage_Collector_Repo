@@ -12,6 +12,7 @@ import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.gunControls.GunController;
 import com.mygdx.controllers.hitboxes.Collider;
+import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
@@ -22,8 +23,10 @@ public class Player extends ScriptableActor{
     private final PlayerMovement movement;
     private final AnimationManager animationManager;
     private Collider collider = new Collider();
-    public static Vector2 center = new Vector2();
+    private Hitbox hitbox = new Hitbox();
     private boolean fighting;
+
+    
 
 
     public Player(Vector2 coordinates) {
@@ -37,12 +40,21 @@ public class Player extends ScriptableActor{
         collider.setTags(Tags.PLAYER);
         collider.setSearchTags(Tags.NPC, Tags.BUILDING, Tags.PROJECTILE);
         collider.register();
+
+        hitbox = new Hitbox(center, getWidth(), getHeight(), 0, true);
+        hitbox.setTags(Tags.PLAYER);
+        hitbox.setOnHit((collider) -> {
+            System.out.println("Colpito!");
+            System.out.println(collider.getExtraInfo().getIntegerInfo("damage"));
+        });
+        hitbox.register();
+
         setPosition(coordinates.x, coordinates.y);
 
         GunController.get().loadGuns();
         CameraController.calculateMouseAngle(center);
 
-        animationManager = new AnimationManager(16, TextureEnum.PLAYER.getAnimationRate(), TextureEnum.PLAYER.getDelay(), TextureEnum.PLAYER);
+        animationManager = new AnimationManager(16, TextureEnum.PLAYER.getAnimationRate(), TextureEnum.PLAYER.getDelay(), false,  TextureEnum.PLAYER);
             
         this.debug();
 
@@ -76,9 +88,8 @@ public class Player extends ScriptableActor{
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
         collider.setPosition();
+        hitbox.setPosition();
     }
 
     @Override
@@ -98,5 +109,9 @@ public class Player extends ScriptableActor{
 
 
         fighting = !fighting;
+    }
+
+    public Vector2 getCenter() {
+        return center;
     }
 }

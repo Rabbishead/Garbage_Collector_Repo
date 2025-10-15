@@ -14,7 +14,7 @@ public class Effect extends GameActor {
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
         float delay = texture.delay != -1 ? texture.delay : 0f;
-        animationManager = new AnimationManager(32, animationRate, delay, texture);
+        animationManager = new AnimationManager(32, animationRate, delay, true, texture);
 
         this.addAction(Actions.sequence(
             Actions.delay(duration),
@@ -26,7 +26,7 @@ public class Effect extends GameActor {
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
         float delay = texture.delay != -1 ? texture.delay : 0f;
-        animationManager = new AnimationManager(32, animationRate, delay, texture);
+        animationManager = new AnimationManager(32, animationRate, delay, true, texture);
 
         shouldDoOnce = true;
     }
@@ -36,6 +36,8 @@ public class Effect extends GameActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(animationManager.getCurrentFrame(), getX(), getY());
+
+        if(shouldDoOnce && animationManager.isFinishedOnce()) remove();
     }
 
     @Override

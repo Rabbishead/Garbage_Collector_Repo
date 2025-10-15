@@ -121,7 +121,7 @@ public enum ResourceEnum {
 
 
     //EFFECTS
-    EXPLOSION("assets/effects/explosion.png", TypeEnum.TEXTURE);
+    EXPLOSION("assets/effects/explosion.png", TypeEnum.TEXTURE, 0.05f, 0);
 
     public String label;
     public TypeEnum type;
