@@ -116,11 +116,12 @@ public enum ResourceEnum {
     TEST_2("assets/scripts/npcs/reflection/test2.gcs", TypeEnum.SCRIPT),
     TEST_3("assets/scripts/npcs/reflection/test3.gcs", TypeEnum.SCRIPT),
     MEET_1("assets/scripts/npcs/reflection/meet1.gcs", TypeEnum.SCRIPT),
-    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT);
+    MEET_2("assets/scripts/npcs/reflection/meet2.gcs", TypeEnum.SCRIPT),
 
 
 
-    //SOUND EFFECTS
+    //EFFECTS
+    EXPLOSION("assets/effects/explosion.png", TypeEnum.TEXTURE);
 
     public String label;
     public TypeEnum type;

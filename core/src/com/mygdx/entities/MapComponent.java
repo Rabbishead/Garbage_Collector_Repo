@@ -19,13 +19,13 @@ public class MapComponent extends GameActor {
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
 
-        animationManager = new AnimationManager(builder.width * 32, builder.animationRate, builder.delay, builder.textureEnum);
+        animationManager = new AnimationManager((int)builder.width, builder.animationRate, builder.delay, builder.textureEnum);
 
         if (builder.fade) {
 
             hitbox = new Hitbox(
-                    new Vector2(getX() + builder.width * 16, getY() + 16 + builder.height * 16),
-                    builder.width * 32, (builder.height - 1) * 32, true);
+                    new Vector2(getX() + builder.width * 0.5f, getY() + 16 + builder.height * 0.5f),
+                    builder.width, builder.height - 32, true);
             hitbox.setTags(Tags.BUILDING);
             hitbox.setOnHit((collider) -> {
                 fade = 0.2f;
