@@ -78,6 +78,7 @@ public class AnimationManager {
             return;
 
         stateTime += delta; // Advances the animation
+
         // Conditions to pause:
         // currentDelay is not zero, the option to pause was selected
         // frame index is zero, we are on the first frame of the animation
@@ -96,8 +97,9 @@ public class AnimationManager {
         }
 
         // when we move on from frame on
-        if (animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) != 0)
+        if (animationMap.get(currentAnimation).getKeyFrameIndex(stateTime) != 0){
             alreadyPausedOnce = false;
+        }
 
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime, true);
     }

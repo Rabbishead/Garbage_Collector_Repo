@@ -37,6 +37,7 @@ public class BaseBullet extends Actor {
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(ally ? Tags.ENEMY : Tags.PLAYER);
         collider.setOnHit(hitbox -> {
+            System.out.println("Shot");
             delete();
         });
         collider.register();

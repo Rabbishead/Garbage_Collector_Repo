@@ -8,6 +8,7 @@ import com.mygdx.hud.Hud;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
+import com.mygdx.effects.Effect;
 import com.mygdx.entities.Player;
 import com.mygdx.map.TileMapCollisionsManager;
 import com.mygdx.map.TileSetManager;
@@ -91,6 +92,9 @@ public abstract class PlayableScreen extends GenericScreen {
         if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
             ScreensManager.setScreen(Screens.PAUSE_SCREEN);
             return;
+        }
+        if(Gdx.input.isKeyJustPressed(Keys.U)){
+            GCStage.get().addActor(new Effect(ResourceEnum.EXPLOSION, player.getX() + 32, player.getY()));
         }
         if (Gdx.input.isKeyJustPressed(Keys.M)) {
             SavingsManager.save();

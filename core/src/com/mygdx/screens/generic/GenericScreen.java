@@ -30,10 +30,7 @@ public abstract class GenericScreen extends ScreenAdapter {
         GCStage.set(stage);
         Gdx.input.setInputProcessor(stage);
 
-
         CameraController.initCamera();
-
-        
     }
 
     @Override

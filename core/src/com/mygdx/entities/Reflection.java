@@ -92,7 +92,7 @@ public class Reflection extends NPC {
             }
         }
         if(scope.getCoords().dst(playerPos) < 20 && DelayManager.isDelayOver(scope)){
-            System.out.println("HEYHEYHEY");
+            System.out.println("SHOOTING");
             getStage().addActor(new Projectile(center, 0, CameraController.getAngle(getCoords(), scope.getCoords()), false));
             DelayManager.resetDelay(scope);
         } 

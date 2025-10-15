@@ -1,20 +1,46 @@
 package com.mygdx.effects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.mygdx.animations.AnimationManager;
+import com.mygdx.entities.GameActor;
+import com.mygdx.resources.ResourceEnum;
 
-public class Effect extends Actor {
+public class Effect extends GameActor {
+
+    private boolean shouldDoOnce;
+
+    public Effect(ResourceEnum texture, float x, float y, float duration){
+        setCoords(x, y);
+        float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
+        float delay = texture.delay != -1 ? texture.delay : 0f;
+        animationManager = new AnimationManager(32, animationRate, delay, texture);
+
+        this.addAction(Actions.sequence(
+            Actions.delay(duration),
+            Actions.run(this::remove)
+        ));
+    }
+
+    public Effect(ResourceEnum texture, float x, float y){
+        setCoords(x, y);
+        float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
+        float delay = texture.delay != -1 ? texture.delay : 0f;
+        animationManager = new AnimationManager(32, animationRate, delay, texture);
+
+        shouldDoOnce = true;
+    }
     
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        // TODO Auto-generated method stub
         super.draw(batch, parentAlpha);
+        batch.draw(animationManager.getCurrentFrame(), getX(), getY());
     }
 
     @Override
     public void act(float delta) {
-        // TODO Auto-generated method stub
         super.act(delta);
+        animationManager.updateAnimation(delta);
     }
 }

@@ -4,15 +4,23 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.animations.AnimationManager;
 import com.mygdx.movement.AutoMovementManager;
 
 public class GameActor extends Actor implements Telegraph {
 
     protected final AutoMovementManager autoMovementManager = new AutoMovementManager(this);
+    protected AnimationManager animationManager;
+
 
     public void setCoords(Vector2 coords) {
         setX(coords.x);
         setY(coords.y);
+    }
+
+    public void setCoords(float x, float y) {
+        setX(x);
+        setY(y);
     }
 
     public Vector2 getCoords() {

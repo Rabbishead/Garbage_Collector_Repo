@@ -35,7 +35,7 @@ public class Player extends ScriptableActor{
 
         collider = new Collider(center, getWidth(), getHeight());
         collider.setTags(Tags.PLAYER);
-        collider.setSearchTags(Tags.NPC, Tags.BUILDING);
+        collider.setSearchTags(Tags.NPC, Tags.BUILDING, Tags.PROJECTILE);
         collider.register();
         setPosition(coordinates.x, coordinates.y);
 
