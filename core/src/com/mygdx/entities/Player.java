@@ -26,9 +26,6 @@ public class Player extends ScriptableActor{
     private Hitbox hitbox = new Hitbox();
     private boolean fighting;
 
-    
-
-
     public Player(Vector2 coordinates) {
         GCStage.get().setPlayer(this);
         setTouchable(Touchable.enabled);
@@ -38,14 +35,13 @@ public class Player extends ScriptableActor{
 
         collider = new Collider(center, getWidth(), getHeight());
         collider.setTags(Tags.PLAYER);
-        collider.setSearchTags(Tags.NPC, Tags.BUILDING, Tags.PROJECTILE);
+        collider.setSearchTags(Tags.NPC, Tags.BUILDING, Tags.PROJECTILE, Tags.SCOPE);
         collider.register();
 
         hitbox = new Hitbox(center, getWidth(), getHeight(), 0, true);
         hitbox.setTags(Tags.PLAYER);
         hitbox.setOnHit((collider) -> {
             System.out.println("Colpito!");
-            System.out.println(collider.getExtraInfo().getIntegerInfo("damage"));
         });
         hitbox.register();
 

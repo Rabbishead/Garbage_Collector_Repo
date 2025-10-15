@@ -54,20 +54,6 @@ public class NPC extends ScriptableActor{
                 return;
             }
         });
-        hitbox.setOnHit(collider -> {
-            if (collider.containsTag(Tags.PROJECTILE)) {
-                Integer dmg = collider.getExtraInfo().getIntegerInfo("damage");
-                if (dmg != null)
-                    lf -= dmg;
-                else
-                    System.out.println("no damage value");
-
-                if (lf <= 0) {
-                    this.remove();
-                    hitbox.unregister();
-                }
-            }
-        });
         hitbox.register();
         setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
 

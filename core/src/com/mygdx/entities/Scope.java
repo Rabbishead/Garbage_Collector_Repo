@@ -14,41 +14,54 @@ import com.mygdx.stage.GCStage;
 public class Scope extends GameActor{
     private Texture texture;
     private Hitbox hitbox = new Hitbox();
+    private boolean isFighting = GCStage.get().getPlayer().isFighting();
+    public boolean hitplayer = false;
 
 
     public Scope(Vector2 coords){
         this.texture = RM.get().getTexture(ResourceEnum.SCOPE);
-        setCoords(coords);
+
         setSize(texture.getWidth(), texture.getHeight());
         setOrigin(getWidth() / 2, getHeight() / 2);
 
-
-        hitbox = new Hitbox(center, getWidth(), getHeight(), 0, false);
-        hitbox.setTags(Tags.PLAYER);
-        hitbox.setOnHit((collider) -> {
-            System.out.println("Colpito!");
-            System.out.println(collider.getExtraInfo().getIntegerInfo("damage"));
+        hitbox = new Hitbox(center, getWidth(), getHeight(), 0, true);
+        hitbox.setTags(Tags.SCOPE);
+        hitbox.setOnFrame((collider) -> {
+            if (!hitbox.touching(collider))
+                return;
+            if (!collider.containsTag(Tags.PLAYER))
+                return;
+            hitplayer = true;
+        });
+        hitbox.setOnLeave(collider -> {
+            hitplayer = false;
         });
         hitbox.register();
 
         System.out.println(center);
 
-        debug();
+        this.debug();
+        setCoords(coords);
     }
+
     public Scope(float x, float y){
         this(new Vector2(x, y));
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, center.x, center.y);
+        if (!isFighting) return;
+        super.draw(batch, parentAlpha);
+        batch.draw(texture, center.x - getOriginX(), center.y - getOriginY());
     }
 
     @Override
     public void act(float delta) {
-        addAction(Actions.moveTo(GCStage.get().getPlayer().center.x, GCStage.get().getPlayer().center.y, 2));
-
         super.act(delta);
+        isFighting = GCStage.get().getPlayer().isFighting();
+        if (!isFighting) return;
+
+        addAction(Actions.moveTo(GCStage.get().getPlayer().center.x - getOriginX(), GCStage.get().getPlayer().center.y - getOriginY(), 2));
     }
 
     @Override
@@ -57,6 +70,7 @@ public class Scope extends GameActor{
         hitbox.setPosition();
     }
 
+    @Override
     public void drawDebug(ShapeRenderer shapeRenderer) {
         shapeRenderer.polygon(hitbox.getTransformedVertices());
     }

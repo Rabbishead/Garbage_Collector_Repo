@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.delay.DelayManager;
 import com.mygdx.controllers.gunControls.projectiles.Projectile;
+import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.states.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
@@ -27,19 +28,34 @@ public class Reflection extends NPC {
         stateController.setMovementState(StateController.MovementState.FOLLOW_PLAYER);
         GCStage.get().subscribe(this, MSG.SHOT);
         scope = new Scope(getCoords());
+        GCStage.get().addActor(scope);
         DelayManager.registerObject(scope, 100f);
+
+        hitbox.setOnHit(collider -> {
+            if (collider.containsTag(Tags.PROJECTILE)) {
+                Integer dmg = collider.getExtraInfo().getIntegerInfo("damage");
+                if (dmg != null)
+                    lf -= dmg;
+                else
+                    System.out.println("no damage value");
+
+                if (lf <= 0) {
+                    this.remove();
+                    scope.remove();
+                    hitbox.unregister();
+                }
+            }
+        });
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(GCStage.get().getPlayer().isFighting()) scope.draw(batch, parentAlpha);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(GCStage.get().getPlayer().isFighting())  scope.act(delta);
         DelayManager.updateDelay(scope);
         Vector2 playerPos = GCStage.get().getPlayer().getCoords();
 
@@ -91,7 +107,7 @@ public class Reflection extends NPC {
                 System.out.println("NOT IN A STATE");
             }
         }
-        if(scope.getCoords().dst(playerPos) < 20 && DelayManager.isDelayOver(scope)){
+        if(scope.hitplayer && DelayManager.isDelayOver(scope)) {
             System.out.println("SHOOTING");
             getStage().addActor(new Projectile(center, 0, CameraController.getAngle(getCoords(), scope.getCoords()), false));
             DelayManager.resetDelay(scope);

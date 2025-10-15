@@ -7,5 +7,6 @@ public enum Tags {
     PLAYER,
     BUILDING,
     NPC,
-    ENEMY
+    ENEMY,
+    SCOPE
 }

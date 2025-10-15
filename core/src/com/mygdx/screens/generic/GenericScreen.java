@@ -22,12 +22,14 @@ public abstract class GenericScreen extends ScreenAdapter {
     protected GenericScreen() {
         camera = new OrthographicCamera();
         stage = new GCStage(new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, camera));
+        GCStage.set(stage);
     }
 
     @Override
     public void show() {
 
         GCStage.set(stage);
+
         Gdx.input.setInputProcessor(stage);
 
         CameraController.initCamera();

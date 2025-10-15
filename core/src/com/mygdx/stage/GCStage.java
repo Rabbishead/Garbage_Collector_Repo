@@ -21,7 +21,6 @@ public class GCStage extends Stage {
         instance = stage;
     }
 
-
     public GCStage(Viewport v) {
         super(v);
         stageMsg = new MessageDispatcher();
