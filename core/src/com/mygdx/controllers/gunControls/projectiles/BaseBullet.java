@@ -40,7 +40,8 @@ public class BaseBullet extends Actor {
         collider.setTags(Tags.PROJECTILE);
         collider.setSearchTags(ally ? Tags.ENEMY : Tags.PLAYER);
         collider.setOnHit(hitbox -> {
-            GCStage.get().addActor(new Effect(ResourceEnum.EXPLOSION, GCStage.get().getPlayer().getX(), GCStage.get().getPlayer().getY()));
+            Vector2 centerWorldCoords = movement.getCenterWorldCoords();
+            GCStage.get().addActor(new Effect(ResourceEnum.EXPLOSION, centerWorldCoords.x, centerWorldCoords.y));
             delete();
         });
         collider.register();

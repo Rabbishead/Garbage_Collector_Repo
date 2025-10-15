@@ -22,7 +22,7 @@ public class NPC extends ScriptableActor{
     protected Hitbox hitbox = new Hitbox();
     public Vector2 center = new Vector2();
     public Script script;
-    private String name;
+    protected String name;
 
     public NPC(NPCBuilder npcBuilder) {
         super();

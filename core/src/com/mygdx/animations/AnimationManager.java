@@ -126,6 +126,7 @@ public class AnimationManager {
     }
 
     public void setCurrentAnimation(ResourceEnum ani) {
+        if (currentAnimation == ani) return;
         currentAnimation = ani;
         currentDelay = ani.delay != -1 ? ani.delay : defaultDelay;
         pauser.clearActions();

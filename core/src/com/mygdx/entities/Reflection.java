@@ -13,6 +13,7 @@ import com.mygdx.controllers.hitboxes.Tags;
 import com.mygdx.controllers.messages.MSG;
 import com.mygdx.controllers.states.StateController;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.resources.ResourceEnum;
 import com.mygdx.stage.GCStage;
 
 import java.util.Random;
@@ -57,6 +58,21 @@ public class Reflection extends NPC {
     public void act(float delta) {
         super.act(delta);
         DelayManager.updateDelay(scope);
+
+        float angler = CameraController.getAngle(center, scope.center);
+        String direction = "-";
+
+        if (angler > 55 && angler <= 125)
+            direction = "WALK_UP";
+        else if (angler > 125 && angler <= 235)
+            direction = "WALK_LEFT";
+        else if (angler > 235 && angler <= 305)
+            direction = "WALK_DOWN";
+        else if (angler > 305 || angler <= 55)
+            direction = "WALK_RIGHT";
+        animationManager.setCurrentAnimation(ResourceEnum.valueOf(name + "_" + direction));
+        animationManager.updateAnimation(delta);
+
         Vector2 playerPos = GCStage.get().getPlayer().getCoords();
 
         if (!GCStage.get().getPlayer().isFighting()) {
@@ -107,11 +123,12 @@ public class Reflection extends NPC {
                 System.out.println("NOT IN A STATE");
             }
         }
-        if(scope.hitplayer && DelayManager.isDelayOver(scope)) {
+        if (scope.hitplayer && DelayManager.isDelayOver(scope)) {
             System.out.println("SHOOTING");
-            getStage().addActor(new Projectile(center, 0, CameraController.getAngle(getCoords(), scope.getCoords()), false));
+            getStage().addActor(
+                    new Projectile(center, 0, CameraController.getAngle(getCoords(), scope.getCoords()), false));
             DelayManager.resetDelay(scope);
-        } 
+        }
     }
 
     @Override
@@ -121,13 +138,13 @@ public class Reflection extends NPC {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(msg.message == MSG.SHOT.code){
+        if (msg.message == MSG.SHOT.code) {
             System.out.println("HEY");
         }
         return true;
     }
 
-    public static class ReflectionBuilder extends NPCBuilder{    
+    public static class ReflectionBuilder extends NPCBuilder {
 
         public Reflection build() {
             return new Reflection(this);
