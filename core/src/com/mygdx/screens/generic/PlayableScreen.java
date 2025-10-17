@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.hud.Hud;
+import com.mygdx.Money;
 import com.mygdx.controllers.camera.CameraController;
 import com.mygdx.controllers.hitboxes.HitboxHandler;
 import com.mygdx.controllers.messages.MSG;
@@ -50,7 +51,7 @@ public abstract class PlayableScreen extends GenericScreen {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));
             player.moveTo(tileSetManager.getExitPoint().cpy().add(8, 8));
         } else
-            player = new Player(SavingsManager.getPlayerCoordinates());
+            player = new Player(SavingsManager.getSavings().getPlayerCoordinates());
 
         stage.addActor(player);
         stage.setKeyboardFocus(player);
@@ -72,7 +73,7 @@ public abstract class PlayableScreen extends GenericScreen {
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
         GCStage.get().subscribe(tileSetManager, MSG.BLOCK_WALLS, MSG.SWAP_FIGHT_STATE);
         GCStage.get().subscribe(player, MSG.SWAP_FIGHT_STATE);
-        if(SavingsManager.isPlayerFighting()) GCStage.get().send(MSG.SWAP_FIGHT_STATE, MSG.BLOCK_WALLS); //turns on combat mode
+        if(SavingsManager.getSavings().isFightging()) GCStage.get().send(MSG.SWAP_FIGHT_STATE, MSG.BLOCK_WALLS); //turns on combat mode
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING) && !player.isAutoWalking()) {
             player.setCoords(tileSetManager.getCoord().cpy().add(8, 8));
@@ -98,6 +99,9 @@ public abstract class PlayableScreen extends GenericScreen {
         }
         if (Gdx.input.isKeyJustPressed(Keys.M)) {
             SavingsManager.save();
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+            Money.gainMoney(50);
         }
         if (Gdx.input.isKeyJustPressed(Keys.R)) {
             GCStage.get().send(MSG.DIALOGUE_TRIGGERED);

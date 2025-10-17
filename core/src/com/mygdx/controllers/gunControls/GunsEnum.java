@@ -4,8 +4,8 @@ import com.mygdx.controllers.gunControls.guns.*;
 import com.mygdx.savings.SavingsManager;
 
 public enum GunsEnum {
-    CHAINGUN(new ChainGun(), SavingsManager.getSelectedGun(0)),
-    USBLADE(new Usblade(), SavingsManager.getSelectedGun(1));
+    CHAINGUN(new ChainGun(), SavingsManager.getSavings().getSelectedGun(0)),
+    USBLADE(new Usblade(), SavingsManager.getSavings().getSelectedGun(1));
 
     private final BaseGun gun;
     private boolean active;

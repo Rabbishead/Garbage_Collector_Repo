@@ -7,14 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
-import com.mygdx.screens.Screens;
 
 public class SavingsManager {
     private static Json json;
-    private static Settings s;
+    private static Savings s;
 
     public static void save() {
         if (json == null) {
@@ -32,7 +30,7 @@ public class SavingsManager {
         }
         FileHandle file = Gdx.files.local("savings/savings.json");
         String jsonFile = file.readString();
-        s = json.fromJson(Settings.class, jsonFile);
+        s = json.fromJson(Savings.class, jsonFile);
     }
 
     private static void writeFile(String s) {
@@ -45,24 +43,8 @@ public class SavingsManager {
         }
     }
 
-    public static Vector2 getPlayerCoordinates() {
-        return s.getPlayerCoordinates();
-    }
-
-    public static boolean isPlayerFighting(){
-        return s.isFightging();
-    }
-
-    public static Screens getLastRoom() {
-        return s.getLastRoom();
-    }
-
-    public static boolean getFlag(int index) {
-        return s.getFlag(index);
-    }
-
-    public static boolean getSelectedGun(int index) {
-        return s.getSelectedGun(index);
+    public static Savings getSavings(){
+        return s;
     }
 
     public static void loadDefaultIfNeeded() {

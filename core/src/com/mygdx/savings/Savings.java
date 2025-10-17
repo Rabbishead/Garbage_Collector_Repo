@@ -3,16 +3,17 @@ package com.mygdx.savings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-
+import com.mygdx.Money;
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
 import com.mygdx.stage.GCStage;
 
-public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
+public class Savings implements com.badlogic.gdx.utils.Json.Serializable {
     private Screens lastRoom;
     private boolean fightging;
     private Vector2 lastRoomCoordinates = new Vector2();
     private boolean[] flags, selectedGuns = new boolean[] { true, true };
+    private int money;
 
     public void updateData() {
         lastRoom = ScreensManager.getLastPlayableActiveScreen();
@@ -21,6 +22,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
         fightging = GCStage.get().getPlayer().isFighting();
         flags = new boolean[] { true, true, false };
         selectedGuns = new boolean[] { true, true };
+        money = Money.getMoney();
     }
 
     @Override
@@ -30,6 +32,7 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
         json.writeValue("FIGHTING", fightging);
         json.writeValue("FLAGS", flags);
         json.writeValue("SELECTED_GUNS", selectedGuns);
+        json.writeValue("MONEY", money);
     }
 
     @Override
@@ -43,6 +46,8 @@ public class Settings implements com.badlogic.gdx.utils.Json.Serializable {
 
         //flags = jsonData.get("FLAGS").asBooleanArray();
         //selectedGuns = jsonData.get("SELECTED_GUNS").asBooleanArray();
+        money = jsonData.getInt("MONEY");
+        Money.setMoney(money);
     }
 
     public Vector2 getPlayerCoordinates() {

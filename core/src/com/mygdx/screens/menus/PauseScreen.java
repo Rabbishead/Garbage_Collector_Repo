@@ -40,7 +40,7 @@ public class PauseScreen extends GuiScreen {
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ScreensManager.setScreen(SavingsManager.getLastRoom());
+                ScreensManager.setScreen(SavingsManager.getSavings().getLastRoom());
                 return true;
             }
         });
