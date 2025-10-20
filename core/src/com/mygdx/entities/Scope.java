@@ -38,8 +38,6 @@ public class Scope extends GameActor{
         });
         hitbox.register();
 
-        System.out.println(center);
-
         this.debug();
         setCoords(coords);
     }
