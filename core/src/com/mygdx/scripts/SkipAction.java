@@ -1,15 +1,12 @@
 package com.mygdx.scripts;
 
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.Gdx;
 import com.mygdx.entities.ScriptableActor;
 
 public class SkipAction implements ScriptAction{
 
     @Override
     public void perform(ScriptableActor actor) {
-        actor.addAction(Actions.sequence(
-            Actions.delay(0, //skips a frame
-            Actions.run(() -> actor.proceed()))
-        ));
+        Gdx.app.postRunnable(actor::proceed);
     }
 }

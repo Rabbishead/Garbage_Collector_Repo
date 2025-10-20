@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,114 +18,94 @@ import com.bladecoder.ink.runtime.Choice;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Data;
 import com.mygdx.hud.Hud;
-import com.mygdx.states.StateEnum;
-import com.mygdx.states.StateManager;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Dialogue extends Actor {
-    private Story story;
-
-    private Table table;
-
-    private TypewriterEffect typer;
-
-    private boolean justRan = false;
+    private final Story story;
+    private final Table table;
+    private final TypewriterEffect typer;
+    private boolean running = true;
 
     public Dialogue(Story story) {
-        setX(0);
-        setY(0);
-        Hud.get().addComponent(this);
         this.story = story;
+
         try {
             story.resetState();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        var labelStyle = Data.skin.get("default", Label.LabelStyle.class);
-
-        var labelColor = new Pixmap(1, 1, Pixmap.Format.RGB888);
-        labelColor.setColor(1, 0, 0, 1);
-        labelColor.fill();
-
-        var tableColor = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        tableColor.setColor(0, 0, 0, 0.5f); // semi-transparent black
+        // Table background
+        Pixmap tableColor = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        tableColor.setColor(0, 0, 0, 0.5f);
         tableColor.fill();
-        var bg = new TextureRegionDrawable(new TextureRegion(new Texture(tableColor)));
+        Texture tableTexture = new Texture(tableColor);
+        tableColor.dispose();
+        TextureRegionDrawable bg = new TextureRegionDrawable(new TextureRegion(tableTexture));
 
-        var dialogueLabel = new Label("", labelStyle);
+        // Dialogue label
+        Label dialogueLabel = new Label("", Data.skin.get("dialogue", Label.LabelStyle.class));
         dialogueLabel.setWrap(true);
-        dialogueLabel.getStyle().background = new Image(new Texture(labelColor)).getDrawable();
+
         typer = new TypewriterEffect(dialogueLabel);
 
+        // Setup table
         table = new Table();
         table.setFillParent(true);
-        table.defaults().expand();
+        table.defaults().expand().fillX();
+        table.debug();
+
         table.setBackground(bg);
-        //table.debug();
 
         table.add(dialogueLabel)
-                .width(600)
+                .fillX()
                 .pad(20)
                 .top()
-                .padTop(100)
-                .colspan(100);
+                .padTop(100);
         table.row();
 
         Hud.get().addComponent(table);
 
-        justRan = true;
+        Gdx.input.setInputProcessor(Hud.get().getStage());
 
-        continueStory();
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
+        Gdx.app.postRunnable(this::continueStory);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
 
-        if (typer.isRunning() && Gdx.input.isButtonJustPressed(Buttons.LEFT) && !justRan) {
+        // Skip typewriter if running
+        if (typer.isRunning() && Gdx.input.isButtonJustPressed(Buttons.LEFT)) {
             typer.skip();
         }
-
-        justRan = false;
-    }
-
-    public String getQuestion() {
-        try {
-            return story.getCurrentText();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    public ArrayList<String> getResponses() {
-        var responses = new ArrayList<String>();
-        story.getCurrentChoices().forEach(element -> responses.add(element.getText()));
-        return responses;
     }
 
     public void continueStory() {
-        if (!story.canContinue()){
+        if (!story.canContinue()) {
             removeDialogue();
             return;
         }
-        try {
-            story.Continue();
-            String s = getQuestion();
-            typer.start(s = s.replaceAll("\\n+$", ""), 0.0005f, () -> {
-                if (story.getCurrentChoices().size() == 0)
-                    waitForClickToContinue();
-            });
 
-            if (story.getCurrentChoices().size() > 0) {
+        // Clear previous choices
+        clearChoices();
+
+        try {
+            // Continue story if possible
+            if (story.canContinue()) {
+                String text = story.Continue().trim();
+
+                typer.start(text, 0.02f, () -> {
+                    // After typewriter finishes, wait for click if no choices
+                    if (story.getCurrentChoices().isEmpty()) {
+                        waitForClickToContinue();
+                    }
+                });
+            }
+
+            // Show choices if any
+            if (!story.getCurrentChoices().isEmpty()) {
                 showChoices(story.getCurrentChoices());
             }
 
@@ -154,25 +133,19 @@ public class Dialogue extends Actor {
         Hud.get().addComponent(clickCatcher);
     }
 
-    public void showChoices(List<Choice> choicesList) {
 
+    private void showChoices(List<Choice> choicesList) {
         for (int i = 0; i < choicesList.size(); i++) {
             final int index = i;
             Choice choice = choicesList.get(i);
 
-            var labelStyle = Data.skin.get("default", Label.LabelStyle.class);
-
-            var labelColor = new Pixmap(1, 1, Pixmap.Format.RGB888);
-            labelColor.setColor(1, 0, 0, 1);
-            labelColor.fill();
-
-            var choiceLabel = new Label(choice.getText(), labelStyle);
+            Label choiceLabel = new Label(choice.getText(), Data.skin.get("dialogue", Label.LabelStyle.class));
             choiceLabel.setWrap(true);
             choiceLabel.setTouchable(Touchable.enabled);
-            choiceLabel.getStyle().background = new Image(new Texture(labelColor)).getDrawable();
             choiceLabel.setAlignment(Align.center);
 
             choiceLabel.addListener(new ClickListener() {
+                @Override
                 public void clicked(InputEvent event, float x, float y) {
                     try {
                         story.chooseChoiceIndex(index);
@@ -185,32 +158,25 @@ public class Dialogue extends Actor {
 
             table.add(choiceLabel)
                     .pad(20)
-                    .fillX()
-                    .expandX()
-                    .center();
+                    .expandX();
         }
     }
 
-    public boolean canContinue() {
-        return story.canContinue();
-    }
-
-    public void chose(int optionNumber) {
-        try {
-            story.chooseChoiceIndex(optionNumber);
-        } catch (Exception e) {
-
-            e.printStackTrace();
+    private void clearChoices() {
+        if (table.getChildren().size > 1) {
+            table.getChildren().removeRange(1, table.getChildren().size - 1);
         }
-    }
-
-    public int choiceNumber() {
-        return story.getCurrentChoices().size();
     }
 
     private void removeDialogue() {
-        StateManager.updateBoolState(StateEnum.PAUSE, false);
+        running = false;
         table.remove();
         remove();
     }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    
 }

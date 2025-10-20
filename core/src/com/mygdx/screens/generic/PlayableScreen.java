@@ -144,4 +144,11 @@ public abstract class PlayableScreen extends GenericScreen {
     public String getName(){
         return this.name.name();
     }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        Hud.get().resize(width, height);
+
+    }
 }

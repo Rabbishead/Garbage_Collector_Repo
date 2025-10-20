@@ -10,12 +10,11 @@ import com.mygdx.animations.AnimationManager;
 import com.mygdx.controllers.dialogues.Dialogue;
 import com.mygdx.controllers.hitboxes.Hitbox;
 import com.mygdx.controllers.hitboxes.Tags;
-import com.mygdx.scripts.Script;
-import com.mygdx.states.StateEnum;
-import com.mygdx.states.StateManager;
+import com.mygdx.hud.Hud;
 import com.mygdx.resources.ResourceEnum;
+import com.mygdx.scripts.Script;
 
-public class NPC extends ScriptableActor{
+public class NPC extends ScriptableActor {
 
     protected int lf = 2;
 
@@ -23,6 +22,7 @@ public class NPC extends ScriptableActor{
     public Vector2 center = new Vector2();
     public Script script;
     protected String name;
+    private Dialogue currentDialogue = null;
 
     public NPC(NPCBuilder npcBuilder) {
         super();
@@ -30,12 +30,13 @@ public class NPC extends ScriptableActor{
 
         setSize(npcBuilder.size.x, npcBuilder.size.y);
         setOrigin(getWidth() / 2, getHeight() / 2);
-        
-        animationManager = new AnimationManager((int)(npcBuilder.size.x), npcBuilder.textureEnum.getAnimationRate(), npcBuilder.textureEnum.getDelay(), false, npcBuilder.textureEnum);
-        if(npcBuilder.startingAnimation != null) animationManager.setCurrentAnimation(npcBuilder.startingAnimation);
+
+        animationManager = new AnimationManager((int) (npcBuilder.size.x), npcBuilder.textureEnum.getAnimationRate(),
+                npcBuilder.textureEnum.getDelay(), false, npcBuilder.textureEnum);
+        if (npcBuilder.startingAnimation != null)
+            animationManager.setCurrentAnimation(npcBuilder.startingAnimation);
 
         name = npcBuilder.textureEnum.toString();
-        
 
         hitbox = new Hitbox(center, npcBuilder.size.x, npcBuilder.size.y, true);
         hitbox.setTags(Tags.NPC, Tags.ENEMY);
@@ -46,20 +47,19 @@ public class NPC extends ScriptableActor{
                 return;
 
             boolean leftPressed = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
-            boolean inPause = StateManager.getBoolState(StateEnum.PAUSE);
-            
-            if (leftPressed && !inPause && npcBuilder.story != null) {
-                new Dialogue(npcBuilder.story);
-                StateManager.updateBoolState(StateEnum.PAUSE, true);
+
+            if (leftPressed && currentDialogue == null && npcBuilder.story != null) {
+                currentDialogue = new Dialogue(npcBuilder.story);
+                Hud.get().addComponent(currentDialogue);
                 return;
             }
         });
         hitbox.register();
         setPosition(npcBuilder.coordinates.x, npcBuilder.coordinates.y);
 
+        if (npcBuilder.autoStartedScript != null)
+            doScript(npcBuilder.autoStartedScript);
 
-        if(npcBuilder.autoStartedScript != null) doScript(npcBuilder.autoStartedScript);
-        
         debug();
     }
 
@@ -73,10 +73,18 @@ public class NPC extends ScriptableActor{
     public void act(float delta) {
         super.act(delta);
 
-        autoMovementManager.update();
-        if(!autoMovementManager.hasFinished()) animationManager.setCurrentAnimation(ResourceEnum.valueOf(name + "_" + autoMovementManager.getOrientation()));
-                
-        
+        if (currentDialogue != null)
+            if (!currentDialogue.isRunning())
+                currentDialogue = null;
+
+        if (currentDialogue == null) {
+            autoMovementManager.update();
+            if (!autoMovementManager.hasFinished())
+                animationManager
+                        .setCurrentAnimation(ResourceEnum.valueOf(name + "_" + autoMovementManager.getOrientation()));
+
+        }
+
         animationManager.updateAnimation(delta);
     }
 

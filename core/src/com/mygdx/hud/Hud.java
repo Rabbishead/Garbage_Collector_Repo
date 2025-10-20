@@ -157,4 +157,9 @@ public class Hud implements Disposable {
         moneyPopup.setText(Money.getMoney() + newText);
         showMoneyPopup();
     }
+
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, false);
+    }
+
 }

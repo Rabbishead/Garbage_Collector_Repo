@@ -20,17 +20,15 @@ public class AnimationManager {
 
     private float stateTime = 0f;
 
-    private boolean paused;
-    private boolean alreadyPausedOnce;
-
-    private float defaultDelay;
-    private float currentDelay;
-
-    private GameActor pauser = new GameActor();
-
-    // whether this animation should only play once
     private final boolean playOnce;
     private boolean finishedOnce = false;
+
+    private boolean paused = false;
+    private boolean alreadyPausedOnce = false;
+    private GameActor pauser = new GameActor();
+    
+    private float defaultDelay;
+    private float currentDelay;
 
     /**
      * Creates an AnimationManager.
@@ -64,15 +62,10 @@ public class AnimationManager {
         }
 
         currentAnimation = textures[0];
-        stateTime = 0f;
-
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime);
 
         defaultDelay = delay;
         currentDelay = currentAnimation.delay != -1 ? currentAnimation.delay : defaultDelay;
-
-        paused = false;
-        alreadyPausedOnce = false;
 
         GCStage.get().addActor(pauser);
     }

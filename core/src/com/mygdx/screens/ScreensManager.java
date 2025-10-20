@@ -64,6 +64,6 @@ public class ScreensManager {
 
     public static void setScreen(Screens s){
         RM.get().stopAllAudio();
-        GarbageCollection.getInstance().setScreen(ScreensManager.getPlayableScreen(s));
+        GarbageCollection.getInstance().setScreen(ScreensManager.getScreen(s));
     }
 }

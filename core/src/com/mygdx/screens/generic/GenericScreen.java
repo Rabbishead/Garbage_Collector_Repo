@@ -49,7 +49,7 @@ public abstract class GenericScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height);
+        stage.getViewport().update(width, height, false);
     }
 
     public void addAll(Actor... actors) {
