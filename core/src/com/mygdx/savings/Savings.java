@@ -47,7 +47,7 @@ public class Savings implements com.badlogic.gdx.utils.Json.Serializable {
         //flags = jsonData.get("FLAGS").asBooleanArray();
         //selectedGuns = jsonData.get("SELECTED_GUNS").asBooleanArray();
         money = jsonData.getInt("MONEY");
-        Money.setMoney(money);
+        Money.set(money);
     }
 
     public Vector2 getPlayerCoordinates() {

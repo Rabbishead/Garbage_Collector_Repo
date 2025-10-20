@@ -51,10 +51,6 @@ public class AutoMovementManager {
     }
 
     public void goTo(Vector2 coordinates) {
-        if (isAnimationInProgress()){
-            
-            return;
-        }
 
         finished = false;
             

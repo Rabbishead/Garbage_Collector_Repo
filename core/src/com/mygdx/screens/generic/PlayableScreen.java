@@ -101,7 +101,7 @@ public abstract class PlayableScreen extends GenericScreen {
             SavingsManager.save();
         }
         if (Gdx.input.isKeyJustPressed(Keys.L)) {
-            Money.gainMoney(50);
+            Money.gain(50);
         }
         if (Gdx.input.isKeyJustPressed(Keys.R)) {
             GCStage.get().send(MSG.DIALOGUE_TRIGGERED);

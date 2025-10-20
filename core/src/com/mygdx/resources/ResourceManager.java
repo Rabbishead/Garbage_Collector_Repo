@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.bladecoder.ink.runtime.Story;
+import com.mygdx.controllers.dialogues.GameStory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class ResourceManager {
 
     private final AssetManager manager;
-    private final EnumMap<ResourceEnum, Story> dialogueMap;
+    private final EnumMap<ResourceEnum, GameStory> dialogueMap;
     private final EnumMap<ResourceEnum, TiledMap> maps;
 
     public ResourceManager() {
@@ -66,8 +66,13 @@ public class ResourceManager {
         return maps.get(e);
     }
 
-    public Story getStory(ResourceEnum e) {
-        return dialogueMap.get(e);
+    public GameStory getStory(ResourceEnum e) {
+        try {
+            return dialogueMap.get(e);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 
     public Music getAudio(ResourceEnum e) {
@@ -116,7 +121,7 @@ public class ResourceManager {
                 line = br.readLine();
             }
             String json = sb.toString().replace('\uFEFF', ' ');
-            dialogueMap.put(dialogue, new Story(json));
+            dialogueMap.put(dialogue, new GameStory(json));
 
         } catch (Exception e) {
             e.printStackTrace();

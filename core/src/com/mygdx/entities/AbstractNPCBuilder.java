@@ -1,8 +1,7 @@
 package com.mygdx.entities;
 
 import com.badlogic.gdx.math.Vector2;
-import com.bladecoder.ink.runtime.Story;
-
+import com.mygdx.controllers.dialogues.GameStory;
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
@@ -10,7 +9,7 @@ import com.mygdx.resources.TextureEnum;
 public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected Vector2 coordinates, size = new Vector2(16, 32);
     protected TextureEnum textureEnum;
-    protected Story story;
+    protected GameStory story;
     protected ResourceEnum autoStartedScript;
     protected ResourceEnum startingAnimation;
 

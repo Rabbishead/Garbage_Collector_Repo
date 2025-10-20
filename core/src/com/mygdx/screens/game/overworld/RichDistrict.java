@@ -20,7 +20,7 @@ public class RichDistrict extends PlayableScreen {
         private NPC particularNPC2 = new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 55, Data.TILE * 25)
                         .texture(TextureEnum.JERKINS)
-                        .story(ResourceEnum.ADEPTUS_2)
+                        .story(ResourceEnum.ADEPTUS_1)
                         .autoStartedScript(ResourceEnum.TEST_3)
                         .build();
 

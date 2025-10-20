@@ -8,14 +8,14 @@ public class Money {
     public static int getMoney() {
         return money;
     }
-    public static void setMoney(int amount) {
+    public static void set(int amount) {
         money = amount;
     }
-    public static void gainMoney(int amount){
+    public static void gain(int amount){
         money += amount;
         Hud.get().setMoney(amount, true);
     }
-    public static void loseMoney(int amount){
+    public static void lose(int amount){
         money -= amount;
         Hud.get().setMoney(amount, false);
     }

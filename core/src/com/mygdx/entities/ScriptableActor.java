@@ -11,7 +11,9 @@ import com.mygdx.stage.GCStage;
 public class ScriptableActor extends GameActor{
     protected Script script;
     public MSG listeningMSG;
+
     public void doScript(ResourceEnum s){
+        this.clearActions();
         script = new Script(s);
         script.proceed(this);
     }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Align;
 import com.bladecoder.ink.runtime.Choice;
 import com.bladecoder.ink.runtime.Story;
 import com.mygdx.Data;
+import com.mygdx.entities.ScriptableActor;
 import com.mygdx.hud.Hud;
 
 import java.util.List;
@@ -27,8 +28,9 @@ public class Dialogue extends Actor {
     private final TypewriterEffect typer;
     private boolean running = true;
 
-    public Dialogue(Story story) {
-        this.story = story;
+    public Dialogue(GameStory gs, ScriptableActor actor) {
+        this.story = gs.getStory();
+        gs.setActor(actor);
 
         try {
             story.resetState();
@@ -54,7 +56,7 @@ public class Dialogue extends Actor {
         table = new Table();
         table.setFillParent(true);
         table.defaults().expand().fillX();
-        table.debug();
+        //table.debug();
 
         table.setBackground(bg);
 
@@ -133,7 +135,6 @@ public class Dialogue extends Actor {
         Hud.get().addComponent(clickCatcher);
     }
 
-
     private void showChoices(List<Choice> choicesList) {
         for (int i = 0; i < choicesList.size(); i++) {
             final int index = i;
@@ -178,5 +179,4 @@ public class Dialogue extends Actor {
         return running;
     }
 
-    
 }

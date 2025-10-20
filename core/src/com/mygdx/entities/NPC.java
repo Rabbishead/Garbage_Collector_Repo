@@ -49,7 +49,7 @@ public class NPC extends ScriptableActor {
             boolean leftPressed = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
 
             if (leftPressed && currentDialogue == null && npcBuilder.story != null) {
-                currentDialogue = new Dialogue(npcBuilder.story);
+                currentDialogue = new Dialogue(npcBuilder.story, this);
                 Hud.get().addComponent(currentDialogue);
                 return;
             }
