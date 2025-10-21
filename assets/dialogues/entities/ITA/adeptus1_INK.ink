@@ -8,3 +8,4 @@ Aderite oggi al progetto del Grande Sistema Operativo!
         ~DO("TEST_2")
     *forse
         ~GAIN(10)
+    *ok

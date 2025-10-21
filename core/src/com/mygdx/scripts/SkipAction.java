@@ -1,7 +1,7 @@
 package com.mygdx.scripts;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.entities.ScriptableActor;
+import com.mygdx.entities.helpers.ScriptableActor;
 
 public class SkipAction implements ScriptAction{
 

@@ -3,10 +3,10 @@ package com.mygdx.savings;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.GCStage;
 import com.mygdx.Money;
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.stage.GCStage;
 
 public class Savings implements com.badlogic.gdx.utils.Json.Serializable {
     private Screens lastRoom;

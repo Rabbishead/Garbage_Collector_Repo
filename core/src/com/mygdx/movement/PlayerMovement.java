@@ -3,10 +3,10 @@ package com.mygdx.movement;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.GCStage;
+import com.mygdx.camera.CameraController;
 import com.mygdx.entities.Player;
 import com.mygdx.map.TileMapCollisionsManager;
-import com.mygdx.stage.GCStage;
 
 /**
  * RealtimeMovement for the overworld

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -18,8 +17,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
 import com.mygdx.Money;
 import com.mygdx.hud.actors.HealthBar;
-import com.mygdx.controllers.delay.DelayManager;
-import com.mygdx.controllers.dialogues.Dialogue;
 
 public class Hud implements Disposable {
     private static Hud instance;
@@ -32,14 +29,16 @@ public class Hud implements Disposable {
         instance = h;
     }
 
+    public static Stage stage() {
+        return get().stage;
+    }
+
     private final Stage stage;
 
     private Table table;
     private Label fps;
     private Label moneyPopup;
     private Label debugData;
-
-    private Dialogue complexDialogue;
 
     public Hud() {
         FitViewport viewport = new FitViewport(Data.VIEWPORT_X, Data.VIEWPORT_Y, new OrthographicCamera());
@@ -72,10 +71,7 @@ public class Hud implements Disposable {
 
     public void update() {
         stage.act(Gdx.graphics.getDeltaTime());
-
         fps.setText("Current FPS: " + Gdx.graphics.getFramesPerSecond());
-
-        DelayManager.updateDelay(complexDialogue);
     }
 
     @Override
@@ -83,28 +79,8 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 
-    public void addComponent(Actor actor) {
-        stage.addActor(actor);
-        if (actor instanceof Dialogue d) {
-            complexDialogue = d;
-            DelayManager.registerObject(complexDialogue, 100f);
-        }
-    }
-
-    public void removeDialogue() {
-        stage.getActors().forEach(actor -> {
-            if (actor instanceof Dialogue) {
-                actor.remove();
-            }
-        });
-    }
-
     public void setDebugSting(String debugSting) {
         debugData.setText(debugSting);
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
     public void showMoneyPopup() {

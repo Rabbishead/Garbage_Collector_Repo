@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.mygdx.controllers.dialogues.GameStory;
+import com.mygdx.dialogues.GameStory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

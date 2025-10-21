@@ -1,15 +1,14 @@
 package com.mygdx.screens.game.arenas;
 
 import com.mygdx.Data;
-
-import com.mygdx.controllers.messages.MSG;
-import com.mygdx.entities.Reflection;
+import com.mygdx.GCStage;
+import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.map.TileMapCollisionsManager;
+import com.mygdx.messages.MSG;
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
 import com.mygdx.screens.generic.PlayableScreen;
-import com.mygdx.stage.GCStage;
 
 public class ReflectionArena extends PlayableScreen {
 

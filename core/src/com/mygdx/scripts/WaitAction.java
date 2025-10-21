@@ -1,7 +1,7 @@
 package com.mygdx.scripts;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.entities.ScriptableActor;
+import com.mygdx.entities.helpers.ScriptableActor;
 
 public class WaitAction implements ScriptAction {
 

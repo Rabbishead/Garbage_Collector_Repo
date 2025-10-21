@@ -3,8 +3,9 @@ package com.mygdx.scripts;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import com.mygdx.controllers.messages.MSG;
-import com.mygdx.entities.ScriptableActor;
+
+import com.mygdx.entities.helpers.ScriptableActor;
+import com.mygdx.messages.MSG;
 import com.mygdx.resources.ResourceEnum;
 
 public class Script {

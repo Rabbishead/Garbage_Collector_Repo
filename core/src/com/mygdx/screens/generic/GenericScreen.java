@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.Data;
-import com.mygdx.controllers.camera.CameraController;
+import com.mygdx.GCStage;
+import com.mygdx.camera.CameraController;
 import com.mygdx.resources.RM;
-import com.mygdx.stage.GCStage;
 
 /**
  * generic abstract class for every screen

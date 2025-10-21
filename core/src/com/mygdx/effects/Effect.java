@@ -2,8 +2,8 @@ package com.mygdx.effects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.animations.AnimationManager;
-import com.mygdx.entities.GameActor;
+import com.mygdx.AnimationManager;
+import com.mygdx.entities.helpers.GameActor;
 import com.mygdx.resources.ResourceEnum;
 
 public class Effect extends GameActor {

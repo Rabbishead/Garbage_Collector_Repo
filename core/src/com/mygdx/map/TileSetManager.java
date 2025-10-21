@@ -12,11 +12,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.GCStage;
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.screens.Screens;
 import com.mygdx.screens.ScreensManager;
-import com.mygdx.stage.GCStage;
 import com.mygdx.states.StateEnum;
 import com.mygdx.states.StateManager;
 

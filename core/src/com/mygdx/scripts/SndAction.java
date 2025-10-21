@@ -1,7 +1,7 @@
 package com.mygdx.scripts;
 
-import com.mygdx.controllers.messages.MSG;
-import com.mygdx.entities.ScriptableActor;
+import com.mygdx.entities.helpers.ScriptableActor;
+import com.mygdx.messages.MSG;
 
 public class SndAction implements ScriptAction{
     private MSG msg;

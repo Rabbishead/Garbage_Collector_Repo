@@ -1,6 +1,6 @@
 package com.mygdx.scripts;
 
-import com.mygdx.entities.ScriptableActor;
+import com.mygdx.entities.helpers.ScriptableActor;
 
 public class MovAction implements ScriptAction{
     private float x, y;

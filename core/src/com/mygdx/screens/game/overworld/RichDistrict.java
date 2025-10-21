@@ -1,9 +1,9 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
-import com.mygdx.entities.MapComponentEnum;
-import com.mygdx.entities.NPC;
-import com.mygdx.entities.Reflection;
+import com.mygdx.entities.mapComponents.MapComponentEnum;
+import com.mygdx.entities.npcs.NPC;
+import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
 import com.mygdx.screens.generic.PlayableScreen;

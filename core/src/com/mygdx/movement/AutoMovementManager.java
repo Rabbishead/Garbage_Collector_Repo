@@ -2,8 +2,8 @@ package com.mygdx.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.entities.GameActor;
-import com.mygdx.entities.ScriptableActor;
+import com.mygdx.entities.helpers.GameActor;
+import com.mygdx.entities.helpers.ScriptableActor;
 import com.mygdx.map.TileMapCollisionsManager;
 
 public class AutoMovementManager {

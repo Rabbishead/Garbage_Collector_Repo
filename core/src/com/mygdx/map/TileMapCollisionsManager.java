@@ -3,8 +3,7 @@ package com.mygdx.map;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-
-import com.mygdx.stage.GCStage;
+import com.mygdx.GCStage;
 
 /**
  * manages collisions inside a tilemap

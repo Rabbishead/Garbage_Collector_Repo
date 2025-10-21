@@ -1,6 +1,6 @@
 package com.mygdx.map;
 
-import com.mygdx.controllers.messages.MSG;
+import com.mygdx.messages.MSG;
 
 /**
  * links tiles properties with MSG
