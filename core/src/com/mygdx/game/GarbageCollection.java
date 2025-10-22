@@ -1,8 +1,7 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
 import com.mygdx.Logger;
-
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceManager;
 import com.mygdx.savings.SavingsManager;

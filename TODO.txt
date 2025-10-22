@@ -1,7 +1,4 @@
 PROGRAMMAZIONE
-Auto movement npc
-Integrazione Script
-Rework combattimento
 
 
 

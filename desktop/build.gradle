@@ -1,40 +1,86 @@
-sourceCompatibility = 1.17
-sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = ["../assets"]
+plugins {
+    id 'java-library'
+    id 'eclipse'
+}
 
-project.ext.mainClassName = "com.mygdx.game.DesktopLauncher"
-project.ext.assetsDir = new File("../assets")
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+// -------------------- Configurations --------------------
+configurations {
+    texturePacker
+}
+
+// -------------------- Dependencies --------------------
+dependencies {
+    // Core project
+    implementation project(":core")
+
+    // Desktop runtime dependencies
+    api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+    api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+
+    // gdx-tools only for TexturePacker
+    texturePacker "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+}
+
+// -------------------- Source Sets --------------------
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/"]
+        }
+        resources {
+            srcDirs = ["../assets"]
+        }
+    }
+}
+
+// -------------------- Project Properties --------------------
+project.ext {
+    mainClassName = "com.mygdx.game.DesktopLauncher"
+    assetsDir = file("../assets")
+}
 
 import org.gradle.internal.os.OperatingSystem
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
+// -------------------- Run Task --------------------
 tasks.register('run', JavaExec) {
+    group = "application"
     dependsOn classes
-    mainClass = project.mainClassName
+    mainClass.set(project.ext.mainClassName)
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir = project.assetsDir
-    ignoreExitValue = true
+    workingDir = project.projectDir.parentFile  // <-- set to project root
 
     if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
-        // Required to run on macOS
         jvmArgs += "-XstartOnFirstThread"
     }
 }
 
 tasks.register('debug', JavaExec) {
+    group = "application"
     dependsOn classes
-    mainClass = project.mainClassName
+    mainClass.set(project.ext.mainClassName)
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
-    workingDir = project.assetsDir
-    ignoreExitValue = true
+    workingDir = project.projectDir.parentFile  // <-- project root
     debug = true
 }
 
+
+// -------------------- Dist Task --------------------
 tasks.register('dist', Jar) {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     manifest {
-        attributes 'Main-Class': project.mainClassName
+        attributes 'Main-Class': project.ext.mainClassName
     }
     dependsOn configurations.runtimeClasspath
     from {
@@ -42,8 +88,55 @@ tasks.register('dist', Jar) {
     }
     with jar
 }
+tasks.named('dist').configure { dependsOn classes }
 
+// -------------------- Pack NPCs Atlas --------------------
+tasks.register("packNpcsAtlas", JavaExec) {
+    group = "assets"
+    description = "Packs all NPC assets into a single TextureAtlas"
 
-dist.dependsOn classes
+    // Directories
+    def assetsDir = new File(project.projectDir, "../assets").canonicalFile
+    def inputDir = new File(assetsDir, "npcs")
+    def outputDir = new File(assetsDir, "packed")
+    def tempDir = new File(assetsDir, "tmp_npcs_flat")
 
-eclipse.project.name = appName + "-desktop"
+    if (!inputDir.exists()) throw new GradleException("Input directory not found: $inputDir")
+    outputDir.mkdirs()
+    tempDir.deleteDir()
+    tempDir.mkdirs()
+
+    // Flatten all NPC images into temp folder with unique names
+    inputDir.eachFileRecurse { file ->
+        if (file.isFile() && file.name.toLowerCase().endsWith(".png")) {
+            def newName = "${file.name}"
+            println "Copying $file -> $newName"
+            Files.copy(file.toPath(), new File(tempDir, newName).toPath(), StandardCopyOption.REPLACE_EXISTING)
+        }
+    }
+
+    // TexturePacker classpath: only gdx-tools to avoid LWJGL sealing violations
+    mainClass.set("com.badlogic.gdx.tools.texturepacker.TexturePacker")
+    classpath = configurations.texturePacker
+
+    // Arguments: inputDir outputDir packFileName
+    args = [
+        tempDir.absolutePath,
+        outputDir.absolutePath,
+        "npcs"
+    ]
+
+    doFirst {
+        println "Packing NPCs from: ${tempDir.absolutePath}"
+        println "Output directory: ${outputDir.absolutePath}"
+    }
+
+    doLast {
+        println "NPC TextureAtlas created successfully."
+        if (tempDir.exists()) {
+            println "Deleting temporary folder: ${tempDir.absolutePath}"
+            tempDir.deleteDir()  // Groovy method, works cross-platform
+            println "Temporary folder deleted."
+        }
+    }
+}

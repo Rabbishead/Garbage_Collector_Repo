@@ -9,6 +9,7 @@ import com.mygdx.resources.TextureEnum;
 public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
     protected Vector2 coordinates, size = new Vector2(16, 32);
     protected TextureEnum textureEnum;
+    protected boolean atlas = true;
     protected GameStory story;
     protected ResourceEnum autoStartedScript;
     protected ResourceEnum startingAnimation;
@@ -37,6 +38,11 @@ public abstract class AbstractNPCBuilder<T extends AbstractNPCBuilder<T>> {
 
     public T texture(TextureEnum texture) {
         this.textureEnum = texture;
+        return getThis();
+    }
+
+    public T noAtlas(){
+        this.atlas = false;
         return getThis();
     }
 

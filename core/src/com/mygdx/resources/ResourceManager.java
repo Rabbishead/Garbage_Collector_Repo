@@ -47,14 +47,15 @@ public class ResourceManager {
                 case ATLAS -> {
                     manager.load(e.label, TextureAtlas.class);
                 }
-                case ATLAS_REGION -> {}
+                case ATLAS_REGION -> {
+                }
                 default -> {
                 }
             }
         });
     }
 
-    public void update(){
+    public void update() {
         manager.update();
     }
 
@@ -72,7 +73,7 @@ public class ResourceManager {
         return manager.get(e.label);
     }
 
-    public TiledMap getMap(ResourceEnum e){
+    public TiledMap getMap(ResourceEnum e) {
         return maps.get(e);
     }
 
@@ -90,7 +91,6 @@ public class ResourceManager {
         return manager.get(e.label);
     }
 
-
     public void playAudio(ResourceEnum e) {
         if (!getAudio(e).isPlaying()) {
             getAudio(e).setVolume(0.05f);
@@ -106,8 +106,8 @@ public class ResourceManager {
 
     public void stopAllAudio() {
         getAllAudio()
-            .filter(Music::isPlaying)
-            .forEach(Music::stop);
+                .filter(Music::isPlaying)
+                .forEach(Music::stop);
     }
 
     public Stream<Music> getAllAudio() {
@@ -116,10 +116,11 @@ public class ResourceManager {
                 .map(this::getAudio);
     }
 
-    //helper for dialogue loading
+    // helper for dialogue loading
     public void loadDialogue(ResourceEnum dialogue) {
 
-        InputStream systemResourceAsStream = ClassLoader.getSystemResourceAsStream("dialogues/entities/"+ Lang.getCurrent() + "/" + dialogue.label);
+        InputStream systemResourceAsStream = ClassLoader
+                .getSystemResourceAsStream("dialogues/entities/" + Lang.getCurrent() + "/" + dialogue.label);
         StringBuilder sb = new StringBuilder();
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(Objects.requireNonNull(systemResourceAsStream), StandardCharsets.UTF_8))) {
@@ -138,10 +139,10 @@ public class ResourceManager {
         }
     }
 
-    public void updateLang(){
+    public void updateLang() {
         dialogueMap.clear();
         Stream.of(ResourceEnum.values())
-            .filter(e -> e.type.equals(TypeEnum.DIALOGUE))
-            .forEach(this::loadDialogue);
+                .filter(e -> e.type.equals(TypeEnum.DIALOGUE))
+                .forEach(this::loadDialogue);
     }
 }

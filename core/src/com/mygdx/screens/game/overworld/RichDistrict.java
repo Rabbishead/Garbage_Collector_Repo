@@ -26,7 +26,6 @@ public class RichDistrict extends PlayableScreen {
 
         public RichDistrict() {
                 super(ResourceEnum.RICH_DISTRICT);
-
                 addAll(
                                 particularNPC,
                                 particularNPC2,

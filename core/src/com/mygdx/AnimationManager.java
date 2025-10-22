@@ -68,28 +68,42 @@ public class AnimationManager {
         GCStage.get().addActor(pauser);
     }
 
-    public AnimationManager(int width, float animationRate, float delay, boolean playOnce, TextureEnum textures) {
-        this(width, animationRate, delay, playOnce, textures.getResourceList());
+    public AnimationManager(int width, boolean playOnce, TextureEnum textures) {
+        this(width, textures.getAnimationRate(), textures.getDelay(), playOnce, textures.getResourceList());
     }
 
-    public AnimationManager(ResourceEnum atlas, int width, float animationRate, float delay, boolean playOnce,
-            TextureEnum textures) {
-        this(atlas, width, animationRate, delay, playOnce, textures.getResourceList());
+    public AnimationManager(ResourceEnum atlas, boolean playOnce, TextureEnum textures) {
+        this(atlas, textures.getAnimationRate(), textures.getDelay(), playOnce, textures.getResourceList());
     }
 
-    public AnimationManager(ResourceEnum atlas, int width, float animationRate, float delay, boolean playOnce,
+    public AnimationManager(ResourceEnum atlas, float animationRate, float delay, boolean playOnce,
             ResourceEnum... textures) {
         this.playOnce = playOnce;
         for (ResourceEnum e : textures) {
-            var regions = RM.get().getAtlas(atlas).findRegions(e.label);
-            if (regions.size == 0) {
-                throw new RuntimeException("Region not found in atlas: " + e.label);
+            TextureAtlas.AtlasRegion region = RM.get().getAtlas(atlas).findRegion(e.label);
+            if (region == null) {
+                throw new RuntimeException("Region not found: " + e.label);
             }
 
-            Animation<TextureRegion> animation = new Animation<>(animationRate, regions);
-            animation.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
-            animationMap.put(e, animation);
+            int frameWidth = region.getRegionWidth() / e.frameCount;
+            int frameHeight = region.getRegionHeight();
+
+            // split horizontally into frames
+            TextureRegion[] frames = new TextureRegion[e.frameCount];
+            for (int i = 0; i < e.frameCount; i++) {
+                frames[i] = new TextureRegion(region, i * frameWidth, 0, frameWidth, frameHeight);
+            }
+
+            Animation<TextureRegion> anim = new Animation<>(e.animationRate != -1 ? e.animationRate : animationRate,
+                    frames);
+            anim.setPlayMode(Animation.PlayMode.LOOP);
+
+            animationMap.put(e, anim);
+
         }
+        animationMap.forEach((k, v) -> {
+            System.out.println("Key -> " + k + "  " + v.getFrameDuration());
+        });
 
         currentAnimation = textures[0];
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime);

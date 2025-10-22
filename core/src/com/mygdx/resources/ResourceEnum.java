@@ -2,7 +2,7 @@ package com.mygdx.resources;
 
 public enum ResourceEnum {
 
-    NPCS("assets/npcs/npcs.atlas", TypeEnum.ATLAS),
+    NPCS("assets/packed/npcs.atlas", TypeEnum.ATLAS),
 
     //ENTITIES
     PLAYER_IDLE_DOWN("assets/player/idle_down.png", TypeEnum.TEXTURE),
@@ -15,25 +15,25 @@ public enum ResourceEnum {
     PLAYER_WALK_RIGHT("assets/player/walk_right.png", TypeEnum.TEXTURE),
 
 
-    JERKINS_IDLE_DOWN("jenkins_idle_down", TypeEnum.ATLAS_REGION),
-    JERKINS_IDLE_UP("jenkins_idle_up", TypeEnum.ATLAS_REGION),
-    JERKINS_IDLE_LEFT("jenkins_idle_left", TypeEnum.ATLAS_REGION, 0.2f, 1),
-    JERKINS_IDLE_RIGHT("jenkins_idle_right", TypeEnum.ATLAS_REGION),
-    JERKINS_WALK_DOWN("jenkins_walk_down", TypeEnum.ATLAS_REGION),
-    JERKINS_WALK_UP("jenkins_walk_up", TypeEnum.ATLAS_REGION),
-    JERKINS_WALK_LEFT("jenkins_walk_left", TypeEnum.ATLAS_REGION),
-    JERKINS_WALK_RIGHT("jenkins_walk_right", TypeEnum.ATLAS_REGION),
+    JERKINS_IDLE_DOWN(3),
+    JERKINS_IDLE_UP(1),
+    JERKINS_IDLE_LEFT(3),
+    JERKINS_IDLE_RIGHT(3),
+    JERKINS_WALK_DOWN(3),
+    JERKINS_WALK_UP(3),
+    JERKINS_WALK_LEFT(3),
+    JERKINS_WALK_RIGHT(3),
 
 
-    BLACKMARKETEER_IDLE_DOWN("blackmarketeer_idle_down", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_IDLE_UP("blackmarketeer_idle_up", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_IDLE_LEFT("blackmarketeer_idle_left", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_IDLE_RIGHT("blackmarketeer_idle_right", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_WALK_DOWN("blackmarketeer_walk_down", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_WALK_UP("blackmarketeer_walk_up", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_WALK_LEFT("blackmarketeer_walk_left", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_WALK_RIGHT("blackmarketeer_walk_right", TypeEnum.ATLAS_REGION),
-    BLACKMARKETEER_SLEEPING("blackmarketeer_sleeping", TypeEnum.ATLAS_REGION, 0.01f, 0),
+    BLACKMARKETEER_IDLE_DOWN(3),
+    BLACKMARKETEER_IDLE_UP(1),
+    BLACKMARKETEER_IDLE_LEFT(3),
+    BLACKMARKETEER_IDLE_RIGHT(3),
+    BLACKMARKETEER_WALK_DOWN(3),
+    BLACKMARKETEER_WALK_UP(3),
+    BLACKMARKETEER_WALK_LEFT(3),
+    BLACKMARKETEER_WALK_RIGHT(3),
+    BLACKMARKETEER_SLEEPING(3, 0.01f, 0),
 
 
     //PROJECTILES AND WEAPONS
@@ -56,7 +56,7 @@ public enum ResourceEnum {
     HEALTH_BAR("assets/hud/health.png", TypeEnum.TEXTURE),
 
     //MAP
-    SLUMS("assets/map/slums//slums.tmx", TypeEnum.MAP),
+    SLUMS("assets/map/slums/slums.tmx", TypeEnum.MAP),
     RICH_DISTRICT("assets/map/rich_disctirct/rich_district.tmx", TypeEnum.MAP),
     PARK("assets/map/park/park.tmx", TypeEnum.MAP),
     REFLECTION_ARENA("assets/map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
@@ -129,17 +129,72 @@ public enum ResourceEnum {
     public TypeEnum type;
     public float animationRate = -1;
     public float delay = -1;
+    public int  frameCount = 1;
 
+    /**
+     * only for non graphics OR textures not included in any atlas AND single frame
+     * AKA use it only for non textures
+     * @param label
+     * @param type
+     */
     ResourceEnum(String label, TypeEnum type) {
         this.label = label;
         this.type = type;
         
     }
 
+    /**
+     * texture with default (1) frame count
+     * @param label
+     * @param type
+     * @param animationRate
+     * @param delay
+     */
     ResourceEnum(String label, TypeEnum type, float animationRate, float delay) {
         this(label, type);
         this.animationRate = animationRate;
         this.delay = delay;
-        
+    }
+
+    /**
+     * texture with custom frame count
+     * @param label
+     * @param type
+     * @param animationRate
+     * @param delay
+     */
+    ResourceEnum(String label, TypeEnum type, float animationRate, float delay, int frameCount) {
+        this(label, type, animationRate, delay);
+        this.frameCount = frameCount;
+    }
+
+    /**
+     * Animation included in a textureatlas
+     * Lable is trivial, should always be the same name as the enum
+     * TypeEnum is trivial, you are only allowed to not specify the label when you have a ATLAS_REGION
+     * @param animationRate
+     * @param delay
+     * @param frameCount
+     */
+    ResourceEnum(int frameCount, float animationRate, float delay){
+        this.label = name().toLowerCase();
+        this.type = TypeEnum.ATLAS_REGION;
+        this.animationRate = animationRate;
+        this.delay = delay;
+        this.frameCount = frameCount;
+    }
+
+    /**
+     * Animation included in a textureatlas with default rate and delay
+     * Lable is trivial, should always be the same name as the enum
+     * TypeEnum is trivial, you are only allowed to not specify the label when you have a ATLAS_REGION
+     * @param animationRate
+     * @param delay
+     * @param frameCount
+     */
+    ResourceEnum(int frameCount){
+        this.label = name().toLowerCase();
+        this.type = TypeEnum.ATLAS_REGION;
+        this.frameCount = frameCount;
     }
 }
