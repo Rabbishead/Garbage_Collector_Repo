@@ -67,56 +67,56 @@ blackmarketeer_walk_up
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_idle_down
+jerkins_idle_down
   rotate: false
   xy: 202, 2
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_idle_left
+jerkins_idle_left
   rotate: false
   xy: 252, 32
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_idle_right
+jerkins_idle_right
   rotate: false
   xy: 252, 2
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_idle_up
+jerkins_idle_up
   rotate: false
   xy: 436, 2
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: -1
-jenkins_walk_down
+jerkins_walk_down
   rotate: false
   xy: 302, 32
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_walk_left
+jerkins_walk_left
   rotate: false
   xy: 302, 2
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_walk_right
+jerkins_walk_right
   rotate: false
   xy: 352, 32
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
-jenkins_walk_up
+jerkins_walk_up
   rotate: false
   xy: 352, 2
   size: 48, 28

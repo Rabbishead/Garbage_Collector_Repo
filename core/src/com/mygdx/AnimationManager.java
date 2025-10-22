@@ -101,9 +101,6 @@ public class AnimationManager {
             animationMap.put(e, anim);
 
         }
-        animationMap.forEach((k, v) -> {
-            System.out.println("Key -> " + k + "  " + v.getFrameDuration());
-        });
 
         currentAnimation = textures[0];
         currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime);

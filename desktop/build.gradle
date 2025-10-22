@@ -95,31 +95,14 @@ tasks.register("packNpcsAtlas", JavaExec) {
     group = "assets"
     description = "Packs all NPC assets into a single TextureAtlas"
 
-    // Directories
     def assetsDir = new File(project.projectDir, "../assets").canonicalFile
     def inputDir = new File(assetsDir, "npcs")
     def outputDir = new File(assetsDir, "packed")
     def tempDir = new File(assetsDir, "tmp_npcs_flat")
 
-    if (!inputDir.exists()) throw new GradleException("Input directory not found: $inputDir")
-    outputDir.mkdirs()
-    tempDir.deleteDir()
-    tempDir.mkdirs()
-
-    // Flatten all NPC images into temp folder with unique names
-    inputDir.eachFileRecurse { file ->
-        if (file.isFile() && file.name.toLowerCase().endsWith(".png")) {
-            def newName = "${file.name}"
-            println "Copying $file -> $newName"
-            Files.copy(file.toPath(), new File(tempDir, newName).toPath(), StandardCopyOption.REPLACE_EXISTING)
-        }
-    }
-
-    // TexturePacker classpath: only gdx-tools to avoid LWJGL sealing violations
     mainClass.set("com.badlogic.gdx.tools.texturepacker.TexturePacker")
     classpath = configurations.texturePacker
 
-    // Arguments: inputDir outputDir packFileName
     args = [
         tempDir.absolutePath,
         outputDir.absolutePath,
@@ -127,6 +110,19 @@ tasks.register("packNpcsAtlas", JavaExec) {
     ]
 
     doFirst {
+        if (!inputDir.exists()) throw new GradleException("Input directory not found: $inputDir")
+
+        println "Preparing temp folder..."
+        if (tempDir.exists()) tempDir.deleteDir()
+        tempDir.mkdirs()
+
+        // Flatten all NPC images
+        inputDir.eachFileRecurse { file ->
+            if (file.isFile() && file.name.toLowerCase().endsWith(".png")) {
+                Files.copy(file.toPath(), new File(tempDir, file.name).toPath(), StandardCopyOption.REPLACE_EXISTING)
+            }
+        }
+
         println "Packing NPCs from: ${tempDir.absolutePath}"
         println "Output directory: ${outputDir.absolutePath}"
     }
@@ -135,8 +131,8 @@ tasks.register("packNpcsAtlas", JavaExec) {
         println "NPC TextureAtlas created successfully."
         if (tempDir.exists()) {
             println "Deleting temporary folder: ${tempDir.absolutePath}"
-            tempDir.deleteDir()  // Groovy method, works cross-platform
-            println "Temporary folder deleted."
+            tempDir.deleteDir()
         }
     }
 }
+
