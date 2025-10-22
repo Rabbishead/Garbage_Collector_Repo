@@ -3,6 +3,7 @@ package com.mygdx.resources;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.dialogues.GameStory;
@@ -43,6 +44,10 @@ public class ResourceManager {
                 case MAP -> {
                     maps.put(e, new TmxMapLoader().load(e.label));
                 }
+                case ATLAS -> {
+                    manager.load(e.label, TextureAtlas.class);
+                }
+                case ATLAS_REGION -> {}
                 default -> {
                 }
             }
@@ -58,6 +63,11 @@ public class ResourceManager {
     }
 
     public Texture getTexture(ResourceEnum e) {
+        manager.finishLoadingAsset(e.label);
+        return manager.get(e.label);
+    }
+
+    public TextureAtlas getAtlas(ResourceEnum e) {
         manager.finishLoadingAsset(e.label);
         return manager.get(e.label);
     }

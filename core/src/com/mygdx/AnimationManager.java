@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.entities.helpers.GameActor;
@@ -25,18 +26,18 @@ public class AnimationManager {
     private boolean paused = false;
     private boolean alreadyPausedOnce = false;
     private GameActor pauser = new GameActor();
-    
+
     private float defaultDelay;
     private float currentDelay;
 
     /**
      * Creates an AnimationManager.
      * 
-     * @param width          width of each frame
-     * @param animationRate  default frame duration
-     * @param delay          default delay before replaying animation
-     * @param playOnce       if true, the animation plays only once
-     * @param textures       resource list for the animation
+     * @param width         width of each frame
+     * @param animationRate default frame duration
+     * @param delay         default delay before replaying animation
+     * @param playOnce      if true, the animation plays only once
+     * @param textures      resource list for the animation
      */
     public AnimationManager(int width, float animationRate, float delay, boolean playOnce, ResourceEnum... textures) {
         this.playOnce = playOnce;
@@ -48,13 +49,11 @@ public class AnimationManager {
             TextureRegion[][] matrix = TextureRegion.split(
                     texture,
                     texture.getWidth() / FRAME_COLS,
-                    texture.getHeight()
-            );
+                    texture.getHeight());
 
             Animation<TextureRegion> animation = new Animation<>(
                     e.animationRate != -1 ? e.animationRate : animationRate,
-                    matrix[0]
-            );
+                    matrix[0]);
             animation.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
 
             animationMap.put(e, animation);
@@ -71,6 +70,35 @@ public class AnimationManager {
 
     public AnimationManager(int width, float animationRate, float delay, boolean playOnce, TextureEnum textures) {
         this(width, animationRate, delay, playOnce, textures.getResourceList());
+    }
+
+    public AnimationManager(ResourceEnum atlas, int width, float animationRate, float delay, boolean playOnce,
+            TextureEnum textures) {
+        this(atlas, width, animationRate, delay, playOnce, textures.getResourceList());
+    }
+
+    public AnimationManager(ResourceEnum atlas, int width, float animationRate, float delay, boolean playOnce,
+            ResourceEnum... textures) {
+        this.playOnce = playOnce;
+        for (ResourceEnum e : textures) {
+            var regions = RM.get().getAtlas(atlas).findRegions(e.label);
+            if (regions.size == 0) {
+                throw new RuntimeException("Region not found in atlas: " + e.label);
+            }
+
+            Animation<TextureRegion> animation = new Animation<>(animationRate, regions);
+            animation.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
+            animationMap.put(e, animation);
+        }
+
+        currentAnimation = textures[0];
+        currentFrame = animationMap.get(currentAnimation).getKeyFrame(stateTime);
+
+        defaultDelay = delay;
+        currentDelay = currentAnimation.delay != -1 ? currentAnimation.delay : defaultDelay;
+
+        GCStage.get().addActor(pauser);
+
     }
 
     /** @return current frame in the animation */
@@ -96,8 +124,7 @@ public class AnimationManager {
                             Actions.run(() -> {
                                 paused = false;
                                 stateTime = 0;
-                            })
-                    ));
+                            })));
             alreadyPausedOnce = true;
             paused = true;
         }
@@ -118,7 +145,8 @@ public class AnimationManager {
     }
 
     public void setCurrentAnimation(ResourceEnum ani) {
-        if (currentAnimation == ani) return;
+        if (currentAnimation == ani)
+            return;
         currentAnimation = ani;
         currentDelay = ani.delay != -1 ? ani.delay : defaultDelay;
         pauser.clearActions();
@@ -131,7 +159,10 @@ public class AnimationManager {
         animation.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
     }
 
-    /** @return true if the animation has completed (only relevant if playOnce = true) */
+    /**
+     * @return true if the animation has completed (only relevant if playOnce =
+     *         true)
+     */
     public boolean isFinishedOnce() {
         return finishedOnce;
     }

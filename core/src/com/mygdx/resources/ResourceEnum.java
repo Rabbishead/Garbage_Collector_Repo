@@ -2,6 +2,8 @@ package com.mygdx.resources;
 
 public enum ResourceEnum {
 
+    NPCS("assets/npcs/npcs.atlas", TypeEnum.ATLAS),
+
     //ENTITIES
     PLAYER_IDLE_DOWN("assets/player/idle_down.png", TypeEnum.TEXTURE),
     PLAYER_IDLE_UP("assets/player/idle_up.png", TypeEnum.TEXTURE),
@@ -13,25 +15,25 @@ public enum ResourceEnum {
     PLAYER_WALK_RIGHT("assets/player/walk_right.png", TypeEnum.TEXTURE),
 
 
-    JERKINS_IDLE_DOWN("assets/npcs/jerkins/jenkins_idle_down.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_UP("assets/npcs/jerkins/jenkins_idle_up.png", TypeEnum.TEXTURE),
-    JERKINS_IDLE_LEFT("assets/npcs/jerkins/jenkins_idle_left.png", TypeEnum.TEXTURE, 0.2f, 1),
-    JERKINS_IDLE_RIGHT("assets/npcs/jerkins/jenkins_idle_right.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_DOWN("assets/npcs/jerkins/jenkins_walk_down.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_UP("assets/npcs/jerkins/jenkins_walk_up.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_LEFT("assets/npcs/jerkins/jenkins_walk_left.png", TypeEnum.TEXTURE),
-    JERKINS_WALK_RIGHT("assets/npcs/jerkins/jenkins_walk_right.png", TypeEnum.TEXTURE),
+    JERKINS_IDLE_DOWN("jenkins_idle_down", TypeEnum.ATLAS_REGION),
+    JERKINS_IDLE_UP("jenkins_idle_up", TypeEnum.ATLAS_REGION),
+    JERKINS_IDLE_LEFT("jenkins_idle_left", TypeEnum.ATLAS_REGION, 0.2f, 1),
+    JERKINS_IDLE_RIGHT("jenkins_idle_right", TypeEnum.ATLAS_REGION),
+    JERKINS_WALK_DOWN("jenkins_walk_down", TypeEnum.ATLAS_REGION),
+    JERKINS_WALK_UP("jenkins_walk_up", TypeEnum.ATLAS_REGION),
+    JERKINS_WALK_LEFT("jenkins_walk_left", TypeEnum.ATLAS_REGION),
+    JERKINS_WALK_RIGHT("jenkins_walk_right", TypeEnum.ATLAS_REGION),
 
 
-    BLACKMARKETEER_IDLE_DOWN("assets/npcs/blackmarketeer/blackmarketeer_idle_down.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_UP("assets/npcs/blackmarketeer/blackmarketeer_idle_up.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_LEFT("assets/npcs/blackmarketeer/blackmarketeer_idle_left.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_IDLE_RIGHT("assets/npcs/blackmarketeer/blackmarketeer_idle_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_DOWN("assets/npcs/blackmarketeer/blackmarketeer_walk_down.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_UP("assets/npcs/blackmarketeer/blackmarketeer_walk_up.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_LEFT("assets/npcs/blackmarketeer/blackmarketeer_walk_left.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_WALK_RIGHT("assets/npcs/blackmarketeer/blackmarketeer_walk_right.png", TypeEnum.TEXTURE),
-    BLACKMARKETEER_SLEEPING("assets/npcs/blackmarketeer/blackmarketeer_sleeping.png", TypeEnum.TEXTURE, 0.01f, 0),
+    BLACKMARKETEER_IDLE_DOWN("blackmarketeer_idle_down", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_IDLE_UP("blackmarketeer_idle_up", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_IDLE_LEFT("blackmarketeer_idle_left", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_IDLE_RIGHT("blackmarketeer_idle_right", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_WALK_DOWN("blackmarketeer_walk_down", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_WALK_UP("blackmarketeer_walk_up", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_WALK_LEFT("blackmarketeer_walk_left", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_WALK_RIGHT("blackmarketeer_walk_right", TypeEnum.ATLAS_REGION),
+    BLACKMARKETEER_SLEEPING("blackmarketeer_sleeping", TypeEnum.ATLAS_REGION, 0.01f, 0),
 
 
     //PROJECTILES AND WEAPONS
