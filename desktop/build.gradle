@@ -128,13 +128,13 @@ tasks.register("packAtlases") {
         settings.combineSubdirectories = true
         settings.flattenPaths = false
 
-        println "📦 Packing all atlases from: ${rawDir}"
-        println "➡️ Output folder: ${outputDir}\n"
+        println "Packing all atlases from: ${rawDir}"
+        println "Output folder: ${outputDir}\n"
 
         rawDir.eachDir { subDir ->
     def pngCount = subDir.listFiles({ f -> f.isFile() && f.name.toLowerCase().endsWith(".png") } as FileFilter)?.length ?: 0
     if (pngCount == 0 && !subDir.listFiles().any { it.isDirectory() }) {
-        println "⚪ Skipping empty folder '${subDir.name}'"
+        println "Skipping empty folder '${subDir.name}'"
         return
     }
 
@@ -159,13 +159,13 @@ tasks.register("packAtlases") {
 
     println "→ Packing '${atlasName}'..."
     processMethod.invoke(null, settings, tempDir.absolutePath, outputDir.absolutePath, atlasName)
-    println "   ✅ Packed $pngCount images into '${atlasName}.atlas'\n"
+    println "   Packed $pngCount images into '${atlasName}.atlas'\n"
 
     // Clean up temporary directory
     tempDir.deleteDir()
 }
 
 
-        println "🎉 All atlases packed successfully into ${outputDir}"
+        println "All atlases packed successfully into ${outputDir}"
     }
 }
