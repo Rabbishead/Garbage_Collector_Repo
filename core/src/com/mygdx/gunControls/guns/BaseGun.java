@@ -1,6 +1,5 @@
 package com.mygdx.gunControls.guns;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -16,8 +15,8 @@ public class BaseGun extends Actor {
     protected float angleOffset;
     protected boolean flipped, stop = false;
 
-    public BaseGun(Texture t, Vector2 origin, float angleOffset) {
-        s = new Sprite(t);
+    public BaseGun(Sprite s, Vector2 origin, float angleOffset) {
+        this.s = s;
         flipped = true;
         setSize(s.getWidth(), s.getHeight());
         movement = new BaseMovement(getWidth() / 2, getHeight() / 2);

@@ -1,7 +1,7 @@
 package com.mygdx.entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -13,16 +13,16 @@ import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceEnum;
 
 public class Scope extends GameActor{
-    private Texture texture;
+    private Sprite sprite;
     private Hitbox hitbox = new Hitbox();
     private boolean isFighting = GCStage.get().getPlayer().isFighting();
     public boolean hitplayer = false;
 
 
     public Scope(Vector2 coords){
-        this.texture = RM.get().getTexture(ResourceEnum.SCOPE);
+        this.sprite = RM.get().getFromAtlas(ResourceEnum.OTHERS, ResourceEnum.SCOPE);
 
-        setSize(texture.getWidth(), texture.getHeight());
+        setSize(sprite.getWidth(), sprite.getHeight());
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         hitbox = new Hitbox(center, getWidth(), getHeight(), 0, true);
@@ -51,7 +51,7 @@ public class Scope extends GameActor{
     public void draw(Batch batch, float parentAlpha) {
         if (!isFighting) return;
         super.draw(batch, parentAlpha);
-        batch.draw(texture, center.x - getOriginX(), center.y - getOriginY());
+        batch.draw(sprite, center.x - getOriginX(), center.y - getOriginY());
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.mygdx.gunControls.guns;
 
-
 import com.mygdx.hud.Hud;
 import com.mygdx.GCStage;
 import com.mygdx.camera.CameraController;
@@ -19,7 +18,7 @@ public class ChainGun extends BaseGun {
      * ChainGun class
      */
     public ChainGun() {
-        super(RM.get().getTexture(ResourceEnum.CHAINGUN), GCStage.get().getPlayer().center, 0);
+        super(RM.get().getFromAtlas(ResourceEnum.WEAPONS, ResourceEnum.DEFAULT), GCStage.get().getPlayer().center, 0);
         setOffset(30, 0, 0);
         flip(true, false);
 

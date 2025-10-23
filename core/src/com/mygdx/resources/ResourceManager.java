@@ -3,6 +3,7 @@ package com.mygdx.resources;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -71,6 +72,10 @@ public class ResourceManager {
     public TextureAtlas getAtlas(ResourceEnum e) {
         manager.finishLoadingAsset(e.label);
         return manager.get(e.label);
+    }
+
+    public Sprite getFromAtlas(ResourceEnum atlas, ResourceEnum texture){
+        return getAtlas(atlas).createSprite(texture.label);
     }
 
     public TiledMap getMap(ResourceEnum e) {

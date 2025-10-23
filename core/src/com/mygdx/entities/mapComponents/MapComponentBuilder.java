@@ -6,6 +6,7 @@ import com.mygdx.resources.ResourceEnum;
 
 public class MapComponentBuilder {
     protected Vector2 coordinates;
+    protected ResourceEnum atlas = ResourceEnum.BUILDINGS;
     protected ResourceEnum[] textureEnum;
     protected float width = Data.TILE;
     protected float height = Data.TILE;
@@ -21,6 +22,11 @@ public class MapComponentBuilder {
 
     public MapComponentBuilder texture(ResourceEnum... texture) {
         this.textureEnum = texture;
+        return this;
+    }
+
+    public MapComponentBuilder atlas(ResourceEnum atlas){
+        this.atlas = atlas;
         return this;
     }
 

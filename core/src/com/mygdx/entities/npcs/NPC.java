@@ -33,10 +33,10 @@ public class NPC extends ScriptableActor {
         setOrigin(getWidth() / 2, getHeight() / 2);
 
         if(npcBuilder.atlas){
-            animationManager = new AnimationManager(ResourceEnum.NPCS, false, npcBuilder.textureEnum);
+            animationManager = new AnimationManager(ResourceEnum.NPCS, npcBuilder.textureEnum);
         }
         else {
-            animationManager = new AnimationManager((int) (npcBuilder.size.x), false, npcBuilder.textureEnum);
+            animationManager = new AnimationManager(npcBuilder.textureEnum);
         }
 
         

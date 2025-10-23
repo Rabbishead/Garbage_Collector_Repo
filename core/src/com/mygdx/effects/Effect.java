@@ -14,7 +14,7 @@ public class Effect extends GameActor {
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
         float delay = texture.delay != -1 ? texture.delay : 0f;
-        animationManager = new AnimationManager(32, animationRate, delay, true, texture);
+        animationManager = new AnimationManager(ResourceEnum.EFFECTS, animationRate, delay, true, texture);
 
         this.addAction(Actions.sequence(
             Actions.delay(duration),
@@ -26,7 +26,7 @@ public class Effect extends GameActor {
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
         float delay = texture.delay != -1 ? texture.delay : 0f;
-        animationManager = new AnimationManager(32, animationRate, delay, true, texture);
+        animationManager = new AnimationManager(ResourceEnum.EFFECTS, animationRate, delay, true, texture);
 
         shouldDoOnce = true;
     }

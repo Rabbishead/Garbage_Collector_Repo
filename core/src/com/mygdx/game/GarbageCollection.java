@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.mygdx.Logger;
 import com.mygdx.resources.RM;
 import com.mygdx.resources.ResourceManager;
@@ -29,6 +31,8 @@ public class GarbageCollection extends Game {
 
 	@Override
 	public void create() {
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
 		manager = new ResourceManager();
 
 		SavingsManager.loadDefaultIfNeeded();

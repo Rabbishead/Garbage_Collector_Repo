@@ -20,7 +20,7 @@ public class AnimationManager {
 
     private float stateTime = 0f;
 
-    private final boolean playOnce;
+    private boolean playOnce = false;
     private boolean finishedOnce = false;
 
     private boolean paused = false;
@@ -39,12 +39,11 @@ public class AnimationManager {
      * @param playOnce      if true, the animation plays only once
      * @param textures      resource list for the animation
      */
-    public AnimationManager(int width, float animationRate, float delay, boolean playOnce, ResourceEnum... textures) {
+    public AnimationManager(float animationRate, float delay, boolean playOnce, ResourceEnum... textures) {
         this.playOnce = playOnce;
-
         for (ResourceEnum e : textures) {
             Texture texture = RM.get().getTexture(e);
-            int FRAME_COLS = texture.getWidth() / width;
+            int FRAME_COLS = texture.getWidth() / e.frameCount * 32;
 
             TextureRegion[][] matrix = TextureRegion.split(
                     texture,
@@ -52,10 +51,9 @@ public class AnimationManager {
                     texture.getHeight());
 
             Animation<TextureRegion> animation = new Animation<>(
-                    e.animationRate != -1 ? e.animationRate : animationRate,
+                    e.animationRate != -1 ? e.animationRate : 0.2f,
                     matrix[0]);
             animation.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
-
             animationMap.put(e, animation);
         }
 
@@ -68,16 +66,15 @@ public class AnimationManager {
         GCStage.get().addActor(pauser);
     }
 
-    public AnimationManager(int width, boolean playOnce, TextureEnum textures) {
-        this(width, textures.getAnimationRate(), textures.getDelay(), playOnce, textures.getResourceList());
+    public AnimationManager(TextureEnum textures) {
+        this(textures.getAnimationRate(), textures.getDelay(), false, textures.getResourceList());
     }
 
-    public AnimationManager(ResourceEnum atlas, boolean playOnce, TextureEnum textures) {
-        this(atlas, textures.getAnimationRate(), textures.getDelay(), playOnce, textures.getResourceList());
+    public AnimationManager(ResourceEnum atlas, TextureEnum textures) {
+        this(atlas, textures.getAnimationRate(), textures.getDelay(), false, textures.getResourceList());
     }
 
-    public AnimationManager(ResourceEnum atlas, float animationRate, float delay, boolean playOnce,
-            ResourceEnum... textures) {
+    public AnimationManager(ResourceEnum atlas, float animationRate, float delay, boolean playOnce, ResourceEnum... textures) {
         this.playOnce = playOnce;
         for (ResourceEnum e : textures) {
             TextureAtlas.AtlasRegion region = RM.get().getAtlas(atlas).findRegion(e.label);
@@ -96,7 +93,7 @@ public class AnimationManager {
 
             Animation<TextureRegion> anim = new Animation<>(e.animationRate != -1 ? e.animationRate : animationRate,
                     frames);
-            anim.setPlayMode(Animation.PlayMode.LOOP);
+            anim.setPlayMode(playOnce ? PlayMode.NORMAL : PlayMode.LOOP);
 
             animationMap.put(e, anim);
 
@@ -152,7 +149,7 @@ public class AnimationManager {
             return;
         }
 
-        currentFrame = ani.getKeyFrame(stateTime, !playOnce);
+        currentFrame = ani.getKeyFrame(stateTime, playOnce);
     }
 
     public void setCurrentAnimation(ResourceEnum ani) {

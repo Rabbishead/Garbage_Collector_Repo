@@ -10,7 +10,7 @@ import com.mygdx.resources.ResourceEnum;
 
 public class Usblade extends BaseGun {
     public Usblade() {
-        super(RM.get().getTexture(ResourceEnum.USBLADE), GCStage.get().getPlayer().center, 45);
+        super(RM.get().getFromAtlas(ResourceEnum.WEAPONS, ResourceEnum.USBLADE), GCStage.get().getPlayer().center, 45);
         setOffset(35, 0, 0);
     }
 

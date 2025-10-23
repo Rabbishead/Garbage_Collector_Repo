@@ -9,7 +9,7 @@ import com.mygdx.resources.ResourceEnum;
 public class Slingshot extends BaseGun {
 
     public Slingshot() {
-        super(RM.get().getTexture(ResourceEnum.DEFAULT), GCStage.get().getPlayer().center, 0);
+        super(RM.get().getFromAtlas(ResourceEnum.WEAPONS, ResourceEnum.DEFAULT), GCStage.get().getPlayer().center, 0);
         flip(false, true);
     }
 

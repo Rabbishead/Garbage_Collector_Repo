@@ -1,6 +1,5 @@
 package com.mygdx.gunControls.projectiles;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -22,8 +21,8 @@ public class BaseBullet extends Actor {
     protected Collider collider = new Collider();
     protected ObjectInfo info;
 
-    public BaseBullet(Texture t, Vector2 origin, float speed, float distance, float rotation, boolean ally) {
-        s = new Sprite(t);
+    public BaseBullet(Sprite s, Vector2 origin, float speed, float distance, float rotation, boolean ally) {
+        this.s = s;
         this.distance = distance;
         this.origin = new Vector2(origin);
 

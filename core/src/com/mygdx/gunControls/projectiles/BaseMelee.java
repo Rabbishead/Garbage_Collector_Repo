@@ -1,6 +1,5 @@
 package com.mygdx.gunControls.projectiles;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,8 +18,8 @@ public class BaseMelee extends Actor {
     protected Collider collider = new Collider();
     protected ObjectInfo info;
 
-    public BaseMelee(Texture t, Vector2 origin, float angle, float arc, float speed, boolean flipped) {
-        s = new Sprite(t);
+    public BaseMelee(Sprite s, Vector2 origin, float angle, float arc, float speed, boolean flipped) {
+        this.s = s;
 
         this.angle = angle;
         this.speed = speed;

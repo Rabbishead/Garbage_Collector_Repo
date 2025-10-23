@@ -19,8 +19,7 @@ public class MapComponent extends GameActor {
         super();
         setX(builder.coordinates.x);
         setY(builder.coordinates.y);
-
-        animationManager = new AnimationManager((int)builder.width, builder.animationRate, builder.delay, false, builder.textureEnum);
+        animationManager = new AnimationManager(builder.atlas, builder.animationRate, builder.delay, false, builder.textureEnum);
 
         if (builder.fade) {
 

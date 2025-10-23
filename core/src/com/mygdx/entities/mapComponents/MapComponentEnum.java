@@ -85,6 +85,7 @@ public enum MapComponentEnum {
     LAMP(
             new MapComponentBuilder()
                     .texture(ResourceEnum.LAMP)
+                    .atlas(ResourceEnum.COMPONENTS)
                     .height(Data.TILE * 2)
                     .animationRate(1f)
                     .delay(1000)),
@@ -92,6 +93,7 @@ public enum MapComponentEnum {
     LONG_LAMP(
             new MapComponentBuilder()
                     .texture(ResourceEnum.LONG_LAMP)
+                    .atlas(ResourceEnum.COMPONENTS)
                     .size(Data.TILE * 2, Data.TILE * 2));
 
     private Vector2 coord;

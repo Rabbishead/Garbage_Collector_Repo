@@ -6,127 +6,120 @@ filter: Nearest, Nearest
 repeat: none
 blackmarketeer_idle_down
   rotate: false
-  xy: 52, 32
+  xy: 1, 1
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_idle_left
   rotate: false
-  xy: 52, 2
+  xy: 51, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_idle_right
   rotate: false
-  xy: 102, 32
+  xy: 51, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_idle_up
   rotate: false
-  xy: 436, 32
+  xy: 351, 5
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: -1
 blackmarketeer_sleeping
   rotate: false
-  xy: 2, 28
+  xy: 1, 31
   size: 48, 32
   orig: 48, 32
   offset: 0, 0
   index: -1
 blackmarketeer_walk_down
   rotate: false
-  xy: 102, 2
+  xy: 101, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_walk_left
   rotate: false
-  xy: 152, 32
+  xy: 101, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_walk_right
   rotate: false
-  xy: 152, 2
+  xy: 151, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 blackmarketeer_walk_up
   rotate: false
-  xy: 202, 32
+  xy: 151, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_idle_down
   rotate: false
-  xy: 202, 2
+  xy: 201, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_idle_left
   rotate: false
-  xy: 252, 32
+  xy: 201, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_idle_right
   rotate: false
-  xy: 252, 2
+  xy: 251, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_idle_up
   rotate: false
-  xy: 436, 2
+  xy: 401, 35
   size: 16, 28
   orig: 16, 28
   offset: 0, 0
   index: -1
 jerkins_walk_down
   rotate: false
-  xy: 302, 32
+  xy: 251, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_walk_left
   rotate: false
-  xy: 302, 2
+  xy: 301, 35
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_walk_right
   rotate: false
-  xy: 352, 32
+  xy: 301, 5
   size: 48, 28
   orig: 48, 28
   offset: 0, 0
   index: -1
 jerkins_walk_up
   rotate: false
-  xy: 352, 2
+  xy: 351, 35
   size: 48, 28
   orig: 48, 28
-  offset: 0, 0
-  index: -1
-scope
-  rotate: false
-  xy: 402, 28
-  size: 32, 32
-  orig: 32, 32
   offset: 0, 0
   index: -1
