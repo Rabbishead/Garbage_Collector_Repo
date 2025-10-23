@@ -9,6 +9,10 @@ public class GameStory {
     private Story story;
     private ScriptableActor currentActor;
 
+    /**
+     * Initializes the story, binding the external functions
+     * @param inkJsonText
+     */
     public GameStory(String inkJsonText) {
         try {
             story = new Story(inkJsonText);
@@ -28,6 +32,10 @@ public class GameStory {
         }
     }
 
+    /**
+     * assigns the story
+     * @param actor
+     */
     public void setActor(ScriptableActor actor) {
         currentActor = actor;
     }

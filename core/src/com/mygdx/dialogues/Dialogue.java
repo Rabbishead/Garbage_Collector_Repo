@@ -28,6 +28,11 @@ public class Dialogue extends Actor {
     private final TypewriterEffect typer;
     private boolean running = true;
 
+    /**
+     * Creates a dialogue with the given Story and assigns the story to the Actor
+     * @param gs
+     * @param actor
+     */
     public Dialogue(GameStory gs, ScriptableActor actor) {
         this.story = gs.getStory();
         gs.setActor(actor);
@@ -38,7 +43,6 @@ public class Dialogue extends Actor {
             e.printStackTrace();
         }
 
-        // Table background
         Pixmap tableColor = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         tableColor.setColor(0, 0, 0, 0.5f);
         tableColor.fill();
@@ -46,13 +50,11 @@ public class Dialogue extends Actor {
         tableColor.dispose();
         TextureRegionDrawable bg = new TextureRegionDrawable(new TextureRegion(tableTexture));
 
-        // Dialogue label
         Label dialogueLabel = new Label("", Data.skin.get("dialogue", Label.LabelStyle.class));
         dialogueLabel.setWrap(true);
 
         typer = new TypewriterEffect(dialogueLabel);
 
-        // Setup table
         table = new Table();
         table.setFillParent(true);
         table.defaults().expand().fillX();
@@ -70,7 +72,7 @@ public class Dialogue extends Actor {
 
         Gdx.input.setInputProcessor(Hud.stage());
 
-        Gdx.app.postRunnable(this::continueStory);
+        Gdx.app.postRunnable(this::continueStory); //Does this the next frame
     }
 
     @Override
@@ -89,7 +91,6 @@ public class Dialogue extends Actor {
             return;
         }
 
-        // Clear previous choices
         clearChoices();
 
         try {

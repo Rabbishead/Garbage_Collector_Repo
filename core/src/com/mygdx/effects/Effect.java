@@ -10,6 +10,13 @@ public class Effect extends GameActor {
 
     private boolean shouldDoOnce;
 
+    /**
+     * creates an effect that lasts for a certain time
+     * @param texture
+     * @param x
+     * @param y
+     * @param duration
+     */
     public Effect(ResourceEnum texture, float x, float y, float duration){
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;
@@ -22,6 +29,12 @@ public class Effect extends GameActor {
         ));
     }
 
+    /**
+     * creates an effect that plays its animation just one time
+     * @param texture
+     * @param x
+     * @param y
+     */
     public Effect(ResourceEnum texture, float x, float y){
         setCoords(x, y);
         float animationRate = texture.animationRate != -1 ? texture.animationRate : 0.2f;

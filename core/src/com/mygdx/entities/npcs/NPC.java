@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.mygdx.AnimationManager;
 import com.mygdx.dialogues.Dialogue;
@@ -20,7 +19,6 @@ public class NPC extends ScriptableActor {
     protected int lf = 2;
 
     protected Hitbox hitbox = new Hitbox();
-    public Vector2 center = new Vector2();
     public Script script;
     protected String name;
     private Dialogue currentDialogue = null;
@@ -98,8 +96,6 @@ public class NPC extends ScriptableActor {
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        center.x = getX() + getOriginX();
-        center.y = getY() + getOriginY();
         hitbox.setPosition();
     }
 

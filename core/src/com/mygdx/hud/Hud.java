@@ -83,8 +83,7 @@ public class Hud implements Disposable {
         debugData.setText(debugSting);
     }
 
-    public void showMoneyPopup() {
-
+    private void showMoneyPopup() {
         Label temp = new Label(moneyPopup.getText(), moneyPopup.getStyle());
         temp.setPosition(moneyPopup.getX(), moneyPopup.getY());
         temp.getColor().a = 0f;
@@ -128,6 +127,11 @@ public class Hud implements Disposable {
         moneyPopup.setText(0);
     }
 
+    /**
+     * Show the money popup label with the given amount
+     * @param money
+     * @param gained
+     */
     public void setMoney(int money, boolean gained) {
         String newText = gained ? "+" + money : "-" + money;
         moneyPopup.setText(Money.getMoney() + newText);
@@ -137,5 +141,4 @@ public class Hud implements Disposable {
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, false);
     }
-
 }
