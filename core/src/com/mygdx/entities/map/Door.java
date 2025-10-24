@@ -1,4 +1,4 @@
-package com.mygdx.map;
+package com.mygdx.entities.map;
 
 import com.badlogic.gdx.math.Vector2;
 

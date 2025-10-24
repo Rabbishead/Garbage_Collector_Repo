@@ -7,5 +7,6 @@ public enum Screens {
     REFLECTION_ARENA,
     SLUMS,
     PARK,
-    RICH_DISTRICT
+    RICH_DISTRICT,
+    INSIDE
 }

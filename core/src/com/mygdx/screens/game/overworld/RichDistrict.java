@@ -1,7 +1,7 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
-import com.mygdx.entities.mapComponents.MapComponentEnum;
+import com.mygdx.entities.map.MapConstructor;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.resources.ResourceEnum;
@@ -36,45 +36,9 @@ public class RichDistrict extends PlayableScreen {
                                                 .story(ResourceEnum.ADEPTUS_1)
                                                 .build(),
 
-                                MapComponentEnum.MARMOT_PIZZA
-                                                .coord(Data.TILE * 59, Data.TILE * 25)
-                                                .build(),
+                                MapConstructor.getBuilding(Data.TILE * 61, Data.TILE * 25, ResourceEnum.ENERGYPLANT_TURNED_ON, ResourceEnum.ENERGYPLANT_TURNED_OFF)
 
-                                MapComponentEnum.ENERGYPLANT
-                                                .coord(Data.TILE * 62, Data.TILE * 25)
-                                                .build(),
-
-                                MapComponentEnum.ABANDONED
-                                                .coord(Data.TILE * 65, Data.TILE * 25)
-                                                .build(),
-
-                                MapComponentEnum.ABANDONED
-                                                .coord(Data.TILE * 65, Data.TILE * 27)
-                                                .build(),
-
-                                MapComponentEnum.SKYSCRAPER_MEDIUM
-                                                .coord(Data.TILE * 68, Data.TILE * 25)
-                                                .build(),
-
-                                MapComponentEnum.SYNTH
-                                                .coord(Data.TILE * 71, Data.TILE * 25)
-                                                .build(),
-
-                                MapComponentEnum.LAMP
-                                                .coord(Data.TILE * 81, Data.TILE * 28)
-                                                .build(),
-
-                                MapComponentEnum.SKYSCRAPER_1_BACK
-                                                .coord(Data.TILE * 80, Data.TILE * 21)
-                                                .build(),
-
-                                MapComponentEnum.SKYSCRAPER_1_BACK
-                                                .coord(Data.TILE * 75, Data.TILE * 21)
-                                                .build(),
-
-                                MapComponentEnum.SKYSCRAPER_1_SIDE
-                                                .coord(Data.TILE * 65, Data.TILE * 20)
-                                                .build());
+                                );
         }
 
         @Override

@@ -1,29 +1,30 @@
-package com.mygdx.entities.mapComponents;
+package com.mygdx.entities.map;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.AnimationManager;
+import com.mygdx.GCStage;
 import com.mygdx.entities.helpers.GameActor;
 import com.mygdx.hitboxes.Hitbox;
-import com.mygdx.hitboxes.Tags;
+import com.mygdx.resources.ResourceEnum;
+import com.mygdx.resources.TextureEnum;
 
-public class MapComponent extends GameActor {
+public class Building extends GameActor {
 
     private Hitbox hitbox = new Hitbox();
     private float fade = 1;
 
     private final AnimationManager animationManager;
 
-    public MapComponent(MapComponentBuilder builder) {
+    public Building(Vector2 coords, ResourceEnum... textures) {
         super();
-        setX(builder.coordinates.x);
-        setY(builder.coordinates.y);
-        animationManager = new AnimationManager(builder.atlas, builder.animationRate, builder.delay, false, builder.textureEnum);
+        setX(coords.x);
+        setY(coords.y);
 
-        if (builder.fade) {
+        animationManager = new AnimationManager(ResourceEnum.BUILDINGS, 0.2f, 0, false, textures);
 
-            hitbox = new Hitbox(
+            /*hitbox = new Hitbox(
                     new Vector2(getX() + builder.width * 0.5f, getY() + 16 + builder.height * 0.5f),
                     builder.width, builder.height - 32, true);
             hitbox.setTags(Tags.BUILDING);
@@ -34,8 +35,28 @@ public class MapComponent extends GameActor {
                 fade = 1;
             });
             hitbox.register();
-            this.debug();
-        }
+            this.debug();*/
+    }
+
+    public Building(Vector2 coords, TextureEnum textures) {
+        super();
+        setX(coords.x);
+        setY(coords.y);
+
+        animationManager = new AnimationManager(ResourceEnum.BUILDINGS, textures);
+
+            /*hitbox = new Hitbox(
+                    new Vector2(getX() + builder.width * 0.5f, getY() + 16 + builder.height * 0.5f),
+                    builder.width, builder.height - 32, true);
+            hitbox.setTags(Tags.BUILDING);
+            hitbox.setOnHit((collider) -> {
+                fade = 0.2f;
+            });
+            hitbox.setOnLeave((collider) -> {
+                fade = 1;
+            });
+            hitbox.register();
+            this.debug();*/
     }
 
     @Override
@@ -60,6 +81,11 @@ public class MapComponent extends GameActor {
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        hitbox.setPosition(getX(), getY());
+        //hitbox.setPosition(getX(), getY());
+    }
+
+    public void door(float x, float y, ResourceEnum door){
+        Component tmp = MapConstructor.getComponent(getX() + x, getY() + y, door);
+        GCStage.get().addActor(tmp);
     }
 }

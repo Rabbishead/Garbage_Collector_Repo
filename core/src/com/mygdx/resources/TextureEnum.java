@@ -14,7 +14,6 @@ public enum TextureEnum {
         rl = resourceList;
         this.animationRate = animationRate;
         this.delay = delay;
-
     }
 
     TextureEnum(ResourceEnum ... resourceList){

@@ -82,6 +82,13 @@
    <frame tileid="63" duration="360"/>
   </animation>
  </tile>
+ <tile id="25">
+  <properties>
+   <property name="destination" value="INSIDE-RICH_DISTRICT"/>
+   <property name="name" value="RICH_DISTRICT-INSIDE"/>
+   <property name="orientation" value="d"/>
+  </properties>
+ </tile>
  <tile id="42">
   <properties>
    <property name="blocked" type="bool" value="true"/>

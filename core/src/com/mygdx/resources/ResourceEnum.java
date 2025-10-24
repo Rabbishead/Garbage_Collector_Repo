@@ -100,6 +100,7 @@ public enum ResourceEnum {
     LAMP(2),
     LONG_LAMP,
     TRAFFIC_LIGHT,
+    GLASS_DOOR(9, 0.1f, 3),
 
     //EFFECTS
     EXPLOSION(8, 0.05f, 0),
@@ -126,6 +127,7 @@ public enum ResourceEnum {
     RICH_DISTRICT("assets/map/rich_disctirct/rich_district.tmx", TypeEnum.MAP),
     PARK("assets/map/park/park.tmx", TypeEnum.MAP),
     REFLECTION_ARENA("assets/map/reflection_arena/reflection_arena.tmx", TypeEnum.MAP),
+    INSIDE("assets/map/inside/inside.tmx", TypeEnum.MAP),
 
 
 //DIALOGUE TEXTURES

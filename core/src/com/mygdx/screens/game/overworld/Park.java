@@ -1,7 +1,7 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
-import com.mygdx.entities.mapComponents.MapComponentEnum;
+import com.mygdx.entities.map.MapConstructor;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
@@ -13,9 +13,7 @@ public class Park extends PlayableScreen {
         super(ResourceEnum.PARK);
 
         addAll(
-                MapComponentEnum.SKYSCRAPER_MEDIUM
-                        .coord(Data.TILE * 70, Data.TILE * 30)
-                        .build(),
+                MapConstructor.getComponent(Data.TILE * 70, Data.TILE * 20, ResourceEnum.ABANDONED_TURNED_ON, ResourceEnum.ABANDONED_TURNED_OFF),
 
                 new NPC.NPCBuilder()
                         .coordinates(Data.TILE * 40, Data.TILE * 20)

@@ -6,6 +6,7 @@ import com.mygdx.game.GarbageCollection;
 import com.mygdx.resources.RM;
 import com.mygdx.screens.game.arenas.ReflectionArena;
 import com.mygdx.screens.game.overworld.Slums;
+import com.mygdx.screens.game.overworld.Inside;
 import com.mygdx.screens.game.overworld.Park;
 import com.mygdx.screens.game.overworld.RichDistrict;
 import com.mygdx.screens.generic.GenericScreen;
@@ -42,6 +43,9 @@ public class ScreensManager {
                 }
                 case RICH_DISTRICT -> {
                     map.put(Screens.RICH_DISTRICT, new RichDistrict());
+                }
+                case INSIDE -> {
+                    map.put(Screens.INSIDE, new Inside());
                 }
             }
         }
