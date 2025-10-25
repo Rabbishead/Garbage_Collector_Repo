@@ -1,33 +1,40 @@
 
 components.png
-size: 256, 128
+size: 512, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 glass_door
   rotate: false
-  xy: 1, 67
+  xy: 1, 1
   size: 144, 32
   orig: 144, 32
   offset: 0, 0
   index: -1
 lamp
   rotate: false
-  xy: 1, 1
+  xy: 259, 35
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 long_lamp
   rotate: false
-  xy: 67, 1
+  xy: 325, 35
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
+marco_lamp
+  rotate: false
+  xy: 1, 35
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
 traffic_light
   rotate: false
-  xy: 133, 1
+  xy: 391, 35
   size: 32, 64
   orig: 32, 64
   offset: 0, 0

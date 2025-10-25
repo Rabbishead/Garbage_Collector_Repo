@@ -101,6 +101,7 @@ public enum ResourceEnum {
     LONG_LAMP,
     TRAFFIC_LIGHT,
     GLASS_DOOR(9, 0.1f, 3),
+    MARCO_LAMP(4),
 
     //EFFECTS
     EXPLOSION(8, 0.05f, 0),

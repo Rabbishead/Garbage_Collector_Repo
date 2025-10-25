@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -12,10 +11,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.GCStage;
@@ -92,9 +88,29 @@ public class TileSetManager implements Telegraph {
 
     }
 
+    public void readComponentsLayer() {
+        MapLayer doorLayer = map.getLayers().get("components");
+        if (doorLayer == null)
+            return;
+        for (MapObject obj : doorLayer.getObjects()) {
+
+            if (obj instanceof RectangleMapObject rectObj) {
+                Rectangle rect = rectObj.getRectangle();
+                System.out.println(rect.getX());
+                System.out.println("Rectangle trigger: " + rect);
+                GCStage.get().addActor(MapConstructor.getComponent(rect.getX(), rect.getY(), ResourceEnum.valueOf(obj.getName())));
+
+            } else {
+                System.out.println("Skipping unknown object type: " + obj.getClass().getSimpleName());
+            }
+        }
+
+    }
+
     private void loadDoors() {
         readBuildingsLayer();
         readDoorsLayer();
+        readComponentsLayer();
         
         /*TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int w = 0; w < layer.getWidth(); w++) {

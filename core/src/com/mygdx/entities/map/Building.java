@@ -7,6 +7,7 @@ import com.mygdx.AnimationManager;
 import com.mygdx.GCStage;
 import com.mygdx.entities.helpers.GameActor;
 import com.mygdx.hitboxes.Hitbox;
+import com.mygdx.hitboxes.Tags;
 import com.mygdx.resources.ResourceEnum;
 import com.mygdx.resources.TextureEnum;
 
@@ -24,18 +25,19 @@ public class Building extends GameActor {
 
         animationManager = new AnimationManager(ResourceEnum.BUILDINGS, 0.2f, 0, false, textures);
 
-            /*hitbox = new Hitbox(
-                    new Vector2(getX() + builder.width * 0.5f, getY() + 16 + builder.height * 0.5f),
-                    builder.width, builder.height - 32, true);
-            hitbox.setTags(Tags.BUILDING);
-            hitbox.setOnHit((collider) -> {
-                fade = 0.2f;
-            });
-            hitbox.setOnLeave((collider) -> {
-                fade = 1;
-            });
-            hitbox.register();
-            this.debug();*/
+        hitbox = new Hitbox(
+                new Vector2(getX() + animationManager.getWidth() * 0.5f,
+                        getY() + 16 + animationManager.getHeight() * 0.5f),
+                animationManager.getWidth(), animationManager.getHeight() - 32, true);
+        hitbox.setTags(Tags.BUILDING);
+        hitbox.setOnHit((collider) -> {
+            fade = 0.2f;
+        });
+        hitbox.setOnLeave((collider) -> {
+            fade = 1;
+        });
+        hitbox.register();
+        this.debug();
     }
 
     public Building(Vector2 coords, TextureEnum textures) {
@@ -45,18 +47,19 @@ public class Building extends GameActor {
 
         animationManager = new AnimationManager(ResourceEnum.BUILDINGS, textures);
 
-            /*hitbox = new Hitbox(
-                    new Vector2(getX() + builder.width * 0.5f, getY() + 16 + builder.height * 0.5f),
-                    builder.width, builder.height - 32, true);
-            hitbox.setTags(Tags.BUILDING);
-            hitbox.setOnHit((collider) -> {
-                fade = 0.2f;
-            });
-            hitbox.setOnLeave((collider) -> {
-                fade = 1;
-            });
-            hitbox.register();
-            this.debug();*/
+        hitbox = new Hitbox(
+                new Vector2(getX() + animationManager.getWidth() * 0.5f,
+                        getY() + 16 + animationManager.getHeight() * 0.5f),
+                animationManager.getWidth(), animationManager.getHeight() - 32, true);
+        hitbox.setTags(Tags.BUILDING);
+        hitbox.setOnHit((collider) -> {
+            fade = 0.2f;
+        });
+        hitbox.setOnLeave((collider) -> {
+            fade = 1;
+        });
+        hitbox.register();
+        this.debug();
     }
 
     @Override
@@ -81,10 +84,10 @@ public class Building extends GameActor {
     @Override
     protected void positionChanged() {
         super.positionChanged();
-        //hitbox.setPosition(getX(), getY());
+        hitbox.setPosition(getX(), getY());
     }
 
-    public void door(float x, float y, ResourceEnum door){
+    public void door(float x, float y, ResourceEnum door) {
         Component tmp = MapConstructor.getComponent(getX() + x, getY() + y, door);
         GCStage.get().addActor(tmp);
     }

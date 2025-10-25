@@ -41,11 +41,12 @@ public abstract class PlayableScreen extends GenericScreen {
     protected PlayableScreen(ResourceEnum map) {
         super();
 
+        hitboxHandler = new HitboxHandler();
+        HitboxHandler.set(hitboxHandler);
+
         tileSetManager = new TileSetManager(map);
         TileMapCollisionsManager.layer = ((TiledMapTileLayer) tileSetManager.getMap().getLayers().get("background"));
 
-        hitboxHandler = new HitboxHandler();
-        HitboxHandler.set(hitboxHandler);
 
         if (StateManager.getBoolState(StateEnum.IS_EXITING)) {
             player = new Player(tileSetManager.getCoord().cpy().add(8, 8));

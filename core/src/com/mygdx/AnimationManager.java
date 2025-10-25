@@ -174,4 +174,12 @@ public class AnimationManager {
     public boolean isFinishedOnce() {
         return finishedOnce;
     }
+
+    public float getWidth(){
+        return animationMap.get(currentAnimation).getKeyFrame(stateTime).getRegionWidth();
+    }
+
+    public float getHeight(){
+        return animationMap.get(currentAnimation).getKeyFrame(stateTime).getRegionHeight();
+    }
 }
