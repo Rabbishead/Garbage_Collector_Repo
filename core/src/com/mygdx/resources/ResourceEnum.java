@@ -94,6 +94,7 @@ public enum ResourceEnum {
     
     SYNTH_TURNED_OFF(4),
     SYNTH_TURNED_ON(4),
+    SKYSCRAPER_PROTOTYPE,
     
 
     //MAP COMPONENTS
@@ -105,6 +106,7 @@ public enum ResourceEnum {
     SIDE_WALK(1),
     RUBBISH(3),
     GLASS_DOOR1_OPENING(32, 0.02f, 5),
+    
 
     //EFFECTS
     EXPLOSION(8, 0.05f, 0),

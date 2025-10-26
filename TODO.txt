@@ -6,7 +6,7 @@ PROGRAMMAZIONE
 GRAFICA
 Oltre bordo mappa
 Un interno
-Porte con animatione di apertura
+Porte con animazione di apertura
 Piu palazzi
 Arena di reflection
 Cecchino
