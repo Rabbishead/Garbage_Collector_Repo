@@ -1,7 +1,6 @@
 package com.mygdx.screens.game.overworld;
 
 import com.mygdx.Data;
-import com.mygdx.entities.map.MapConstructor;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.entities.npcs.Reflection;
 import com.mygdx.resources.ResourceEnum;

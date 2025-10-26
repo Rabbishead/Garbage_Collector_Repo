@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -39,6 +41,7 @@ public class TileSetManager implements Telegraph {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         doors = new ArrayList<>();
         loadDoors();
+        loadObjLayers();
         loadReplacers();
     }
 
@@ -52,63 +55,51 @@ public class TileSetManager implements Telegraph {
         return map;
     }
 
-    public void readDoorsLayer() {
-        MapLayer doorLayer = map.getLayers().get("doors");
-        if (doorLayer == null)
-            return;
-        for (MapObject obj : doorLayer.getObjects()) {
+    public void loadObjLayers() {
+        for (MapLayer layer : map.getLayers()) {
+            if (layer instanceof TiledMapTileLayer)
+                continue;
+            MapObjects objects = layer.getObjects();
+            if (objects.getCount() == 0)
+                continue;
 
-            if (obj instanceof RectangleMapObject rectObj) {
-                Rectangle rect = rectObj.getRectangle();
-                GCStage.get().addActor(MapConstructor.getComponent(rect.getX() - 8, rect.getY() - 8, ResourceEnum.valueOf(obj.getName())));
-
-            } else {
-                System.out.println("Skipping unknown object type: " + obj.getClass().getSimpleName());
+            // Check if atlas exists
+            String layerName = layer.getName();
+            ResourceEnum atlas = layerName.equals("doors") ? ResourceEnum.COMPONENTS
+                    : ResourceEnum.valueOf(layerName.toUpperCase());
+            if (atlas == null) {
+                throw new RuntimeException("No atlas with: " + layerName + " found, check your spelling");
             }
-        }
 
-    }
+            for (MapObject obj : layer.getObjects()) {
+                //System.out.println(obj.getName());
 
-    public void readBuildingsLayer() {
-        MapLayer doorLayer = map.getLayers().get("buildings");
-        if (doorLayer == null)
-            return;
-        for (MapObject obj : doorLayer.getObjects()) {
+                if (obj instanceof RectangleMapObject rectObj) {
+                    Rectangle rect = rectObj.getRectangle();
 
-            if (obj instanceof RectangleMapObject rectObj) {
-                Rectangle rect = rectObj.getRectangle();
-                GCStage.get().addActor(MapConstructor.getBuilding(rect.getX(), rect.getY(), ResourceEnum.valueOf(obj.getName())));
+                    ResourceEnum texture = ResourceEnum.valueOf(obj.getName());
 
-            } else {
-                System.out.println("Skipping unknown object type: " + obj.getClass().getSimpleName());
-            }
-        }
-
-    }
-
-    public void readComponentsLayer() {
-        MapLayer doorLayer = map.getLayers().get("components");
-        if (doorLayer == null)
-            return;
-        for (MapObject obj : doorLayer.getObjects()) {
-            System.out.println(obj.getName());
-
-            if (obj instanceof RectangleMapObject rectObj) {
-                Rectangle rect = rectObj.getRectangle();
-                GCStage.get().addActor(MapConstructor.getComponent(rect.getX(), rect.getY(), ResourceEnum.valueOf(obj.getName())));
-
-            } else {
-                System.out.println("Skipping unknown object type: " + obj.getClass().getSimpleName());
+                    TextureRegion region = RM.get().getAtlas(atlas).findRegion(texture.label);
+                    if (region == null) {
+                        throw new RuntimeException("\nERROR\n\nResourceEnum: " + texture +
+                                " not found in region, \nthe .png file should be in the folder: assets/raw/" + atlas
+                                + " \ncheck your spelling and pack all the assets");
+                    }
+                    if (atlas.equals(ResourceEnum.BUILDINGS)) {
+                        GCStage.get().addActor(
+                                MapConstructor.getBuilding(rect.getX(), rect.getY(), texture));
+                    } else if(atlas.equals(ResourceEnum.COMPONENTS)){
+                        GCStage.get().addActor(
+                                MapConstructor.getComponent(rect.getX(), rect.getY(), texture));
+                    }
+                }
             }
         }
 
     }
 
     private void loadDoors() {
-        readBuildingsLayer();
-        readDoorsLayer();
-        readComponentsLayer();
-        
+
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int w = 0; w < layer.getWidth(); w++) {
             for (int h = 0; h < layer.getHeight(); h++) {

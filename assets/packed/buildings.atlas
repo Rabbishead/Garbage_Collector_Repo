@@ -4,13 +4,6 @@ size: 2048, 4096
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-Skyscraper_prototype
-  rotate: false
-  xy: 1, 1239
-  size: 1024, 2048
-  orig: 1024, 2048
-  offset: 0, 0
-  index: -1
 abandoned_turned_off
   rotate: false
   xy: 1027, 3223
@@ -128,6 +121,13 @@ skyscraper_medium
   xy: 1283, 2997
   size: 96, 224
   orig: 96, 224
+  offset: 0, 0
+  index: -1
+skyscraper_prototype
+  rotate: false
+  xy: 1, 1239
+  size: 1024, 2048
+  orig: 1024, 2048
   offset: 0, 0
   index: -1
 skyscraper_small
