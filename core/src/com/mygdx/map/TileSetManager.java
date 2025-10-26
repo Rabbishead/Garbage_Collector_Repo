@@ -11,7 +11,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.GCStage;
@@ -112,7 +114,7 @@ public class TileSetManager implements Telegraph {
         readDoorsLayer();
         readComponentsLayer();
         
-        /*TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
         for (int w = 0; w < layer.getWidth(); w++) {
             for (int h = 0; h < layer.getHeight(); h++) {
                 TiledMapTile tile = layer.getCell(w, h).getTile();
@@ -129,7 +131,7 @@ public class TileSetManager implements Telegraph {
                                 new Vector2((w) * 32, (h) * 32),
                                 prop.get("side") == null));
             }
-        }*/
+        }
     }
 
     public void loadReplacers() {
