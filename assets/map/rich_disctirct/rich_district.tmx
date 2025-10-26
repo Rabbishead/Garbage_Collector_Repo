@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-down" width="120" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="33">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="120" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="34">
  <tileset firstgid="1" source="../tilesets/city_tileset.tsx"/>
  <layer id="1" name="background" width="120" height="100">
   <data encoding="base64">
@@ -7,14 +7,7 @@
   </data>
  </layer>
  <objectgroup id="3" name="doors">
-  <object id="6" name="REFLECTION_ARENA" x="2240" y="2880" width="96" height="32">
-   <properties>
-    <property name="destination" value="REFLECTION_ARENA"/>
-    <property name="orientation" value="u"/>
-    <property name="texture" value="GLASS_DOOR"/>
-   </properties>
-  </object>
-  <object id="25" name="INSIDE" x="2352" y="2112">
+  <object id="25" name="GLASS_DOOR1_OPENING" x="2352" y="2112">
    <point/>
   </object>
  </objectgroup>
@@ -25,5 +18,6 @@
  </objectgroup>
  <objectgroup id="6" name="components">
   <object id="32" name="MARCO_LAMP" x="1928" y="2592" width="40" height="72"/>
+  <object id="33" name="RUBBISH" x="2232" y="2480" width="24" height="24"/>
  </objectgroup>
 </map>

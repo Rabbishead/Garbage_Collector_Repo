@@ -34,9 +34,8 @@ public class RichDistrict extends PlayableScreen {
                                                 .coordinates(Data.TILE * 30, Data.TILE * 15)
                                                 .texture(TextureEnum.BLACKMARKETEER)
                                                 .story(ResourceEnum.ADEPTUS_1)
-                                                .build(),
+                                                .build()
 
-                                MapConstructor.getBuilding(Data.TILE * 61, Data.TILE * 25, ResourceEnum.ENERGYPLANT_TURNED_ON, ResourceEnum.ENERGYPLANT_TURNED_OFF)
 
                                 );
         }

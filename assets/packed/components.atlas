@@ -1,40 +1,75 @@
 
 components.png
-size: 512, 128
+size: 4096, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+Glass_door1
+  rotate: false
+  xy: 1, 35
+  size: 1024, 64
+  orig: 1024, 64
+  offset: 0, 0
+  index: -1
 glass_door
   rotate: false
-  xy: 1, 1
+  xy: 2053, 67
   size: 144, 32
   orig: 144, 32
   offset: 0, 0
   index: -1
+glass_door1_closing
+  rotate: false
+  xy: 1, 1
+  size: 1024, 32
+  orig: 1024, 32
+  offset: 0, 0
+  index: -1
+glass_door1_opening
+  rotate: false
+  xy: 1027, 67
+  size: 1024, 32
+  orig: 1024, 32
+  offset: 0, 0
+  index: -1
 lamp
   rotate: false
-  xy: 259, 35
+  xy: 1285, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 long_lamp
   rotate: false
-  xy: 325, 35
+  xy: 1351, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 marco_lamp
   rotate: false
-  xy: 1, 35
+  xy: 1027, 1
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
+rubbish
+  rotate: false
+  xy: 2199, 67
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+side_walk
+  rotate: false
+  xy: 2297, 67
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 traffic_light
   rotate: false
-  xy: 391, 35
+  xy: 1417, 1
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
