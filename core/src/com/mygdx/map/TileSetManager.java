@@ -60,9 +60,7 @@ public class TileSetManager implements Telegraph {
 
             if (obj instanceof RectangleMapObject rectObj) {
                 Rectangle rect = rectObj.getRectangle();
-                System.out.println(rect.getX());
-                System.out.println("Rectangle trigger: " + rect);
-                GCStage.get().addActor(MapConstructor.getComponent(rect.getX() - 8, rect.getY() - 8, ResourceEnum.GLASS_DOOR));
+                GCStage.get().addActor(MapConstructor.getComponent(rect.getX() - 8, rect.getY() - 8, ResourceEnum.valueOf(obj.getName())));
 
             } else {
                 System.out.println("Skipping unknown object type: " + obj.getClass().getSimpleName());
@@ -79,8 +77,6 @@ public class TileSetManager implements Telegraph {
 
             if (obj instanceof RectangleMapObject rectObj) {
                 Rectangle rect = rectObj.getRectangle();
-                System.out.println(rect.getX());
-                System.out.println("Rectangle trigger: " + rect);
                 GCStage.get().addActor(MapConstructor.getBuilding(rect.getX(), rect.getY(), ResourceEnum.valueOf(obj.getName())));
 
             } else {
@@ -95,11 +91,10 @@ public class TileSetManager implements Telegraph {
         if (doorLayer == null)
             return;
         for (MapObject obj : doorLayer.getObjects()) {
+            System.out.println(obj.getName());
 
             if (obj instanceof RectangleMapObject rectObj) {
                 Rectangle rect = rectObj.getRectangle();
-                System.out.println(rect.getX());
-                System.out.println("Rectangle trigger: " + rect);
                 GCStage.get().addActor(MapConstructor.getComponent(rect.getX(), rect.getY(), ResourceEnum.valueOf(obj.getName())));
 
             } else {

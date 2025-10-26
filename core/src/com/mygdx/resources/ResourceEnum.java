@@ -102,6 +102,9 @@ public enum ResourceEnum {
     TRAFFIC_LIGHT,
     GLASS_DOOR(9, 0.1f, 3),
     MARCO_LAMP(4),
+    SIDE_WALK(1),
+    RUBBISH(3),
+    GLASS_DOOR1_OPENING(32, 0.02f, 5),
 
     //EFFECTS
     EXPLOSION(8, 0.05f, 0),
